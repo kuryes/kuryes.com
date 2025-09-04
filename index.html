@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuryes.com - Ana Sayfa</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="logo.png" sizes="16x16">
+    <link rel="shortcut icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-53C4KLRL');</script>
+    <!-- End Google Tag Manager -->
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            color: #333333;
+            overflow: hidden;
+        }
+
+        .logo-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #ffffff;
+        }
+
+        .logo {
+            max-width: 80%;
+            max-height: 60%;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+            animation: logoFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .nav-button {
+            position: absolute;
+            bottom: 50px;
+            padding: 18px 40px;
+            background: linear-gradient(45deg, #ff6b35, #ff8c42);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.5);
+            background: linear-gradient(45deg, #ff8c42, #ff6b35);
+        }
+
+        .watermark {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: rgba(0, 0, 0, 0.3);
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo {
+                max-width: 90%;
+                max-height: 50%;
+            }
+            
+            .nav-button {
+                bottom: 30px;
+                padding: 15px 30px;
+                font-size: 1rem;
+            }
+            
+            .watermark {
+                top: 20px;
+                right: 20px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-53C4KLRL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div class="logo-container">
+        <img src="logo.png" alt="Kuryes.com Logo" class="logo">
+        <a href="form.html" class="nav-button">Ön Başvuru Formu</a>
+        <div class="watermark">Kuryes.com</div>
+    </div>
+</body>
+</html>
