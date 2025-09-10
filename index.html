@@ -3,127 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kuryes.com - Ana Sayfa</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="logo.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="logo.png" sizes="16x16">
-    <link rel="shortcut icon" type="image/png" href="logo.png">
-    <link rel="apple-touch-icon" href="logo.png">
-    
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-53C4KLRL');</script>
-    <!-- End Google Tag Manager -->
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #ffffff;
-            min-height: 100vh;
-            color: #333333;
-            overflow: hidden;
-        }
-
-        .logo-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: #ffffff;
-        }
-
-        .logo {
-            max-width: 80%;
-            max-height: 60%;
-            object-fit: contain;
-            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
-            animation: logoFloat 6s ease-in-out infinite;
-        }
-
-        @keyframes logoFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .nav-button {
-            position: absolute;
-            bottom: 50px;
-            padding: 18px 40px;
-            background: linear-gradient(45deg, #ff6b35, #ff8c42);
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
-            border: none;
-            cursor: pointer;
-        }
-
-        .nav-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.5);
-            background: linear-gradient(45deg, #ff8c42, #ff6b35);
-        }
-
-        .watermark {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            color: rgba(0, 0, 0, 0.3);
-            font-size: 0.9rem;
-            font-weight: 300;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .logo {
-                max-width: 90%;
-                max-height: 50%;
-            }
-            
-            .nav-button {
-                bottom: 30px;
-                padding: 15px 30px;
-                font-size: 1rem;
-            }
-            
-            .watermark {
-                top: 20px;
-                right: 20px;
-                font-size: 0.8rem;
-            }
-        }
-    </style>
+    <title>Kurye Ön Başvuru Formu</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-53C4KLRL"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+    <div class="container">
+        <h1>Kurye Ön Başvuru Formu</h1>
+        
+        <form id="courierForm" action="https://formspree.io/f/mkgvpznl" method="POST">
+            <div class="form-group">
+                <label for="fullName">Ad Soyad *</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
 
-    <div class="logo-container">
-        <img src="logo.png" alt="Kuryes.com Logo" class="logo">
-        <a href="form.html" class="nav-button">Ön Başvuru Formu</a>
-        <div class="watermark">Kuryes.com</div>
+            <div class="form-group">
+                <label for="birthDate">Doğum Tarihi *</label>
+                <input type="text" id="birthDate" name="birthDate" placeholder="gg.aa.yyyy" required>
+            </div>
+
+            <div class="form-group">
+                <label for="licenseType">Ehliyet Tipi *</label>
+                <select id="licenseType" name="licenseType" required>
+                    <option value="">Seçiniz</option>
+                    <option value="A">A</option>
+                    <option value="A1">A1</option>
+                    <option value="A2">A2</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Açık Adres *</label>
+                <textarea id="address" name="address" rows="3" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Telefon *</label>
+                <input type="tel" id="phone" name="phone" placeholder="+905XXXXXXXXX" required>
+            </div>
+
+            <div class="checkbox-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="sms" name="sms">
+                    <span class="checkmark"></span>
+                    SMS
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="phoneContact" name="phoneContact">
+                    <span class="checkmark"></span>
+                    Telefon
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-posta *</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="checkbox-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="mail" name="mail">
+                    <span class="checkmark"></span>
+                    Mail
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label>Şahıs Şirketi</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="company" value="yes">
+                        <span class="radio-mark"></span>
+                        Var
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="company" value="no">
+                        <span class="radio-mark"></span>
+                        Yok
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Motor</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="motor" value="yes">
+                        <span class="radio-mark"></span>
+                        Var
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="motor" value="no">
+                        <span class="radio-mark"></span>
+                        Yok
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>P1</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="p1" value="yes">
+                        <span class="radio-mark"></span>
+                        Var
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="p1" value="no">
+                        <span class="radio-mark"></span>
+                        Yok
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="experience1">Deneyim *</label>
+                <input type="text" id="experience1" name="experience1" placeholder="Götür" required>
+            </div>
+
+            <div class="form-group">
+                <label for="experience2">Deneyim</label>
+                <input type="text" id="experience2" name="experience2" placeholder="Barış Cafe">
+            </div>
+
+            <div class="form-group">
+                <label for="experience3">Deneyim</label>
+                <input type="text" id="experience3" name="experience3">
+            </div>
+
+            <div class="form-group">
+                <label for="heardFrom">Nereden duydunuz? *</label>
+                <select id="heardFrom" name="heardFrom" required>
+                    <option value="">Seçiniz</option>
+                    <option value="İşin Olsun">İşin Olsun</option>
+                    <option value="Facebook">Facebook</option>
+                    <option value="İnstagram">İnstagram</option>
+                    <option value="WhatsApp">WhatsApp</option>
+                    <option value="Sahibinden">Sahibinden</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <div class="kvkk-container">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="kvkk" name="kvkk" required>
+                        <span class="checkmark"></span>
+                        KVKK şartlarını kabul ediyorum *
+                    </label>
+                    <a href="#" id="kvkkLink" class="kvkk-link">KVKK Rıza Metni</a>
+                </div>
+            </div>
+
+            <button type="submit" id="submitBtn" disabled>Gönder</button>
+        </form>
+
+        <div id="successMessage" class="success-message" style="display: none;">
+            <h2>Teşekkürler!</h2>
+            <p>Başvurunuz başarıyla gönderildi.</p>
+        </div>
     </div>
+
+    <!-- KVKK Modal -->
+    <div id="kvkkModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>KVKK Rıza Metni</h2>
+            <div class="modal-body">
+                <p>Bu form aracılığıyla toplanan kişisel verileriniz, 6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında işlenmektedir.</p>
+                <p><strong>Veri Sorumlusu:</strong> Kurye Hizmetleri A.Ş.</p>
+                <p><strong>Toplanan Veriler:</strong> Ad, soyad, doğum tarihi, ehliyet bilgileri, adres, telefon, e-posta, deneyim bilgileri</p>
+                <p><strong>Veri İşleme Amaçları:</strong> İş başvurusu süreçlerinin yürütülmesi, aday değerlendirmesi, iletişim kurulması</p>
+                <p><strong>Veri Saklama Süresi:</strong> Başvuru sürecinin tamamlanmasından itibaren 2 yıl</p>
+                <p><strong>Veri Paylaşımı:</strong> Kişisel verileriniz, yasal yükümlülükler ve iş süreçleri kapsamında sınırlı olarak paylaşılabilir.</p>
+                <p><strong>Haklarınız:</strong> Kişisel verilerinizin işlenip işlenmediğini öğrenme, işlenen verileriniz hakkında bilgi talep etme, verilerinizin düzeltilmesini isteme, verilerinizin silinmesini isteme, verilerinizin üçüncü kişilere aktarılması halinde bu durumdan haberdar olma haklarına sahipsiniz.</p>
+                <p>Bu haklarınızı kullanmak için <strong>Kuryes.up@gmail.com</strong> adresine başvurabilirsiniz.</p>
+            </div>
+            <button id="kvkkAccept" class="accept-btn">Metni Okudum Anladım</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
