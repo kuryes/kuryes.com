@@ -14,8 +14,11 @@
     <meta property="og:image" content="/img/og-image.png">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="public/favicon/kuryesfavicon.png">
-    <link rel="apple-touch-icon" href="public/favicon/kuryesfavicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="public/favicon/kuryesfavicon.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="public/favicon/kuryesfavicon.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="public/favicon/kuryesfavicon.png">
+    <link rel="icon" type="image/png" sizes="256x256" href="public/favicon/kuryesfavicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="public/favicon/kuryesfavicon.png">
     
     <!-- PWA -->
     <link rel="manifest" href="manifest.json">
@@ -131,35 +134,42 @@
     </div>
     
     <!-- Hero Section -->
-    <section class="relative py-20 bg-gradient-to-br from-bg to-white">
+    <section class="relative py-20 bg-gradient-to-br from-bg to-white overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h1 class="text-4xl md:text-6xl font-bold font-poppins text-text mb-6">
-                    Kuryes.com — <span class="text-primary">Türkiye'nin Şeffaf Kargosu</span>
-                </h1>
-                <p class="text-xl text-muted mb-8 max-w-3xl mx-auto">
-                    Kurye, işletme ve gönderici—tek platformda buluşuyor.
-                </p>
-                
-                <!-- CTA Buttons -->
-                <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-                    <button data-register-btn class="bg-primary text-white px-8 py-4 rounded-xl font-semibold hover:bg-red-600 transition-colors shadow-lg">
-                        Kurye Ol
-                    </button>
-                    <a href="freelance.html" class="border-2 border-accent text-accent px-8 py-4 rounded-xl font-semibold hover:bg-accent hover:text-white transition-colors">
-                        Kurye Bul
-                    </a>
-                    <a href="kurye-rehberi.html" class="text-text hover:text-primary px-8 py-4 rounded-xl font-semibold transition-colors">
-                        Rehber
-                    </a>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Text Content -->
+                <div class="text-center lg:text-left">
+                    <h1 class="text-4xl md:text-6xl font-bold font-poppins text-text mb-6">
+                        Kuryes.com — <span class="text-primary">Türkiye'nin Şeffaf Kargosu</span>
+                    </h1>
+                    <p class="text-xl text-muted mb-8 max-w-2xl mx-auto lg:mx-0">
+                        Kurye, işletme ve gönderici—tek platformda buluşuyor.
+                    </p>
+                    
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
+                        <button data-register-btn class="bg-primary text-white px-8 py-4 rounded-xl font-semibold hover:bg-red-600 transition-colors shadow-lg">
+                            Kurye Ol
+                        </button>
+                        <a href="freelance.html" class="border-2 border-accent text-accent px-8 py-4 rounded-xl font-semibold hover:bg-accent hover:text-white transition-colors">
+                            Kurye Bul
+                        </a>
+                        <a href="kurye-rehberi.html" class="text-text hover:text-primary px-8 py-4 rounded-xl font-semibold transition-colors">
+                            Rehber
+                        </a>
+                    </div>
                 </div>
                 
-                <!-- Background Illustration -->
-                <div class="relative">
-                    <svg class="w-full max-w-4xl mx-auto opacity-20" viewBox="0 0 800 200" fill="none">
-                        <!-- Antalya skyline placeholder -->
-                        <path d="M0,150 L50,120 L100,140 L150,100 L200,130 L250,90 L300,110 L350,80 L400,100 L450,70 L500,90 L550,60 L600,80 L650,50 L700,70 L750,40 L800,60 L800,200 L0,200 Z" fill="#FF3131" opacity="0.3"/>
-                    </svg>
+                <!-- Right: Kurye Image -->
+                <div class="flex justify-center lg:justify-end">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300 w-full max-w-lg h-96 sm:h-[500px] lg:h-[600px]">
+                        <img src="public/img/kuryew.png" 
+                             alt="Kurye - Kuryes.com" 
+                             class="w-full h-full object-cover"
+                             onerror="this.style.display='none';"
+                             loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                    </div>
                 </div>
             </div>
         </div>
