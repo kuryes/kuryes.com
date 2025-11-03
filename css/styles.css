@@ -211,7 +211,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .gradient-accent {
-    background: linear-gradient(135deg, #00C8FF 0%, #0099CC 100%);
+    background: linear-gradient(135deg, #00C8FF 0%, #00C8FF 100%);
 }
 
 .gradient-bg {
