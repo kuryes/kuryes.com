@@ -1,0 +1,63 @@
+<svg width="400" height="120" viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 3D embossed efekt için gradient (üst-sol açık, alt-sağ koyu) -->
+    <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#FF3131;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#FF3131;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#cc2525;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="tealGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#33d9ff;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#00C8FF;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#00C8FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0099cc;stop-opacity:1" />
+    </linearGradient>
+    <!-- Daha belirgin gölge efekti -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="4" dy="4" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.5"/>
+      </feComponentTransfer>
+      <feMerge> 
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Outline/sticker efekti için filter -->
+    <filter id="outline">
+      <feMorphology operator="dilate" radius="2" in="SourceAlpha" result="dilated"/>
+      <feFlood flood-color="#e0e0e0" flood-opacity="1" result="flood"/>
+      <feComposite in="flood" in2="dilated" operator="in" result="masked"/>
+      <feMerge>
+        <feMergeNode in="masked"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Şeffaf arka plan (siyah arka plan için) -->
+  <!-- Not: PNG kullanıldığında arka plan şeffaf olacak -->
+  
+  <!-- Açık gri outline (rounded sticker efekti) -->
+  <rect x="15" y="15" width="370" height="90" rx="12" ry="12" 
+        fill="none" stroke="#e0e0e0" stroke-width="5" opacity="0.95"/>
+  
+  <!-- KURYES metni (kırmızı, 3D embossed efekt) -->
+  <text x="40" y="75" 
+        font-family="Poppins, Arial, sans-serif" 
+        font-size="48" 
+        font-weight="700" 
+        fill="url(#redGradient)"
+        filter="url(#shadow)"
+        style="letter-spacing: 1px;">KURYΕS</text>
+  
+  <!-- .com metni (turkuaz, 3D embossed efekt) -->
+  <text x="270" y="75" 
+        font-family="Poppins, Arial, sans-serif" 
+        font-size="48" 
+        font-weight="700" 
+        fill="url(#tealGradient)"
+        filter="url(#shadow)">.com</text>
+</svg>

@@ -1,0 +1,28 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FF3131;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#cc2525;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Arka plan - gri -->
+  <rect width="512" height="512" fill="#4a4a4a" rx="90" ry="90"/>
+  
+  <!-- Beyaz yuvarlatılmış kare -->
+  <rect x="64" y="64" width="384" height="384" rx="70" ry="70" fill="#ffffff"/>
+  
+  <!-- Kırmızı K harfi -->
+  <text x="256" y="340" 
+        font-family="Poppins, Arial, sans-serif" 
+        font-size="280" 
+        font-weight="700" 
+        fill="url(#redGradient)"
+        text-anchor="middle"
+        dominant-baseline="middle">K</text>
+  
+  <!-- Turkuaz nokta (sağ alt) -->
+  <circle cx="370" cy="370" r="28" fill="#00C8FF"/>
+</svg>
+

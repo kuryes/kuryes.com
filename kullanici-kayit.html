@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kullanıcı Kayıt - Kuryes.com</title>
+    <meta name="description" content="Gönderi yapmak için kullanıcı kayıt formu. Hızlı ve güvenli kurye hizmeti.">
+    
+    <!-- OpenGraph -->
+    <meta property="og:title" content="Kullanıcı Kayıt - Kuryes.com">
+    <meta property="og:description" content="Gönderi yapmak için kullanıcı kayıt formu.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kuryes.com/kullanici-kayit.html">
+    <meta property="og:image" content="public/img/og-image.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="public/favicon/kuryesfavicon.png">
+    <link rel="apple-touch-icon" href="public/favicon/kuryesfavicon.png">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#FF3131">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Kuryes">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF3131',
+                        accent: '#00C8FF',
+                        support: {
+                            yellow: '#FFD60A',
+                            orange: '#FF7A00'
+                        },
+                        bg: '#F8FBFD',
+                        text: '#1C1C1C',
+                        muted: '#6F6F6F'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-bg text-text font-inter">
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <img src="public/img/kuryes.svg" 
+                             srcset="public/img/kuryes.svg, public/img/kuryes.png" 
+                             alt="KURYΕS.com" 
+                             class="h-12 md:h-14 w-auto"
+                             onerror="this.onerror=null; this.src='public/img/kuryes.png';">
+                    </a>
+                </div>
+                
+                <!-- Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-text hover:text-primary transition-colors">Ana Sayfa</a>
+                    <a href="kurye-tabani.html" class="text-text hover:text-primary transition-colors">KuryeTabanı</a>
+                    <a href="freelance.html" class="text-text hover:text-primary transition-colors">Kurye Bul</a>
+                    <a href="kurye-rehberi.html" class="text-text hover:text-primary transition-colors">Kurye Rehberi</a>
+                    <a href="ilanlar.html" class="text-text hover:text-primary transition-colors">İş İlanları</a>
+                    <a href="forum.html" class="text-text hover:text-primary transition-colors">Forum</a>
+                    <a href="kazanc.html" class="text-text hover:text-primary transition-colors">Kazanç</a>
+                </nav>
+                
+                <!-- Auth Buttons -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <button class="text-muted hover:text-text transition-colors" disabled>Giriş Yap</button>
+                    <button data-register-btn class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors">Kayıt Ol</button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobileMenuBtn" class="text-text hover:text-primary transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 hidden">
+            <div class="px-4 py-2 space-y-2">
+                <a href="index.html" class="block py-2 text-text hover:text-primary">Ana Sayfa</a>
+                <a href="kurye-tabani.html" class="block py-2 text-text hover:text-primary">KuryeTabanı</a>
+                <a href="freelance.html" class="block py-2 text-text hover:text-primary">Kurye Bul</a>
+                <a href="kurye-rehberi.html" class="block py-2 text-text hover:text-primary">Kurye Rehberi</a>
+                <a href="ilanlar.html" class="block py-2 text-text hover:text-primary">İş İlanları</a>
+                <a href="forum.html" class="block py-2 text-text hover:text-primary">Forum</a>
+                <a href="kazanc.html" class="block py-2 text-text hover:text-primary">Kazanç</a>
+                <div class="pt-2 border-t border-gray-200">
+                    <button class="block w-full text-left py-2 text-muted" disabled>Giriş Yap</button>
+                    <button data-register-btn class="block w-full text-center bg-primary text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors mt-2">Kayıt Ol</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Launch Banner -->
+    <div class="bg-gradient-to-r from-primary to-accent text-white text-center py-2">
+        <p class="text-sm font-medium">🚀 Lansman: Aralık 2025 Antalya — 2026 Tüm Türkiye</p>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="py-16 bg-gradient-to-br from-bg to-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="text-6xl mb-4">📦</div>
+            <h1 class="text-4xl md:text-5xl font-bold font-poppins text-text mb-6">
+                Kullanıcı Kaydı
+            </h1>
+            <p class="text-xl text-muted mb-8">
+                Gönderileriniz için hızlı ve güvenli kurye hizmeti.
+            </p>
+        </div>
+    </section>
+    
+    <!-- Form Section -->
+    <section class="py-16">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <form id="kullaniciForm" action="https://formspree.io/f/FORMSPREE_ID_KULLANICI" method="POST" class="space-y-6">
+                    <!-- Honeypot -->
+                    <input type="text" name="_gotcha" style="display:none">
+                    
+                    <!-- Ad Soyad -->
+                    <div>
+                        <label for="adSoyad" class="block text-sm font-medium text-text mb-2">
+                            Ad Soyad *
+                        </label>
+                        <input type="text" id="adSoyad" name="adSoyad" required
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-support-orange focus:border-transparent">
+                    </div>
+                    
+                    <!-- Telefon -->
+                    <div>
+                        <label for="telefon" class="block text-sm font-medium text-text mb-2">
+                            Telefon *
+                        </label>
+                        <input type="tel" id="telefon" name="telefon" required
+                               placeholder="5XX XXX XX XX"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-support-orange focus:border-transparent">
+                    </div>
+                    
+                    <!-- E-posta -->
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-text mb-2">
+                            E-posta *
+                        </label>
+                        <input type="email" id="email" name="email" required
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-support-orange focus:border-transparent">
+                    </div>
+                    
+                    <!-- Şehir -->
+                    <div>
+                        <label for="sehir" class="block text-sm font-medium text-text mb-2">
+                            Şehir *
+                        </label>
+                        <select id="sehir" name="sehir" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-support-orange focus:border-transparent">
+                            <option value="">Şehir seçin</option>
+                            <option value="Antalya">Antalya</option>
+                            <option value="İstanbul">İstanbul</option>
+                            <option value="Ankara">Ankara</option>
+                            <option value="İzmir">İzmir</option>
+                            <option value="Eskişehir">Eskişehir</option>
+                            <option value="Isparta">Isparta</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Gönderi Sıklığı -->
+                    <div>
+                        <label for="gonderiSikligi" class="block text-sm font-medium text-text mb-2">
+                            Haftalık Gönderi Sıklığı *
+                        </label>
+                        <select id="gonderiSikligi" name="gonderiSikligi" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-support-orange focus:border-transparent">
+                            <option value="">Sıklık seçin</option>
+                            <option value="1-2">Haftada 1-2 kez</option>
+                            <option value="3-5">Haftada 3-5 kez</option>
+                            <option value="6-10">Haftada 6-10 kez</option>
+                            <option value="10+">Haftada 10+ kez</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Gönderi Türü -->
+                    <div>
+                        <label class="block text-sm font-medium text-text mb-3">
+                            Gönderi Türleri
+                        </label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <label class="flex items-center">
+                                <input type="checkbox" name="gonderiTuru[]" value="Yemek" class="mr-2">
+                                <span class="text-sm">Yemek</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="gonderiTuru[]" value="Market Alışverişi" class="mr-2">
+                                <span class="text-sm">Market</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="gonderiTuru[]" value="E-Ticaret Paketi" class="mr-2">
+                                <span class="text-sm">E-Ticaret</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="gonderiTuru[]" value="Belge" class="mr-2">
+                                <span class="text-sm">Belge</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Açıklama -->
+                    <div>
+                        <label for="aciklama" class="block text-sm font-medium text-text mb-2">
+                            İlave Bilgiler
+                        </label>
+                        <textarea id="aciklama" name="aciklama" rows="4"
+                                  placeholder="Eklemek istediğiniz bilgiler..."
+                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-support-orange focus:border-transparent"></textarea>
+                    </div>
+                    
+                    <!-- Onay Kutuları -->
+                    <div class="space-y-4">
+                        <label class="flex items-start">
+                            <input type="checkbox" name="bildirimler" class="mt-1 mr-3">
+                            <span class="text-sm text-text">
+                                Kampanya ve güncellemeler için bildirim almak istiyorum.
+                            </span>
+                        </label>
+                        
+                        <label class="flex items-start">
+                            <input type="checkbox" name="kvkk" required class="mt-1 mr-3">
+                            <span class="text-sm text-text">
+                                KVKK ve Kullanım Şartları'nı okudum. *
+                            </span>
+                        </label>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <button type="submit" 
+                            class="w-full bg-support-orange text-white py-4 rounded-lg font-semibold hover:bg-orange-600 transition-colors">
+                        Başvuru Gönder
+                    </button>
+                </form>
+                
+                <!-- Success Message -->
+                <div id="successMessage" class="hidden mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <p class="text-green-700 font-medium">Kullanıcı başvurunuz alındı — platform açıldığında sizi bilgilendireceğiz.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-text text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm">© 2025 Kuryes — Altyapı: <a href="https://kaysia.co" class="text-accent hover:text-white">Kaysia.co</a></p>
+                </div>
+                <div class="flex flex-wrap gap-4 text-sm">
+                    <a href="#" class="hover:text-accent transition-colors">KVKK</a>
+                    <a href="#" class="hover:text-accent transition-colors">Gizlilik</a>
+                    <a href="#" class="hover:text-accent transition-colors">Kullanım Şartları</a>
+                    <a href="#" class="hover:text-accent transition-colors">İletişim</a>
+                </div>
+            </div>
+        </div>
+        <!-- powered by Kaysia -->
+    </footer>
+    
+    <!-- Profile Selection Modal -->
+    <div id="profileModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full p-8 animate-fadeInUp">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-text mb-2">Kayıt Ol</h2>
+                <p class="text-muted">Size en uygun profili seçin</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <button id="selectKurye" class="profile-option bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-primary hover:shadow-xl transition-all transform hover:scale-105 group">
+                    <div class="text-6xl mb-4">🏍️</div>
+                    <h3 class="text-xl font-bold text-text mb-2 group-hover:text-primary">Kurye</h3>
+                    <p class="text-sm text-muted">Kurye olmak için kayıt ol</p>
+                </button>
+                
+                <button id="selectIsletme" class="profile-option bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-accent hover:shadow-xl transition-all transform hover:scale-105 group">
+                    <div class="text-6xl mb-4">🏪</div>
+                    <h3 class="text-xl font-bold text-text mb-2 group-hover:text-accent">İşletme</h3>
+                    <p class="text-sm text-muted">İşletmeniz için kayıt olun</p>
+                </button>
+                
+                <button id="selectKullanici" class="profile-option bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-support-orange hover:shadow-xl transition-all transform hover:scale-105 group">
+                    <div class="text-6xl mb-4">📦</div>
+                    <h3 class="text-xl font-bold text-text mb-2 group-hover:text-support-orange">Kullanıcı</h3>
+                    <p class="text-sm text-muted">Gönderi yapmak için kayıt ol</p>
+                </button>
+            </div>
+            
+            <button id="closeModal" class="mt-8 w-full text-muted hover:text-text transition-colors">İptal</button>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script>
+        // Form submission
+        document.getElementById('kullaniciForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Gönderiliyor...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                document.getElementById('successMessage').classList.remove('hidden');
+                this.style.display = 'none';
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        });
+        
+        // Profile selection modal
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileModal = document.getElementById('profileModal');
+            const selectKurye = document.getElementById('selectKurye');
+            const selectIsletme = document.getElementById('selectIsletme');
+            const selectKullanici = document.getElementById('selectKullanici');
+            const closeModal = document.getElementById('closeModal');
+            const registerButtons = document.querySelectorAll('[data-register-btn]');
+            
+            registerButtons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    profileModal.classList.remove('hidden');
+                });
+            });
+            
+            closeModal.addEventListener('click', function() {
+                profileModal.classList.add('hidden');
+            });
+            
+            profileModal.addEventListener('click', function(e) {
+                if (e.target === profileModal) {
+                    profileModal.classList.add('hidden');
+                }
+            });
+            
+            selectKurye.addEventListener('click', function() {
+                window.location.href = 'kurye-tabani.html';
+            });
+            
+            selectIsletme.addEventListener('click', function() {
+                window.location.href = 'isletme-kayit.html';
+            });
+            
+            selectKullanici.addEventListener('click', function() {
+                window.location.href = 'kullanici-kayit.html';
+            });
+        });
+    </script>
+</body>
+</html>
+

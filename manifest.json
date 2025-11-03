@@ -1,0 +1,81 @@
+{
+  "name": "Kuryes.com - Türkiye'nin Şeffaf Kargosu",
+  "short_name": "Kuryes",
+  "description": "Kurye, işletme ve gönderici—tek platformda buluşuyor. Şeffaf fiyatlandırma, hızlı teslimat.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "background_color": "#F8FBFD",
+  "theme_color": "#FF3131",
+  "orientation": "any",
+  "scope": "/",
+  "lang": "tr",
+  "dir": "ltr",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "public/favicon/kuryespwaicons.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "public/favicon/kuryespwaicons.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Kurye Ol",
+      "short_name": "Kurye Ol",
+      "description": "KuryeTabanı'na kayıt ol",
+      "url": "/kurye-tabani.html",
+      "icons": [
+        {
+          "src": "public/favicon/kuryesfavicon.png",
+          "sizes": "32x32"
+        }
+      ]
+    },
+    {
+      "name": "Kurye Bul",
+      "short_name": "Kurye Bul",
+      "description": "Kurye bul ve gönderi oluştur",
+      "url": "/freelance.html",
+      "icons": [
+        {
+          "src": "/favicon/favicon-32x32-turquoise.png",
+          "sizes": "32x32"
+        }
+      ]
+    },
+    {
+      "name": "Forum",
+      "short_name": "Forum",
+      "description": "Kurye forumu ve sohbet",
+      "url": "/forum.html",
+      "icons": [
+        {
+          "src": "/favicon/favicon-32x32-orange.png",
+          "sizes": "32x32"
+        }
+      ]
+    },
+    {
+      "name": "Kazanç",
+      "short_name": "Kazanç",
+      "description": "Kazanç hesaplayıcı",
+      "url": "/kazanc.html",
+      "icons": [
+        {
+          "src": "/favicon/favicon-32x32-yellow.png",
+          "sizes": "32x32"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

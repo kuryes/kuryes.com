@@ -1,0 +1,790 @@
+KURYE REHBERİ İÇERİKLERİ
+========================
+
+1. ŞİRKET AÇILIŞI
+-----------------
+Gerekli Belgeler:
+• TC Kimlik belgesi
+• İkametgah belgesi
+• Başvuru formu
+• Harç makbuzu
+
+Adımlar:
+1. MERSIS sistemine giriş yapın
+2. Şirket türünü seçin (Limited/Anonim)
+3. Şirket unvanını belirleyin
+4. Sermaye miktarını girin
+5. Ortak bilgilerini ekleyin
+6. Başvuruyu tamamlayın
+
+Önemli Notlar:
+• İşlem süresi: 1-3 gün
+• Harç bedeli: 1.000 TL
+• Minimum sermaye: 10.000 TL
+• Vergi levhası otomatik gelir
+
+2. E-FATURA KAYDI
+-----------------
+Gerekli Belgeler:
+• Vergi levhası
+• İmza sirküleri
+• Yetki belgesi
+• E-imza sertifikası
+
+Kayıt Süreci:
+1. GİB e-Fatura portalına giriş
+2. "e-Fatura Kaydı" seçeneğini tıklayın
+3. Şirket bilgilerini girin
+4. E-imza ile imzalayın
+5. Onay bekleyin (1-2 gün)
+
+Önemli Bilgiler:
+• Ücretsiz kayıt
+• Zorunlu: Yıllık ciro 500.000 TL+
+• E-imza gerekli
+• Fatura kesme sınırı yok
+
+3. İLK GÜN KONTROL LİSTESİ
+--------------------------
+Zorunlu Kontroller:
+✓ P1 belgesi yanınızda
+✓ Ehliyet kontrolü
+✓ Kask takılı
+✓ Reflektörlü mont
+✓ Telefon şarjlı
+
+Araç Kontrolü:
+✓ Yakıt seviyesi
+✓ Lastik hava basıncı
+✓ Fren kontrolü
+✓ Ayna ayarları
+✓ Çanta bağlantıları
+
+Uygulama Ayarları:
+✓ Kurye uygulaması güncel
+✓ GPS açık
+✓ Bildirimler aktif
+✓ Çevrimiçi durumu
+✓ Profil bilgileri tam
+
+4. PLATFORMA BAŞVURU
+--------------------
+Popüler Platformlar:
+• Getir: Hızlı teslimat, yüksek ücret
+• Yemeksepeti: Geniş kapsama alanı
+• Trendyol Express: E-ticaret odaklı
+• Migros: Market teslimatı
+
+Başvuru Süreci:
+1. Platform web sitesine gidin
+2. "Kurye Ol" butonuna tıklayın
+3. Kişisel bilgileri girin
+4. Belgeleri yükleyin
+5. Mülakat için randevu alın
+6. Eğitim programına katılın
+
+Gerekli Belgeler:
+• P1 belgesi
+• Ehliyet fotokopisi
+• Kimlik fotokopisi
+• Adli sicil kaydı
+• Sağlık raporu
+
+5. P1 / P1* (ÜCRET, SON TARİH)
+------------------------------
+Gerekli Belgeler:
+• TC Kimlik belgesi
+• Ehliyet fotokopisi
+• Adli sicil kaydı
+• Sağlık raporu
+• 2 adet fotoğraf
+
+Başvuru Süreci:
+1. İl/İlçe Emniyet Müdürlüğü'ne başvuru
+2. Gerekli belgeleri teslim edin
+3. Eğitim programına katılın
+4. Yazılı sınavı geçin (%70 başarı)
+5. P1 belgenizi alın
+
+Ücret ve Süre:
+• Başvuru ücreti: 150 TL
+• Eğitim ücreti: 200 TL
+• Toplam: 350 TL
+• İşlem süresi: 7-10 gün
+• Belge geçerlilik: 3 yıl
+
+6. MYK / SRC NOTLARI
+--------------------
+MYK (Mesleki Yeterlilik Belgesi):
+• Zorunlu değil, ancak avantajlı
+• Eğitim süresi: 40 saat
+• Sınav: Teorik + Pratik
+• Ücret: 500 TL
+
+SRC (Sürücü Sertifikası):
+• Ticari araç kullanımı için
+• Eğitim süresi: 35 saat
+• Sınav: Teorik
+• Ücret: 300 TL
+
+Önemli Notlar:
+• MYK + SRC kombinasyonu ideal
+• Platformlarda öncelik sağlar
+• Maaş artışına etki eder
+• 5 yıl geçerli
+
+7. ÇANTAYI RUHSATA İŞLEME
+-------------------------
+Gerekli Belgeler:
+• Araç ruhsatı
+• Çanta satış faturası
+• Montaj belgesi
+• Teknik rapor
+
+İşlem Süreci:
+1. Yetkili servise gidin
+2. Çanta montajını yaptırın
+3. Teknik rapor alın
+4. Trafik şubesine başvurun
+5. Ruhsat güncellemesi yapın
+
+Maliyet:
+• Montaj ücreti: 200-500 TL
+• Ruhsat güncelleme: 50 TL
+• Toplam: 250-550 TL
+• İşlem süresi: 1-2 gün
+
+8. BAĞ-KUR KAYDI
+----------------
+Gerekli Belgeler:
+• TC Kimlik belgesi
+• Vergi levhası
+• İkametgah belgesi
+• Başvuru formu
+
+Kayıt Süreci:
+1. SGK İl Müdürlüğü'ne başvuru
+2. Başvuru formunu doldurun
+3. Belgeleri teslim edin
+4. Prim ödemesini yapın
+5. Bağ-Kur kartınızı alın
+
+Prim Tutarları (2025):
+• Asgari prim: 1.500 TL/ay
+• Maksimum prim: 15.000 TL/ay
+• Emeklilik için: 25 yıl
+• Sağlık sigortası dahil
+
+9. KASK (ECE/DOT)
+-----------------
+ECE 22.05 Standardı:
+• Avrupa standartı
+• Zorunlu etiket
+• Test sertifikası
+• 5 yıl geçerli
+
+DOT Standardı:
+• Amerika standartı
+• Daha sıkı testler
+• Yüksek kalite
+• 5 yıl geçerli
+
+Önerilen Markalar:
+• AGV: İtalyan, premium
+• Shoei: Japon, yüksek kalite
+• HJC: Kore, uygun fiyat
+• LS2: Çin, ekonomik
+
+Fiyat Aralığı:
+• Ekonomik: 500-1.000 TL
+• Orta segment: 1.000-2.500 TL
+• Premium: 2.500+ TL
+
+10. REFLEKTÖRLÜ MONT
+--------------------
+Zorunlu Özellikler:
+• EN 471 standardı
+• Yüksek görünürlük
+• Su geçirmez
+• Yırtılmaz kumaş
+
+Renk Seçenekleri:
+• Sarı: En yüksek görünürlük
+• Turuncu: İyi görünürlük
+• Kırmızı: Orta görünürlük
+
+Önerilen Markalar:
+• Alpinestars: İtalyan, premium
+• Dainese: İtalyan, yüksek kalite
+• Rev'it: Hollanda, orta segment
+• Spidi: İtalyan, ekonomik
+
+Fiyat Aralığı:
+• Ekonomik: 300-600 TL
+• Orta segment: 600-1.200 TL
+• Premium: 1.200+ TL
+
+11. ELDİVEN/DİZLİK
+------------------
+Eldiven Özellikleri:
+• Su geçirmez
+• Kaymaz yüzey
+• Parmak uçları dokunmatik
+• Yırtılmaz kumaş
+
+Dizlik Özellikleri:
+• CE sertifikalı
+• Ayarlanabilir kayış
+• Koruyucu plaka
+• Rahat kullanım
+
+Önerilen Markalar:
+• Alpinestars: Premium
+• Dainese: Yüksek kalite
+• Rev'it: Orta segment
+• Spidi: Ekonomik
+
+Fiyat Aralığı:
+• Eldiven: 100-400 TL
+• Dizlik: 200-800 TL
+• Set: 300-1.200 TL
+
+12. TELEFON TUTUCU/YAĞMURLUK
+----------------------------
+Telefon Tutucu Özellikleri:
+• Su geçirmez
+• Titreşim emici
+• Hızlı takma/çıkarma
+• Evrensel uyumlu
+
+Yağmurluk Özellikleri:
+• Su geçirmez
+• Nefes alabilir
+• Kompakt taşıma
+• Yüksek görünürlük
+
+Önerilen Markalar:
+• Quad Lock: Premium tutucu
+• Ram Mount: Güvenilir
+• Oxford: Ekonomik
+• Rev'it: Orta segment
+
+Fiyat Aralığı:
+• Telefon tutucu: 200-600 TL
+• Yağmurluk: 150-400 TL
+• Set: 350-1.000 TL
+
+13. KDV %20, TEVKİFAT 2/10
+---------------------------
+KDV Oranları:
+• Moto kurye hizmetleri: %20
+• Standart teslimat: %20
+• Hızlı teslimat: %20
+• Özel hizmetler: %20
+
+Tevkifat Oranları:
+• KDV'nin %20'si: Tevkifat
+• Hesaplama: KDV x 0.20
+• Örnek: 100 TL KDV → 20 TL tevkifat
+• Net KDV: 80 TL
+
+Örnek Hesaplama:
+• Hizmet bedeli: 1.000 TL
+• KDV (%20): 200 TL
+• Tevkifat (%20): 40 TL
+• Net KDV: 160 TL
+• Toplam: 1.160 TL
+
+14. GELİR VERGİSİ DİLİMLERİ
+---------------------------
+2025 Gelir Vergisi Dilimleri:
+• 0-32.000 TL: %15
+• 32.001-70.000 TL: %20
+• 70.001-170.000 TL: %27
+• 170.001-880.000 TL: %35
+• 880.001+ TL: %40
+
+Örnek Hesaplama (Aylık 15.000 TL):
+• Yıllık gelir: 180.000 TL
+• İlk dilim: 32.000 x %15 = 4.800 TL
+• İkinci dilim: 38.000 x %20 = 7.600 TL
+• Üçüncü dilim: 100.000 x %27 = 27.000 TL
+• Dördüncü dilim: 10.000 x %35 = 3.500 TL
+• Toplam vergi: 42.900 TL
+
+15. GİDER YAZILABİLEN KALEMLER
+------------------------------
+Tam Gider Yazılabilenler:
+• Yakıt giderleri
+• Araç bakım/onarım
+• Sigorta primleri
+• Kasko primleri
+• Lastik değişimi
+
+Kısmi Gider Yazılabilenler:
+• Telefon faturası (%50)
+• İnternet faturası (%50)
+• Kıyafet giderleri (%30)
+• Yemek giderleri (%30)
+
+Gider Yazılamayanlar:
+• Kişisel harcamalar
+• Konut kirası
+• Kişisel sigortalar
+• Eğlence giderleri
+
+Örnek Aylık Giderler:
+• Yakıt: 2.000 TL
+• Bakım: 500 TL
+• Sigorta: 200 TL
+• Telefon: 100 TL (%50 = 50 TL)
+• Toplam gider: 2.750 TL
+
+16. BEYAN DÖNEMLERİ
+-------------------
+Gelir Vergisi Beyanı:
+• Beyan tarihi: 1-25 Mart
+• Ödeme tarihi: 31 Mart
+• Geç ödeme faizi: %2.5/ay
+• Gecikme cezası: %5
+
+KDV Beyanı:
+• Beyan tarihi: Ay sonundan itibaren 24 gün
+• Ödeme tarihi: Beyan tarihi ile aynı
+• Geç ödeme faizi: %2.5/ay
+• Gecikme cezası: %5
+
+Muhtasar Beyanı:
+• Beyan tarihi: Ay sonundan itibaren 26 gün
+• Ödeme tarihi: Beyan tarihi ile aynı
+• Geç ödeme faizi: %2.5/ay
+• Gecikme cezası: %5
+
+Önemli Tarihler:
+• Ocak: 24 Şubat
+• Şubat: 26 Mart
+• Mart: 24 Nisan
+• Nisan: 26 Mayıs
+
+17. TRAFİK SİGORTASI
+--------------------
+Zorunlu Trafik Sigortası:
+• Yasal zorunluluk
+• Üçüncü şahıs koruması
+• Mala ve cana zarar
+• Yıllık yenileme
+
+Prim Hesaplama Faktörleri:
+• Araç yaşı
+• Sürücü yaşı
+• Kaza geçmişi
+• Bölge riski
+
+Örnek Primler (2025):
+• 0-3 yaş araç: 800-1.200 TL
+• 4-7 yaş araç: 1.000-1.500 TL
+• 8+ yaş araç: 1.200-2.000 TL
+
+Önemli Notlar:
+• Prim artışı: Kaza durumunda
+• İndirim: Kaza yoksa
+• Maksimum indirim: %50
+• Maksimum artış: %100
+
+18. KASKO (OPSİYONEL)
+---------------------
+Kasko Sigortası:
+• Zorunlu değil
+• Kendi aracınızı korur
+• Hırsızlık, yangın, doğal afet
+• Çarpışma, devrilme
+
+Kapsam Seçenekleri:
+• Tam kasko: Tüm riskler
+• Kısmi kasko: Belirli riskler
+• Ekonomik kasko: Temel riskler
+• Özel kasko: Özel durumlar
+
+Prim Hesaplama:
+• Araç değeri
+• Sürücü profili
+• Kullanım amacı
+• Bölge riski
+
+Örnek Primler:
+• Ekonomik: 1.500-2.500 TL
+• Kısmi: 2.500-4.000 TL
+• Tam: 4.000-7.000 TL
+
+19. İŞ KAZASI SİGORTASI
+-----------------------
+İş Kazası Sigortası:
+• Zorunlu sigorta
+• İş kazası koruması
+• Meslek hastalığı
+• Geçici iş göremezlik
+
+Kapsam:
+• Tıbbi giderler
+• Geçici iş göremezlik ödeneği
+• Sürekli iş göremezlik ödeneği
+• Ölüm durumunda tazminat
+
+Prim Hesaplama:
+• Brüt ücret
+• Risk sınıfı
+• Meslek kodu
+• Çalışma süresi
+
+Örnek Primler:
+• Düşük risk: %1.5-2.5
+• Orta risk: %2.5-4.0
+• Yüksek risk: %4.0-6.5
+
+20. KAZA TUTANAĞI
+-----------------
+Kaza Tutanağı:
+• Zorunlu belge
+• Sigorta için gerekli
+• Hukuki koruma
+• Delil niteliği
+
+Tutanağa Yazılacaklar:
+• Kaza tarihi ve saati
+• Kaza yeri
+• Araç bilgileri
+• Sürücü bilgileri
+• Kaza nedeni
+• Hasar durumu
+• Tanık bilgileri
+
+Önemli Notlar:
+• 24 saat içinde doldurun
+• Taraflar imzalasın
+• Fotoğraf çekin
+• Polis çağırın
+• Sigortaya bildirin
+
+21. YAĞMURDA SÜRÜŞ
+------------------
+Güvenlik Önlemleri:
+• Hızı düşürün (%30-50)
+• Fren mesafesini artırın
+• Lastik hava basıncını kontrol edin
+• Görüş mesafesini koruyun
+
+Ekipman Kontrolü:
+• Yağmurluk giyin
+• Eldiven takın
+• Kask vizörünü temizleyin
+• Reflektörlü mont kullanın
+
+Yol Durumu:
+• Su birikintilerinden kaçının
+• Beyaz çizgilerden uzak durun
+• Köprü ve viyadüklerde dikkatli olun
+• Rüzgara karşı sürüş yapın
+
+Önemli İpuçları:
+• Ani fren yapmayın
+• Virajlarda yavaşlayın
+• Takip mesafesini artırın
+• Acil durumda güvenli yere çekilin
+
+22. ROTA PLANLAMA
+-----------------
+Rota Optimizasyonu:
+• GPS uygulaması kullanın
+• Trafik durumunu kontrol edin
+• Alternatif yolları öğrenin
+• Zaman dilimlerini planlayın
+
+Zaman Yönetimi:
+• Yoğun saatleri kaçının
+• Okul saatlerini dikkate alın
+• Hafta sonu planlaması
+• Tatil günleri özel
+
+Yakıt Tasarrufu:
+• Kısa yolları seçin
+• Trafik yoğunluğundan kaçının
+• Sabit hızda sürün
+• Gereksiz dur-kalk yapmayın
+
+Önemli Notlar:
+• Müşteri bekleme süreleri
+• Teslimat süreleri
+• Geri dönüş rotaları
+• Acil durum planları
+
+23. MÜŞTERİ İLETİŞİMİ
+---------------------
+İletişim Kuralları:
+• Nazik ve saygılı olun
+• Açık ve net konuşun
+• Sabırlı davranın
+• Profesyonel görünün
+
+Telefon Görüşmeleri:
+• Açılış selamı
+• Kimlik belirtme
+• Durum açıklama
+• Teşekkür etme
+
+Yüz yüze İletişim:
+• Göz teması kurun
+• Gülümseyin
+• Dinleyin
+• Çözüm odaklı olun
+
+Sorun Çözme:
+• Sakin kalın
+• Müşteriyi dinleyin
+• Çözüm önerin
+• Gerekirse yöneticiye başvurun
+
+24. YAKIT TASARRUFU
+-------------------
+Sürüş Teknikleri:
+• Sabit hızda sürün
+• Ani hızlanma/duraklama yapmayın
+• Vites değişimini doğru yapın
+• Motor devrini düşük tutun
+
+Araç Bakımı:
+• Lastik hava basıncını kontrol edin
+• Motor yağını düzenli değiştirin
+• Hava filtresini temizleyin
+• Fren sistemini kontrol edin
+
+Yol Seçimi:
+• Kısa yolları tercih edin
+• Trafik yoğunluğundan kaçının
+• Yokuş yukarı hızlanmayın
+• Rüzgara karşı sürüş yapmayın
+
+Yakıt Türü:
+• Kaliteli yakıt kullanın
+• Yakıt katkı maddeleri
+• Düzenli yakıt alımı
+• Yakıt fiyatlarını takip edin
+
+25. ŞİRKET AÇMADAN OLUR MU?
+---------------------------
+Şirket Açmadan Çalışma:
+• Bireysel çalışma mümkün
+• Gelir vergisi mükellefi
+• Bağ-Kur kaydı gerekli
+• Fatura kesme zorunluluğu
+
+Avantajları:
+• Düşük maliyet
+• Hızlı başlangıç
+• Basit muhasebe
+• Az evrak
+
+Dezavantajları:
+• Yüksek vergi oranları
+• Sınırlı iş imkanları
+• Kredi zorluğu
+• Büyüme sınırı
+
+Öneriler:
+• Başlangıç için uygun
+• Gelir artınca şirket açın
+• Muhasebeci desteği alın
+• Vergi planlaması yapın
+
+26. P1'SİZ ÇALIŞMAK?
+--------------------
+P1 Belgesi Zorunluluğu:
+• Yasal zorunluluk
+• Ceza riski
+• Sigorta sorunu
+• Platform reddi
+
+Ceza Miktarları:
+• İlk kez: 500 TL
+• Tekrar: 1.000 TL
+• Üçüncü kez: 2.000 TL
+• Araç trafikten men
+
+Riskler:
+• Sigorta geçersiz
+• Kaza durumunda sorumluluk
+• Platform hesap kapatma
+• Yasal sorunlar
+
+Öneriler:
+• Mutlaka P1 alın
+• Geçici çalışma yapmayın
+• Yasal yollardan ilerleyin
+• Güvenli çalışın
+
+27. VERGİ NASIL ÖDENİR?
+-----------------------
+Gelir Vergisi Ödemesi:
+• E-devlet üzerinden
+• Banka şubelerinden
+• PTT'den
+• Online bankacılık
+
+KDV Ödemesi:
+• E-devlet üzerinden
+• Banka şubelerinden
+• Online bankacılık
+• Otomatik ödeme
+
+Muhtasar Ödemesi:
+• E-devlet üzerinden
+• Banka şubelerinden
+• Online bankacılık
+• Otomatik ödeme
+
+Ödeme Yöntemleri:
+• Nakit ödeme
+• Kredi kartı
+• Banka kartı
+• Havale/EFT
+
+Önemli Notlar:
+• Ödeme tarihlerini takip edin
+• Geç ödeme faizi var
+• Makbuzları saklayın
+• Ödeme onayını alın
+
+28. YAŞ SINIRI?
+---------------
+Minimum Yaş Sınırı:
+• 18 yaş altı: Çalışamaz
+• 18-21 yaş: Sınırlı çalışma
+• 21+ yaş: Tam çalışma
+• 65+ yaş: Emeklilik
+
+18-21 Yaş Sınırlamaları:
+• Gece çalışma yasak
+• Ağır işler yasak
+• Saat sınırlaması
+• Özel izin gerekli
+
+65+ Yaş Durumu:
+• Emeklilik sonrası çalışma
+• Bağ-Kur prim ödemesi
+• Gelir vergisi muafiyeti
+• Sağlık sigortası
+
+Öneriler:
+• Yaş sınırlarını öğrenin
+• Yasal haklarınızı bilin
+• Sigorta durumunu kontrol edin
+• Muhasebeciye danışın
+
+29. E-DEVLET
+------------
+E-devlet Hizmetleri:
+• Vergi ödemeleri
+• Belge sorgulama
+• Başvuru takibi
+• Ödeme geçmişi
+
+Giriş Yöntemleri:
+• TC Kimlik + Şifre
+• E-imza
+• Mobil imza
+• SMS doğrulama
+
+Kurye İçin Önemli Hizmetler:
+• Gelir vergisi beyanı
+• KDV beyanı
+• Muhtasar beyanı
+• Bağ-Kur prim ödemesi
+
+Önemli Notlar:
+• 7/24 erişim
+• Güvenli ödeme
+• Anında onay
+• Makbuz alma
+
+30. GİB (GELİRLER İDARESİ BAŞKANLIĞI)
+------------------------------------
+GİB Hizmetleri:
+• Vergi beyanları
+• Ödeme işlemleri
+• Belge sorgulama
+• Danışmanlık
+
+Kurye İçin Önemli Hizmetler:
+• Gelir vergisi beyanı
+• KDV beyanı
+• Muhtasar beyanı
+• E-fatura kaydı
+
+İletişim:
+• Telefon: 444 0 189
+• E-posta: bilgi@gib.gov.tr
+• Web: www.gib.gov.tr
+• Şube: İl müdürlükleri
+
+Önemli Notlar:
+• 7/24 hizmet
+• Ücretsiz danışmanlık
+• Online işlemler
+• Mobil uygulama
+
+31. UAB (ULAŞTIRMA VE ALTYAPI BAKANLIĞI)
+----------------------------------------
+UAB Hizmetleri:
+• P1 belgesi başvurusu
+• Eğitim programları
+• Sınav takvimi
+• Belge sorgulama
+
+P1 Başvuru Süreci:
+• Online başvuru
+• Belge yükleme
+• Eğitim programı
+• Sınav tarihi
+
+İletişim:
+• Telefon: 444 0 189
+• E-posta: info@uab.gov.tr
+• Web: www.uab.gov.tr
+• Şube: İl müdürlükleri
+
+Önemli Notlar:
+• Online başvuru
+• Eğitim zorunlu
+• Sınav %70 başarı
+• 3 yıl geçerli
+
+32. MYK / SGK
+-------------
+MYK (Mesleki Yeterlilik Kurumu):
+• Meslek standartları
+• Sertifika programları
+• Eğitim kurumları
+• Sınav merkezleri
+
+SGK (Sosyal Güvenlik Kurumu):
+• Sosyal güvenlik
+• Sağlık sigortası
+• Emeklilik
+• İş kazası sigortası
+
+Kurye İçin Önemli Hizmetler:
+• Bağ-Kur kaydı
+• Prim ödemesi
+• Sağlık hizmetleri
+• Emeklilik planlaması
+
+İletişim:
+• SGK: 444 0 189
+• MYK: 444 0 189
+• Web: www.sgk.gov.tr
+• Web: www.myk.gov.tr
+
+Önemli Notlar:
+• Zorunlu sigorta
+• Prim ödemesi
+• Sağlık hizmetleri
+• Emeklilik hakkı

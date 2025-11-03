@@ -1,0 +1,402 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum - Kuryes.com</title>
+    <meta name="description" content="Sohbete katıl, ilan ver, kazanç paylaş. Kurye forumu ve şehir odaları.">
+    
+    <!-- OpenGraph -->
+    <meta property="og:title" content="Forum - Kuryes.com">
+    <meta property="og:description" content="Sohbete katıl, ilan ver, kazanç paylaş.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kuryes.com/forum.html">
+    <meta property="og:image" content="/img/og-image.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="public/favicon/kuryesfavicon.png">
+    <link rel="apple-touch-icon" href="public/favicon/kuryesfavicon.png">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#FF3131">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Kuryes">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF3131',
+                        accent: '#00C8FF',
+                        support: {
+                            yellow: '#FFD60A',
+                            orange: '#FF7A00'
+                        },
+                        bg: '#F8FBFD',
+                        text: '#1C1C1C',
+                        muted: '#6F6F6F'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-bg text-text font-inter">
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <img src="public/img/kuryes.svg" 
+                             srcset="public/img/kuryes.svg, public/img/kuryes.png" 
+                             alt="KURYΕS.com" 
+                             class="h-12 md:h-14 w-auto"
+                             onerror="this.onerror=null; this.src='public/img/kuryes.png';">
+                    </a>
+                </div>
+                
+                <!-- Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-text hover:text-primary transition-colors">Ana Sayfa</a>
+                    <a href="kurye-tabani.html" class="text-text hover:text-primary transition-colors">KuryeTabanı</a>
+                    <a href="freelance.html" class="text-text hover:text-primary transition-colors">Kurye Bul</a>
+                    <a href="kurye-rehberi.html" class="text-text hover:text-primary transition-colors">Kurye Rehberi</a>
+                    <a href="ilanlar.html" class="text-text hover:text-primary transition-colors">İş İlanları</a>
+                    <a href="forum.html" class="text-primary font-semibold">Forum</a>
+                    <a href="kazanc.html" class="text-text hover:text-primary transition-colors">Kazanç</a>
+                </nav>
+                
+                <!-- Auth Buttons -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <button class="text-muted hover:text-text transition-colors" disabled>Giriş Yap</button>
+                    <button data-register-btn class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors">Kayıt Ol</button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobileMenuBtn" class="text-text hover:text-primary transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 hidden">
+            <div class="px-4 py-2 space-y-2">
+                <a href="index.html" class="block py-2 text-text hover:text-primary">Ana Sayfa</a>
+                <a href="kurye-tabani.html" class="block py-2 text-text hover:text-primary">KuryeTabanı</a>
+                <a href="freelance.html" class="block py-2 text-text hover:text-primary">Kurye Bul</a>
+                <a href="kurye-rehberi.html" class="block py-2 text-text hover:text-primary">Kurye Rehberi</a>
+                <a href="ilanlar.html" class="block py-2 text-text hover:text-primary">İş İlanları</a>
+                <a href="forum.html" class="block py-2 text-primary font-semibold">Forum</a>
+                <a href="kazanc.html" class="block py-2 text-text hover:text-primary">Kazanç</a>
+                <div class="pt-2 border-t border-gray-200">
+                    <button class="block w-full text-left py-2 text-muted" disabled>Giriş Yap</button>
+                    <button data-register-btn class="block w-full text-center bg-primary text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors mt-2">Kayıt Ol</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Launch Banner -->
+    <div class="bg-gradient-to-r from-primary to-accent text-white text-center py-2">
+        <p class="text-sm font-medium">🚀 Lansman: Aralık 2025 Antalya — 2026 Tüm Türkiye</p>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="py-16 bg-gradient-to-br from-bg to-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold font-poppins text-text mb-6">
+                Forum
+            </h1>
+            <p class="text-xl text-muted mb-8">
+                Sohbete katıl, ilan ver, kazanç paylaş.
+            </p>
+        </div>
+    </section>
+    
+    <!-- Main Forum Content -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                
+                <!-- Left Sidebar - City Rooms -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h3 class="text-lg font-semibold text-text mb-4">Şehir Odaları</h3>
+                        <div class="space-y-3">
+                            <a href="https://t.me/kuryes_antalya" target="_blank" 
+                               class="flex items-center p-3 bg-accent/10 rounded-lg hover:bg-accent/20 transition-colors">
+                                <div class="w-8 h-8 bg-accent rounded-lg flex items-center justify-center mr-3">
+                                    <span class="text-white text-sm font-bold">A</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-text">Antalya</p>
+                                    <p class="text-xs text-muted">Pilot şehir</p>
+                                </div>
+                            </a>
+                            
+                            <a href="https://t.me/kuryes_istanbul" target="_blank" 
+                               class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors opacity-60">
+                                <div class="w-8 h-8 bg-gray-400 rounded-lg flex items-center justify-center mr-3">
+                                    <span class="text-white text-sm font-bold">İ</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-text">İstanbul</p>
+                                    <p class="text-xs text-muted">Yakında</p>
+                                </div>
+                            </a>
+                            
+                            <a href="https://t.me/kuryes_ankara" target="_blank" 
+                               class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors opacity-60">
+                                <div class="w-8 h-8 bg-gray-400 rounded-lg flex items-center justify-center mr-3">
+                                    <span class="text-white text-sm font-bold">A</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-text">Ankara</p>
+                                    <p class="text-xs text-muted">Yakında</p>
+                                </div>
+                            </a>
+                            
+                            <a href="https://t.me/kuryes_izmir" target="_blank" 
+                               class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors opacity-60">
+                                <div class="w-8 h-8 bg-gray-400 rounded-lg flex items-center justify-center mr-3">
+                                    <span class="text-white text-sm font-bold">İ</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-text">İzmir</p>
+                                    <p class="text-xs text-muted">Yakında</p>
+                                </div>
+                            </a>
+                            
+                            <a href="https://t.me/kuryes_eskisehir" target="_blank" 
+                               class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors opacity-60">
+                                <div class="w-8 h-8 bg-gray-400 rounded-lg flex items-center justify-center mr-3">
+                                    <span class="text-white text-sm font-bold">E</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-text">Eskişehir</p>
+                                    <p class="text-xs text-muted">Yakında</p>
+                                </div>
+                            </a>
+                            
+                            <a href="https://t.me/kuryes_isparta" target="_blank" 
+                               class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors opacity-60">
+                                <div class="w-8 h-8 bg-gray-400 rounded-lg flex items-center justify-center mr-3">
+                                    <span class="text-white text-sm font-bold">I</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-text">Isparta</p>
+                                    <p class="text-xs text-muted">Yakında</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Rules Box -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 mt-6">
+                        <h3 class="text-lg font-semibold text-text mb-4">Kurallar</h3>
+                        <div class="space-y-3 text-sm text-muted">
+                            <p>• Saygılı dil kullanın</p>
+                            <p>• Spam yapmayın</p>
+                            <p>• İlan formatı: [Şehir] İş Tanımı - Ücret</p>
+                            <p>• Kişisel bilgileri paylaşmayın</p>
+                            <p>• Reklam yapmayın</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main Forum - Telegram Embed -->
+                <div class="lg:col-span-3">
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl font-semibold text-text">Ana Forum</h3>
+                            <a href="https://t.me/kuryes_forum" target="_blank" 
+                               class="bg-accent text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-600 transition-colors flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                                </svg>
+                                Telegram'da Aç
+                            </a>
+                        </div>
+                        
+                        <!-- Telegram Widget Placeholder -->
+                        <div class="bg-gray-50 rounded-lg p-8 text-center">
+                            <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-semibold text-text mb-2">Telegram Forumu</h4>
+                            <p class="text-muted mb-4">Ana forumumuza katılmak için Telegram'ı kullanın</p>
+                            <a href="https://t.me/kuryes_forum" target="_blank" 
+                               class="inline-flex items-center bg-accent text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                                </svg>
+                                Forum'a Katıl
+                            </a>
+                        </div>
+                        
+                        <!-- Forum Features -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                            <div class="text-center p-4 bg-gray-50 rounded-lg">
+                                <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mx-auto mb-3">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                    </svg>
+                                </div>
+                                <h4 class="font-semibold text-text mb-2">Sohbet</h4>
+                                <p class="text-sm text-muted">Diğer kuryelerle sohbet edin</p>
+                            </div>
+                            
+                            <div class="text-center p-4 bg-gray-50 rounded-lg">
+                                <div class="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mx-auto mb-3">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6"></path>
+                                    </svg>
+                                </div>
+                                <h4 class="font-semibold text-text mb-2">İlan Ver</h4>
+                                <p class="text-sm text-muted">İş ilanlarınızı paylaşın</p>
+                            </div>
+                            
+                            <div class="text-center p-4 bg-gray-50 rounded-lg">
+                                <div class="w-12 h-12 bg-support-yellow rounded-lg flex items-center justify-center mx-auto mb-3">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                                    </svg>
+                                </div>
+                                <h4 class="font-semibold text-text mb-2">Kazanç Paylaş</h4>
+                                <p class="text-sm text-muted">Kazançlarınızı paylaşın</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-text text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm">© 2025 Kuryes — Altyapı: <a href="https://kaysia.co" class="text-accent hover:text-white">Kaysia.co</a></p>
+                </div>
+                <div class="flex flex-wrap gap-4 text-sm">
+                    <a href="#" class="hover:text-accent transition-colors">KVKK</a>
+                    <a href="#" class="hover:text-accent transition-colors">Gizlilik</a>
+                    <a href="#" class="hover:text-accent transition-colors">Kullanım Şartları</a>
+                    <a href="#" class="hover:text-accent transition-colors">İletişim</a>
+                </div>
+            </div>
+        </div>
+        <!-- powered by Kaysia -->
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    
+    <!-- Profile Selection Modal -->
+    <div id="profileModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full p-8 animate-fadeInUp">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-text mb-2">Kayıt Ol</h2>
+                <p class="text-muted">Size en uygun profili seçin</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <button id="selectKurye" class="profile-option bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-primary hover:shadow-xl transition-all transform hover:scale-105 group">
+                    <div class="text-6xl mb-4">🏍️</div>
+                    <h3 class="text-xl font-bold text-text mb-2 group-hover:text-primary">Kurye</h3>
+                    <p class="text-sm text-muted">Kurye olmak için kayıt ol</p>
+                </button>
+                
+                <button id="selectIsletme" class="profile-option bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-accent hover:shadow-xl transition-all transform hover:scale-105 group">
+                    <div class="text-6xl mb-4">🏪</div>
+                    <h3 class="text-xl font-bold text-text mb-2 group-hover:text-accent">İşletme</h3>
+                    <p class="text-sm text-muted">İşletmeniz için kayıt olun</p>
+                </button>
+                
+                <button id="selectKullanici" class="profile-option bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-support-orange hover:shadow-xl transition-all transform hover:scale-105 group">
+                    <div class="text-6xl mb-4">📦</div>
+                    <h3 class="text-xl font-bold text-text mb-2 group-hover:text-support-orange">Kullanıcı</h3>
+                    <p class="text-sm text-muted">Gönderi yapmak için kayıt ol</p>
+                </button>
+            </div>
+            
+            <button id="closeModal" class="mt-8 w-full text-muted hover:text-text transition-colors">İptal</button>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileModal = document.getElementById('profileModal');
+            const selectKurye = document.getElementById('selectKurye');
+            const selectIsletme = document.getElementById('selectIsletme');
+            const selectKullanici = document.getElementById('selectKullanici');
+            const closeModal = document.getElementById('closeModal');
+            const registerButtons = document.querySelectorAll('[data-register-btn]');
+            
+            registerButtons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    profileModal.classList.remove('hidden');
+                });
+            });
+            
+            closeModal.addEventListener('click', function() {
+                profileModal.classList.add('hidden');
+            });
+            
+            profileModal.addEventListener('click', function(e) {
+                if (e.target === profileModal) {
+                    profileModal.classList.add('hidden');
+                }
+            });
+            
+            selectKurye.addEventListener('click', function() {
+                window.location.href = 'kurye-tabani.html';
+            });
+            
+            selectIsletme.addEventListener('click', function() {
+                window.location.href = 'isletme-kayit.html';
+            });
+            
+            selectKullanici.addEventListener('click', function() {
+                window.location.href = 'kullanici-kayit.html';
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+

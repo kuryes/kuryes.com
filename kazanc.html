@@ -1,0 +1,1100 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurye Maaşları 2025 | Ne Kadar Kazanırım? | Kurye Kazanç Hesaplayıcı - Kuryes.com</title>
+    <meta name="description" content="Kuryeler ne kadar kazanıyor? 2025 kurye maaşları, haftalık kazanç hesaplama, günlük kurye ücretleri. KDV %20, tevfikat, gelir vergisi dahil net kazanç hesaplayıcı. Monte Carlo simülasyonu ile gerçekçi paket dağılımı. Moto kurye gelir simülatörü.">
+    
+    <!-- OpenGraph -->
+    <meta property="og:title" content="Kurye Maaşları 2025 | Ne Kadar Kazanırım? | Kurye Kazanç Hesaplayıcı">
+    <meta property="og:description" content="Kuryeler ne kadar kazanıyor? 2025 kurye maaşları, haftalık kazanç hesaplama, günlük kurye ücretleri. KDV %20, tevfikat, gelir vergisi dahil net kazanç hesaplayıcı. Monte Carlo simülasyonu ile gerçekçi paket dağılımı.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kuryes.com/kazanc.html">
+    <meta property="og:image" content="/img/og-image.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="public/favicon/kuryesfavicon.png">
+    <link rel="apple-touch-icon" href="public/favicon/kuryesfavicon.png">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#FF3131">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Kuryes">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF3131',
+                        accent: '#00C8FF',
+                        support: {
+                            yellow: '#FFD60A',
+                            orange: '#FF7A00'
+                        },
+                        bg: '#F8FBFD',
+                        text: '#1C1C1C',
+                        muted: '#6F6F6F'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-bg text-text font-inter">
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <img src="public/img/kuryes.svg" 
+                             srcset="public/img/kuryes.svg, public/img/kuryes.png" 
+                             alt="KURYΕS.com" 
+                             class="h-12 md:h-14 w-auto"
+                             onerror="this.onerror=null; this.src='public/img/kuryes.png';">
+                    </a>
+                </div>
+                
+                <!-- Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-text hover:text-primary transition-colors">Ana Sayfa</a>
+                    <a href="kurye-tabani.html" class="text-text hover:text-primary transition-colors">KuryeTabanı</a>
+                    <a href="freelance.html" class="text-text hover:text-primary transition-colors">Kurye Bul</a>
+                    <a href="kurye-rehberi.html" class="text-text hover:text-primary transition-colors">Kurye Rehberi</a>
+                    <a href="ilanlar.html" class="text-text hover:text-primary transition-colors">İş İlanları</a>
+                    <a href="forum.html" class="text-text hover:text-primary transition-colors">Forum</a>
+                    <a href="kazanc.html" class="text-primary font-semibold">Kazanç</a>
+                </nav>
+                
+                <!-- Auth Buttons -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <button class="text-muted hover:text-text transition-colors" disabled>Giriş Yap</button>
+                    <button data-register-btn class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors">Kayıt Ol</button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobileMenuBtn" class="text-text hover:text-primary transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 hidden">
+            <div class="px-4 py-2 space-y-2">
+                <a href="index.html" class="block py-2 text-text hover:text-primary">Ana Sayfa</a>
+                <a href="kurye-tabani.html" class="block py-2 text-text hover:text-primary">KuryeTabanı</a>
+                <a href="freelance.html" class="block py-2 text-text hover:text-primary">Kurye Bul</a>
+                <a href="kurye-rehberi.html" class="block py-2 text-text hover:text-primary">Kurye Rehberi</a>
+                <a href="ilanlar.html" class="block py-2 text-text hover:text-primary">İş İlanları</a>
+                <a href="forum.html" class="block py-2 text-text hover:text-primary">Forum</a>
+                <a href="kazanc.html" class="block py-2 text-primary font-semibold">Kazanç</a>
+                <div class="pt-2 border-t border-gray-200">
+                    <button class="block w-full text-left py-2 text-muted" disabled>Giriş Yap</button>
+                    <button data-register-btn class="block w-full text-center bg-primary text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors mt-2">Kayıt Ol</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Launch Banner -->
+    <div class="bg-gradient-to-r from-primary to-accent text-white text-center py-2">
+        <p class="text-sm font-medium">🚀 Lansman: Aralık 2025 Antalya — 2026 Tüm Türkiye</p>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="py-16 bg-gradient-to-br from-bg to-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold font-poppins text-text mb-6">
+                Kurye Maaşları 2025
+            </h1>
+            <p class="text-xl text-muted mb-4">
+                Kuryeler ne kadar kazanıyor? Haftalık kurye maaşları neler?
+            </p>
+            <p class="text-lg text-muted mb-4">
+                Günlük, haftalık ve aylık kurye kazanç hesaplayıcı. KDV, tevfikat dahil net gelir simülatörü.
+            </p>
+            <div class="bg-white/80 backdrop-blur-sm rounded-xl p-6 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                    <div class="space-y-2">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-text">Günlük Kazanç</h3>
+                        <p class="text-sm text-muted">Paket, KM, saatlik ücret hesaplama</p>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mx-auto">
+                            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-text">Vergi Hesaplama</h3>
+                        <p class="text-sm text-muted">KDV %20, tevfikat, gelir vergisi</p>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="w-12 h-12 bg-support-yellow/20 rounded-full flex items-center justify-center mx-auto">
+                            <svg class="w-6 h-6 text-support-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-text">Monte Carlo</h3>
+                        <p class="text-sm text-muted">İstatistiksel paket dağılım simülasyonu</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Calculator Section -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- KAZANÇ GENİŞLETME: Tek kart yapısı - Sol kazanç, sağ kesintiler -->
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    
+                    <!-- Sol: Earnings Calculator -->
+                    <div>
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-support-yellow rounded-lg flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-2xl font-bold text-text">Ne kadar kazanırım?</h2>
+                    </div>
+                    
+                    <div class="space-y-6 flex flex-col">
+                        <!-- KAZANÇ GENİŞLETME: Yeni input ID'leri ve varsayılan değerler -->
+                        <!-- KAZANÇ GENİŞLETME: Güncellenmiş varsayılan değerler -->
+                        <!-- Saat Input -->
+                        <div>
+                            <label for="workHours" class="block text-sm font-medium text-text mb-2">
+                                Günlük Çalışma Saati
+                            </label>
+                            <input type="number" id="workHours" min="0" max="24" value="10" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                        
+                        <!-- Ortalama Sipariş Input -->
+                        <div>
+                            <label for="ordersPerHour" class="block text-sm font-medium text-text mb-2">
+                                Saatte Ortalama Sipariş
+                            </label>
+                            <input type="number" id="ordersPerHour" min="0" max="20" value="4" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                        
+                        <!-- Paket Başına Ücret Input -->
+                        <div>
+                            <label for="pkgFee" class="block text-sm font-medium text-text mb-2">
+                                Paket Başına Ücret (₺)
+                            </label>
+                            <input type="number" id="pkgFee" min="0" max="200" value="80" step="0.01"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                        
+                        <!-- KAZANÇ GENİŞLETME: KM Dahil Et Checkbox -->
+                        <div class="flex items-center">
+                            <input type="checkbox" id="useKm" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
+                            <label for="useKm" class="ml-2 text-sm font-medium text-text">
+                                Km ücreti dahil edilsin
+                            </label>
+                        </div>
+                        
+                        <!-- KM Başına Ücret Input -->
+                        <div id="kmFeeContainer" class="opacity-50 pointer-events-none">
+                            <label for="kmFee" class="block text-sm font-medium text-text mb-2">
+                                Km Başına Ücret (₺)
+                            </label>
+                            <input type="number" id="kmFee" min="0" max="50" value="5" step="0.01" disabled
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                        
+                        <!-- Ortalama Mesafe Input -->
+                        <div id="avgKmContainer" class="opacity-50 pointer-events-none">
+                            <label for="avgKm" class="block text-sm font-medium text-text mb-2">
+                                Ortalama Mesafe (km)
+                            </label>
+                            <input type="number" id="avgKm" min="0" max="50" value="5" step="0.1" disabled
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <p class="text-xs text-muted mt-1">
+                                ⚠️ <strong>İstatistiksel ortalama:</strong> Gerçek mesafeler 1-15km arasında değişebilir. 
+                                Bu değer sadece tahmin amaçlıdır.
+                            </p>
+                        </div>
+                        
+                        <!-- KAZANÇ GENİŞLETME: Saatlik Ücret Checkbox -->
+                        <div class="flex items-center">
+                            <input type="checkbox" id="useHourly" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
+                            <label for="useHourly" class="ml-2 text-sm font-medium text-text">
+                                Saatlik ücret dahil edilsin
+                            </label>
+                        </div>
+                        
+                        <!-- Saatlik Ücret Input -->
+                        <div id="hourlyFeeContainer" class="opacity-50 pointer-events-none">
+                            <label for="hourlyFee" class="block text-sm font-medium text-text mb-2">
+                                Saatlik Ücret (₺)
+                            </label>
+                            <input type="number" id="hourlyFee" min="0" max="500" value="170" step="0.01" disabled
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                        
+                        <!-- KAZANÇ GENİŞLETME: 2. Paket Ücreti Checkbox -->
+                        <div class="flex items-center">
+                            <input type="checkbox" id="useSecondPackage" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
+                            <label for="useSecondPackage" class="ml-2 text-sm font-medium text-text">
+                                2. Paket ücreti dahil edilsin
+                            </label>
+                        </div>
+                        
+                        <!-- 2. Paket Ücreti Input -->
+                        <div id="secondPackageContainer" class="opacity-50 pointer-events-none">
+                            <label for="secondPackageFee" class="block text-sm font-medium text-text mb-2">
+                                2. Paket Ücreti (₺)
+                            </label>
+                            <input type="number" id="secondPackageFee" min="0" max="200" value="70" step="0.01" disabled
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                        
+                        <!-- KAZANÇ GENİŞLETME: İzin Günü Checkbox -->
+                        <div class="flex items-center">
+                            <input type="checkbox" id="izinGunu" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2" checked>
+                            <label for="izinGunu" class="ml-2 text-sm font-medium text-text">
+                                İzin günü var (hafta: 6 gün, ay: 26 gün)
+                            </label>
+                        </div>
+                        
+                        <!-- KAZANÇ GENİŞLETME: Haftalık çıktı eklendi -->
+                        <!-- Results - Mobilde en alta, desktop'ta normal sırada -->
+                        <div class="bg-primary/10 rounded-lg p-6 order-last lg:order-none">
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                                <div>
+                                    <p class="text-sm text-muted">Günlük Kazanç</p>
+                                    <p id="dailyOut" class="text-2xl font-bold text-primary">576 ₺</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-muted">Haftalık Kazanç</p>
+                                    <p id="weeklyOut" class="text-2xl font-bold text-primary">3.456 ₺</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-muted">Aylık Kazanç</p>
+                                    <p id="monthlyOut" class="text-2xl font-bold text-primary">14.976 ₺</p>
+                                </div>
+                            </div>
+                            <div class="text-center mt-4">
+                                <p class="text-xs text-muted">*Brüt kazanç (kesintiler öncesi)</p>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    
+                    <!-- Sağ: Deduction Simulator -->
+                    <div>
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-support-orange rounded-lg flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-bold text-text">Kesinti olursa ne olur?</h2>
+                        </div>
+                        
+                        <div class="space-y-6 flex flex-col">
+                            <!-- KAZANÇ GENİŞLETME: Sadece Vergi Kesintisi kaldı -->
+                            <!-- Vergi Kesintisi -->
+                            <div>
+                                <label for="vergiKesinti" class="block text-sm font-medium text-text mb-2">
+                                    KDV Kesintisi (%)
+                                </label>
+                                <input type="range" id="vergiKesinti" min="0" max="30" value="20" step="1"
+                                       class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                                <div class="flex justify-between text-sm text-muted mt-1">
+                                    <span>0%</span>
+                                    <span id="vergiKesintiValue">20%</span>
+                                    <span>30%</span>
+                                </div>
+                            </div>
+                            
+                            <!-- KAZANÇ GENİŞLETME: Tevfikat Checkbox -->
+                            <div class="flex items-center">
+                                <input type="checkbox" id="tevfikat" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
+                                <label for="tevfikat" class="ml-2 text-sm font-medium text-text">
+                                    Tevfikat uygula (KDV'nin %20'si)
+                                </label>
+                            </div>
+                            
+                            <!-- KAZANÇ GENİŞLETME: Detaylı Kesinti Sonuçları -->
+                            <!-- Results - Mobilde uyarılardan sonra -->
+                            <div class="bg-gray-50 rounded-lg p-6 order-last lg:order-none">
+                                <div class="space-y-6">
+                                    <!-- Günlük Detaylar -->
+                                    <div class="space-y-2">
+                                        <h4 class="text-sm font-semibold text-text">Günlük</h4>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm text-muted">Brüt Günlük Kazanç:</span>
+                                            <span id="brutDaily" class="font-semibold">3.200 TL</span>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm text-muted">KDV:</span>
+                                            <span id="kdvDaily" class="font-semibold text-red-500">640 TL</span>
+                                        </div>
+                                        <div id="tevfikatDailyRow" class="flex justify-between items-center hidden">
+                                            <span class="text-sm text-muted">Tevfikat:</span>
+                                            <span id="tevfikatDaily" class="font-semibold text-red-500">0 TL</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Haftalık Detaylar -->
+                                    <div class="space-y-2">
+                                        <h4 class="text-sm font-semibold text-text">Haftalık</h4>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm text-muted">Brüt Haftalık Kazanç:</span>
+                                            <span id="brutWeekly" class="font-semibold">19.200 TL</span>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm text-muted">KDV:</span>
+                                            <span id="kdvWeekly" class="font-semibold text-red-500">3.840 TL</span>
+                                        </div>
+                                        <div id="tevfikatWeeklyRow" class="flex justify-between items-center hidden">
+                                            <span class="text-sm text-muted">Tevfikat:</span>
+                                            <span id="tevfikatWeekly" class="font-semibold text-red-500">0 TL</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Aylık Detaylar -->
+                                    <div class="space-y-2">
+                                        <h4 class="text-sm font-semibold text-text">Aylık</h4>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm text-muted">Brüt Aylık Kazanç:</span>
+                                            <span id="brutMonthly" class="font-semibold">83.200 TL</span>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm text-muted">KDV:</span>
+                                            <span id="kdvMonthly" class="font-semibold text-red-500">16.640 TL</span>
+                                        </div>
+                                        <div id="tevfikatMonthlyRow" class="flex justify-between items-center hidden">
+                                            <span class="text-sm text-muted">Tevfikat:</span>
+                                            <span id="tevfikatMonthly" class="font-semibold text-red-500">0 TL</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <hr class="border-gray-300">
+                                    
+                                    <!-- KAZANÇ GENİŞLETME: Toplam Paket Sayıları -->
+                                    <div class="space-y-3">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm font-semibold">Günlük Toplam Paket Sayısı:</span>
+                                            <span id="dailyPackageCount" class="text-lg font-bold text-accent">40</span>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm font-semibold">Haftalık Toplam Paket Sayısı:</span>
+                                            <span id="weeklyPackageCount" class="text-lg font-bold text-accent">240</span>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm font-semibold">Aylık Toplam Paket Sayısı:</span>
+                                            <span id="monthlyPackageCount" class="text-lg font-bold text-accent">1.040</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <hr class="border-gray-300">
+                                    
+                                    <!-- Net Sonuçlar -->
+                                    <div class="space-y-3">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm font-semibold">Günlük Net:</span>
+                                            <span id="dailyNet" class="text-lg font-bold text-primary">2.560 TL</span>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm font-semibold">Haftalık Net:</span>
+                                            <span id="weeklyNet" class="text-lg font-bold text-primary">15.360 TL</span>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm font-semibold">Aylık Net:</span>
+                                            <span id="monthlyNet" class="text-lg font-bold text-primary">66.560 TL</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- KAZANÇ GENİŞLETME: KDV, Tevfikat ve Gelir Vergisi bilgisi güncellendi -->
+                            <!-- Mobilde önce uyarılar, desktop'ta normal sırada -->
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 order-first lg:order-none">
+                                <div class="text-sm text-blue-700 space-y-3">
+                                    <div>
+                                        <p class="font-semibold mb-2">📋 Vergi Bilgileri:</p>
+                                        <ul class="list-disc list-inside space-y-1 text-xs">
+                                            <li><strong>KDV:</strong> Moto kuryeler için devletin belirlediği KDV oranı %20'dir</li>
+                                            <li><strong>Tevfikat:</strong> Uygulandığında, KDV'nin %20'si tevfikat olarak kesilir</li>
+                                            <li><strong>Gelir Vergisi:</strong> Türkiye'de serbest meslek erbabı olarak çalışan kuryeler için gelir vergisi dilimleri uygulanır</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="bg-blue-100 border border-blue-300 rounded-lg p-3">
+                                        <p class="text-blue-800 font-medium text-xs">⚠️ Önemli Uyarı:</p>
+                                        <p class="text-blue-700 text-xs mt-1">
+                                            Bu hesaplamalar genel bilgilendirme amaçlıdır. Vergi yükümlülükleri kişisel durumunuza, 
+                                            gelir seviyenize ve diğer faktörlere göre değişebilir. 
+                                            <strong>Detaylı bilgi için mali müşaviriniz ile görüşmeniz önerilir.</strong>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- KAZANÇ GENİŞLETME: Ana İstatistiksel Uyarı -->
+                            <div class="bg-red-50 border border-red-200 rounded-lg p-4 order-first lg:order-none">
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-red-600 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                                    </svg>
+                                    <div class="text-sm text-red-800">
+                                        <p class="font-semibold mb-2">⚠️ Yasal Uyarı - İstatistiksel Hesaplama</p>
+                                        <p class="text-xs mb-2">
+                                            Bu hesaplayıcı <strong>istatistiksel modelleme</strong> kullanır. Tüm değerler 
+                                            (mesafe, paket sayısı, kazanç) <strong>tahmin amaçlıdır</strong> ve gerçek 
+                                            sonuçları garanti etmez.
+                                        </p>
+                                        <p class="text-xs">
+                                            Gerçek kazançlar platform politikaları, trafik koşulları, müşteri 
+                                            davranışları ve diğer faktörlere bağlı olarak değişebilir.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CTA Section -->
+            <div class="mt-12 text-center">
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-text mb-4">Kurye Olmaya Hazır mısın?</h3>
+                    <p class="text-muted mb-6">KuryeTabanı'na kayıt ol ve tüm platformlara tek seferde başvuru yap.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button data-register-btn class="bg-primary text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-600 transition-colors">KuryeTabanı'na Kayıt Ol</button>
+                        <a href="kurye-rehberi.html" class="border-2 border-accent text-accent px-8 py-4 rounded-lg font-semibold hover:bg-accent hover:text-white transition-colors">
+                            Rehberi İncele
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-text text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm">© 2025 Kuryes — Altyapı: <a href="https://kaysia.co" class="text-accent hover:text-white">Kaysia.co</a></p>
+                </div>
+                <div class="flex flex-wrap gap-4 text-sm">
+                    <a href="#" class="hover:text-accent transition-colors">KVKK</a>
+                    <a href="#" class="hover:text-accent transition-colors">Gizlilik</a>
+                    <a href="#" class="hover:text-accent transition-colors">Kullanım Şartları</a>
+                    <a href="#" class="hover:text-accent transition-colors">İletişim</a>
+                </div>
+            </div>
+        </div>
+        <!-- powered by Kaysia -->
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script>
+        // KAZANÇ GENİŞLETME: Yeni hesaplama fonksiyonları
+        
+        // KAZANÇ GENİŞLETME: Güncellenmiş hesaplama fonksiyonu
+        function compute() {
+            // Input değerlerini al
+            const pkgFee = parseFloat(document.getElementById('pkgFee').value) || 0;
+            const ordersPerHour = parseFloat(document.getElementById('ordersPerHour').value) || 0;
+            const workHours = parseFloat(document.getElementById('workHours').value) || 0;
+            const useKm = document.getElementById('useKm').checked;
+            const kmFee = parseFloat(document.getElementById('kmFee').value) || 0;
+            const avgKm = parseFloat(document.getElementById('avgKm').value) || 0;
+            const useHourly = document.getElementById('useHourly').checked;
+            const hourlyFee = parseFloat(document.getElementById('hourlyFee').value) || 0;
+            const useSecondPackage = document.getElementById('useSecondPackage').checked;
+            const izinVar = document.getElementById('izinGunu').checked;
+            
+            // Paket ücreti hesaplama
+            let perPackage;
+            if (useSecondPackage) {
+                // Monte Carlo simülasyonu ile ortalama hesapla
+                perPackage = monteCarloSimulation(1000);
+            } else {
+                // Normal hesaplama
+                perPackage = pkgFee + (useKm ? (kmFee * avgKm) : 0);
+            }
+            
+            const packageEarnings = perPackage * ordersPerHour * workHours;
+            const hourlyEarnings = useHourly ? (hourlyFee * workHours) : 0;
+            const daily = packageEarnings + hourlyEarnings;
+            const weekly = daily * (izinVar ? 6 : 7);
+            const monthly = daily * (izinVar ? 26 : 30);
+            
+            // Çıktıları formatla ve göster
+            const formatter = new Intl.NumberFormat('tr-TR', { 
+                style: 'currency', 
+                currency: 'TRY', 
+                maximumFractionDigits: 0 
+            });
+            
+            document.getElementById('dailyOut').textContent = formatter.format(daily);
+            document.getElementById('weeklyOut').textContent = formatter.format(weekly);
+            document.getElementById('monthlyOut').textContent = formatter.format(monthly);
+            
+            // Kesinti hesaplayıcısını güncelle
+            updateDeductions(daily);
+        }
+        
+        // KM checkbox toggle fonksiyonu
+        function toggleKmInputs() {
+            const useKm = document.getElementById('useKm').checked;
+            const kmFeeContainer = document.getElementById('kmFeeContainer');
+            const avgKmContainer = document.getElementById('avgKmContainer');
+            const kmFeeInput = document.getElementById('kmFee');
+            const avgKmInput = document.getElementById('avgKm');
+            
+            if (useKm) {
+                kmFeeContainer.classList.remove('opacity-50', 'pointer-events-none');
+                avgKmContainer.classList.remove('opacity-50', 'pointer-events-none');
+                kmFeeInput.disabled = false;
+                avgKmInput.disabled = false;
+            } else {
+                kmFeeContainer.classList.add('opacity-50', 'pointer-events-none');
+                avgKmContainer.classList.add('opacity-50', 'pointer-events-none');
+                kmFeeInput.disabled = true;
+                avgKmInput.disabled = true;
+            }
+        }
+        
+        // KAZANÇ GENİŞLETME: Saatlik ücret toggle fonksiyonu
+        function toggleHourlyInputs() {
+            const useHourly = document.getElementById('useHourly').checked;
+            const hourlyFeeContainer = document.getElementById('hourlyFeeContainer');
+            const hourlyFeeInput = document.getElementById('hourlyFee');
+            
+            if (useHourly) {
+                hourlyFeeContainer.classList.remove('opacity-50', 'pointer-events-none');
+                hourlyFeeInput.disabled = false;
+            } else {
+                hourlyFeeContainer.classList.add('opacity-50', 'pointer-events-none');
+                hourlyFeeInput.disabled = true;
+            }
+        }
+        
+        // KAZANÇ GENİŞLETME: KM Modal Kontrolü
+        function showKmModal() {
+            const modal = document.getElementById('kmModal');
+            modal.classList.remove('hidden');
+            
+            // Backdrop click ile kapanma
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    hideKmModal();
+                    document.getElementById('useKm').checked = false;
+                    toggleKmInputs();
+                }
+            });
+        }
+
+        function hideKmModal() {
+            const modal = document.getElementById('kmModal');
+            modal.classList.add('hidden');
+        }
+        
+        // KAZANÇ GENİŞLETME: 2. Paket toggle fonksiyonu
+        function toggleSecondPackageInputs() {
+            const useSecondPackage = document.getElementById('useSecondPackage').checked;
+            const secondPackageContainer = document.getElementById('secondPackageContainer');
+            const secondPackageInput = document.getElementById('secondPackageFee');
+            
+            if (useSecondPackage) {
+                secondPackageContainer.classList.remove('opacity-50', 'pointer-events-none');
+                secondPackageInput.disabled = false;
+            } else {
+                secondPackageContainer.classList.add('opacity-50', 'pointer-events-none');
+                secondPackageInput.disabled = true;
+            }
+        }
+        
+        // KAZANÇ GENİŞLETME: 2. Paket Modal Kontrolü
+        function showSecondPackageModal() {
+            const modal = document.getElementById('secondPackageModal');
+            modal.classList.remove('hidden');
+            
+            // Backdrop click ile kapanma
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    hideSecondPackageModal();
+                    document.getElementById('useSecondPackage').checked = false;
+                    toggleSecondPackageInputs();
+                }
+            });
+        }
+
+        function hideSecondPackageModal() {
+            const modal = document.getElementById('secondPackageModal');
+            modal.classList.add('hidden');
+        }
+        
+        // KAZANÇ GENİŞLETME: Monte Carlo Simülasyonu
+        function monteCarloSimulation(iterations = 1000) {
+            const pkgFee = parseFloat(document.getElementById('pkgFee').value) || 0;
+            const secondPackageFee = parseFloat(document.getElementById('secondPackageFee').value) || 0;
+            const useKm = document.getElementById('useKm').checked;
+            const kmFee = parseFloat(document.getElementById('kmFee').value) || 0;
+            const avgKm = parseFloat(document.getElementById('avgKm').value) || 0;
+            
+            // Paket dağılımı (gerçekçi oranlar)
+            const packageDistribution = [
+                { count: 1, probability: 0.60 }, // %60 tek paket
+                { count: 2, probability: 0.25 }, // %25 2 paket
+                { count: 3, probability: 0.10 }, // %10 3 paket
+                { count: 4, probability: 0.05 }  // %5 4+ paket
+            ];
+            
+            let totalEarnings = 0;
+            
+            for (let i = 0; i < iterations; i++) {
+                const random = Math.random();
+                let packageCount = 1;
+                let cumulativeProbability = 0;
+                
+                // Rastgele paket sayısı seç
+                for (const dist of packageDistribution) {
+                    cumulativeProbability += dist.probability;
+                    if (random <= cumulativeProbability) {
+                        packageCount = dist.count;
+                        break;
+                    }
+                }
+                
+                // Ücret hesapla
+                let packageEarnings = pkgFee; // İlk paket
+                if (packageCount >= 2) {
+                    packageEarnings += secondPackageFee; // 2. paket
+                }
+                if (packageCount >= 3) {
+                    packageEarnings += secondPackageFee; // 3. paket (aynı fiyat)
+                }
+                if (packageCount >= 4) {
+                    packageEarnings += secondPackageFee; // 4+ paket (aynı fiyat)
+                }
+                
+                // KM ücreti ekle (her paket için aynı)
+                if (useKm) {
+                    packageEarnings += kmFee * avgKm;
+                }
+                
+                totalEarnings += packageEarnings;
+            }
+            
+            return totalEarnings / iterations; // Ortalama paket ücreti
+        }
+        
+        // KAZANÇ GENİŞLETME: Detaylı kesinti hesaplama fonksiyonu
+        function updateDeductions(dailyBrut) {
+            const vergiKesinti = parseInt(document.getElementById('vergiKesinti').value);
+            const tevfikat = document.getElementById('tevfikat').checked;
+            const izinVar = document.getElementById('izinGunu').checked;
+            
+            // KAZANÇ GENİŞLETME: Paket sayısı hesaplamaları
+            const ordersPerHour = parseFloat(document.getElementById('ordersPerHour').value) || 0;
+            const workHours = parseFloat(document.getElementById('workHours').value) || 0;
+            
+            const dailyPackageCount = ordersPerHour * workHours;
+            const weeklyPackageCount = dailyPackageCount * (izinVar ? 6 : 7);
+            const monthlyPackageCount = dailyPackageCount * (izinVar ? 26 : 30);
+            
+            // Haftalık ve aylık brüt hesaplamaları
+            const weeklyBrut = dailyBrut * (izinVar ? 6 : 7);
+            const monthlyBrut = dailyBrut * (izinVar ? 26 : 30);
+            
+            // KDV hesaplamaları
+            const dailyKDV = (dailyBrut * vergiKesinti) / 100;
+            const weeklyKDV = (weeklyBrut * vergiKesinti) / 100;
+            const monthlyKDV = (monthlyBrut * vergiKesinti) / 100;
+            
+            // Tevfikat hesaplamaları (KDV'nin %20'si)
+            const dailyTevfikat = tevfikat ? (dailyKDV * 20) / 100 : 0;
+            const weeklyTevfikat = tevfikat ? (weeklyKDV * 20) / 100 : 0;
+            const monthlyTevfikat = tevfikat ? (monthlyKDV * 20) / 100 : 0;
+            
+            // Net hesaplamaları
+            const dailyNet = dailyBrut - dailyKDV - dailyTevfikat;
+            const weeklyNet = weeklyBrut - weeklyKDV - weeklyTevfikat;
+            const monthlyNet = monthlyBrut - monthlyKDV - monthlyTevfikat;
+            
+            // Brüt kazançları göster
+            document.getElementById('brutDaily').textContent = dailyBrut.toLocaleString() + ' TL';
+            document.getElementById('brutWeekly').textContent = weeklyBrut.toLocaleString() + ' TL';
+            document.getElementById('brutMonthly').textContent = monthlyBrut.toLocaleString() + ' TL';
+            
+            // KDV miktarlarını göster
+            document.getElementById('kdvDaily').textContent = dailyKDV.toLocaleString() + ' TL';
+            document.getElementById('kdvWeekly').textContent = weeklyKDV.toLocaleString() + ' TL';
+            document.getElementById('kdvMonthly').textContent = monthlyKDV.toLocaleString() + ' TL';
+            
+            // Tevfikat satırlarını göster/gizle
+            const tevfikatDailyRow = document.getElementById('tevfikatDailyRow');
+            const tevfikatWeeklyRow = document.getElementById('tevfikatWeeklyRow');
+            const tevfikatMonthlyRow = document.getElementById('tevfikatMonthlyRow');
+            
+            if (tevfikat) {
+                tevfikatDailyRow.classList.remove('hidden');
+                tevfikatWeeklyRow.classList.remove('hidden');
+                tevfikatMonthlyRow.classList.remove('hidden');
+                
+                document.getElementById('tevfikatDaily').textContent = dailyTevfikat.toLocaleString() + ' TL';
+                document.getElementById('tevfikatWeekly').textContent = weeklyTevfikat.toLocaleString() + ' TL';
+                document.getElementById('tevfikatMonthly').textContent = monthlyTevfikat.toLocaleString() + ' TL';
+            } else {
+                tevfikatDailyRow.classList.add('hidden');
+                tevfikatWeeklyRow.classList.add('hidden');
+                tevfikatMonthlyRow.classList.add('hidden');
+            }
+            
+            // KAZANÇ GENİŞLETME: Paket sayılarını göster
+            document.getElementById('dailyPackageCount').textContent = dailyPackageCount.toLocaleString();
+            document.getElementById('weeklyPackageCount').textContent = weeklyPackageCount.toLocaleString();
+            document.getElementById('monthlyPackageCount').textContent = monthlyPackageCount.toLocaleString();
+            
+            // Net sonuçları göster
+            document.getElementById('dailyNet').textContent = dailyNet.toLocaleString() + ' TL';
+            document.getElementById('weeklyNet').textContent = weeklyNet.toLocaleString() + ' TL';
+            document.getElementById('monthlyNet').textContent = monthlyNet.toLocaleString() + ' TL';
+        }
+        
+        // KAZANÇ GENİŞLETME: Event Listeners
+        // Ana input'lar
+        document.getElementById('pkgFee').addEventListener('input', compute);
+        document.getElementById('ordersPerHour').addEventListener('input', compute);
+        document.getElementById('workHours').addEventListener('input', compute);
+        
+        // KM checkbox ve input'ları (pop-up ile)
+        document.getElementById('useKm').addEventListener('change', function() {
+            if (this.checked) {
+                showKmModal();
+            } else {
+                toggleKmInputs();
+                compute();
+            }
+        });
+        document.getElementById('kmFee').addEventListener('input', compute);
+        document.getElementById('avgKm').addEventListener('input', compute);
+        
+        // KAZANÇ GENİŞLETME: Saatlik ücret checkbox ve input'ı
+        document.getElementById('useHourly').addEventListener('change', function() {
+            toggleHourlyInputs();
+            compute();
+        });
+        document.getElementById('hourlyFee').addEventListener('input', compute);
+        
+        // KAZANÇ GENİŞLETME: 2. Paket checkbox ve input'ı (pop-up ile)
+        document.getElementById('useSecondPackage').addEventListener('change', function() {
+            if (this.checked) {
+                showSecondPackageModal();
+            } else {
+                toggleSecondPackageInputs();
+                compute();
+            }
+        });
+        document.getElementById('secondPackageFee').addEventListener('input', compute);
+        
+        // İzin günü checkbox
+        document.getElementById('izinGunu').addEventListener('change', compute);
+        
+        // KAZANÇ GENİŞLETME: Tevfikat checkbox
+        document.getElementById('tevfikat').addEventListener('change', compute);
+        
+        // KAZANÇ GENİŞLETME: Sadece vergi kesintisi slider'ı
+        document.getElementById('vergiKesinti').addEventListener('input', function() {
+            document.getElementById('vergiKesintiValue').textContent = this.value + '%';
+            compute();
+        });
+        
+        // KAZANÇ GENİŞLETME: Modal Event Listeners
+        // DOM yüklendikten sonra event listener'ları ekle
+        document.addEventListener('DOMContentLoaded', function() {
+            // KM Modal
+            const kmModalCancel = document.getElementById('kmModalCancel');
+            const kmModalConfirm = document.getElementById('kmModalConfirm');
+            
+            if (kmModalCancel) {
+                kmModalCancel.addEventListener('click', function() {
+                    console.log('KM Modal Cancel clicked');
+                    hideKmModal();
+                    document.getElementById('useKm').checked = false;
+                    toggleKmInputs();
+                });
+            }
+
+            if (kmModalConfirm) {
+                kmModalConfirm.addEventListener('click', function() {
+                    console.log('KM Modal Confirm clicked');
+                    hideKmModal();
+                    toggleKmInputs();
+                    compute();
+                });
+            }
+            
+            // 2. Paket Modal
+            const secondPackageModalCancel = document.getElementById('secondPackageModalCancel');
+            const secondPackageModalConfirm = document.getElementById('secondPackageModalConfirm');
+            
+            if (secondPackageModalCancel) {
+                secondPackageModalCancel.addEventListener('click', function() {
+                    console.log('Second Package Modal Cancel clicked');
+                    hideSecondPackageModal();
+                    document.getElementById('useSecondPackage').checked = false;
+                    toggleSecondPackageInputs();
+                });
+            }
+
+            if (secondPackageModalConfirm) {
+                secondPackageModalConfirm.addEventListener('click', function() {
+                    console.log('Second Package Modal Confirm clicked');
+                    hideSecondPackageModal();
+                    toggleSecondPackageInputs();
+                    compute();
+                });
+            }
+        });
+        
+        // ESC tuşu ile modal kapanma
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const kmModal = document.getElementById('kmModal');
+                const secondPackageModal = document.getElementById('secondPackageModal');
+                
+                if (!kmModal.classList.contains('hidden')) {
+                    hideKmModal();
+                    document.getElementById('useKm').checked = false;
+                    toggleKmInputs();
+                }
+                
+                if (!secondPackageModal.classList.contains('hidden')) {
+                    hideSecondPackageModal();
+                    document.getElementById('useSecondPackage').checked = false;
+                    toggleSecondPackageInputs();
+                }
+            }
+        });
+        
+        // KAZANÇ GENİŞLETME: Başlangıç değerleriyle hesaplama
+        // KM, saatlik ücret ve 2. paket input'larını başlangıçta disabled yap
+        toggleKmInputs();
+        toggleHourlyInputs();
+        toggleSecondPackageInputs();
+        
+        // İlk hesaplama
+        compute();
+        
+    </script>
+    
+    <!-- Profile Selection Modal -->
+    <div id="profileModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full p-8 animate-fadeInUp">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-text mb-2">Kayıt Ol</h2>
+                <p class="text-muted">Size en uygun profili seçin</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <button id="selectKurye" class="profile-option bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-primary hover:shadow-xl transition-all transform hover:scale-105 group">
+                    <div class="text-6xl mb-4">🏍️</div>
+                    <h3 class="text-xl font-bold text-text mb-2 group-hover:text-primary">Kurye</h3>
+                    <p class="text-sm text-muted">Kurye olmak için kayıt ol</p>
+                </button>
+                
+                <button id="selectIsletme" class="profile-option bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-accent hover:shadow-xl transition-all transform hover:scale-105 group">
+                    <div class="text-6xl mb-4">🏪</div>
+                    <h3 class="text-xl font-bold text-text mb-2 group-hover:text-accent">İşletme</h3>
+                    <p class="text-sm text-muted">İşletmeniz için kayıt olun</p>
+                </button>
+                
+                <button id="selectKullanici" class="profile-option bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-support-orange hover:shadow-xl transition-all transform hover:scale-105 group">
+                    <div class="text-6xl mb-4">📦</div>
+                    <h3 class="text-xl font-bold text-text mb-2 group-hover:text-support-orange">Kullanıcı</h3>
+                    <p class="text-sm text-muted">Gönderi yapmak için kayıt ol</p>
+                </button>
+            </div>
+            
+            <button id="closeModal" class="mt-8 w-full text-muted hover:text-text transition-colors">İptal</button>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileModal = document.getElementById('profileModal');
+            const selectKurye = document.getElementById('selectKurye');
+            const selectIsletme = document.getElementById('selectIsletme');
+            const selectKullanici = document.getElementById('selectKullanici');
+            const closeModal = document.getElementById('closeModal');
+            const registerButtons = document.querySelectorAll('[data-register-btn]');
+            
+            registerButtons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    profileModal.classList.remove('hidden');
+                });
+            });
+            
+            closeModal.addEventListener('click', function() {
+                profileModal.classList.add('hidden');
+            });
+            
+            profileModal.addEventListener('click', function(e) {
+                if (e.target === profileModal) {
+                    profileModal.classList.add('hidden');
+                }
+            });
+            
+            selectKurye.addEventListener('click', function() {
+                window.location.href = 'kurye-tabani.html';
+            });
+            
+            selectIsletme.addEventListener('click', function() {
+                window.location.href = 'isletme-kayit.html';
+            });
+            
+            selectKullanici.addEventListener('click', function() {
+                window.location.href = 'kullanici-kayit.html';
+            });
+        });
+    </script>
+    
+    <!-- KAZANÇ GENİŞLETME: KM Uyarı Modal -->
+    <div id="kmModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-[9999] flex items-center justify-center">
+        <div class="bg-white rounded-xl p-6 max-w-md mx-4 relative" onclick="event.stopPropagation()">
+            <div class="flex items-center mb-4">
+                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-text">📏 Mesafe Hesaplama Bilgisi</h3>
+            </div>
+            
+            <div class="space-y-3 text-sm text-gray-700">
+                <p><strong>Ortalama Mesafe Hesaplama:</strong></p>
+                <ul class="list-disc list-inside space-y-1 ml-4">
+                    <li>Gerçek teslimat mesafeleri <strong>1-15km</strong> arasında değişir</li>
+                    <li>Bu değer <strong>istatistiksel ortalama</strong>dır</li>
+                    <li>Bazı teslimatlar çok kısa (1-2km), bazıları uzun (10-15km) olabilir</li>
+                    <li>Hesaplama <strong>tahmin amaçlı</strong>dır</li>
+                </ul>
+                
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 mt-4">
+                    <p class="text-blue-800 font-medium">📋 Önemli Not:</p>
+                    <p class="text-blue-700 text-xs mt-1">
+                        Gerçek mesafeler trafik, müşteri konumu ve şehir yapısına göre 
+                        büyük farklılık gösterebilir. Bu hesaplama sadece 
+                        <strong>genel bir tahmin</strong> sunar.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="flex gap-3 mt-6">
+                <button id="kmModalCancel" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer">
+                    İptal
+                </button>
+                <button id="kmModalConfirm" class="flex-1 px-4 py-2 bg-primary text-white rounded-lg hover:bg-red-600 transition-colors cursor-pointer">
+                    Anladım, Devam Et
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- KAZANÇ GENİŞLETME: 2. Paket Uyarı Modal -->
+    <div id="secondPackageModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-[9999] flex items-center justify-center">
+        <div class="bg-white rounded-xl p-6 max-w-md mx-4 relative" onclick="event.stopPropagation()">
+            <div class="flex items-center mb-4">
+                <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center mr-3">
+                    <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-text">⚠️ Önemli Bilgilendirme</h3>
+            </div>
+            
+            <div class="space-y-3 text-sm text-gray-700">
+                <p><strong>2. Paket Ücreti Hesaplama:</strong></p>
+                <ul class="list-disc list-inside space-y-1 ml-4">
+                    <li>Bu hesaplama <strong>Monte Carlo simülasyonu</strong> kullanır</li>
+                    <li><strong>1000 kez tekrarlanan</strong> istatistiksel modelleme</li>
+                    <li>Paket dağılımı: %60 tek, %25 çift, %10 üçlü, %5 dörtlü+</li>
+                    <li>Sonuçlar <strong>tahmini ortalama</strong> değerlerdir</li>
+                </ul>
+                
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mt-4">
+                    <p class="text-yellow-800 font-medium">📦 Paket Ücreti Bilgisi:</p>
+                    <p class="text-yellow-700 text-xs mt-1">
+                        <strong>1. paket:</strong> Temel paket ücreti<br>
+                        <strong>2. ve sonraki paketler:</strong> Aynı 2. paket ücreti (indirim yok)<br>
+                        <em>Not: Bu hesaplama tek platform için geçerlidir. Diğer platformlar farklı hesaplayabilir.</em>
+                    </p>
+                </div>
+                
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mt-3">
+                    <p class="text-yellow-800 font-medium">📋 Yasal Uyarı:</p>
+                    <p class="text-yellow-700 text-xs mt-1">
+                        Bu hesaplama sadece <strong>tahmin amaçlıdır</strong>. Gerçek kazançlar teslimat sayısı, mesafe, 
+                        platform politikaları ve diğer faktörlere bağlı olarak değişebilir. 
+                        <strong>Kesin garanti verilmez.</strong>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="flex gap-3 mt-6">
+                <button id="secondPackageModalCancel" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer">
+                    İptal
+                </button>
+                <button id="secondPackageModalConfirm" class="flex-1 px-4 py-2 bg-primary text-white rounded-lg hover:bg-red-600 transition-colors cursor-pointer">
+                    Anladım, Devam Et
+                </button>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+
+
+
+
+
+
+
