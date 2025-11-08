@@ -11,12 +11,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #FF3131;
+    background: #D32B2C;
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #e02e2e;
+    background: #b82526;
 }
 
 /* Glassmorphism effects */
@@ -93,7 +93,16 @@
 
 /* Custom button styles */
 .btn-primary {
-    @apply bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl;
+    @apply bg-primary text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl;
+}
+
+.btn-primary:hover {
+    background-color: #b82526;
+}
+
+/* Hover effect for inline bg-primary buttons */
+.bg-primary:hover {
+    background-color: #b82526 !important;
 }
 
 .btn-secondary {
@@ -139,7 +148,7 @@ input[type="range"]::-webkit-slider-track {
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    background: #FF3131;
+    background: #D32B2C;
     height: 20px;
     width: 20px;
     border-radius: 50%;
@@ -155,7 +164,7 @@ input[type="range"]::-moz-range-track {
 }
 
 input[type="range"]::-moz-range-thumb {
-    background: #FF3131;
+    background: #D32B2C;
     height: 20px;
     width: 20px;
     border-radius: 50%;
@@ -178,7 +187,7 @@ input[type="range"]::-moz-range-thumb {
     height: 20px;
     margin: -10px 0 0 -10px;
     border: 2px solid #f3f3f3;
-    border-top: 2px solid #FF3131;
+    border-top: 2px solid #D32B2C;
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -207,11 +216,11 @@ input[type="range"]::-moz-range-thumb {
 
 /* Custom gradients */
 .gradient-primary {
-    background: linear-gradient(135deg, #FF3131 0%, #FF7A00 100%);
+    background: linear-gradient(135deg, #D32B2C 0%, #FF7A00 100%);
 }
 
 .gradient-accent {
-    background: linear-gradient(135deg, #00C8FF 0%, #00C8FF 100%);
+    background: linear-gradient(135deg, #24A8AB 0%, #24A8AB 100%);
 }
 
 .gradient-bg {
@@ -220,11 +229,11 @@ input[type="range"]::-moz-range-thumb {
 
 /* Text effects */
 .text-glow {
-    text-shadow: 0 0 10px rgba(255, 49, 49, 0.5);
+    text-shadow: 0 0 10px rgba(211, 43, 44, 0.5);
 }
 
 .text-glow-accent {
-    text-shadow: 0 0 10px rgba(0, 200, 255, 0.5);
+    text-shadow: 0 0 10px rgba(36, 168, 171, 0.5);
 }
 
 /* Hover effects */
