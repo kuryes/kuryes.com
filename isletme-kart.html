@@ -1,0 +1,2112 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ï¿½ï¿½letme Kartï¿½ - Kuryes.com</title>
+    <meta name="description" content="ï¿½ï¿½letme profil kartï¿½nï¿½zï¿½ dï¿½zenleyin ve ilan verin.">
+    
+    <!-- OpenGraph -->
+    <meta property="og:title" content="ï¿½ï¿½letme Kartï¿½ - Kuryes.com">
+    <meta property="og:description" content="ï¿½ï¿½letme profil kartï¿½nï¿½zï¿½ dï¿½zenleyin ve ilan verin.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kuryes.com/isletme-kart.html">
+    <meta property="og:image" content="/img/og-image.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="public/favicon/kuryesfavicon.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="public/favicon/kuryesfavicon.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="public/favicon/kuryesfavicon.png">
+    <link rel="icon" type="image/png" sizes="256x256" href="public/favicon/kuryesfavicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="public/favicon/kuryesfavicon.png">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#D32B2C">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Kuryes">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles-tailwind.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-bg text-text font-inter">
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <img src="public/img/kuryes.svg" 
+                             srcset="public/img/kuryes.svg, public/img/kuryes.png" 
+                             alt="KURY?S.com" 
+                             class="h-12 md:h-14 w-auto"
+                             onerror="this.onerror=null; this.src='public/img/kuryes.png';">
+                    </a>
+                </div>
+                
+                <!-- Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-text hover:text-primary transition-colors">Ana Sayfa</a>
+                    <a href="yakinda.html" class="text-text hover:text-primary transition-colors">Yakï¿½nda</a>
+                    <a href="kurye-rehberi.html" class="text-text hover:text-primary transition-colors">Kurye Rehberi</a>
+                    <a href="ilanlar.html" class="text-text hover:text-primary transition-colors">ï¿½ï¿½ ï¿½lanlarï¿½</a>
+                    <a href="forum.html" class="text-text hover:text-primary transition-colors">Forum</a>
+                    <a href="kazanc.html" class="text-text hover:text-primary transition-colors">Kazanï¿½</a>
+                </nav>
+                
+                <!-- User Menu -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="isletme-kart.html?id=1" class="text-text hover:text-primary transition-colors font-medium">Profilim</a>
+                    <button class="text-muted hover:text-text transition-colors">ï¿½ï¿½kï¿½ï¿½ Yap</button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobileMenuBtn" class="text-text hover:text-primary transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden md:hidden pb-4">
+                <nav class="flex flex-col space-y-2">
+                    <a href="index.html" class="text-text hover:text-primary transition-colors py-2">Ana Sayfa</a>
+                    <a href="yakinda.html" class="text-text hover:text-primary transition-colors py-2">Yakï¿½nda</a>
+                    <a href="kurye-rehberi.html" class="text-text hover:text-primary transition-colors py-2">Kurye Rehberi</a>
+                    <a href="ilanlar.html" class="text-text hover:text-primary transition-colors py-2">ï¿½ï¿½ ï¿½lanlarï¿½</a>
+                    <a href="forum.html" class="text-text hover:text-primary transition-colors py-2">Forum</a>
+                    <a href="kazanc.html" class="text-text hover:text-primary transition-colors py-2">Kazanï¿½</a>
+                    <a href="isletme-kart.html?id=1" class="text-text hover:text-primary transition-colors py-2">Profilim</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Launch Banner -->
+    <div class="bg-gradient-to-r from-primary to-accent text-white text-center py-2">
+        <p class="text-sm font-medium">?? Lansman: Aralï¿½k 2025 Antalya ï¿½ 2026 Tï¿½m Tï¿½rkiye</p>
+    </div>
+    
+    <!-- Main Content -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Left Sidebar - Business Info Card -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-xl shadow-lg p-6 sticky top-24">
+                        <!-- Business Logo/Name -->
+                        <div class="text-center mb-6">
+                            <div class="w-32 h-32 mx-auto bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mb-4 relative">
+                                <img id="businessAvatar" 
+                                     src="" 
+                                     alt="ï¿½ï¿½letme Avatar" 
+                                     class="w-full h-full rounded-full object-cover hidden">
+                                <span class="text-5xl" id="businessIcon">??</span>
+                            </div>
+                            <h2 id="businessName" class="text-2xl font-bold text-text">ï¿½ï¿½letme Adï¿½</h2>
+                            <p id="businessType" class="text-muted">ï¿½ï¿½letme Tï¿½rï¿½</p>
+                        </div>
+                        
+                        <!-- Business Stats -->
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span class="text-sm text-muted">ï¿½ï¿½letme ID</span>
+                                <span id="isletmeId" class="text-sm font-semibold text-primary">#ID</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span class="text-sm text-muted">ï¿½ehir</span>
+                                <span id="profileSehir" class="text-sm font-semibold text-text">-</span>
+                            </div>
+                        </div>
+                        
+                                                 <!-- ï¿½lan ï¿½nizlemesi -->
+                        <div class="border-t border-gray-200 pt-6">
+                            <h3 class="text-lg font-semibold text-text mb-4">ï¿½lan ï¿½nizlemesi</h3>
+                            
+                            <!-- Normal ï¿½lan ï¿½nizlemesi -->
+                            <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                                <h4 class="text-sm font-semibold text-text mb-3">Normal ï¿½lan</h4>
+                                <div class="space-y-2 text-sm">
+                                    <div><span class="font-medium">ï¿½ï¿½letme:</span> <span id="previewIsletmeAdi">-</span></div>
+                                    <div><span class="font-medium">Tï¿½r:</span> <span id="previewIsletmeTuru">-</span></div>
+                                    <div><span class="font-medium">ï¿½ehir:</span> <span id="previewSehir">-</span></div>
+                                    <div><span class="font-medium">Cep:</span> <span id="previewCep">-</span></div>
+                                    <div><span class="font-medium">ï¿½alï¿½ï¿½ma Modeli:</span> <span id="previewCalismaModeli">-</span></div>
+                                    <div><span class="font-medium">ï¿½cret:</span> <span id="previewUcret">-</span></div>
+                                    <div><span class="font-medium">Avantajlar:</span> <span id="previewAvantajlar">-</span></div>
+                                    <div id="previewKonumContainer" class="hidden">
+                                        <span class="font-medium">Konum:</span> 
+                                        <a id="previewKonumLink" href="#" target="_blank" class="text-accent hover:underline">
+                                            Harita
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Acil ï¿½lan ï¿½nizlemesi (sadece acil iï¿½aretliyse gï¿½sterilir) -->
+                            <div id="acilPreviewSection" class="bg-red-50 rounded-lg p-4 hidden">
+                                <h4 class="text-sm font-semibold text-red-600 mb-3">?? Acil ï¿½lan</h4>
+                                <div class="space-y-2 text-sm">
+                                    <div><span class="font-medium">ï¿½ï¿½letme:</span> <span id="previewAcilIsletmeAdi">-</span></div>
+                                    <div><span class="font-medium">ï¿½ehir:</span> <span id="previewAcilSehir">-</span></div>
+                                    <div><span class="font-medium">Cep:</span> <span id="previewAcilCep">-</span></div>
+                                    <div><span class="font-medium">Baï¿½langï¿½ï¿½:</span> <span id="previewAcilBaslangic">-</span></div>
+                                    <div><span class="font-medium">ï¿½cret:</span> <span id="previewAcilUcret">-</span></div>
+                                    <div><span class="font-medium">Avantajlar:</span> <span id="previewAcilAvantajlar">-</span></div>
+                                    <div id="previewAcilKonumContainer" class="hidden">
+                                        <span class="font-medium">Konum:</span> 
+                                        <a id="previewAcilKonumLink" href="#" target="_blank" class="text-accent hover:underline">
+                                            Harita
+                                        </a>
+                                    </div>
+                                    <div><span class="font-medium">Mesaj:</span> <span id="previewAcilMesaj" class="text-xs">-</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main Content - Kart ï¿½zeti -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-xl shadow-lg p-8 space-y-8">
+                        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                            <div>
+                                <h1 class="text-3xl font-bold font-poppins text-text">ï¿½ï¿½letme Kartï¿½nï¿½z</h1>
+                                <p class="mt-3 text-muted leading-relaxed">
+                                    ï¿½ï¿½letme kartï¿½ kuryelerin sizi tanï¿½dï¿½ï¿½ï¿½ vitrindir. ï¿½ï¿½letme bilgileri, ï¿½alï¿½ï¿½ma modeli,
+                                    avantajlar ve iletiï¿½im tercihleri bu kartta yer alï¿½r ve ilan ï¿½nizlemesinde de kullanï¿½lï¿½r.
+                                </p>
+                            </div>
+                            <div class="bg-accent/5 border border-accent/20 rounded-2xl px-6 py-4 max-w-xs">
+                                <p class="text-sm font-semibold text-accent uppercase tracking-wide mb-1">Neden ï¿½nemli?</p>
+                                <p class="text-sm text-text">
+                                    Gï¿½ncel bir kart daha ï¿½ok baï¿½vuru ï¿½eker ve acil kurye modunda doï¿½ru kiï¿½iye ulaï¿½ï¿½lmasï¿½nï¿½ saï¿½lar.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="p-6 rounded-2xl border border-gray-200 bg-gray-50">
+                                <h2 class="text-lg font-semibold text-text mb-3">Kartta Neler Var?</h2>
+                                <ul class="space-y-2 text-sm text-muted">
+                                    <li class="flex items-start gap-2"><span class="mt-1 text-primary">ï¿½</span> ï¿½ï¿½letme ve yetkili kiï¿½i bilgileri</li>
+                                    <li class="flex items-start gap-2"><span class="mt-1 text-primary">ï¿½</span> ï¿½alï¿½ï¿½ma modeli, sï¿½re ve avantajlar</li>
+                                    <li class="flex items-start gap-2"><span class="mt-1 text-primary">ï¿½</span> ï¿½letiï¿½im tercihleri ve gï¿½rï¿½nï¿½rlï¿½k ayarlarï¿½</li>
+                                    <li class="flex items-start gap-2"><span class="mt-1 text-primary">ï¿½</span> Acil kurye modu iï¿½in ek alanlar</li>
+                                </ul>
+                            </div>
+                            <div class="p-6 rounded-2xl border border-gray-200">
+                                <h2 class="text-lg font-semibold text-text mb-3">Nasï¿½l ï¿½alï¿½ï¿½ï¿½r?</h2>
+                                <ol class="space-y-3 text-sm text-muted list-decimal list-inside">
+                                    <li>Kartï¿½nï¿½zï¿½ inceleyip mevcut verileri kontrol edin.</li>
+                                    <li><span class="font-medium text-text">Dï¿½zenle</span> butonuna tï¿½klayarak tï¿½m ayarlarï¿½ tek modï¿½lde aï¿½ï¿½n.</li>
+                                    <li>Alanlarï¿½ gï¿½ncelleyin, tercihlere gï¿½re aï¿½ï¿½p kapatï¿½n.</li>
+                                    <li>Kaydettiï¿½inizde kart ve ilan ï¿½nizlemesi otomatik gï¿½ncellenir.</li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                            <div class="text-sm text-muted">
+                                <p class="font-medium text-text">Dï¿½zenleme sonrasï¿½ bilgileriniz otomatik kaydedilir.</p>
+                                <p>ï¿½lan ï¿½nizlemeleri ve acil kurye ï¿½aï¿½rï¿½larï¿½ aynï¿½ verileri kullanï¿½r.</p>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-3">
+                                <button id="openKartEditorBtn"
+                                        class="inline-flex items-center justify-center px-6 py-3 bg-primary text-white rounded-lg font-semibold shadow-md hover:bg-red-600 transition-colors">
+                                    Dï¿½zenle
+                                </button>
+                                <button id="openIlanPreviewBtn"
+                                        class="inline-flex items-center justify-center px-6 py-3 bg-accent text-white rounded-lg font-semibold shadow-md hover:bg-blue-600 transition-colors">
+                                    ï¿½lanï¿½ Yayï¿½nla
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main Content - Edit Form (modal iï¿½erisine taï¿½ï¿½nacak) -->
+                <div class="lg:col-span-2 hidden" id="kartEditorFormContainer">
+                    <div class="bg-white rounded-xl shadow-lg p-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <h1 class="text-3xl font-bold font-poppins text-text">ï¿½ï¿½letme Kartï¿½ Dï¿½zenle</h1>
+                            <span class="px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-semibold">
+                                ï¿½lan Hazï¿½rlama
+                            </span>
+                        </div>
+                        
+                                                 <form id="isletmeKartForm" method="POST" onsubmit="return false;" class="space-y-6">
+                             <!-- Honeypot -->
+                             <input type="text" name="_gotcha" style="display:none">
+                            
+                            <!-- ï¿½ï¿½letme Bilgileri -->
+                            <div class="border-b border-gray-200 pb-6 accordion-section" data-accordion-item data-section-key="isletme-bilgileri">
+                                <h3 class="text-xl font-semibold text-text mb-4">ï¿½ï¿½letme Bilgileri</h3>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <!-- ï¿½ï¿½letme Adï¿½ -->
+                                    <div>
+                                        <label for="isletmeAdi" class="block text-sm font-medium text-text mb-2">
+                                            ï¿½ï¿½letme Adï¿½ *
+                                        </label>
+                                        <input type="text" id="isletmeAdi" name="isletmeAdi" required
+                                               placeholder="ï¿½rn. Lezzet Restoran"
+                                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    </div>
+                                    
+                                    <!-- ï¿½ï¿½letme Tï¿½rï¿½ -->
+                                    <div>
+                                        <label for="isletmeTuru" class="block text-sm font-medium text-text mb-2">
+                                            ï¿½ï¿½letme Tï¿½rï¿½ *
+                                        </label>
+                                        <select id="isletmeTuru" name="isletmeTuru" required
+                                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                            <option value="">ï¿½ï¿½letme tï¿½rï¿½ seï¿½in</option>
+                                            <option value="Restoran">Restoran</option>
+                                            <option value="Cafe">Cafe</option>
+                                            <option value="Market">Market</option>
+                                            <option value="E-Ticaret">E-Ticaret</option>
+                                            <option value="Eczane">Eczane</option>
+                                            <option value="Saï¿½lï¿½k ï¿½rï¿½nleri">Saï¿½lï¿½k ï¿½rï¿½nleri</option>
+                                            <option value="Diï¿½er">Diï¿½er</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <!-- Yetkili Kiï¿½i -->
+                                    <div>
+                                        <label for="yetkiliAdi" class="block text-sm font-medium text-text mb-2">
+                                            Yetkili Kiï¿½i Ad Soyad *
+                                        </label>
+                                        <input type="text" id="yetkiliAdi" name="yetkiliAdi" required
+                                               placeholder="ï¿½rn. Ahmet Yï¿½lmaz"
+                                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    </div>
+                                    
+                                    <!-- Yetkili Kiï¿½i Telefon -->
+                                    <div>
+                                        <label for="yetkiliTelefon" class="block text-sm font-medium text-text mb-2">
+                                            Yetkili Kiï¿½i Telefon *
+                                        </label>
+                                        <input type="tel" id="yetkiliTelefon" name="yetkiliTelefon" required
+                                               placeholder="5XX XXX XX XX"
+                                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    </div>
+                                    
+                                    <!-- ï¿½ï¿½letme Telefon -->
+                                    <div>
+                                        <label for="telefon" class="block text-sm font-medium text-text mb-2">
+                                            ï¿½ï¿½letme Telefon *
+                                        </label>
+                                        <input type="tel" id="telefon" name="telefon" required
+                                               placeholder="5XX XXX XX XX"
+                                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    </div>
+                                    
+                                    <!-- E-posta -->
+                                    <div>
+                                        <label for="email" class="block text-sm font-medium text-text mb-2">
+                                            E - Posta *
+                                        </label>
+                                        <input type="email" id="email" name="email" required
+                                               placeholder="ornek@isletme.com"
+                                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    </div>
+                                    
+                                    <!-- ï¿½ehir -->
+                                    <div>
+                                        <label for="sehir" class="block text-sm font-medium text-text mb-2">
+                                            ï¿½ehir *
+                                        </label>
+                                        <select id="sehir" name="sehir" required
+                                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                            <option value="">ï¿½ehir seï¿½in</option>
+                                            <option value="Antalya">Antalya</option>
+                                            <option value="ï¿½stanbul">ï¿½stanbul</option>
+                                            <option value="Ankara">Ankara</option>
+                                            <option value="ï¿½zmir">ï¿½zmir</option>
+                                            <option value="Eskiï¿½ehir">Eskiï¿½ehir</option>
+                                            <option value="Isparta">Isparta</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Adres Bilgileri -->
+                            <div class="border-b border-gray-200 pb-6 accordion-section" data-accordion-item data-section-key="adres-bilgileri">
+                                <h3 class="text-xl font-semibold text-text mb-4">Adres Bilgileri</h3>
+                                
+                                <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                                    <p id="adresGoster" class="text-sm text-muted">Henï¿½z adres eklenmedi</p>
+                                    <input type="hidden" id="adres" name="adres">
+                                    <input type="hidden" id="latitude" name="latitude">
+                                    <input type="hidden" id="longitude" name="longitude">
+                                </div>
+                                
+                                <button type="button" 
+                                        onclick="document.getElementById('adresModal').classList.remove('hidden')"
+                                        class="w-full px-4 py-2 bg-accent text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium">
+                                    Adresi Haritada Seï¿½
+                                </button>
+                            </div>
+                            
+                            <!-- ï¿½alï¿½ï¿½ma Saatleri -->
+                            <div class="border-b border-gray-200 pb-6 accordion-section" data-accordion-item data-section-key="acilis-kapanis-saatleri">
+                                <h3 class="text-xl font-semibold text-text mb-4">Aï¿½ï¿½lï¿½ï¿½ - Kapanï¿½ï¿½ Saatleri</h3>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label for="acilisSaati" class="block text-sm font-medium text-text mb-2">
+                                            Aï¿½ï¿½lï¿½ï¿½ Saati
+                                        </label>
+                                        <input type="time" id="acilisSaati" name="acilisSaati"
+                                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    </div>
+                                    <div>
+                                        <label for="kapanisSaati" class="block text-sm font-medium text-text mb-2">
+                                            Kapanï¿½ï¿½ Saati
+                                        </label>
+                                        <input type="time" id="kapanisSaati" name="kapanisSaati"
+                                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- ï¿½alï¿½ï¿½ma Modeli -->
+                            <div class="border-b border-gray-200 pb-6 accordion-section" data-accordion-item data-section-key="calisma-modeli">
+                                <h3 class="text-xl font-semibold text-text mb-4">ï¿½alï¿½ï¿½ma Modeli</h3>
+                                
+                                <div class="space-y-3">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="esnaf" name="esnaf" value="1" class="mr-3 w-4 h-4">
+                                        <span class="text-sm">Esnaf</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="sigortali" name="sigortali" value="1" class="mr-3 w-4 h-4">
+                                        <span class="text-sm">Sigortalï¿½</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- ï¿½cret Tipi -->
+                            <div class="border-b border-gray-200 pb-6 accordion-section" data-accordion-item data-section-key="ucret-tipi">
+                                <h3 class="text-xl font-semibold text-text mb-4">ï¿½cret Tipi</h3>
+                                
+                                <div class="space-y-4">
+                                    <!-- Sabit ï¿½cret -->
+                                    <div class="flex items-start space-x-3">
+                                        <input type="checkbox" id="sabitUcretCheck" class="mt-1 w-4 h-4">
+                                        <div class="flex-1">
+                                            <label for="sabitUcretCheck" class="block text-sm font-medium text-text mb-2">
+                                                Sabit
+                                            </label>
+                                            <input type="number" id="sabitUcret" name="sabitUcret" 
+                                                   placeholder="TL" 
+                                                   disabled
+                                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- ï¿½landa ï¿½cret Bilgisi Paylaï¿½ma -->
+                                <div class="mt-4">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="ucretBilgisiPaylas" name="ucretBilgisiPaylas" value="1" class="mr-3 w-4 h-4">
+                                        <span class="text-sm">ï¿½landa ï¿½cret Bilgisi Paylaï¿½ma</span>
+                                    </label>
+                                    <p class="text-xs text-muted mt-1">ï¿½ï¿½aretliyse ilanda ï¿½cret bilgisi gizli kalï¿½r.</p>
+                                </div>
+                            </div>
+                            
+                            <!-- ï¿½alï¿½ï¿½ma Sï¿½resi -->
+                            <div class="border-b border-gray-200 pb-6 accordion-section" data-accordion-item data-section-key="calisma-suresi">
+                                <h3 class="text-xl font-semibold text-text mb-4">ï¿½alï¿½ï¿½ma Sï¿½resi</h3>
+                                
+                                <div class="space-y-3">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="partTime" name="partTime" value="1" class="mr-3 w-4 h-4">
+                                        <span class="text-sm">Part Time</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="fullTime" name="fullTime" value="1" class="mr-3 w-4 h-4">
+                                        <span class="text-sm">Full Time</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="gunluk" name="gunluk" value="1" class="mr-3 w-4 h-4">
+                                        <span class="text-sm">Gï¿½nlï¿½k</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- ï¿½ï¿½letme Avantajlarï¿½ -->
+                            <div class="border-b border-gray-200 pb-6 accordion-section" data-accordion-item data-section-key="isletme-avantajlari">
+                                <h3 class="text-xl font-semibold text-text mb-4">ï¿½ï¿½letme Avantajlarï¿½</h3>
+                                
+                                <div class="space-y-3">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="yemek" name="yemek" value="1" class="mr-3 w-4 h-4">
+                                        <span class="text-sm">Yemek</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="yol" name="yol" value="1" class="mr-3 w-4 h-4">
+                                        <span class="text-sm">Yol</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="sigorta" name="sigorta" value="1" class="mr-3 w-4 h-4">
+                                        <span class="text-sm">Sigorta</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- ï¿½letiï¿½im -->
+                            <div class="border-b border-gray-200 pb-6 accordion-section" data-accordion-item data-section-key="iletisim">
+                                <h3 class="text-xl font-semibold text-text mb-4">ï¿½letiï¿½im</h3>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                                    <!-- Cep -->
+                                    <div>
+                                        <label for="cep" class="block text-sm font-medium text-text mb-2">
+                                            Cep
+                                        </label>
+                                        <input type="tel" id="cep" name="cep" 
+                                               placeholder="5XX XXX XX XX"
+                                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    </div>
+                                    
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="iletisimYetkiliTelefon" name="iletisimYetkiliTelefon" value="1" class="mr-3 w-4 h-4">
+                                        <span class="text-sm">Yetkili kiï¿½i numarasï¿½nï¿½ kullan</span>
+                                        </label>
+                                    <p class="text-xs text-muted mt-1 ml-7">Yetkili kiï¿½i telefonunu otomatik olarak iletiï¿½im iï¿½in kullanï¿½r.</p>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="kuryeArayabilir" name="kuryeArayabilir" value="1" class="mr-3 w-4 h-4">
+                                        <span class="text-sm">Kurye ilanda beni arayabilir</span>
+                                    </label>
+                                    <p class="text-xs text-muted mt-1 ml-7">ï¿½ï¿½aretliyse ilanda telefon numarasï¿½ gï¿½rï¿½nï¿½r, iï¿½aretsizse gizli kalï¿½r.</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Acil Kurye -->
+                            <div class="border-b border-gray-200 pb-6 accordion-section" data-accordion-item data-section-key="acil-kurye">
+                                <button type="button" class="flex items-center justify-between w-full text-left py-2" data-accordion-trigger>
+                                    <span class="text-lg font-semibold text-text">Acil Kurye</span>
+                                    <svg class="w-5 h-5 text-muted transition-transform duration-200" data-accordion-icon fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"></path>
+                                    </svg>
+                                </button>
+                                <div class="accordion-content mt-4 space-y-6 hidden" data-accordion-content>
+                                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="acilKuryeCheck" name="acilKuryeCheck" value="1" class="mr-3 w-4 h-4">
+                                        <span class="text-sm font-semibold">Acil Kurye ï¿½lanï¿½ Aï¿½</span>
+                                    </label>
+                                    <p class="text-xs text-muted md:text-right">
+                                        ï¿½ï¿½aretliyken hï¿½zlï¿½ ï¿½aï¿½rï¿½ metni, ï¿½cret seï¿½enekleri ve mesajlar gï¿½rï¿½nï¿½r.
+                                    </p>
+                                </div>
+                                
+                                    <div id="acilKuryeInlineContent" class="space-y-6 hidden">
+                                    <div>
+                                            <h4 class="text-lg font-semibold text-text mb-3">ï¿½ï¿½letme Avantajlarï¿½</h4>
+                                        <div class="space-y-3">
+                                            <label class="flex items-center">
+                                                <input type="checkbox" id="acilYemek" name="acilYemek" value="1" class="mr-3 w-4 h-4">
+                                                <span class="text-sm">Yemek</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" id="acilYol" name="acilYol" value="1" class="mr-3 w-4 h-4">
+                                                <span class="text-sm">Yol</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" id="acilSigorta" name="acilSigorta" value="1" class="mr-3 w-4 h-4">
+                                                <span class="text-sm">Sigorta</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                            <h4 class="text-lg font-semibold text-text mb-3">ï¿½cret Tipi</h4>
+                                        <div class="space-y-4">
+                                            <div class="flex items-start space-x-3">
+                                                <input type="checkbox" id="acilSaatlikCheck" class="mt-1 w-4 h-4">
+                                                <div class="flex-1">
+                                                    <label for="acilSaatlikCheck" class="block text-sm font-medium text-text mb-2">
+                                                            Saatlik ï¿½cret
+                                                    </label>
+                                                    <input type="number" id="acilSaatlikUcret" name="acilSaatlikUcret" 
+                                                           placeholder="TL/saat" 
+                                                           disabled
+                                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="flex items-start space-x-3">
+                                                <input type="checkbox" id="acilKmCheck" class="mt-1 w-4 h-4">
+                                                <div class="flex-1">
+                                                    <label for="acilKmCheck" class="block text-sm font-medium text-text mb-2">
+                                                            KM ï¿½creti
+                                                    </label>
+                                                    <input type="number" id="acilKmUcret" name="acilKmUcret" 
+                                                           placeholder="TL/km" 
+                                                           disabled
+                                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="flex items-start space-x-3">
+                                                <input type="checkbox" id="acilPaketCheck" class="mt-1 w-4 h-4">
+                                                <div class="flex-1">
+                                                    <label for="acilPaketCheck" class="block text-sm font-medium text-text mb-2">
+                                                            Paket Baï¿½ï¿½ ï¿½cret
+                                                    </label>
+                                                    <input type="number" id="acilPaketUcret" name="acilPaketUcret" 
+                                                           placeholder="TL/paket" 
+                                                           disabled
+                                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                            <h4 class="text-lg font-semibold text-text mb-3">ï¿½alï¿½ï¿½ma Saatleri</h4>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            <div>
+                                                <label for="acilBaslangicSaati" class="block text-sm font-medium text-text mb-2">
+                                                        Baï¿½langï¿½ï¿½ Saati
+                                                </label>
+                                                <select id="acilBaslangicSaati" name="acilBaslangicSaati"
+                                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                                        <option value="simdi" selected>ï¿½imdi</option>
+                                                    <option value="00:00">00:00</option>
+                                                    <option value="01:00">01:00</option>
+                                                    <option value="02:00">02:00</option>
+                                                    <option value="03:00">03:00</option>
+                                                    <option value="04:00">04:00</option>
+                                                    <option value="05:00">05:00</option>
+                                                    <option value="06:00">06:00</option>
+                                                    <option value="07:00">07:00</option>
+                                                    <option value="08:00">08:00</option>
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="17:00">17:00</option>
+                                                    <option value="18:00">18:00</option>
+                                                    <option value="19:00">19:00</option>
+                                                    <option value="20:00">20:00</option>
+                                                    <option value="21:00">21:00</option>
+                                                    <option value="22:00">22:00</option>
+                                                    <option value="23:00">23:00</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label for="acilCikisSaati" class="block text-sm font-medium text-text mb-2">
+                                                        ï¿½ï¿½kï¿½ï¿½ Saati
+                                                </label>
+                                                <input type="time" id="acilCikisSaati" name="acilCikisSaati"
+                                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="acilOtomatikMesaj" class="block text-sm font-medium text-text mb-2">
+                                            Otomatik Mesaj (Otomatik Doldurulur)
+                                        </label>
+                                        <textarea id="acilOtomatikMesaj" name="acilOtomatikMesaj" rows="3"
+                                                  readonly
+                                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-muted"></textarea>
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="acilEkBilgiler" class="block text-sm font-medium text-text mb-2">
+                                            Ek Bilgiler <span class="text-xs text-muted">(max 70 karakter)</span>
+                                        </label>
+                                        <textarea id="acilEkBilgiler" name="acilEkBilgiler" rows="2" maxlength="70"
+                                                  placeholder="Ek bilgiler..."
+                                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                                        <p class="text-xs text-muted mt-1"><span id="acilEkBilgilerCount">0</span>/70 karakter</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Action Button -->
+                            <div class="mt-6">
+                                <button type="button" id="saveProfile" class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-red-600 transition-colors">
+                                    Kaydet
+                                </button>
+                            </div>
+                             
+                             <!-- Success Message -->
+                            <div id="successMessage" class="hidden p-4 bg-green-50 border border-green-200 rounded-lg">
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <p class="text-green-700 font-medium">ï¿½ï¿½letme bilgileriniz baï¿½arï¿½yla gï¿½ncellendi!</p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-text text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm">&copy; 2025 Kuryes &mdash; AltyapÄ±: <a href="https://kaysia.co" class="text-accent hover:text-white">Kaysia.co</a></p>
+                </div>
+                <div class="flex flex-wrap gap-4 text-sm">
+                    <a href="#" class="hover:text-accent transition-colors">KVKK</a>
+                    <a href="#" class="hover:text-accent transition-colors">Gizlilik</a>
+                    <a href="#" class="hover:text-accent transition-colors">KullanÄ±m ÅartlarÄ±</a>
+                    <a href="#" class="hover:text-accent transition-colors">Ä°letiÅŸim</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+     
+     <!-- ï¿½lan ï¿½nizleme Modal -->
+     <div id="ilanPreviewModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+         <div class="bg-white rounded-2xl shadow-2xl max-w-3xl w-full p-8 animate-fadeInUp max-h-[90vh] overflow-y-auto">
+                           <div class="flex items-center justify-between mb-6">
+                  <h2 class="text-2xl font-bold text-text">ï¿½lan ï¿½nizlemesi</h2>
+                  <button id="modalCloseBtn" 
+                          class="text-gray-400 hover:text-gray-600 transition-colors">
+                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                      </svg>
+                  </button>
+              </div>
+             
+             <div class="space-y-6">
+                 <!-- Normal ï¿½lan ï¿½nizlemesi -->
+                 <div class="bg-gray-50 rounded-lg p-6">
+                     <h3 class="text-lg font-semibold text-text mb-4">Normal ï¿½lan</h3>
+                     <div class="space-y-3 text-sm">
+                         <div><span class="font-medium">ï¿½ï¿½letme:</span> <span id="modalPreviewIsletmeAdi">-</span></div>
+                         <div><span class="font-medium">Tï¿½r:</span> <span id="modalPreviewIsletmeTuru">-</span></div>
+                         <div><span class="font-medium">ï¿½ehir:</span> <span id="modalPreviewSehir">-</span></div>
+                         <div><span class="font-medium">Cep:</span> <span id="modalPreviewCep">-</span></div>
+                         <div><span class="font-medium">ï¿½alï¿½ï¿½ma Modeli:</span> <span id="modalPreviewCalismaModeli">-</span></div>
+                         <div><span class="font-medium">ï¿½cret:</span> <span id="modalPreviewUcret">-</span></div>
+                         <div><span class="font-medium">Avantajlar:</span> <span id="modalPreviewAvantajlar">-</span></div>
+                         <div id="modalPreviewKonumContainer" class="hidden">
+                             <span class="font-medium">Konum:</span> 
+                             <a id="modalPreviewKonumLink" href="#" target="_blank" class="text-accent hover:underline">
+                                 Harita
+                             </a>
+                         </div>
+                     </div>
+                 </div>
+                 
+                 <!-- Acil ï¿½lan ï¿½nizlemesi (sadece acil iï¿½aretliyse gï¿½sterilir) -->
+                 <div id="modalAcilPreviewSection" class="bg-red-50 rounded-lg p-6 hidden">
+                     <h3 class="text-lg font-semibold text-red-600 mb-4">?? Acil ï¿½lan</h3>
+                     <div class="space-y-3 text-sm">
+                         <div><span class="font-medium">ï¿½ï¿½letme:</span> <span id="modalPreviewAcilIsletmeAdi">-</span></div>
+                         <div><span class="font-medium">ï¿½ehir:</span> <span id="modalPreviewAcilSehir">-</span></div>
+                         <div><span class="font-medium">Cep:</span> <span id="modalPreviewAcilCep">-</span></div>
+                         <div><span class="font-medium">Baï¿½langï¿½ï¿½:</span> <span id="modalPreviewAcilBaslangic">-</span></div>
+                         <div><span class="font-medium">ï¿½cret:</span> <span id="modalPreviewAcilUcret">-</span></div>
+                         <div><span class="font-medium">Avantajlar:</span> <span id="modalPreviewAcilAvantajlar">-</span></div>
+                         <div id="modalPreviewAcilKonumContainer" class="hidden">
+                             <span class="font-medium">Konum:</span> 
+                             <a id="modalPreviewAcilKonumLink" href="#" target="_blank" class="text-accent hover:underline">
+                                 Harita
+                             </a>
+                         </div>
+                         <div><span class="font-medium">Mesaj:</span> <span id="modalPreviewAcilMesaj" class="text-xs">-</span></div>
+                     </div>
+                 </div>
+                 
+                                   <!-- Modal Action Buttons -->
+                  <div class="flex gap-3 pt-4">
+                      <button id="modalCancelBtn"
+                              class="flex-1 px-4 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium">
+                          Kapat
+                      </button>
+                      <button id="confirmSaveBtn"
+                              class="flex-1 px-4 py-3 bg-primary text-white rounded-lg hover:bg-red-600 transition-colors font-medium">
+                    Onayla ve Yayï¿½nla
+                      </button>
+                  </div>
+             </div>
+         </div>
+     </div>
+     
+     <!-- Adres Modal -->
+    <div id="adresModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full p-8 animate-fadeInUp">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-text">Adres Bilgileri</h2>
+                <button onclick="document.getElementById('adresModal').classList.add('hidden')" 
+                        class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- Manuel Adres Giriï¿½i -->
+                <div>
+                    <label for="adresInput" class="block text-sm font-medium text-text mb-2">
+                        Adres
+                    </label>
+                    <textarea id="adresInput" rows="3" 
+                              placeholder="Adres bilgilerinizi girin..."
+                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                </div>
+                
+                <!-- Konum Belirleme -->
+                <div>
+                    <button type="button" 
+                            id="konumBelirleBtn"
+                            class="w-full px-4 py-3 bg-accent text-white rounded-lg hover:bg-blue-600 transition-colors font-medium flex items-center justify-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        Konum Belirle
+                    </button>
+                    <p id="konumBilgisi" class="text-xs text-muted mt-2 hidden"></p>
+                </div>
+                
+                <!-- Kaydet Butonu -->
+                <div class="flex gap-3">
+                    <button type="button" 
+                            onclick="saveAddress()"
+                            class="flex-1 px-4 py-3 bg-primary text-white rounded-lg hover:bg-red-600 transition-colors font-medium">
+                        Kaydet
+                    </button>
+                    <button type="button" 
+                            onclick="document.getElementById('adresModal').classList.add('hidden')"
+                            class="flex-1 px-4 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium">
+                        ï¿½ptal
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Kart Dï¿½zenleme Modal -->
+    <div id="kartEditorModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden flex flex-col animate-fadeInUp">
+            <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+                <h2 class="text-2xl font-bold text-text">ï¿½ï¿½letme Kartï¿½ Ayarlarï¿½</h2>
+                <button type="button" id="kartEditorCloseBtn" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div id="kartEditorModalBody" class="flex-1 overflow-y-auto px-6 py-6 space-y-6">
+                <!-- Form iï¿½erik DOM yï¿½klendiï¿½inde buraya taï¿½ï¿½nï¿½r -->
+            </div>
+            <div class="flex flex-col sm:flex-row gap-3 px-6 py-4 border-t border-gray-100 bg-gray-50">
+                <button type="button" id="kartEditorCancelBtn"
+                        class="flex-1 px-4 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium">
+                    ï¿½ptal
+                </button>
+                <button type="button" id="kartEditorSaveBtn"
+                        class="flex-1 px-4 py-3 bg-primary text-white rounded-lg hover:bg-red-600 transition-colors font-medium shadow-md hover:shadow-lg">
+                    Kaydet
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/kuryes-login-modal.js"></script>
+    <script>
+                 document.addEventListener('DOMContentLoaded', function() {
+             // URL'den ID'yi al (?id=1 formatï¿½ iï¿½in)
+             const urlParams = new URLSearchParams(window.location.search);
+             const isletmeId = urlParams.get('id') || '1';
+             
+             // URL'de sadece id parametresi kalmalï¿½, diï¿½er parametreleri temizle
+             const currentUrl = new URL(window.location);
+             const idParam = currentUrl.searchParams.get('id');
+             if (idParam) {
+                 // URL'yi sadece id ile gï¿½ncelle
+                 const cleanUrl = `${currentUrl.pathname}?id=${idParam}`;
+                 if (window.location.search !== `?id=${idParam}`) {
+                     window.history.replaceState({}, '', cleanUrl);
+                 }
+             }
+             
+             // ï¿½ï¿½letme ID'yi gï¿½ster
+             document.getElementById('isletmeId').textContent = '#' + isletmeId;
+            
+            const kartEditorModal = document.getElementById('kartEditorModal');
+            const kartEditorModalBody = document.getElementById('kartEditorModalBody');
+            const kartEditorFormContainer = document.getElementById('kartEditorFormContainer');
+            const openKartEditorBtn = document.getElementById('openKartEditorBtn');
+            const kartEditorCloseBtn = document.getElementById('kartEditorCloseBtn');
+            const kartEditorCancelBtn = document.getElementById('kartEditorCancelBtn');
+            const kartEditorSaveBtn = document.getElementById('kartEditorSaveBtn');
+            let kartEditorForm = null;
+            let kartAccordionInitialized = false;
+            
+            if (kartEditorFormContainer && kartEditorModalBody) {
+                const formElement = kartEditorFormContainer.querySelector('#isletmeKartForm');
+                if (formElement) {
+                    kartEditorForm = formElement;
+                    kartEditorModalBody.appendChild(formElement);
+                }
+                kartEditorFormContainer.remove();
+            }
+            
+            const saveProfileButton = document.getElementById('saveProfile');
+            if (saveProfileButton) {
+                saveProfileButton.classList.add('hidden');
+            }
+            
+            function toggleBodyScroll(disabled) {
+                if (disabled) {
+                    document.body.classList.add('overflow-hidden');
+                    document.documentElement.classList.add('overflow-hidden');
+                } else {
+                    document.body.classList.remove('overflow-hidden');
+                    document.documentElement.classList.remove('overflow-hidden');
+                }
+            }
+            
+            const SECTION_ICON_CHECK = '<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>';
+            const SECTION_ICON_CROSS = '<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>';
+
+            function prepareIsletmeAccordionLabel(trigger) {
+                if (!trigger) return null;
+                let label = trigger.querySelector('.accordion-label');
+                if (!label) {
+                    const iconElement = trigger.querySelector('[data-accordion-icon]');
+                    const firstElement = trigger.firstElementChild;
+                    if (firstElement && firstElement !== iconElement) {
+                        label = firstElement;
+                    }
+                }
+                if (label) {
+                    label.classList.add('accordion-label', 'flex', 'items-center', 'gap-2');
+                }
+                return label || trigger;
+            }
+
+            function isFieldFilled(element) {
+                if (!element) return false;
+                if (element.type === 'checkbox' || element.type === 'radio') {
+                    return element.checked;
+                }
+                return element.value !== undefined && element.value !== null && element.value.toString().trim() !== '';
+            }
+
+            function validateIsletmeRequired(sectionKey) {
+                const section = kartEditorModalBody ? kartEditorModalBody.querySelector(`[data-accordion-item][data-section-key="${sectionKey}"]`) : null;
+                if (!section) return false;
+                const requiredElements = section.querySelectorAll('input[required]:not([disabled]), select[required]:not([disabled]), textarea[required]:not([disabled])');
+                if (requiredElements.length === 0) return true;
+                return Array.from(requiredElements).every(el => el.checkValidity() && isFieldFilled(el));
+            }
+
+            const ISLETME_STATUS_SKIP = new Set();
+            const isletmeSectionValidators = {
+                'isletme-bilgileri': () => validateIsletmeRequired('isletme-bilgileri'),
+                'adres-bilgileri': () => ['adres', 'latitude', 'longitude'].some(id => isFieldFilled(document.getElementById(id))),
+                'acilis-kapanis-saatleri': () => isFieldFilled(document.getElementById('acilisSaati')) && isFieldFilled(document.getElementById('kapanisSaati')),
+                'calisma-modeli': () => ['esnaf', 'sigortali'].some(id => document.getElementById(id)?.checked),
+                'ucret-tipi': () => {
+                    const sabitCheck = document.getElementById('sabitUcretCheck');
+                    if (!sabitCheck) return true;
+                    if (!sabitCheck.checked) return true;
+                    return isFieldFilled(document.getElementById('sabitUcret'));
+                },
+                'calisma-suresi': () => ['partTime', 'fullTime', 'gunluk'].some(id => document.getElementById(id)?.checked),
+                'isletme-avantajlari': () => ['yemek', 'yol', 'sigorta'].some(id => document.getElementById(id)?.checked),
+                'iletisim': () => {
+                    const iletisimYetkili = document.getElementById('iletisimYetkiliTelefon');
+                    if (iletisimYetkili && iletisimYetkili.checked) {
+                        return true;
+                    }
+                    return isFieldFilled(document.getElementById('cep'));
+                },
+                'acil-kurye': () => {
+                    const acilCheck = document.getElementById('acilKuryeCheck');
+                    if (!acilCheck || !acilCheck.checked) {
+                        return true;
+                    }
+                    const compensationPairs = [
+                        ['acilSaatlikCheck', 'acilSaatlikUcret'],
+                        ['acilKmCheck', 'acilKmUcret'],
+                        ['acilPaketCheck', 'acilPaketUcret']
+                    ];
+                    const hasCompensation = compensationPairs.some(([checkId, inputId]) => {
+                        const checkEl = document.getElementById(checkId);
+                        const inputEl = document.getElementById(inputId);
+                        return checkEl && checkEl.checked && isFieldFilled(inputEl);
+                    });
+                    const baslangic = document.getElementById('acilBaslangicSaati');
+                    return hasCompensation && !!baslangic && baslangic.value.trim() !== '';
+                }
+            };
+
+            let isletmeSectionListenersAttached = false;
+
+            function ensureIsletmeSectionIndicator(section, trigger, sectionKey) {
+                if (!sectionKey || !trigger || ISLETME_STATUS_SKIP.has(sectionKey)) {
+                    return;
+                }
+                const label = prepareIsletmeAccordionLabel(trigger);
+                let indicator = trigger.querySelector(`[data-section-status-indicator="${sectionKey}"]`);
+                if (!indicator) {
+                    indicator = document.createElement('span');
+                    indicator.className = 'section-indicator inline-flex items-center justify-center w-4 h-4 text-red-500';
+                    indicator.setAttribute('data-section-status-indicator', sectionKey);
+                    indicator.setAttribute('aria-hidden', 'true');
+                    indicator.innerHTML = SECTION_ICON_CROSS;
+                    if (label) {
+                        label.insertBefore(indicator, label.firstChild);
+                    } else {
+                        trigger.insertBefore(indicator, trigger.firstChild);
+                    }
+                } else if (label && indicator.parentElement !== label) {
+                    label.insertBefore(indicator, label.firstChild);
+                }
+            }
+
+            function updateIsletmeSectionStatus(sectionKey) {
+                if (!sectionKey || ISLETME_STATUS_SKIP.has(sectionKey)) {
+                    return;
+                }
+                const indicator = kartEditorModalBody ? kartEditorModalBody.querySelector(`[data-section-status-indicator="${sectionKey}"]`) : null;
+                const validator = isletmeSectionValidators[sectionKey];
+                if (!indicator) return;
+                let isComplete = false;
+                if (sectionKey === 'acil-kurye') {
+                    const acilCheck = document.getElementById('acilKuryeCheck');
+                    isComplete = acilCheck && acilCheck.checked;
+                } else if (typeof validator === 'function') {
+                    isComplete = !!validator();
+                }
+                indicator.innerHTML = isComplete ? SECTION_ICON_CHECK : SECTION_ICON_CROSS;
+                indicator.classList.toggle('text-green-500', isComplete);
+                indicator.classList.toggle('text-red-500', !isComplete);
+            }
+
+            function updateAllIsletmeSectionStatuses() {
+                Object.keys(isletmeSectionValidators).forEach(updateIsletmeSectionStatus);
+            }
+
+            function handleIsletmeSectionEvent(event) {
+                const section = event.target.closest('[data-accordion-item]');
+                if (!section) return;
+                const sectionKey = section.dataset.sectionKey;
+                if (sectionKey) {
+                    updateIsletmeSectionStatus(sectionKey);
+                }
+            }
+
+            function attachIsletmeSectionListeners() {
+                if (isletmeSectionListenersAttached || !kartEditorForm) return;
+                ['input', 'change'].forEach(evt => kartEditorForm.addEventListener(evt, handleIsletmeSectionEvent));
+                isletmeSectionListenersAttached = true;
+            }
+            if (kartEditorForm) {
+                attachIsletmeSectionListeners();
+            }
+
+            function initKartEditorAccordion() {
+                if (!kartEditorForm || kartAccordionInitialized) return;
+                const sections = kartEditorForm.querySelectorAll('[data-accordion-item]');
+                sections.forEach((section, index) => {
+                    if (section.dataset.accordionInit === '1') return;
+                    section.dataset.accordionInit = '1';
+                    
+                    let trigger = section.querySelector('[data-accordion-trigger]');
+                    let content = section.querySelector('[data-accordion-content]');
+                    
+                    if (!trigger) {
+                        const titleElement = section.querySelector('h3');
+                        const titleText = titleElement ? titleElement.textContent.trim() : 'Bï¿½lï¿½m';
+                        if (titleElement) {
+                            const button = document.createElement('button');
+                            button.type = 'button';
+                            button.className = 'accordion-trigger flex items-center justify-between w-full text-left py-2';
+                            button.setAttribute('data-accordion-trigger', '');
+                            button.innerHTML = `
+                                <span class="text-lg font-semibold text-text">${titleText}</span>
+                                <svg class="w-5 h-5 text-muted transition-transform duration-200" data-accordion-icon fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"></path>
+                                </svg>
+                            `;
+                            titleElement.replaceWith(button);
+                            
+                            const wrapper = document.createElement('div');
+                            wrapper.className = 'accordion-content mt-4 space-y-4';
+                            wrapper.setAttribute('data-accordion-content', '');
+                            while (button.nextSibling) {
+                                wrapper.appendChild(button.nextSibling);
+                            }
+                            section.appendChild(wrapper);
+                            
+                            trigger = button;
+                            content = wrapper;
+                        }
+                    }
+                    
+                    if (!trigger || !content) return;
+                    const rawTitleSource = trigger ? trigger.cloneNode(true) : null;
+                    const rawTitle = rawTitleSource ? rawTitleSource.textContent : (section.querySelector('h3') ? section.querySelector('h3').textContent : `section-${index}`);
+                    let sectionKey = section.dataset.sectionKey;
+                    if (!sectionKey) {
+                        const normalized = (rawTitle || `section-${index}`).trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                        sectionKey = normalized.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || `section-${index}`;
+                        section.dataset.sectionKey = sectionKey;
+                    }
+                    ensureIsletmeSectionIndicator(section, trigger, sectionKey);
+                    const icon = trigger.querySelector('[data-accordion-icon]');
+                    
+                    const collapse = () => {
+                        content.classList.add('hidden');
+                        section.classList.remove('border-primary');
+                        if (icon) icon.classList.remove('rotate-180');
+                    };
+                    const expand = () => {
+                        content.classList.remove('hidden');
+                        section.classList.add('border-primary');
+                        if (icon) icon.classList.add('rotate-180');
+                    };
+                    
+                    trigger.addEventListener('click', () => {
+                        const isHidden = content.classList.contains('hidden');
+                        sections.forEach(other => {
+                            if (other === section) return;
+                            const otherContent = other.querySelector('[data-accordion-content]');
+                            const otherIcon = other.querySelector('[data-accordion-icon]');
+                            if (otherContent) otherContent.classList.add('hidden');
+                            other.classList.remove('border-primary');
+                            if (otherIcon) otherIcon.classList.remove('rotate-180');
+                        });
+                        
+                        if (isHidden) {
+                            expand();
+                        } else {
+                            collapse();
+                        }
+                    });
+                    
+                    if (index === 0) {
+                        expand();
+                    } else {
+                        collapse();
+                    }
+                });
+                
+                kartAccordionInitialized = true;
+            }
+            
+            function openKartEditorModal() {
+                if (!kartEditorModal) return;
+                kartEditorModal.classList.remove('hidden');
+                kartEditorModal.classList.add('flex');
+                toggleBodyScroll(true);
+                initKartEditorAccordion();
+                attachIsletmeSectionListeners();
+                updateAllIsletmeSectionStatuses();
+            }
+            
+            function closeKartEditorModal() {
+                if (!kartEditorModal) return;
+                kartEditorModal.classList.add('hidden');
+                toggleBodyScroll(false);
+            }
+            
+            if (openKartEditorBtn) {
+                openKartEditorBtn.addEventListener('click', openKartEditorModal);
+            }
+            
+            if (kartEditorCloseBtn) {
+                kartEditorCloseBtn.addEventListener('click', closeKartEditorModal);
+            }
+            
+            if (kartEditorCancelBtn) {
+                kartEditorCancelBtn.addEventListener('click', closeKartEditorModal);
+            }
+            
+            if (kartEditorModal) {
+                kartEditorModal.addEventListener('click', function(e) {
+                    if (e.target === kartEditorModal) {
+                        closeKartEditorModal();
+                    }
+                });
+            }
+            
+            if (kartEditorSaveBtn) {
+                kartEditorSaveBtn.addEventListener('click', function() {
+                    const saveBtn = document.getElementById('saveProfile');
+                    if (saveBtn) {
+                        saveBtn.click();
+                    }
+                });
+            }
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && kartEditorModal && !kartEditorModal.classList.contains('hidden')) {
+                    closeKartEditorModal();
+                }
+            });
+            
+            // ï¿½ï¿½letme tï¿½rï¿½ne gï¿½re avatar belirleme
+            const businessTypeIcons = {
+                'Restoran': '???',
+                'Cafe': '?',
+                'Market': '??',
+                'E-Ticaret': '??',
+                'Eczane': '??',
+                'Saï¿½lï¿½k ï¿½rï¿½nleri': '??',
+                'Diï¿½er': '??'
+            };
+            
+            const businessTypeColors = {
+                'Restoran': 'from-orange-500 to-red-500',
+                'Cafe': 'from-amber-500 to-orange-500',
+                'Market': 'from-green-500 to-emerald-500',
+                'E-Ticaret': 'from-blue-500 to-cyan-500',
+                'Eczane': 'from-red-500 to-pink-500',
+                'Saï¿½lï¿½k ï¿½rï¿½nleri': 'from-green-400 to-teal-500',
+                'Diï¿½er': 'from-primary to-accent'
+            };
+            
+            function updateBusinessAvatar() {
+                const isletmeTuru = document.getElementById('isletmeTuru').value || 'Diï¿½er';
+                const businessIcon = document.getElementById('businessIcon');
+                const businessAvatar = document.getElementById('businessAvatar');
+                const avatarContainer = businessIcon.parentElement;
+                
+                // Icon'u gï¿½ncelle
+                businessIcon.textContent = businessTypeIcons[isletmeTuru] || businessTypeIcons['Diï¿½er'];
+                
+                // Renkleri gï¿½ncelle
+                avatarContainer.className = `w-32 h-32 mx-auto bg-gradient-to-br ${businessTypeColors[isletmeTuru] || businessTypeColors['Diï¿½er']} rounded-full flex items-center justify-center mb-4 relative`;
+                
+                // Eï¿½er avatar gï¿½rseli varsa gï¿½ster (ï¿½imdilik icon kullanï¿½yoruz)
+                // Gelecekte: if (businessAvatar.src) { businessAvatar.classList.remove('hidden'); businessIcon.classList.add('hidden'); }
+            }
+            
+            // ï¿½ï¿½letme tï¿½rï¿½ deï¿½iï¿½tiï¿½inde avatar gï¿½ncelle
+            document.getElementById('isletmeTuru').addEventListener('change', updateBusinessAvatar);
+            
+            // ï¿½ehir deï¿½iï¿½tiï¿½inde otomatik gï¿½ncelleme
+            const sehirSelect = document.getElementById('sehir');
+            sehirSelect.addEventListener('change', function() {
+                // Profil kartï¿½ndaki ï¿½ehir bilgisini anï¿½nda gï¿½ncelle
+                const selectedSehir = this.value || '-';
+                document.getElementById('profileSehir').textContent = selectedSehir;
+            });
+            
+            // ï¿½letiï¿½im telefon senkronizasyonu
+            const yetkiliTelefonInput = document.getElementById('yetkiliTelefon');
+            const cepInput = document.getElementById('cep');
+            const iletisimYetkiliTelefon = document.getElementById('iletisimYetkiliTelefon');
+            
+            const acilKuryeCheck = document.getElementById('acilKuryeCheck');
+            const acilKuryeInlineContent = document.getElementById('acilKuryeInlineContent');
+            
+            function updateCepInputState() {
+                if (!cepInput) return;
+                
+                const shouldUseYetkili = iletisimYetkiliTelefon && iletisimYetkiliTelefon.checked;
+                if (shouldUseYetkili) {
+                    const yetkiliValue = yetkiliTelefonInput ? yetkiliTelefonInput.value : '';
+                    if (yetkiliValue !== undefined) {
+                        cepInput.value = yetkiliValue || '';
+                    }
+                    cepInput.setAttribute('disabled', 'disabled');
+                    cepInput.classList.add('bg-gray-100', 'cursor-not-allowed');
+                } else {
+                    cepInput.removeAttribute('disabled');
+                    cepInput.classList.remove('bg-gray-100', 'cursor-not-allowed');
+                }
+                
+                updatePreview();
+                if (acilKuryeCheck && acilKuryeCheck.checked) {
+                    updateAcilMesaj();
+                }
+                updateIsletmeSectionStatus('iletisim');
+            }
+            
+            if (iletisimYetkiliTelefon) {
+                iletisimYetkiliTelefon.addEventListener('change', updateCepInputState);
+            }
+            
+            if (yetkiliTelefonInput) {
+                yetkiliTelefonInput.addEventListener('input', function() {
+                    if (iletisimYetkiliTelefon && iletisimYetkiliTelefon.checked && cepInput) {
+                        cepInput.value = yetkiliTelefonInput.value || '';
+                        updatePreview();
+                        if (acilKuryeCheck && acilKuryeCheck.checked) {
+                            updateAcilMesaj();
+                        }
+                    }
+                });
+            }
+            
+            function setAcilKuryeUIState(isChecked) {
+                if (acilKuryeInlineContent) {
+                    if (isChecked) {
+                        acilKuryeInlineContent.classList.remove('hidden');
+                        const acilAccordionSection = acilKuryeInlineContent.closest('[data-accordion-item]');
+                        if (acilAccordionSection) {
+                            const contentWrapper = acilAccordionSection.querySelector('[data-accordion-content]');
+                            const icon = acilAccordionSection.querySelector('[data-accordion-icon]');
+                            if (contentWrapper && contentWrapper.classList.contains('hidden')) {
+                                contentWrapper.classList.remove('hidden');
+                                acilAccordionSection.classList.add('border-primary');
+                                if (icon) icon.classList.add('rotate-180');
+                            }
+                        }
+                    } else {
+                        acilKuryeInlineContent.classList.add('hidden');
+                    }
+                }
+                updateIsletmeSectionStatus('acil-kurye');
+            }
+            
+            if (acilKuryeCheck) {
+                acilKuryeCheck.addEventListener('change', function() {
+                    setAcilKuryeUIState(this.checked);
+                });
+            }
+            
+            // Baï¿½langï¿½ï¿½ durumlarï¿½nï¿½ ayarla
+            updateCepInputState();
+            if (acilKuryeCheck) {
+                setAcilKuryeUIState(acilKuryeCheck.checked);
+            }
+            
+            // Acil ï¿½cret tipi checkbox'larï¿½ iï¿½in enable/disable
+            const acilSaatlikCheck = document.getElementById('acilSaatlikCheck');
+            const acilSaatlikInput = document.getElementById('acilSaatlikUcret');
+            const acilKmCheck = document.getElementById('acilKmCheck');
+            const acilKmInput = document.getElementById('acilKmUcret');
+            const acilPaketCheck = document.getElementById('acilPaketCheck');
+            const acilPaketInput = document.getElementById('acilPaketUcret');
+            
+            acilSaatlikCheck.addEventListener('change', function() {
+                acilSaatlikInput.disabled = !this.checked;
+                if (!this.checked) acilSaatlikInput.value = '';
+                updateAcilMesaj();
+                updateIsletmeSectionStatus('acil-kurye');
+            });
+            
+            acilKmCheck.addEventListener('change', function() {
+                acilKmInput.disabled = !this.checked;
+                if (!this.checked) acilKmInput.value = '';
+                updateAcilMesaj();
+                updateIsletmeSectionStatus('acil-kurye');
+            });
+            
+            acilPaketCheck.addEventListener('change', function() {
+                acilPaketInput.disabled = !this.checked;
+                if (!this.checked) acilPaketInput.value = '';
+                updateAcilMesaj();
+                updateIsletmeSectionStatus('acil-kurye');
+            });
+            
+            // Acil ï¿½cret input'larï¿½ deï¿½iï¿½tiï¿½inde mesaj gï¿½ncelle
+            acilSaatlikInput.addEventListener('input', function() {
+                updateAcilMesaj();
+                updateIsletmeSectionStatus('acil-kurye');
+            });
+            acilKmInput.addEventListener('input', function() {
+                updateAcilMesaj();
+                updateIsletmeSectionStatus('acil-kurye');
+            });
+            acilPaketInput.addEventListener('input', function() {
+                updateAcilMesaj();
+                updateIsletmeSectionStatus('acil-kurye');
+            });
+            
+            // Acil ek bilgiler karakter sayacï¿½
+            const acilEkBilgiler = document.getElementById('acilEkBilgiler');
+            const acilEkBilgilerCount = document.getElementById('acilEkBilgilerCount');
+            acilEkBilgiler.addEventListener('input', function() {
+                acilEkBilgilerCount.textContent = this.value.length;
+                updateAcilMesaj();
+            });
+            
+            // Acil baï¿½langï¿½ï¿½ ve ï¿½ï¿½kï¿½ï¿½ saati deï¿½iï¿½tiï¿½inde mesaj gï¿½ncelle
+            document.getElementById('acilBaslangicSaati').addEventListener('change', function() {
+                updateAcilMesaj();
+                updateIsletmeSectionStatus('acil-kurye');
+            });
+            document.getElementById('acilCikisSaati').addEventListener('change', function() {
+                updateAcilMesaj();
+                updateIsletmeSectionStatus('acil-kurye');
+            });
+            
+            // Acil avantajlar deï¿½iï¿½tiï¿½inde mesaj gï¿½ncelle
+            document.getElementById('acilYemek').addEventListener('change', function() {
+                updateAcilMesaj();
+                updateIsletmeSectionStatus('acil-kurye');
+            });
+            document.getElementById('acilYol').addEventListener('change', function() {
+                updateAcilMesaj();
+                updateIsletmeSectionStatus('acil-kurye');
+            });
+            document.getElementById('acilSigorta').addEventListener('change', function() {
+                updateAcilMesaj();
+                updateIsletmeSectionStatus('acil-kurye');
+            });
+            
+            // Otomatik mesaj oluï¿½turma fonksiyonu
+            function updateAcilMesaj() {
+                const mesajParts = [];
+                
+                // ï¿½ï¿½letme bilgileri
+                const isletmeAdi = document.getElementById('isletmeAdi').value || '';
+                const sehir = document.getElementById('sehir').value || '';
+                
+                if (isletmeAdi) mesajParts.push(isletmeAdi);
+                if (sehir) mesajParts.push(sehir);
+                
+                // Konum bilgisi (eï¿½er adres seï¿½ildiyse)
+                const latitude = document.getElementById('latitude').value;
+                const longitude = document.getElementById('longitude').value;
+                const adresText = document.getElementById('adres').value;
+                if (latitude && longitude || adresText) {
+                    mesajParts.push('Konum: Harita');
+                }
+                
+                // Baï¿½langï¿½ï¿½ saati
+                const baslangicSaati = document.getElementById('acilBaslangicSaati').value;
+                if (baslangicSaati === 'simdi') {
+                    mesajParts.push('ï¿½imdi');
+                } else if (baslangicSaati) {
+                    mesajParts.push(baslangicSaati);
+                }
+                
+                // ï¿½ï¿½kï¿½ï¿½ saati
+                const cikisSaati = document.getElementById('acilCikisSaati').value;
+                if (cikisSaati) {
+                    mesajParts.push(`- ${cikisSaati}`);
+                }
+                
+                // ï¿½cret bilgileri
+                const ucretParts = [];
+                if (acilSaatlikCheck.checked && acilSaatlikInput.value) {
+                    ucretParts.push(`${acilSaatlikInput.value} TL/saat`);
+                }
+                if (acilKmCheck.checked && acilKmInput.value) {
+                    ucretParts.push(`${acilKmInput.value} TL/km`);
+                }
+                if (acilPaketCheck.checked && acilPaketInput.value) {
+                    ucretParts.push(`${acilPaketInput.value} TL/paket`);
+                }
+                if (ucretParts.length > 0) {
+                    mesajParts.push(ucretParts.join(', '));
+                }
+                
+                // Avantajlar
+                const avantajParts = [];
+                if (document.getElementById('acilYemek').checked) avantajParts.push('Yemek');
+                if (document.getElementById('acilYol').checked) avantajParts.push('Yol');
+                if (document.getElementById('acilSigorta').checked) avantajParts.push('Sigorta');
+                if (avantajParts.length > 0) {
+                    mesajParts.push(`Avantajlar: ${avantajParts.join(', ')}`);
+                }
+                
+                // Ek bilgiler
+                const ekBilgiler = acilEkBilgiler.value.trim();
+                if (ekBilgiler) {
+                    mesajParts.push(ekBilgiler);
+                }
+                
+                const mesaj = mesajParts.join(' | ');
+                document.getElementById('acilOtomatikMesaj').value = mesaj;
+                
+                // ï¿½nizlemeyi gï¿½ncelle
+                updatePreview();
+            }
+            
+            // ï¿½nizleme gï¿½ncelleme fonksiyonu
+            function updatePreview() {
+                // Normal ilan ï¿½nizlemesi
+                document.getElementById('previewIsletmeAdi').textContent = document.getElementById('isletmeAdi').value || '-';
+                document.getElementById('previewIsletmeTuru').textContent = document.getElementById('isletmeTuru').value || '-';
+                document.getElementById('previewSehir').textContent = document.getElementById('sehir').value || '-';
+                
+                // Cep telefonu (koï¿½ullu gï¿½sterim)
+                const kuryeArayabilir = document.getElementById('kuryeArayabilir').checked;
+                const cepTelefonu = document.getElementById('cep').value;
+                if (kuryeArayabilir && cepTelefonu) {
+                    document.getElementById('previewCep').textContent = cepTelefonu;
+                } else {
+                    document.getElementById('previewCep').textContent = 'Gizli';
+                }
+                
+                // ï¿½alï¿½ï¿½ma Modeli
+                const calismaModeliParts = [];
+                if (document.getElementById('esnaf').checked) calismaModeliParts.push('Esnaf');
+                if (document.getElementById('sigortali').checked) calismaModeliParts.push('Sigortalï¿½');
+                document.getElementById('previewCalismaModeli').textContent = calismaModeliParts.length > 0 ? calismaModeliParts.join(', ') : '-';
+                
+                // ï¿½cret (eï¿½er paylaï¿½ma seï¿½eneï¿½i iï¿½aretliyse gizli)
+                const ucretBilgisiPaylas = document.getElementById('ucretBilgisiPaylas').checked;
+                const sabitUcret = document.getElementById('sabitUcret').value;
+                if (ucretBilgisiPaylas) {
+                    document.getElementById('previewUcret').textContent = 'Gizli';
+                } else {
+                    document.getElementById('previewUcret').textContent = sabitUcret ? `${sabitUcret} TL` : '-';
+                }
+                
+                // Avantajlar
+                const avantajParts = [];
+                if (document.getElementById('yemek').checked) avantajParts.push('Yemek');
+                if (document.getElementById('yol').checked) avantajParts.push('Yol');
+                if (document.getElementById('sigorta').checked) avantajParts.push('Sigorta');
+                document.getElementById('previewAvantajlar').textContent = avantajParts.length > 0 ? avantajParts.join(', ') : '-';
+                
+                // Konum (eï¿½er adres seï¿½ildiyse)
+                const latitude = document.getElementById('latitude').value;
+                const longitude = document.getElementById('longitude').value;
+                const adresText = document.getElementById('adres').value;
+                if (latitude && longitude) {
+                    document.getElementById('previewKonumContainer').classList.remove('hidden');
+                    const googleMapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
+                    document.getElementById('previewKonumLink').href = googleMapsUrl;
+                } else if (adresText) {
+                    document.getElementById('previewKonumContainer').classList.remove('hidden');
+                    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(adresText)}`;
+                    document.getElementById('previewKonumLink').href = googleMapsUrl;
+                } else {
+                    document.getElementById('previewKonumContainer').classList.add('hidden');
+                }
+                
+                // Acil ilan ï¿½nizlemesi (sadece acil iï¿½aretliyse)
+                if (acilKuryeCheck.checked) {
+                    document.getElementById('acilPreviewSection').classList.remove('hidden');
+                    
+                    document.getElementById('previewAcilIsletmeAdi').textContent = document.getElementById('isletmeAdi').value || '-';
+                    document.getElementById('previewAcilSehir').textContent = document.getElementById('sehir').value || '-';
+                    
+                    // Acil ilan iï¿½in cep telefonu (koï¿½ullu gï¿½sterim)
+                    const kuryeArayabilir = document.getElementById('kuryeArayabilir').checked;
+                    const cepTelefonu = document.getElementById('cep').value;
+                    if (kuryeArayabilir && cepTelefonu) {
+                        document.getElementById('previewAcilCep').textContent = cepTelefonu;
+                    } else {
+                        document.getElementById('previewAcilCep').textContent = 'Gizli';
+                    }
+                    
+                    const acilBaslangic = document.getElementById('acilBaslangicSaati').value;
+                    document.getElementById('previewAcilBaslangic').textContent = acilBaslangic === 'simdi' ? 'ï¿½imdi' : acilBaslangic || '-';
+                    
+                    // Acil ï¿½cret
+                    const acilUcretParts = [];
+                    if (acilSaatlikCheck.checked && acilSaatlikInput.value) {
+                        acilUcretParts.push(`${acilSaatlikInput.value} TL/saat`);
+                    }
+                    if (acilKmCheck.checked && acilKmInput.value) {
+                        acilUcretParts.push(`${acilKmInput.value} TL/km`);
+                    }
+                    if (acilPaketCheck.checked && acilPaketInput.value) {
+                        acilUcretParts.push(`${acilPaketInput.value} TL/paket`);
+                    }
+                    
+                    // Acil ï¿½cret (eï¿½er paylaï¿½ma seï¿½eneï¿½i iï¿½aretliyse gizli)
+                    const ucretBilgisiPaylas = document.getElementById('ucretBilgisiPaylas').checked;
+                    if (ucretBilgisiPaylas) {
+                        document.getElementById('previewAcilUcret').textContent = 'Gizli';
+                    } else {
+                        document.getElementById('previewAcilUcret').textContent = acilUcretParts.length > 0 ? acilUcretParts.join(', ') : '-';
+                    }
+                    
+                    // Acil avantajlar
+                    const acilAvantajParts = [];
+                    if (document.getElementById('acilYemek').checked) acilAvantajParts.push('Yemek');
+                    if (document.getElementById('acilYol').checked) acilAvantajParts.push('Yol');
+                    if (document.getElementById('acilSigorta').checked) acilAvantajParts.push('Sigorta');
+                    document.getElementById('previewAcilAvantajlar').textContent = acilAvantajParts.length > 0 ? acilAvantajParts.join(', ') : '-';
+                    
+                    // Acil konum (adresten otomatik)
+                    const latitude = document.getElementById('latitude').value;
+                    const longitude = document.getElementById('longitude').value;
+                    const adresText = document.getElementById('adres').value;
+                    if (latitude && longitude) {
+                        document.getElementById('previewAcilKonumContainer').classList.remove('hidden');
+                        const googleMapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
+                        document.getElementById('previewAcilKonumLink').href = googleMapsUrl;
+                    } else if (adresText) {
+                        document.getElementById('previewAcilKonumContainer').classList.remove('hidden');
+                        const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(adresText)}`;
+                        document.getElementById('previewAcilKonumLink').href = googleMapsUrl;
+                    } else {
+                        document.getElementById('previewAcilKonumContainer').classList.add('hidden');
+                    }
+                    
+                    // Acil mesaj
+                    document.getElementById('previewAcilMesaj').textContent = document.getElementById('acilOtomatikMesaj').value || '-';
+                } else {
+                    document.getElementById('acilPreviewSection').classList.add('hidden');
+                }
+            }
+            
+            // ï¿½cret bilgisi paylaï¿½ma checkbox'ï¿½ deï¿½iï¿½tiï¿½inde ï¿½nizlemeyi gï¿½ncelle
+            document.getElementById('ucretBilgisiPaylas').addEventListener('change', updatePreview);
+            
+            // Kurye arayabilir checkbox'ï¿½ deï¿½iï¿½tiï¿½inde ï¿½nizlemeyi gï¿½ncelle
+            document.getElementById('kuryeArayabilir').addEventListener('change', updatePreview);
+            
+            // Cep telefonu deï¿½iï¿½tiï¿½inde ï¿½nizlemeyi gï¿½ncelle
+            document.getElementById('cep').addEventListener('input', updatePreview);
+            
+            // ï¿½cret tipi checkbox'ï¿½ iï¿½in enable/disable
+            const sabitCheck = document.getElementById('sabitUcretCheck');
+            const sabitInput = document.getElementById('sabitUcret');
+            
+            sabitCheck.addEventListener('change', function() {
+                sabitInput.disabled = !this.checked;
+                if (!this.checked) sabitInput.value = '';
+                updateIsletmeSectionStatus('ucret-tipi');
+            });
+            sabitInput.addEventListener('input', function() {
+                updateIsletmeSectionStatus('ucret-tipi');
+            });
+            
+            // Konum belirleme
+            const konumBtn = document.getElementById('konumBelirleBtn');
+            const konumBilgisi = document.getElementById('konumBilgisi');
+            const konumBtnOriginalHtml = konumBtn ? konumBtn.innerHTML : '';
+            
+            konumBtn.addEventListener('click', function() {
+                if (navigator.geolocation) {
+                    konumBtn.disabled = true;
+                    konumBtn.textContent = 'Konum alï¿½nï¿½yor...';
+                    
+                                        navigator.geolocation.getCurrentPosition(
+                        function(position) {
+                            const lat = position.coords.latitude;
+                            const lng = position.coords.longitude;
+                            
+                            // Koordinatlarï¿½ sakla
+                            document.getElementById('latitude').value = lat;
+                            document.getElementById('longitude').value = lng;
+                            updateIsletmeSectionStatus('adres-bilgileri');
+
+                            // Reverse geocoding ile adres al
+                            konumBilgisi.textContent = 'Adres alï¿½nï¿½yor...';
+                            konumBilgisi.classList.remove('hidden');
+                            
+                            // Nominatim (OpenStreetMap) reverse geocoding API
+                            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1&accept-language=tr`, {
+                                headers: {
+                                    'User-Agent': 'Kuryes.com/1.0'
+                                }
+                            })
+                                .then(response => {
+                                    if (!response.ok) throw new Error('Geocoding failed');
+                                    return response.json();
+                                })
+                                .then(data => {
+                                    if (data && data.address) {
+                                        const addr = data.address;
+                                        // Adres bileï¿½enlerini birleï¿½tir
+                                        const adresParts = [];
+                                        
+                                        if (addr.road) adresParts.push(addr.road);
+                                        if (addr.house_number) adresParts.push('No: ' + addr.house_number);
+                                        if (addr.suburb || addr.neighbourhood) adresParts.push(addr.suburb || addr.neighbourhood);
+                                        if (addr.postcode) adresParts.push('PK: ' + addr.postcode);
+                                        
+                                        // Mahalle ve ilï¿½e bilgisi
+                                        const mahalle = addr.suburb || addr.neighbourhood || addr.quarter || '';
+                                        const ilce = addr.city_district || addr.county || '';
+                                        const sehir = addr.city || addr.state || '';
+                                        
+                                        // Tam adres string'i oluï¿½tur
+                                        let fullAddress = '';
+                                        if (addr.road) fullAddress += addr.road;
+                                        if (addr.house_number) fullAddress += ' No: ' + addr.house_number;
+                                        if (mahalle) fullAddress += ', ' + mahalle;
+                                        if (ilce && ilce !== sehir) fullAddress += ', ' + ilce;
+                                        if (sehir) fullAddress += ', ' + sehir;
+                                        if (addr.postcode) fullAddress += ' (PK: ' + addr.postcode + ')';
+                                        
+                                        // Kï¿½sa gï¿½sterim (mahalle, ilï¿½e, ï¿½ehir)
+                                        const shortAddress = [mahalle, ilce, sehir].filter(Boolean).join(', ');
+                                        
+                                        // Adres input alanï¿½nï¿½ gï¿½ncelle
+                                        document.getElementById('adresInput').value = fullAddress || `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+                                        
+                                        // Konum bilgisini gï¿½ster
+                                        konumBilgisi.textContent = `Konum alï¿½ndï¿½: ${shortAddress || `${lat.toFixed(6)}, ${lng.toFixed(6)}`}`;
+                                    } else {
+                                        // Adres bulunamazsa koordinatlarï¿½ gï¿½ster
+                                        document.getElementById('adresInput').value = `Konum: ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+                                        konumBilgisi.textContent = `Konum alï¿½ndï¿½: ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Reverse geocoding error:', error);
+                                    // Hata durumunda koordinatlarï¿½ gï¿½ster
+                                    document.getElementById('adresInput').value = `Konum: ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+                                    konumBilgisi.textContent = `Konum alï¿½ndï¿½: ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+                                });
+                            
+                            konumBtn.disabled = false;
+                            konumBtn.innerHTML = konumBtnOriginalHtml;
+                        },
+                        function(error) {
+                            alert('Konum alï¿½namadï¿½. Lï¿½tfen tarayï¿½cï¿½ ayarlarï¿½nï¿½zï¿½ kontrol edin.');
+                            konumBtn.disabled = false;
+                            konumBtn.innerHTML = konumBtnOriginalHtml;
+                        }
+                    );
+                } else {
+                    alert('Tarayï¿½cï¿½nï¿½z konum servisini desteklemiyor.');
+                }
+            });
+            
+            // Adres kaydetme
+            window.saveAddress = function() {
+                const adresText = document.getElementById('adresInput').value;
+                const lat = document.getElementById('latitude').value;
+                const lng = document.getElementById('longitude').value;
+                
+                if (adresText || (lat && lng)) {
+                    // Adres bilgisini kaydet
+                    document.getElementById('adres').value = adresText || '';
+                    
+                    // Eï¿½er koordinatlar varsa, kï¿½sa adres gï¿½ster (mahalle, ilï¿½e, ï¿½ehir formatï¿½nda)
+                    if (lat && lng && adresText) {
+                        // Adres text'inden kï¿½sa format ï¿½ï¿½kar (virgï¿½lle ayrï¿½lmï¿½ï¿½ son kï¿½sï¿½mlar)
+                        const adresParts = adresText.split(',');
+                        // Son 2-3 parï¿½ayï¿½ al (mahalle, ilï¿½e, ï¿½ehir)
+                        const shortParts = adresParts.slice(-3).join(', ').replace(/\s*\(PK:.*?\)\s*/g, '').trim();
+                        document.getElementById('adresGoster').textContent = shortParts || adresText;
+                    } else if (adresText) {
+                        document.getElementById('adresGoster').textContent = adresText;
+                    } else if (lat && lng) {
+                        document.getElementById('adresGoster').textContent = 'Konum: Harita';
+                    }
+                    
+                    // Modalï¿½ kapat
+                    document.getElementById('adresModal').classList.add('hidden');
+                    
+                    // ï¿½nizlemeyi gï¿½ncelle
+                    updatePreview();
+                        updateAcilMesaj();
+                    updateIsletmeSectionStatus('adres-bilgileri');
+                } else {
+                    alert('Lï¿½tfen bir adres seï¿½in veya konum almayï¿½ deneyin.');
+                }
+            };
+            
+            // Modal dï¿½ï¿½ï¿½na tï¿½klayï¿½nca kapat
+            document.getElementById('adresModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.add('hidden');
+                }
+            });
+            
+            // TODO: DB'den veri ï¿½ekme
+            updateCepInputState();
+            setAcilKuryeUIState(acilKuryeCheck ? acilKuryeCheck.checked : false);
+             updateProfileDisplay();
+            updatePreview();
+            
+                         // Modal ï¿½nizleme gï¿½ncelleme fonksiyonu
+             function updateModalPreview() {
+                 // Normal ilan
+                 document.getElementById('modalPreviewIsletmeAdi').textContent = document.getElementById('isletmeAdi').value || '-';
+                 document.getElementById('modalPreviewIsletmeTuru').textContent = document.getElementById('isletmeTuru').value || '-';
+                 document.getElementById('modalPreviewSehir').textContent = document.getElementById('sehir').value || '-';
+                 
+                 // Cep telefonu (koï¿½ullu gï¿½sterim)
+                 const kuryeArayabilir = document.getElementById('kuryeArayabilir').checked;
+                 const cepTelefonu = document.getElementById('cep').value;
+                 if (kuryeArayabilir && cepTelefonu) {
+                     document.getElementById('modalPreviewCep').textContent = cepTelefonu;
+                 } else {
+                     document.getElementById('modalPreviewCep').textContent = 'Gizli';
+                 }
+                 
+                 // ï¿½alï¿½ï¿½ma Modeli
+                 const calismaModeliParts = [];
+                 if (document.getElementById('esnaf').checked) calismaModeliParts.push('Esnaf');
+                 if (document.getElementById('sigortali').checked) calismaModeliParts.push('Sigortalï¿½');
+                 document.getElementById('modalPreviewCalismaModeli').textContent = calismaModeliParts.length > 0 ? calismaModeliParts.join(', ') : '-';
+                 
+                 // ï¿½cret
+                 const ucretBilgisiPaylas = document.getElementById('ucretBilgisiPaylas').checked;
+                 const sabitUcret = document.getElementById('sabitUcret').value;
+                 if (ucretBilgisiPaylas) {
+                     document.getElementById('modalPreviewUcret').textContent = 'Gizli';
+                 } else {
+                    document.getElementById('modalPreviewUcret').textContent = sabitUcret ? `${sabitUcret} TL` : '-';
+                 }
+                 
+                 // Avantajlar
+                 const avantajParts = [];
+                 if (document.getElementById('yemek').checked) avantajParts.push('Yemek');
+                 if (document.getElementById('yol').checked) avantajParts.push('Yol');
+                 if (document.getElementById('sigorta').checked) avantajParts.push('Sigorta');
+                 document.getElementById('modalPreviewAvantajlar').textContent = avantajParts.length > 0 ? avantajParts.join(', ') : '-';
+                 
+                 // Konum
+                 const latitude = document.getElementById('latitude').value;
+                 const longitude = document.getElementById('longitude').value;
+                 const adresText = document.getElementById('adres').value;
+                 if (latitude && longitude) {
+                     document.getElementById('modalPreviewKonumContainer').classList.remove('hidden');
+                     const googleMapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
+                     document.getElementById('modalPreviewKonumLink').href = googleMapsUrl;
+                 } else if (adresText) {
+                     document.getElementById('modalPreviewKonumContainer').classList.remove('hidden');
+                     const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(adresText)}`;
+                     document.getElementById('modalPreviewKonumLink').href = googleMapsUrl;
+                 } else {
+                     document.getElementById('modalPreviewKonumContainer').classList.add('hidden');
+                 }
+                 
+                 // Acil ilan ï¿½nizlemesi
+                 if (acilKuryeCheck.checked) {
+                     document.getElementById('modalAcilPreviewSection').classList.remove('hidden');
+                     
+                     document.getElementById('modalPreviewAcilIsletmeAdi').textContent = document.getElementById('isletmeAdi').value || '-';
+                     document.getElementById('modalPreviewAcilSehir').textContent = document.getElementById('sehir').value || '-';
+                     
+                     // Acil cep telefonu
+                     if (kuryeArayabilir && cepTelefonu) {
+                         document.getElementById('modalPreviewAcilCep').textContent = cepTelefonu;
+                     } else {
+                         document.getElementById('modalPreviewAcilCep').textContent = 'Gizli';
+                     }
+                     
+                     const acilBaslangic = document.getElementById('acilBaslangicSaati').value;
+                     document.getElementById('modalPreviewAcilBaslangic').textContent = acilBaslangic === 'simdi' ? 'ï¿½imdi' : acilBaslangic || '-';
+                     
+                     // Acil ï¿½cret
+                     const acilUcretParts = [];
+                     if (acilSaatlikCheck.checked && acilSaatlikInput.value) {
+                         acilUcretParts.push(`${acilSaatlikInput.value} TL/saat`);
+                     }
+                     if (acilKmCheck.checked && acilKmInput.value) {
+                         acilUcretParts.push(`${acilKmInput.value} TL/km`);
+                     }
+                     if (acilPaketCheck.checked && acilPaketInput.value) {
+                         acilUcretParts.push(`${acilPaketInput.value} TL/paket`);
+                     }
+                     
+                     if (ucretBilgisiPaylas) {
+                         document.getElementById('modalPreviewAcilUcret').textContent = 'Gizli';
+                     } else {
+                         document.getElementById('modalPreviewAcilUcret').textContent = acilUcretParts.length > 0 ? acilUcretParts.join(', ') : '-';
+                     }
+                     
+                     // Acil avantajlar
+                     const acilAvantajParts = [];
+                     if (document.getElementById('acilYemek').checked) acilAvantajParts.push('Yemek');
+                     if (document.getElementById('acilYol').checked) acilAvantajParts.push('Yol');
+                     if (document.getElementById('acilSigorta').checked) acilAvantajParts.push('Sigorta');
+                     document.getElementById('modalPreviewAcilAvantajlar').textContent = acilAvantajParts.length > 0 ? acilAvantajParts.join(', ') : '-';
+                     
+                     // Acil konum
+                     if (latitude && longitude) {
+                         document.getElementById('modalPreviewAcilKonumContainer').classList.remove('hidden');
+                         const googleMapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
+                         document.getElementById('modalPreviewAcilKonumLink').href = googleMapsUrl;
+                     } else if (adresText) {
+                         document.getElementById('modalPreviewAcilKonumContainer').classList.remove('hidden');
+                         const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(adresText)}`;
+                         document.getElementById('modalPreviewAcilKonumLink').href = googleMapsUrl;
+                     } else {
+                         document.getElementById('modalPreviewAcilKonumContainer').classList.add('hidden');
+                     }
+                     
+                     // Acil mesaj
+                     document.getElementById('modalPreviewAcilMesaj').textContent = document.getElementById('acilOtomatikMesaj').value || '-';
+                 } else {
+                     document.getElementById('modalAcilPreviewSection').classList.add('hidden');
+                 }
+             }
+             
+                           // Form submit event'ini engelle (URL'de form verileri gï¿½rï¿½nmesin)
+              const form = document.getElementById('isletmeKartForm');
+              form.addEventListener('submit', function(e) {
+                  e.preventDefault();
+                  return false;
+              });
+              
+              // Form kaydetme
+              const saveProfile = document.getElementById('saveProfile');
+              const successMessage = document.getElementById('successMessage');
+              const ilanPreviewModal = document.getElementById('ilanPreviewModal');
+              const confirmSaveBtn = document.getElementById('confirmSaveBtn');
+              const openIlanPreviewBtn = document.getElementById('openIlanPreviewBtn');
+              let isProcessing = false;
+
+              if (openIlanPreviewBtn) {
+                  openIlanPreviewBtn.addEventListener('click', function() {
+                      updateModalPreview();
+                          ilanPreviewModal.classList.remove('hidden');
+                      toggleBodyScroll(true);
+                  });
+              }
+
+              function submitIsletmeProfile(triggerBtn) {
+                  if (isProcessing) return;
+
+                  if (!form.checkValidity()) {
+                      form.reportValidity();
+                      return;
+                  }
+                  
+                  isProcessing = true;
+                  
+                  const disabledButtons = [];
+                  if (triggerBtn) {
+                      disabledButtons.push([triggerBtn, triggerBtn.textContent]);
+                      triggerBtn.disabled = true;
+                      triggerBtn.textContent = 'Kaydediliyor...';
+                  }
+                  if (kartEditorSaveBtn && kartEditorSaveBtn !== triggerBtn) {
+                      disabledButtons.push([kartEditorSaveBtn, kartEditorSaveBtn.textContent || 'Kaydet']);
+                      kartEditorSaveBtn.disabled = true;
+                      kartEditorSaveBtn.textContent = 'Kaydediliyor...';
+                  }
+                  if (confirmSaveBtn && confirmSaveBtn !== triggerBtn) {
+                      disabledButtons.push([confirmSaveBtn, confirmSaveBtn.textContent || 'Kaydet']);
+                  confirmSaveBtn.disabled = true;
+                  confirmSaveBtn.textContent = 'Kaydediliyor...';
+                  }
+
+                  function finalize() {
+                      disabledButtons.forEach(([btn, text]) => {
+                          btn.disabled = false;
+                          btn.textContent = text;
+                      });
+                      isProcessing = false;
+                  }
+
+                  try {
+                      const temporarilyEnabled = [];
+                      ['cep', 'sabitUcret'].forEach(id => {
+                          const el = document.getElementById(id);
+                          if (el && el.disabled) {
+                              temporarilyEnabled.push(el);
+                              el.disabled = false;
+                          }
+                      });
+                  
+                  const formData = new FormData(form);
+                  formData.append('isletmeId', isletmeId);
+                  
+                      const checkboxIds = ['esnaf', 'sigortali', 'sabitUcretCheck', 'partTime', 'fullTime', 'gunluk', 'yemek', 'yol', 'sigorta', 'ucretBilgisiPaylas', 'kuryeArayabilir', 'iletisimYetkiliTelefon', 'acilSaatlikCheck', 'acilKmCheck', 'acilPaketCheck', 'acilYemek', 'acilYol', 'acilSigorta'];
+                      checkboxIds.forEach(id => {
+                          const el = document.getElementById(id);
+                          if (el) {
+                              formData.set(id, el.checked ? '1' : '0');
+                          }
+                      });
+
+                      const acilKuryeCheckEl = document.getElementById('acilKuryeCheck');
+                      const acilKuryeAktif = acilKuryeCheckEl && acilKuryeCheckEl.checked;
+                      formData.set('acilKuryeCheck', acilKuryeAktif ? '1' : '0');
+
+                      const acilTextFields = ['acilSaatlikUcret', 'acilKmUcret', 'acilPaketUcret', 'acilBaslangicSaati', 'acilCikisSaati', 'acilOtomatikMesaj', 'acilEkBilgiler'];
+                      acilTextFields.forEach(id => {
+                          const el = document.getElementById(id);
+                          if (!el) return;
+                          if (acilKuryeAktif) {
+                              formData.set(id, el.value || '');
+                          } else {
+                              formData.set(id, '');
+                          }
+                      });
+
+                      const sabitInput = document.getElementById('sabitUcret');
+                      if (sabitInput) {
+                          const sabitCheck = document.getElementById('sabitUcretCheck');
+                          formData.set('sabitUcret', sabitCheck && sabitCheck.checked ? (sabitInput.value || '') : '');
+                      }
+                      const cepInput = document.getElementById('cep');
+                      if (cepInput) {
+                          formData.set('cep', cepInput.value || '');
+                      }
+
+                      temporarilyEnabled.forEach(el => {
+                          el.disabled = true;
+                      });
+
+                  console.log('Form Data:', Object.fromEntries(formData));
+                  
+                  ilanPreviewModal.classList.add('hidden');
+                      closeKartEditorModal();
+                      toggleBodyScroll(false);
+                  
+                  setTimeout(() => {
+                      successMessage.classList.remove('hidden');
+                      updateProfileDisplay();
+                          updateAllIsletmeSectionStatuses();
+                          finalize();
+                      setTimeout(() => {
+                          successMessage.classList.add('hidden');
+                      }, 3000);
+                      }, 200);
+                  } catch (error) {
+                      console.error('ï¿½ï¿½letme kartï¿½ kaydedilirken hata oluï¿½tu:', error);
+                      alert('Bir hata oluï¿½tu. Lï¿½tfen tekrar deneyin.');
+                      finalize();
+                  } finally {
+                      temporarilyEnabled.forEach(el => {
+                          el.disabled = true;
+                      });
+                  }
+              }
+
+              if (saveProfile) {
+                  saveProfile.addEventListener('click', function(e) {
+                      e.preventDefault();
+                      submitIsletmeProfile(kartEditorSaveBtn || saveProfile);
+                  });
+              }
+
+              if (kartEditorSaveBtn) {
+                  kartEditorSaveBtn.addEventListener('click', function() {
+                      submitIsletmeProfile(kartEditorSaveBtn);
+                  });
+              }
+
+              if (confirmSaveBtn) {
+                  confirmSaveBtn.addEventListener('click', function(e) {
+                      e.preventDefault();
+                      submitIsletmeProfile(confirmSaveBtn);
+                  });
+              }
+
+              function closeModal() {
+                  ilanPreviewModal.classList.add('hidden');
+                  isProcessing = false;
+                  if (!kartEditorModal || kartEditorModal.classList.contains('hidden')) {
+                      toggleBodyScroll(false);
+                  }
+              }
+              
+              ilanPreviewModal.addEventListener('click', function(e) {
+                  if (e.target === this) {
+                      closeModal();
+                  }
+              });
+              
+              const modalCloseBtn = document.getElementById('modalCloseBtn');
+              if (modalCloseBtn) {
+                  modalCloseBtn.addEventListener('click', closeModal);
+              }
+              
+              const modalCancelBtn = document.getElementById('modalCancelBtn');
+              if (modalCancelBtn) {
+                  modalCancelBtn.addEventListener('click', closeModal);
+              }
+            
+            // Profil gï¿½rï¿½nï¿½mï¿½nï¿½ gï¿½ncelle
+            function updateProfileDisplay() {
+                const isletmeAdi = document.getElementById('isletmeAdi').value || 'ï¿½ï¿½letme Adï¿½';
+                const isletmeTuru = document.getElementById('isletmeTuru').value || 'ï¿½ï¿½letme Tï¿½rï¿½';
+                const sehir = document.getElementById('sehir').value || '-';
+                
+                document.getElementById('businessName').textContent = isletmeAdi;
+                document.getElementById('businessType').textContent = isletmeTuru;
+                document.getElementById('profileSehir').textContent = sehir;
+                
+                // Avatar'ï¿½ gï¿½ncelle
+                updateBusinessAvatar();
+                
+                // ï¿½nizlemeyi gï¿½ncelle
+                updatePreview();
+                
+                // Acil mesajï¿½ gï¿½ncelle
+                if (acilKuryeCheck.checked) {
+                    updateAcilMesaj();
+                }
+            }
+            
+            // Form deï¿½iï¿½ikliklerini dinle (ï¿½ehir iï¿½in ï¿½zel event zaten var ama genel gï¿½ncelleme iï¿½in de tutuyoruz)
+            form.addEventListener('input', function(e) {
+                // Acil kurye alanlarï¿½ iï¿½in ï¿½zel iï¿½lem yapï¿½lmï¿½ï¿½
+                if (e.target.id.startsWith('acil')) {
+                    if (acilKuryeCheck.checked) {
+                        updateAcilMesaj();
+                        updatePreview();
+                    }
+                } else {
+                    updateProfileDisplay();
+                }
+            });
+            
+            form.addEventListener('change', function(e) {
+                // ï¿½ehir deï¿½iï¿½ikliï¿½i iï¿½in ï¿½zel iï¿½lem yapï¿½lmï¿½ï¿½
+                if (e.target.id === 'sehir') {
+                    return;
+                }
+                // Acil kurye alanlarï¿½ iï¿½in ï¿½zel iï¿½lem yapï¿½lmï¿½ï¿½
+                if (e.target.id.startsWith('acil')) {
+                    if (acilKuryeCheck.checked) {
+                        updateAcilMesaj();
+                        updatePreview();
+                    }
+                } else {
+                    updateProfileDisplay();
+                }
+            });
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            updatePreview();
+            updateAllIsletmeSectionStatuses();
+        });
+    </script>
+</body>
+</html>
+
+
+
