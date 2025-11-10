@@ -1,47 +1,11 @@
 // Kuryes.com - Main JavaScript File
-// Dynamic favicon, city selector, and price calculator
-
-// Dynamic Favicon - Color Cycling
-class DynamicFavicon {
-    constructor() {
-        this.colors = ['red', 'yellow', 'orange', 'turquoise'];
-        this.currentIndex = 0;
-        this.interval = null;
-        this.init();
-    }
-    
-    init() {
-        // Set initial favicon (red)
-        this.updateFavicon('red');
-        
-        // Start color cycling every 30 seconds
-        this.interval = setInterval(() => {
-            this.currentIndex = (this.currentIndex + 1) % this.colors.length;
-            this.updateFavicon(this.colors[this.currentIndex]);
-        }, 30000);
-    }
-    
-    updateFavicon(color) {
-        const favicon32 = document.querySelector('link[rel="icon"][sizes="32x32"]');
-        const favicon64 = document.querySelector('link[rel="icon"][sizes="64x64"]');
-        const appleTouchIcon = document.querySelector('link[rel="apple-touch-icon"]');
-        
-        if (favicon32) favicon32.href = `/favicon/favicon-32x32-${color}.png`;
-        if (favicon64) favicon64.href = `/favicon/favicon-64x64-${color}.png`;
-        if (appleTouchIcon) appleTouchIcon.href = `/favicon/apple-touch-icon-${color}.png`;
-    }
-    
-    destroy() {
-        if (this.interval) {
-            clearInterval(this.interval);
-        }
-    }
-}
+// City selector, and price calculator
 
 // City Selector
 class CitySelector {
     constructor() {
-        this.currentCity = localStorage.getItem('city') || 'Antalya';
+        // Test aşamasında localStorage kaldırıldı - her zaman Antalya varsayılan
+        this.currentCity = 'Antalya';
         this.init();
     }
     
@@ -85,8 +49,8 @@ class CitySelector {
     }
     
     setCity(city) {
+        // Test aşamasında localStorage kaldırıldı - sadece session'da tut
         this.currentCity = city;
-        localStorage.setItem('city', city);
         this.updateCityDisplay();
     }
     
@@ -292,7 +256,8 @@ class PWAManager {
     }
     
     init() {
-        if ('serviceWorker' in navigator) {
+        // Service Worker sadece HTTP/HTTPS protokolünde çalışır (file:// değil)
+        if ('serviceWorker' in navigator && (location.protocol === 'http:' || location.protocol === 'https:')) {
             this.registerServiceWorker();
             this.setupInstallPrompt();
         }
@@ -456,7 +421,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Initialize all components
-    window.dynamicFavicon = new DynamicFavicon();
     window.citySelector = new CitySelector();
     window.priceCalculator = new PriceCalculator();
     window.formHandler = new FormHandler();
@@ -468,7 +432,81 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Export for use in other scripts
 window.KuryesApp = {
-    DynamicFavicon,
+    CitySelector,
+    PriceCalculator,
+    FormHandler,
+    MobileMenuHandler,
+    Utils,
+    PWAManager
+};
+
+// Page-specific initialization
+function initializePageSpecificFeatures() {
+    const currentPage = window.location.pathname;
+    
+    // Freelance page specific features
+    if (currentPage.includes('freelance.html')) {
+        initializeFreelancePage();
+    }
+    
+    // Kazanç page specific features
+    if (currentPage.includes('kazanc.html')) {
+        initializeKazancPage();
+    }
+}
+
+// Freelance page initialization
+function initializeFreelancePage() {
+    const startInput = document.getElementById('baslangic');
+    const endInput = document.getElementById('teslim');
+    
+    if (startInput && endInput) {
+        const debouncedCalculate = Utils.debounce(() => {
+            if (startInput.value && endInput.value) {
+                const result = window.priceCalculator.calculateDemoPrice(startInput.value, endInput.value);
+                
+                // Update UI elements
+                const distanceEl = document.getElementById('mesafe');
+                const timeEl = document.getElementById('sure');
+                const priceEl = document.getElementById('ucret');
+                
+                if (distanceEl) distanceEl.textContent = result.distance.toFixed(1) + ' km';
+                if (timeEl) timeEl.textContent = Math.round(result.time) + ' dk';
+                if (priceEl) priceEl.textContent = Math.round(result.price) + ' TL';
+            }
+        }, 500);
+        
+        startInput.addEventListener('input', debouncedCalculate);
+        endInput.addEventListener('input', debouncedCalculate);
+    }
+}
+
+// Kazanç page initialization
+function initializeKazancPage() {
+    // This is handled by the inline script in kazanc.html
+    // But we can add additional functionality here if needed
+}
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize PWA Manager first (for service worker registration)
+    if ('serviceWorker' in navigator) {
+        pwaManager = new PWAManager();
+        window.pwaManager = pwaManager;
+    }
+    
+    // Initialize all components
+    window.citySelector = new CitySelector();
+    window.priceCalculator = new PriceCalculator();
+    window.formHandler = new FormHandler();
+    window.mobileMenuHandler = new MobileMenuHandler();
+    
+    // Initialize page-specific functionality
+    initializePageSpecificFeatures();
+});
+
+// Export for use in other scripts
+window.KuryesApp = {
     CitySelector,
     PriceCalculator,
     FormHandler,

@@ -11,12 +11,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #D32B2C;
+    background: #FF3131;
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #b82526;
+    background: #DC2828;
 }
 
 /* Glassmorphism effects */
@@ -97,12 +97,12 @@
 }
 
 .btn-primary:hover {
-    background-color: #b82526;
+    background-color: #DC2828;
 }
 
 /* Hover effect for inline bg-primary buttons */
 .bg-primary:hover {
-    background-color: #b82526 !important;
+    background-color: #DC2828 !important;
 }
 
 .btn-secondary {
@@ -148,7 +148,7 @@ input[type="range"]::-webkit-slider-track {
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    background: #D32B2C;
+    background: #FF3131;
     height: 20px;
     width: 20px;
     border-radius: 50%;
@@ -164,7 +164,7 @@ input[type="range"]::-moz-range-track {
 }
 
 input[type="range"]::-moz-range-thumb {
-    background: #D32B2C;
+    background: #FF3131;
     height: 20px;
     width: 20px;
     border-radius: 50%;
@@ -187,7 +187,7 @@ input[type="range"]::-moz-range-thumb {
     height: 20px;
     margin: -10px 0 0 -10px;
     border: 2px solid #f3f3f3;
-    border-top: 2px solid #D32B2C;
+    border-top: 2px solid #FF3131;
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -216,7 +216,7 @@ input[type="range"]::-moz-range-thumb {
 
 /* Custom gradients */
 .gradient-primary {
-    background: linear-gradient(135deg, #D32B2C 0%, #FF7A00 100%);
+    background: linear-gradient(135deg, #FF3131 0%, #FF7A00 100%);
 }
 
 .gradient-accent {
@@ -229,7 +229,7 @@ input[type="range"]::-moz-range-thumb {
 
 /* Text effects */
 .text-glow {
-    text-shadow: 0 0 10px rgba(211, 43, 44, 0.5);
+    text-shadow: 0 0 10px rgba(255, 49, 49, 0.5);
 }
 
 .text-glow-accent {
@@ -329,6 +329,27 @@ input[type="range"]::-moz-range-thumb {
         margin-bottom: 1rem;
     }
     
+    /* Mobile card container spacing */
+    #isletmeCardsContainer {
+        @apply space-y-3 sm:space-y-4; /* Tighter spacing on mobile */
+    }
+    
+    /* Mobile card content overflow */
+    .bg-white.rounded-xl.shadow-lg {
+        @apply overflow-hidden; /* Prevent content overflow */
+    }
+    
+    /* Mobile touch targets */
+    a[href^="tel:"],
+    a[href^="https://wa.me"],
+    a[href^="mailto:"] {
+        min-width: 44px;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
     /* Mobile text optimizations */
     h1 {
         @apply text-3xl leading-tight; /* Smaller h1 on mobile */
@@ -355,21 +376,24 @@ input[type="range"]::-moz-range-thumb {
         @apply px-4; /* Reduce horizontal padding on mobile */
     }
     
-    /* Mobile grid optimizations */
-    .grid-cols-2 {
+    /* Mobile grid optimizations - Only override when not using responsive prefixes */
+    .grid-cols-2:not(.sm\\:grid-cols-2):not(.md\\:grid-cols-2) {
         @apply grid-cols-1; /* Single column on mobile */
     }
     
-    .grid-cols-3 {
+    .grid-cols-3:not(.sm\\:grid-cols-3):not(.md\\:grid-cols-3) {
         @apply grid-cols-1; /* Single column on mobile */
     }
     
-    .lg\\:grid-cols-3 {
-        @apply grid-cols-1; /* Single column on mobile */
+    /* Ensure responsive grids work properly */
+    .sm\\:grid-cols-2 {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
     }
     
-    .md\\:grid-cols-2 {
-        @apply grid-cols-1; /* Single column on mobile */
+    @media (min-width: 640px) {
+        .sm\\:grid-cols-2 {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
     }
     
     /* Mobile table optimizations */
@@ -384,7 +408,22 @@ input[type="range"]::-moz-range-thumb {
     .modal, .modal-content {
         @apply w-full max-w-full; /* Full width modals */
         margin: 0;
-        border-radius: 0; /* Remove border radius for full-screen feel */
+    }
+    
+    /* Ensure modals are scrollable on mobile */
+    #detailModal,
+    #loginModal,
+    #profileModal {
+        align-items: flex-start;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    
+    /* Mobile modal content padding */
+    #detailModal .p-4,
+    #loginModal .p-4,
+    #profileModal .p-4 {
+        padding: 1rem;
     }
     
     /* Mobile image optimizations */
