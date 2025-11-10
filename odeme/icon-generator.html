@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>JetlaApp Icon Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 2rem;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+        canvas {
+            border: 1px solid #ddd;
+            margin: 1rem 0;
+        }
+        button {
+            background: #e53935;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 0.5rem;
+        }
+        button:hover {
+            background: #c62828;
+        }
+        h2 {
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-size: 1.25rem;
+        }
+        h2:first-of-type {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>JetlaApp Icon Generator</h1>
+        <p>Icon'ları oluşturmak için aşağıdaki butonlara tıklayın:</p>
+        
+        <h2>Favicon</h2>
+        <canvas id="icon16" width="16" height="16"></canvas>
+        <button onclick="downloadIcon(16)">16x16 İndir (Favicon)</button>
+        
+        <canvas id="icon32" width="32" height="32"></canvas>
+        <button onclick="downloadIcon(32)">32x32 İndir (Favicon)</button>
+        
+        <canvas id="icon64" width="64" height="64"></canvas>
+        <button onclick="downloadIcon(64)">64x64 İndir (Favicon)</button>
+        
+        <h2>PWA Icons</h2>
+        <canvas id="icon192" width="192" height="192"></canvas>
+        <button onclick="downloadIcon(192)">192x192 İndir</button>
+        
+        <canvas id="icon512" width="512" height="512"></canvas>
+        <button onclick="downloadIcon(512)">512x512 İndir</button>
+        
+        <script>
+            function drawIcon(canvas, size) {
+                const ctx = canvas.getContext('2d');
+                
+                // Kırmızı kare arka plan (#e53935)
+                ctx.fillStyle = '#e53935';
+                ctx.fillRect(0, 0, size, size);
+                
+                // Beyaz daire (ortada)
+                const centerX = size / 2;
+                const centerY = size / 2;
+                const circleRadius = size * 0.35; // Daire boyutu
+                
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, circleRadius, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Kırmızı J harfi (dairenin içinde, ortada)
+                ctx.fillStyle = '#e53935';
+                ctx.font = `bold ${size * 0.45}px -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('J', centerX, centerY);
+            }
+            
+            function downloadIcon(size) {
+                const canvas = document.getElementById(`icon${size}`);
+                const link = document.createElement('a');
+                
+                // Favicon dosya isimleri
+                let filename;
+                if (size === 16) {
+                    filename = 'favicon-16x16.png';
+                } else if (size === 32) {
+                    filename = 'favicon-32x32.png';
+                } else if (size === 64) {
+                    filename = 'favicon-64x64.png';
+                } else {
+                    filename = `icon-${size}.png`;
+                }
+                
+                link.download = filename;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            }
+            
+            // Sayfa yüklendiğinde icon'ları çiz
+            window.addEventListener('load', () => {
+                drawIcon(document.getElementById('icon16'), 16);
+                drawIcon(document.getElementById('icon32'), 32);
+                drawIcon(document.getElementById('icon64'), 64);
+                drawIcon(document.getElementById('icon192'), 192);
+                drawIcon(document.getElementById('icon512'), 512);
+            });
+        </script>
+    </div>
+</body>
+</html>
+
