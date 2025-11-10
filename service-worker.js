@@ -11,12 +11,14 @@ const STATIC_FILES = [
     '/index.html',
     '/kurye-tabani.html',
     '/freelance.html',
+    '/kurye-kayit.html',
+    '/kurye-kart.html',
+    '/isletme-kart.html',
     '/kurye-rehberi.html',
     '/ilanlar.html',
     '/forum.html',
     '/kazanc.html',
     '/isletme-kayit.html',
-    '/kullanici-kayit.html',
     '/css/styles.css',
     '/js/app.js',
     '/manifest.json',
@@ -182,15 +184,15 @@ async function handleOfflineFormSubmissions() {
 // Store form data for offline submission
 async function storeFormData(formData) {
     try {
-        // Store in localStorage for simplicity
-        const stored = JSON.parse(localStorage.getItem('offlineForms') || '[]');
+        // Test aşamasında localStorage kaldırıldı - sadece session'da tut
+        const stored = [];
         stored.push({
             id: Date.now(),
             url: formData.url,
             formData: formData.formData,
             timestamp: new Date().toISOString()
         });
-        localStorage.setItem('offlineForms', JSON.stringify(stored));
+        // Test aşamasında localStorage kaldırıldı
     } catch (error) {
         console.error('Service Worker: Error storing form data', error);
     }
@@ -199,7 +201,8 @@ async function storeFormData(formData) {
 // Get stored form data
 async function getStoredFormData() {
     try {
-        return JSON.parse(localStorage.getItem('offlineForms') || '[]');
+        // Test aşamasında localStorage kaldırıldı
+        return [];
     } catch (error) {
         console.error('Service Worker: Error getting stored form data', error);
         return [];
@@ -209,9 +212,9 @@ async function getStoredFormData() {
 // Remove stored form data
 async function removeStoredFormData(id) {
     try {
-        const stored = JSON.parse(localStorage.getItem('offlineForms') || '[]');
+        // Test aşamasında localStorage kaldırıldı
+        const stored = [];
         const filtered = stored.filter(item => item.id !== id);
-        localStorage.setItem('offlineForms', JSON.stringify(filtered));
     } catch (error) {
         console.error('Service Worker: Error removing stored form data', error);
     }

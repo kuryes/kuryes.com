@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İşletme Kayıt - Kuryes.com</title>
-    <meta name="description" content="İşletmeniz için kayıt formu. Kurye bulmak ve işletmenizi tanıtmak için kayıt olun.">
+    <title>Kurye Kayıt - Kuryes.com</title>
+    <meta name="description" content="Kurye olmak için kayıt formu. Tüm kurye platformlarına tek seferde başvuru.">
     
     <!-- OpenGraph -->
-    <meta property="og:title" content="İşletme Kayıt - Kuryes.com">
-    <meta property="og:description" content="İşletmeniz için kayıt formu. Kurye bulun, işletmenizi tanıtın.">
+    <meta property="og:title" content="Kurye Kayıt - Kuryes.com">
+    <meta property="og:description" content="Kurye olmak için kayıt formu. Platformlar açıldığında sana bilgi verelim.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kuryes.com/isletme-kayit.html">
+    <meta property="og:url" content="https://kuryes.com/kurye-kayit.html">
     <meta property="og:image" content="public/img/og-image.png">
     
     <!-- Favicon -->
@@ -106,13 +106,13 @@
     <section class="py-16 bg-gradient-to-br from-bg to-white">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="text-6xl mb-4">
-                <img src="public/img/kuryes.png" alt="İşletme" class="w-24 h-24 mx-auto object-contain">
+                <img src="public/img/kurye.png" alt="Kurye" class="w-24 h-24 mx-auto object-contain">
             </div>
             <h1 class="text-4xl md:text-5xl font-bold font-poppins text-text mb-6">
-                İşletme Kaydı
+                Kurye Kaydı
             </h1>
             <p class="text-xl text-muted mb-8">
-                İşletmeniz için kayıt olun. Kurye bulun, işletmenizi tanıtın, teslimatlarınızı kolaylaştırın.
+                Kurye olmak için kayıt olun. Profilinizi oluşturun, iş fırsatlarını keşfedin.
             </p>
         </div>
     </section>
@@ -121,29 +121,15 @@
     <section class="py-16">
         <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-white rounded-xl shadow-lg p-8">
-                <form id="isletmeForm" action="https://formspree.io/f/FORMSPREE_ID_ISLETME" method="POST" class="space-y-6">
+                <form id="kuryeForm" action="https://formspree.io/f/FORMSPREE_ID_KURYE" method="POST" class="space-y-6">
+                    <!-- Honeypot -->
                     <input type="text" name="_gotcha" style="display:none">
                     
-                    <!-- Lojistik Firması Checkbox -->
-                    <div class="mb-4">
-                        <label class="flex items-center">
-                            <input type="checkbox" id="lojistikFirmasi" name="lojistikFirmasi" class="mr-2 w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary">
-                            <span class="text-sm font-medium text-text">Lojistik Firması mısınız?</span>
-                        </label>
-                    </div>
-                    
-                    <!-- İşletme Adı / Lojistik Adı -->
+                    <!-- Ad Soyad -->
                     <div>
-                        <label for="isletmeAdi" id="isletmeAdiLabel" class="block text-sm font-medium text-text mb-2">İşletme Adı *</label>
-                        <input type="text" id="isletmeAdi" name="isletmeAdi" required placeholder="İşletmenizin adını yazın"
-                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-                    </div>
-                    
-                    <!-- Yetkili Kişi -->
-                    <div>
-                        <label for="yetkiliKisi" class="block text-sm font-medium text-text mb-2">Yetkili Kişi (Ad Soyad) *</label>
-                        <input type="text" id="yetkiliKisi" name="yetkiliKisi" required placeholder="Yetkili kişinin adı soyadı"
-                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <label for="adSoyad" class="block text-sm font-medium text-text mb-2">Ad Soyad *</label>
+                        <input type="text" id="adSoyad" name="adSoyad" required
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Adınızı ve soyadınızı yazın">
                     </div>
                     
                     <!-- Telefon -->
@@ -156,7 +142,7 @@
                     <!-- E-posta -->
                     <div>
                         <label for="email" class="block text-sm font-medium text-text mb-2">E-posta *</label>
-                        <input type="email" id="email" name="email" required placeholder="ornek@isletme.com"
+                        <input type="email" id="email" name="email" required placeholder="ornek@email.com"
                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
                     </div>
                     
@@ -175,34 +161,46 @@
                         </select>
                     </div>
                     
-                    <!-- İşletme Türü -->
+                    <!-- Ehliyet -->
                     <div>
-                        <label for="isletmeTuru" class="block text-sm font-medium text-text mb-2">İşletme Türü *</label>
-                        <select id="isletmeTuru" name="isletmeTuru" required
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed">
-                            <option value="">İşletme türü seçin</option>
-                            <option value="Restoran">Restoran</option>
-                            <option value="Kafe">Kafe</option>
-                            <option value="E-ticaret">E-ticaret</option>
-                            <option value="Market">Market</option>
-                            <option value="Eczane">Eczane</option>
-                            <option value="Lojistik">Lojistik</option>
-                            <option value="Diğer">Diğer</option>
+                        <label for="ehliyet" class="block text-sm font-medium text-text mb-2">Ehliyet *</label>
+                        <select id="ehliyet" name="ehliyet" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <option value="">Ehliyet sınıfı seçin</option>
+                            <option value="B">B</option>
+                            <option value="A">A</option>
+                            <option value="A1">A1</option>
+                            <option value="A2">A2</option>
                         </select>
+                    </div>
+                    
+                    <!-- Motor Var mı? -->
+                    <div>
+                        <label class="block text-sm font-medium text-text mb-3">Motorun var mı? *</label>
+                        <div class="flex gap-6">
+                            <label class="flex items-center">
+                                <input type="radio" name="motorVarmi" value="evet" required class="mr-2">
+                                <span class="text-sm">Evet</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="motorVarmi" value="hayir" required class="mr-2">
+                                <span class="text-sm">Hayır</span>
+                            </label>
+                        </div>
                     </div>
                     
                     <!-- Şifre -->
                     <div>
-                        <label for="isletmeSifre" class="block text-sm font-medium text-text mb-2">Şifre *</label>
-                        <input type="password" id="isletmeSifre" name="sifre" required minlength="8" placeholder="En az 8 karakter"
+                        <label for="kuryeSifre" class="block text-sm font-medium text-text mb-2">Şifre *</label>
+                        <input type="password" id="kuryeSifre" name="sifre" required minlength="8" placeholder="En az 8 karakter"
                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
                         <p class="text-xs text-muted mt-1">Şifreniz en az 8 karakter olmalıdır.</p>
                     </div>
                     
                     <!-- Şifre Tekrar -->
                     <div>
-                        <label for="isletmeSifreTekrar" class="block text-sm font-medium text-text mb-2">Şifre Tekrar *</label>
-                        <input type="password" id="isletmeSifreTekrar" required minlength="8" placeholder="Şifrenizi tekrar girin"
+                        <label for="kuryeSifreTekrar" class="block text-sm font-medium text-text mb-2">Şifre Tekrar *</label>
+                        <input type="password" id="kuryeSifreTekrar" name="sifreTekrar" required minlength="8" placeholder="Şifrenizi tekrar girin"
                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
                     </div>
                     
@@ -218,6 +216,7 @@
                         </label>
                     </div>
                     
+                    <!-- Submit Button -->
                     <button type="submit" class="w-full bg-primary text-white py-4 rounded-lg font-semibold hover:bg-red-600 transition-colors">Kayıt Ol</button>
                 </form>
             </div>
@@ -350,34 +349,10 @@
                 window.location.href = "isletme-kayit.html";
             });
 
-            // Lojistik Firması Checkbox İşlevselliği
-            const lojistikCheckbox = document.getElementById("lojistikFirmasi");
-            const isletmeAdiLabel = document.getElementById("isletmeAdiLabel");
-            const isletmeAdiInput = document.getElementById("isletmeAdi");
-            const isletmeTuruSelect = document.getElementById("isletmeTuru");
-
-            if (lojistikCheckbox && isletmeAdiLabel && isletmeAdiInput && isletmeTuruSelect) {
-                lojistikCheckbox.addEventListener("change", function() {
-                    if (this.checked) {
-                        // Checkbox işaretlendiğinde
-                        isletmeAdiLabel.textContent = "Lojistik Adı *";
-                        isletmeAdiInput.placeholder = "Lojistik firmanızın adını yazın";
-                        isletmeTuruSelect.value = "Lojistik";
-                        isletmeTuruSelect.disabled = true;
-                    } else {
-                        // Checkbox işareti kaldırıldığında
-                        isletmeAdiLabel.textContent = "İşletme Adı *";
-                        isletmeAdiInput.placeholder = "İşletmenizin adını yazın";
-                        isletmeTuruSelect.value = "";
-                        isletmeTuruSelect.disabled = false;
-                    }
-                });
-            }
-
-            const isletmeForm = document.getElementById("isletmeForm");
-            if (isletmeForm) {
-                const passwordInput = document.getElementById("isletmeSifre");
-                const confirmInput = document.getElementById("isletmeSifreTekrar");
+            const kuryeForm = document.getElementById("kuryeForm");
+            if (kuryeForm) {
+                const passwordInput = document.getElementById("kuryeSifre");
+                const confirmInput = document.getElementById("kuryeSifreTekrar");
 
                 const validatePasswords = () => {
                     if (!passwordInput || !confirmInput) return;
@@ -392,26 +367,26 @@
                 confirmInput?.addEventListener("input", validatePasswords);
                 
                 // Form submit handler - Preview mode için
-                isletmeForm.addEventListener("submit", function(e) {
+                kuryeForm.addEventListener("submit", function(e) {
                     e.preventDefault(); // Preview mode: Form submit'i engelle
                     
                     validatePasswords();
                     
                     // Form geçerliyse verileri kaydet
-                    if (isletmeForm.checkValidity()) {
-                        const formData = new FormData(isletmeForm);
+                    if (kuryeForm.checkValidity()) {
+                        const formData = new FormData(kuryeForm);
                         
                         // Preview mode: Verileri localStorage'a kaydet
                         if (typeof saveRegistrationData === 'function') {
-                            saveRegistrationData('isletme', formData);
+                            saveRegistrationData('kurye', formData);
                         }
                         
                         // Başarı mesajı göster
-                        alert('Kayıt başarılı! Giriş sayfasına yönlendiriliyorsunuz...');
+                        alert('Kayıt başarılı! Ana sayfaya yönlendiriliyorsunuz...');
                         
-                        // Giriş sayfasına yönlendir
+                        // Ana sayfaya yönlendir (kurye kartı sayfası oluşturulduğunda oraya yönlendirilecek)
                         setTimeout(() => {
-                            window.location.href = 'ilanlar.html?showCard=true';
+                            window.location.href = 'index.html';
                         }, 500);
                     }
                 });

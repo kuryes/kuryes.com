@@ -1,4 +1,4 @@
-# Kuryes.com - Türkiye'nin Şeffaf Kargosu
+# Kuryes.com - Kuryelerin Platformu
 
 A modern, static website for Turkey's transparent courier platform. Built with HTML, TailwindCSS, and Vanilla JavaScript.
 
