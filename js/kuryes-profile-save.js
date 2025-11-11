@@ -2,8 +2,7 @@
 // Profil kartındaki değişiklikleri Google Sheets'e kaydeder
 
 // Google Apps Script Web App URL'i (güncelleme için)
-// TODO: Yeni Google Apps Script URL'i eklenecek
-const PROFILE_UPDATE_URL = '';
+const PROFILE_UPDATE_URL = 'https://script.google.com/macros/s/AKfycbyP4rGbVDXG8-xli6QPv4YXaHgiCyCoCr5UvdJtYJyTi2RWfFx-rqUd-ZtTQiMsz6Hdww/exec';
 
 /**
  * Form verilerini FormData'dan düz JavaScript objesine çevirir

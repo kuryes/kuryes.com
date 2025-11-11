@@ -2,9 +2,8 @@
 // Handles form submissions for kurye and isletme registration forms
 
 // Google Apps Script Web App URL'leri
-// TODO: Yeni Google Apps Script URL'i eklenecek
-const KURYE_WEBHOOK_URL = '';
-const ISLETME_WEBHOOK_URL = '';
+const KURYE_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyP4rGbVDXG8-xli6QPv4YXaHgiCyCoCr5UvdJtYJyTi2RWfFx-rqUd-ZtTQiMsz6Hdww/exec';
+const ISLETME_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyP4rGbVDXG8-xli6QPv4YXaHgiCyCoCr5UvdJtYJyTi2RWfFx-rqUd-ZtTQiMsz6Hdww/exec';
 
 /**
  * Form verilerini FormData'dan düz JavaScript objesine çevirir
@@ -148,7 +147,24 @@ async function handleFormSubmit(event, form, webhookUrl, messageElementId) {
         formDataUrlEncoded.append('jsonData', jsonPayload);
         
         // Form tipini ekle (kurye veya isletme)
-        const formType = form.id === 'kurye-form' ? 'kurye' : 'isletme';
+        let formType = 'kurye';
+        if (form.id === 'kurye-form' || form.id === 'kuryeForm') {
+            formType = 'kurye';
+        } else if (form.id === 'isletme-form' || form.id === 'isletmeForm') {
+            // Lojistik kontrolü
+            const lojistikCheckbox = form.querySelector('#lojistikFirmasi');
+            if (lojistikCheckbox && lojistikCheckbox.checked) {
+                formType = 'lojistik';
+                formDataUrlEncoded.append('lojistikFirmasi', 'true');
+                // Lojistik kaydı için işletme türünü otomatik "Lojistik" olarak ayarla
+                formDataUrlEncoded.set('tur', 'Lojistik');
+                console.log('Lojistik kaydı: İşletme türü otomatik olarak "Lojistik" olarak ayarlandı');
+            } else {
+                formType = 'isletme';
+            }
+        }
+        
+        formDataUrlEncoded.append('action', 'register');
         formDataUrlEncoded.append('formType', formType);
         
         console.log('Google Apps Script\'e istek gönderiliyor...', webhookUrl, 'Form tipi:', formType);
@@ -216,24 +232,40 @@ async function handleFormSubmit(event, form, webhookUrl, messageElementId) {
                             input.disabled = true;
                         });
                         
-                        // ID varsa profil kartı sayfasına yönlendir
+                        // ID varsa başarı modalını göster ve yönlendir
                         if (responseData.success && responseData.id) {
                             const profileId = responseData.id;
-                            const formType = form.id === 'kurye-form' ? 'kurye' : 'isletme';
+                            
+                            // Form tipini tekrar belirle (lojistik kontrolü ile)
+                            // Önce daha önce belirlenen formType'ı kullan, yoksa tekrar kontrol et
+                            let finalFormType = formType; // handleFormSubmit içinde belirlenen formType'ı kullan
+                            
+                            // Eğer formType belirlenmemişse veya isletme formuysa lojistik kontrolü yap
+                            if (form.id === 'isletme-form' || form.id === 'isletmeForm') {
+                                const lojistikCheckbox = form.querySelector('#lojistikFirmasi');
+                                if (lojistikCheckbox && lojistikCheckbox.checked) {
+                                    finalFormType = 'lojistik';
+                                } else {
+                                    finalFormType = 'isletme';
+                                }
+                            } else if (form.id === 'kurye-form' || form.id === 'kuryeForm') {
+                                finalFormType = 'kurye';
+                            }
+                            
+                            console.log('=== KAYIT BAŞARILI ===');
+                            console.log('Form ID:', form.id);
+                            console.log('Form Tipi:', finalFormType);
+                            console.log('Profile ID:', profileId);
+                            console.log('Yönlendirme URL:', finalFormType === 'kurye' ? `kurye-kart.html?id=${profileId}` : (finalFormType === 'lojistik' ? `lojistik-kart.html?id=${profileId}` : `isletme-kart.html?id=${profileId}`));
                             
                             // LocalStorage'a kullanıcı bilgilerini kaydet
                             localStorage.setItem('kuryes_user_id', profileId);
-                            localStorage.setItem('kuryes_user_type', formType);
+                            localStorage.setItem('kuryes_user_type', finalFormType);
                             localStorage.setItem('kuryes_logged_in', 'true');
-                            console.log('Kullanıcı bilgileri localStorage\'a kaydedildi:', { id: profileId, type: formType });
+                            console.log('Kullanıcı bilgileri localStorage\'a kaydedildi:', { id: profileId, type: finalFormType });
                             
-                            setTimeout(() => {
-                                if (formType === 'kurye') {
-                                    window.location.href = `kurye-kart.html?id=${profileId}`;
-                                } else {
-                                    window.location.href = `isletme-kart.html?id=${profileId}`;
-                                }
-                            }, 1500); // 1.5 saniye sonra yönlendir
+                            // Başarı modalını göster
+                            showSuccessModal(profileId, finalFormType);
                         }
                     } catch (parseError) {
                         console.error(`${form.id} formu JSON parse hatası:`, parseError, 'Response:', responseText);
@@ -327,12 +359,72 @@ async function handleFormSubmit(event, form, webhookUrl, messageElementId) {
     }
 }
 
+/**
+ * Başarı modalını gösterir ve yönlendirme yapar
+ */
+function showSuccessModal(profileId, formType) {
+    // Modal elementlerini bul veya oluştur
+    let modal = document.getElementById('kayitModal');
+    if (!modal) {
+        // Modal yoksa oluştur
+        modal = document.createElement('div');
+        modal.id = 'kayitModal';
+        modal.className = 'fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4';
+        modal.innerHTML = `
+            <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 animate-fadeInUp">
+                <div class="text-center">
+                    <div id="kayitModalSpinner" class="inline-block w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4"></div>
+                    <h3 id="kayitModalTitle" class="text-2xl font-bold text-text mb-2">Kaydınız Yükleniyor</h3>
+                    <p id="kayitModalMessage" class="text-muted">Lütfen bekleyin...</p>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    }
+    
+    const spinner = document.getElementById('kayitModalSpinner');
+    const title = document.getElementById('kayitModalTitle');
+    const message = document.getElementById('kayitModalMessage');
+    
+    // Modal'ı göster
+    modal.classList.remove('hidden');
+    
+    // Başarı mesajını göster
+    setTimeout(() => {
+        if (spinner) spinner.classList.add('hidden');
+        if (title) title.textContent = 'Kayıt Başarılı! ✓';
+        if (title) title.className = 'text-2xl font-bold text-green-600 mb-2';
+        if (message) message.textContent = 'Profil kartınıza yönlendiriliyorsunuz...';
+        if (message) message.className = 'text-muted';
+        
+        // Yönlendirme
+        setTimeout(() => {
+            let redirectUrl = '';
+            console.log('Yönlendirme yapılıyor, formType:', formType, 'profileId:', profileId);
+            
+            if (formType === 'kurye') {
+                redirectUrl = `kurye-kart.html?id=${profileId}`;
+            } else if (formType === 'lojistik') {
+                redirectUrl = `lojistik-kart.html?id=${profileId}`;
+            } else if (formType === 'isletme') {
+                redirectUrl = `isletme-kart.html?id=${profileId}`;
+            } else {
+                // Fallback: varsayılan olarak işletme kartına yönlendir
+                redirectUrl = `isletme-kart.html?id=${profileId}`;
+            }
+            
+            console.log('Yönlendirme URL:', redirectUrl);
+            window.location.href = redirectUrl;
+        }, 2000);
+    }, 500);
+}
+
 // DOM yüklendiğinde form event'lerini bağla
 document.addEventListener('DOMContentLoaded', function() {
     console.log('kuryes-forms.js yüklendi');
     
-    // Kurye formu
-    const kuryeForm = document.getElementById('kurye-form');
+    // Kurye formu (hem kurye-form hem kuryeForm ID'leri için)
+    const kuryeForm = document.getElementById('kurye-form') || document.getElementById('kuryeForm');
     console.log('Kurye form bulundu:', kuryeForm);
     if (kuryeForm) {
         kuryeForm.addEventListener('submit', function(event) {
@@ -341,8 +433,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // İşletme formu
-    const isletmeForm = document.getElementById('isletme-form');
+    // İşletme formu (hem isletme-form hem isletmeForm ID'leri için)
+    const isletmeForm = document.getElementById('isletme-form') || document.getElementById('isletmeForm');
     console.log('İşletme form bulundu:', isletmeForm);
     if (isletmeForm) {
         isletmeForm.addEventListener('submit', function(event) {

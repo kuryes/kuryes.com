@@ -2,8 +2,7 @@
 // Handles login modal display and form submission
 
 // Google Apps Script Web App URL'i (login için)
-// TODO: Yeni Google Apps Script URL'i eklenecek
-const LOGIN_API_URL = '';
+const LOGIN_API_URL = 'https://script.google.com/macros/s/AKfycbyP4rGbVDXG8-xli6QPv4YXaHgiCyCoCr5UvdJtYJyTi2RWfFx-rqUd-ZtTQiMsz6Hdww/exec';
 
 /**
  * Login modal'ı açar
@@ -12,6 +11,11 @@ function openLoginModal() {
     const loginModal = document.getElementById('loginModal');
     if (loginModal) {
         loginModal.classList.remove('hidden');
+        loginModal.classList.add('flex');
+        
+        // Body scroll'u engelle
+        document.body.classList.add('overflow-hidden');
+        document.documentElement.classList.add('overflow-hidden');
         
         // Preview mode: Kayıt bilgilerini yükle
         if (typeof loadRegistrationDataToLogin === 'function') {
@@ -23,6 +27,8 @@ function openLoginModal() {
         if (emailInput) {
             setTimeout(() => emailInput.focus(), 100);
         }
+    } else {
+        console.error('Login modal bulunamadı!');
     }
 }
 
@@ -33,6 +39,12 @@ function closeLoginModal() {
     const loginModal = document.getElementById('loginModal');
     if (loginModal) {
         loginModal.classList.add('hidden');
+        loginModal.classList.remove('flex');
+        
+        // Body scroll'u aktif et
+        document.body.classList.remove('overflow-hidden');
+        document.documentElement.classList.remove('overflow-hidden');
+        
         // Form'u temizle
         const loginForm = document.getElementById('login-form');
         if (loginForm) {
@@ -86,48 +98,6 @@ function handleLoginModalSubmit(e) {
     submitBtn.disabled = true;
     submitBtn.textContent = 'Giriş yapılıyor...';
     
-    // Preview mode: DB yoksa localStorage'dan kontrol et
-    if (!LOGIN_API_URL) {
-        // Preview mode için localStorage'dan kontrol
-        const registrationDataStr = localStorage.getItem('kuryes_registration_data');
-        if (registrationDataStr) {
-            try {
-                const registrationData = JSON.parse(registrationDataStr);
-                
-                // E-posta ve şifre eşleşiyorsa giriş yap
-                if (registrationData.email === email && registrationData.sifre === sifre) {
-                    showLoginModalMessage('Giriş başarılı! Yönlendiriliyorsunuz...', 'success');
-                    submitBtn.textContent = 'Giriş Başarılı ✓';
-                    
-                    // Form input'larını disable et
-                    const inputs = loginForm.querySelectorAll('input');
-                    inputs.forEach(input => input.disabled = true);
-                    
-                    // Kullanıcı kartını göster
-                    setTimeout(() => {
-                        if (typeof showUserCard === 'function') {
-                            showUserCard(registrationData.userType, registrationData);
-                        }
-                        closeLoginModal();
-                    }, 1500);
-                    return;
-                } else {
-                    showLoginModalMessage('E-posta veya şifre hatalı. Kayıt formunda girdiğiniz bilgileri kullanın.', 'error');
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Giriş Yap';
-                    return;
-                }
-            } catch (error) {
-                console.error('Registration data parse error:', error);
-            }
-        }
-        
-        showLoginModalMessage('Giriş sistemi henüz yapılandırılmamış. Önce kayıt olun.', 'error');
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Giriş Yap';
-        return;
-    }
-    
     // Login request gönder
     const loginData = new URLSearchParams();
     loginData.append('action', 'login');
@@ -136,12 +106,16 @@ function handleLoginModalSubmit(e) {
     
     fetch(LOGIN_API_URL, {
         method: 'POST',
+        redirect: 'follow',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: loginData.toString()
     })
-    .then(response => response.text())
+    .then(response => {
+        // Response'u text olarak oku
+        return response.text();
+    })
     .then(text => {
         try {
             const data = JSON.parse(text);
@@ -155,6 +129,21 @@ function handleLoginModalSubmit(e) {
                 localStorage.setItem('kuryes_logged_in', 'true');
                 localStorage.setItem('kuryes_user_id', data.id);
                 localStorage.setItem('kuryes_user_type', data.userType);
+                localStorage.setItem('kuryes_user_avatar', data.avatar || '1');
+                
+                if (data.userType === 'kurye') {
+                    localStorage.setItem('kuryes_user_name', data.adSoyad || '');
+                } else {
+                    localStorage.setItem('kuryes_user_name', data.isletmeAdi || '');
+                    if (data.yetkiliAdi) {
+                        localStorage.setItem('kuryes_yetkili_adi', data.yetkiliAdi);
+                    }
+                }
+                
+                // Auth state'i güncelle
+                if (typeof window.KuryesAuth !== 'undefined' && window.KuryesAuth.updateHeaderForAuth) {
+                    window.KuryesAuth.updateHeaderForAuth();
+                }
                 
                 // Form input'larını disable et
                 const inputs = loginForm.querySelectorAll('input');
@@ -163,9 +152,11 @@ function handleLoginModalSubmit(e) {
                 // Profil sayfasına yönlendir
                 setTimeout(() => {
                     if (data.userType === 'kurye') {
-                        window.location.href = `kurye-kart.html?id=${data.id}`;
+                        window.location.href = `kurye-kart.html?id=${data.id}&type=kurye`;
                     } else if (data.userType === 'isletme') {
-                        window.location.href = `isletme-kart.html?id=${data.id}`;
+                        window.location.href = `isletme-kart.html?id=${data.id}&type=isletme`;
+                    } else if (data.userType === 'lojistik') {
+                        window.location.href = `lojistik-kart.html?id=${data.id}&type=lojistik`;
                     } else {
                         window.location.reload();
                     }
@@ -178,6 +169,7 @@ function handleLoginModalSubmit(e) {
             }
         } catch (error) {
             console.error('Login response parse error:', error);
+            console.error('Response text:', text);
             showLoginModalMessage('Bir hata oluştu. Lütfen tekrar deneyin.', 'error');
             submitBtn.disabled = false;
             submitBtn.textContent = 'Giriş Yap';
@@ -208,9 +200,11 @@ function showLoginModalMessage(message, type) {
     }
 }
 
-// Global fonksiyonlar (onclick için)
-window.openLoginModal = openLoginModal;
-window.closeLoginModal = closeLoginModal;
+// Global fonksiyonlar (onclick için) - Sayfa yüklenmeden önce de erişilebilir olmalı
+if (typeof window !== 'undefined') {
+    window.openLoginModal = openLoginModal;
+    window.closeLoginModal = closeLoginModal;
+}
 
 // DOM yüklendiğinde event listener'ları ekle
 document.addEventListener('DOMContentLoaded', function() {
@@ -248,24 +242,28 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Tüm "Giriş Yap" butonlarına event listener ekle
-    const loginButtonCandidates = Array.from(document.querySelectorAll('[data-login-btn], a[href="giris.html"], button'));
-    const loginButtons = loginButtonCandidates.filter(btn => {
-        if (btn.matches('[data-login-btn], a[href="giris.html"]')) {
-            return true;
-        }
-        return btn.tagName === 'BUTTON' && btn.textContent.trim().toLowerCase() === 'giriş yap';
-    });
+    const loginButtons = document.querySelectorAll('[data-login-btn]');
     
     loginButtons.forEach(btn => {
+        // Mevcut onclick'i kaldır
+        btn.removeAttribute('onclick');
+        
         btn.addEventListener('click', function(e) {
-            const isLoginLink = btn.matches('a[href="giris.html"]');
-            const isLoginDataBtn = btn.hasAttribute('data-login-btn');
-            const isLoginTextButton = btn.tagName === 'BUTTON' && btn.textContent.trim().toLowerCase() === 'giriş yap';
-            
-            if (isLoginLink || isLoginDataBtn || isLoginTextButton) {
-                e.preventDefault();
-                openLoginModal();
-            }
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Giriş Yap butonuna tıklandı');
+            openLoginModal();
+        });
+    });
+    
+    // Ayrıca onclick attribute'u olan butonları da kontrol et
+    const onclickButtons = document.querySelectorAll('button[onclick*="openLoginModal"]');
+    onclickButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('onclick ile Giriş Yap butonuna tıklandı');
+            openLoginModal();
         });
     });
 });
