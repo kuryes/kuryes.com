@@ -49,7 +49,6 @@
                 
                 <!-- Navigation -->
                 <nav class="hidden md:flex space-x-8">
-                    <a href="index.html" class="text-text hover:text-primary transition-colors">Ana Sayfa</a>
                     <a href="yakinda.html" class="text-text hover:text-primary transition-colors">Yakında</a>
                     <a href="kurye-rehberi.html" class="text-text hover:text-primary transition-colors">Kurye Rehberi</a>
                     <a href="ilanlar.html" class="text-text hover:text-primary transition-colors">İş İlanları</a>
@@ -57,10 +56,22 @@
                     <a href="kazanc.html" class="text-primary font-semibold">Kazanç</a>
                 </nav>
                 
-                <!-- Auth Buttons -->
+                <!-- Auth Buttons / User Menu -->
                 <div class="hidden md:flex items-center space-x-4">
-                    <button data-login-btn onclick="openLoginModal(); return false;" class="bg-accent text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors font-medium">Giriş Yap</button>
+                    <!-- Login Button (shown when not logged in) -->
+                    <button id="loginBtn" data-login-btn class="bg-accent text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors font-medium">Giriş Yap</button>
                     <button data-register-btn class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors font-medium">Kayıt Ol</button>
+                    
+                    <!-- User Menu (shown when logged in) -->
+                    <div id="userMenu" class="hidden flex items-center space-x-3">
+                        <a id="profileLink" href="#" class="flex items-center space-x-2 text-text hover:text-primary transition-colors">
+                            <div id="userAvatarDisplay" class="w-8 h-8 rounded-full bg-gray-200 overflow-hidden border-2 border-primary">
+                                <img src="public/img/avatars/1.png" alt="Avatar" class="w-full h-full object-cover">
+                            </div>
+                            <span id="userNameDisplay" class="font-medium">Kullanıcı</span>
+                        </a>
+                        <button id="logoutBtn" class="text-muted hover:text-text transition-colors font-medium">Çıkış Yap</button>
+                    </div>
                 </div>
                 
                 <!-- Mobile Menu Button -->
@@ -78,15 +89,26 @@
         <!-- Mobile Menu -->
         <div id="mobileMenu" class="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 hidden">
             <div class="px-4 py-2 space-y-2">
-                <a href="index.html" class="block py-2 text-text hover:text-primary">Ana Sayfa</a>
                 <a href="yakinda.html" class="block py-2 text-text hover:text-primary">Yakında</a>
                 <a href="kurye-rehberi.html" class="block py-2 text-text hover:text-primary">Kurye Rehberi</a>
                 <a href="ilanlar.html" class="block py-2 text-text hover:text-primary">İş İlanları</a>
                 <a href="forum.html" class="block py-2 text-text hover:text-primary">Forum</a>
                 <a href="kazanc.html" class="block py-2 text-primary font-semibold">Kazanç</a>
-                <div class="pt-2 border-t border-gray-200 space-y-2">
-                    <button data-login-btn onclick="openLoginModal(); return false;" class="block w-full text-left py-2 bg-accent text-white rounded-lg px-4 font-medium hover:bg-blue-600 transition-colors">Giriş Yap</button>
-                    <button data-register-btn class="block w-full text-center bg-primary text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors font-medium">Kayıt Ol</button>
+                <div class="pt-2 border-t border-gray-200">
+                    <!-- Login Button (shown when not logged in) -->
+                    <button id="loginBtnMobile" data-login-btn class="block w-full text-center py-2 bg-accent text-white rounded-lg px-4 font-medium hover:bg-blue-600 transition-colors">Giriş Yap</button>
+                    <button data-register-btn class="block w-full text-center bg-primary text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors mt-2">Kayıt Ol</button>
+                    
+                    <!-- User Menu Mobile (shown when logged in) -->
+                    <div id="userMenuMobile" class="hidden pt-2 space-y-2">
+                        <a id="profileLinkMobile" href="#" class="flex items-center space-x-2 py-2 text-text hover:text-primary">
+                            <div id="userAvatarDisplayMobile" class="w-8 h-8 rounded-full bg-gray-200 overflow-hidden border-2 border-primary">
+                                <img src="public/img/avatars/1.png" alt="Avatar" class="w-full h-full object-cover">
+                            </div>
+                            <span id="userNameDisplayMobile" class="font-medium">Kullanıcı</span>
+                        </a>
+                        <button id="logoutBtnMobile" class="block w-full text-center py-2 text-muted hover:text-text transition-colors font-medium">Çıkış Yap</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -144,10 +166,24 @@
     </section>
     
     <!-- Calculator Section -->
-    <section class="py-16">
+    <section class="py-16 relative" id="kazancSection">
+        <!-- Blur Overlay (shown when not logged in) -->
+        <div id="kazancBlurOverlay" class="absolute inset-0 bg-black/50 backdrop-blur-sm z-10 hidden flex items-center justify-center">
+            <div class="bg-white rounded-xl p-8 max-w-md mx-4 text-center shadow-2xl">
+                <div class="text-5xl mb-4">🔒</div>
+                <h3 class="text-2xl font-bold text-text mb-4">Kazanç Hesaplayıcıya Erişim</h3>
+                <p class="text-muted mb-6">
+                    Kazanç hesaplayıcıyı kullanmak için kayıt olmanız gerekiyor.
+                </p>
+                <button data-register-btn class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-red-600 transition-colors font-medium">
+                    Kayıt Ol
+                </button>
+            </div>
+        </div>
+        
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- KAZANÇ GENİŞLETME: Tek kart yapısı - Sol kazanç, sağ kesintiler -->
-            <div class="bg-white rounded-xl shadow-lg p-8">
+            <div class="bg-white rounded-xl shadow-lg p-8" id="kazancContent">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     
                     <!-- Sol: Earnings Calculator -->
@@ -288,7 +324,21 @@
                     </div>
                     
                     <!-- Sağ: Deduction Simulator -->
-                    <div>
+                    <div id="deductionSection" class="relative">
+                        <!-- Blur Overlay (shown when not logged in) -->
+                        <div id="deductionBlurOverlay" class="absolute inset-0 bg-black/50 backdrop-blur-sm z-10 hidden flex items-center justify-center rounded-lg">
+                            <div class="bg-white rounded-xl p-6 max-w-sm mx-4 text-center shadow-2xl">
+                                <div class="text-5xl mb-4">🔒</div>
+                                <h3 class="text-xl font-bold text-text mb-2">Üyelik Gerekli</h3>
+                                <p class="text-sm text-muted mb-4">
+                                    Kesinti hesaplayıcıyı kullanmak için kayıt olmanız gerekiyor.
+                                </p>
+                                <button data-register-btn class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-red-600 transition-colors font-medium text-sm">
+                                    Kayıt Ol
+                                </button>
+                            </div>
+                        </div>
+                        
                         <div class="flex items-center mb-6">
                             <div class="w-12 h-12 bg-support-orange rounded-lg flex items-center justify-center mr-4">
                                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -298,7 +348,7 @@
                             <h2 class="text-2xl font-bold text-text">Kesinti olursa ne olur?</h2>
                         </div>
                         
-                        <div class="space-y-6">
+                        <div id="deductionContent" class="space-y-6">
                             <!-- KAZANÇ GENİŞLETME: Sadece Vergi Kesintisi kaldı -->
                             <!-- Vergi Kesintisi -->
                             <div>
@@ -500,8 +550,49 @@
     
     <!-- Scripts -->
     <script src="js/app.js"></script>
+    <script src="js/kuryes-auth.js"></script>
     <script src="js/kuryes-login-modal.js"></script>
     <script src="js/kuryes-preview.js"></script>
+    <script>
+        // Kazanç sayfası blur kontrolü
+        document.addEventListener('DOMContentLoaded', function() {
+            const authState = window.KuryesAuth ? window.KuryesAuth.getAuthState() : { isLoggedIn: false };
+            const blurOverlay = document.getElementById('kazancBlurOverlay');
+            const kazancContent = document.getElementById('kazancContent');
+            
+            // Ana kazanç içeriği kontrolü (üye olmayanlar için)
+            if (!authState.isLoggedIn && blurOverlay) {
+                blurOverlay.classList.remove('hidden');
+                if (kazancContent) {
+                    kazancContent.style.filter = 'blur(5px)';
+                    kazancContent.style.pointerEvents = 'none';
+                }
+            } else {
+                if (blurOverlay) blurOverlay.classList.add('hidden');
+                if (kazancContent) {
+                    kazancContent.style.filter = 'none';
+                    kazancContent.style.pointerEvents = 'auto';
+                }
+            }
+            
+            // Kesinti bölümü kontrolü (sadece üyelere göster)
+            const deductionBlurOverlay = document.getElementById('deductionBlurOverlay');
+            const deductionContent = document.getElementById('deductionContent');
+            const deductionSection = document.getElementById('deductionSection');
+            
+            if (!authState.isLoggedIn && deductionBlurOverlay && deductionContent) {
+                deductionBlurOverlay.classList.remove('hidden');
+                deductionContent.style.filter = 'blur(5px)';
+                deductionContent.style.pointerEvents = 'none';
+            } else {
+                if (deductionBlurOverlay) deductionBlurOverlay.classList.add('hidden');
+                if (deductionContent) {
+                    deductionContent.style.filter = 'none';
+                    deductionContent.style.pointerEvents = 'auto';
+                }
+            }
+        });
+    </script>
     
         <!-- Login Modal -->
     <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">

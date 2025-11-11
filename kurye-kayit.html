@@ -47,7 +47,6 @@
                 
                 <!-- Navigation -->
                 <nav class="hidden md:flex space-x-8">
-                    <a href="index.html" class="text-text hover:text-primary transition-colors">Ana Sayfa</a>
                     <a href="yakinda.html" class="text-text hover:text-primary transition-colors">Yakında</a>
                     <a href="kurye-rehberi.html" class="text-text hover:text-primary transition-colors">Kurye Rehberi</a>
                     <a href="ilanlar.html" class="text-text hover:text-primary transition-colors">İş İlanları</a>
@@ -79,7 +78,6 @@
         <!-- Mobile Menu -->
         <div id="mobileMenu" class="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 hidden">
             <div class="px-4 py-2 space-y-2">
-                <a href="index.html" class="block py-2 text-text hover:text-primary">Ana Sayfa</a>
                 <a href="yakinda.html" class="block py-2 text-text hover:text-primary">Yakında</a>
                 <a href="kurye-rehberi.html" class="block py-2 text-text hover:text-primary">Kurye Rehberi</a>
                 <a href="ilanlar.html" class="block py-2 text-text hover:text-primary">İş İlanları</a>
@@ -106,7 +104,7 @@
     <section class="py-16 bg-gradient-to-br from-bg to-white">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="text-6xl mb-4">
-                <img src="public/img/kurye.png" alt="Kurye" class="w-24 h-24 mx-auto object-contain">
+                <img src="public/img/kurye.png" alt="Kurye" class="w-56 h-56 md:w-72 md:h-72 mx-auto object-contain animate-kurye-image">
             </div>
             <h1 class="text-4xl md:text-5xl font-bold font-poppins text-text mb-6">
                 Kurye Kaydı
@@ -121,14 +119,25 @@
     <section class="py-16">
         <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-white rounded-xl shadow-lg p-8">
-                <form id="kuryeForm" action="https://formspree.io/f/FORMSPREE_ID_KURYE" method="POST" class="space-y-6">
+                <!-- Kayıt Modal -->
+                <div id="kayitModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+                    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 animate-fadeInUp">
+                        <div class="text-center">
+                            <div id="kayitModalSpinner" class="inline-block w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4"></div>
+                            <h3 id="kayitModalTitle" class="text-2xl font-bold text-text mb-2">Kaydınız Yükleniyor</h3>
+                            <p id="kayitModalMessage" class="text-muted">Lütfen bekleyin...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <form id="kuryeForm" method="POST" class="space-y-6">
                     <!-- Honeypot -->
                     <input type="text" name="_gotcha" style="display:none">
                     
                     <!-- Ad Soyad -->
                     <div>
                         <label for="adSoyad" class="block text-sm font-medium text-text mb-2">Ad Soyad *</label>
-                        <input type="text" id="adSoyad" name="adSoyad" required
+                        <input type="text" id="adSoyad" name="adsoyad" required
                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Adınızı ve soyadınızı yazın">
                     </div>
                     
@@ -142,7 +151,7 @@
                     <!-- E-posta -->
                     <div>
                         <label for="email" class="block text-sm font-medium text-text mb-2">E-posta *</label>
-                        <input type="email" id="email" name="email" required placeholder="ornek@email.com"
+                        <input type="email" id="email" name="eposta" required placeholder="ornek@email.com"
                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
                     </div>
                     
@@ -179,11 +188,11 @@
                         <label class="block text-sm font-medium text-text mb-3">Motorun var mı? *</label>
                         <div class="flex gap-6">
                             <label class="flex items-center">
-                                <input type="radio" name="motorVarmi" value="evet" required class="mr-2">
+                                <input type="radio" name="motorunvarmi" value="evet" required class="mr-2">
                                 <span class="text-sm">Evet</span>
                             </label>
                             <label class="flex items-center">
-                                <input type="radio" name="motorVarmi" value="hayir" required class="mr-2">
+                                <input type="radio" name="motorunvarmi" value="hayir" required class="mr-2">
                                 <span class="text-sm">Hayır</span>
                             </label>
                         </div>
@@ -207,7 +216,7 @@
                     <!-- Onay Kutuları -->
                     <div class="space-y-4">
                         <label class="flex items-start">
-                            <input type="checkbox" name="veriPaylasimi" required class="mt-1 mr-3">
+                            <input type="checkbox" name="izin" required class="mt-1 mr-3">
                             <span class="text-sm text-text">Verilerimin yönlendirme amacıyla ilgili platformlarla paylaşılmasını onaylıyorum. *</span>
                         </label>
                         <label class="flex items-start">
@@ -295,6 +304,7 @@
     <script src="js/app.js"></script>
     <script src="js/kuryes-login-modal.js"></script>
     <script src="js/kuryes-preview.js"></script>
+    <script src="js/kuryes-forms.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const mobileMenuBtn = document.getElementById("mobileMenuBtn");
@@ -366,30 +376,7 @@
                 passwordInput?.addEventListener("input", validatePasswords);
                 confirmInput?.addEventListener("input", validatePasswords);
                 
-                // Form submit handler - Preview mode için
-                kuryeForm.addEventListener("submit", function(e) {
-                    e.preventDefault(); // Preview mode: Form submit'i engelle
-                    
-                    validatePasswords();
-                    
-                    // Form geçerliyse verileri kaydet
-                    if (kuryeForm.checkValidity()) {
-                        const formData = new FormData(kuryeForm);
-                        
-                        // Preview mode: Verileri localStorage'a kaydet
-                        if (typeof saveRegistrationData === 'function') {
-                            saveRegistrationData('kurye', formData);
-                        }
-                        
-                        // Başarı mesajı göster
-                        alert('Kayıt başarılı! Ana sayfaya yönlendiriliyorsunuz...');
-                        
-                        // Ana sayfaya yönlendir (kurye kartı sayfası oluşturulduğunda oraya yönlendirilecek)
-                        setTimeout(() => {
-                            window.location.href = 'index.html';
-                        }, 500);
-                    }
-                });
+                // Şifre doğrulaması için event listener'lar zaten var
             }
         });
     </script>

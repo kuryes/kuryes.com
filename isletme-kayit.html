@@ -47,7 +47,6 @@
                 
                 <!-- Navigation -->
                 <nav class="hidden md:flex space-x-8">
-                    <a href="index.html" class="text-text hover:text-primary transition-colors">Ana Sayfa</a>
                     <a href="yakinda.html" class="text-text hover:text-primary transition-colors">Yakında</a>
                     <a href="kurye-rehberi.html" class="text-text hover:text-primary transition-colors">Kurye Rehberi</a>
                     <a href="ilanlar.html" class="text-text hover:text-primary transition-colors">İş İlanları</a>
@@ -79,7 +78,6 @@
         <!-- Mobile Menu -->
         <div id="mobileMenu" class="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 hidden">
             <div class="px-4 py-2 space-y-2">
-                <a href="index.html" class="block py-2 text-text hover:text-primary">Ana Sayfa</a>
                 <a href="yakinda.html" class="block py-2 text-text hover:text-primary">Yakında</a>
                 <a href="kurye-rehberi.html" class="block py-2 text-text hover:text-primary">Kurye Rehberi</a>
                 <a href="ilanlar.html" class="block py-2 text-text hover:text-primary">İş İlanları</a>
@@ -103,15 +101,15 @@
     </div>
     
     <!-- Hero Section -->
-    <section class="py-16 bg-gradient-to-br from-bg to-white">
+    <section class="py-16 bg-gradient-to-br from-bg to-white" id="heroSection">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="text-6xl mb-4">
-                <img src="public/img/kuryes.png" alt="İşletme" class="w-24 h-24 mx-auto object-contain">
+                <img id="heroImage" src="public/img/isletme.png" alt="İşletme" class="w-56 h-56 md:w-72 md:h-72 mx-auto object-contain animate-kurye-image">
             </div>
-            <h1 class="text-4xl md:text-5xl font-bold font-poppins text-text mb-6">
+            <h1 id="heroTitle" class="text-4xl md:text-5xl font-bold font-poppins text-text mb-6">
                 İşletme Kaydı
             </h1>
-            <p class="text-xl text-muted mb-8">
+            <p id="heroDescription" class="text-xl text-muted mb-8">
                 İşletmeniz için kayıt olun. Kurye bulun, işletmenizi tanıtın, teslimatlarınızı kolaylaştırın.
             </p>
         </div>
@@ -121,7 +119,18 @@
     <section class="py-16">
         <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-white rounded-xl shadow-lg p-8">
-                <form id="isletmeForm" action="https://formspree.io/f/FORMSPREE_ID_ISLETME" method="POST" class="space-y-6">
+                <!-- Kayıt Modal -->
+                <div id="kayitModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+                    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 animate-fadeInUp">
+                        <div class="text-center">
+                            <div id="kayitModalSpinner" class="inline-block w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4"></div>
+                            <h3 id="kayitModalTitle" class="text-2xl font-bold text-text mb-2">Kaydınız Yükleniyor</h3>
+                            <p id="kayitModalMessage" class="text-muted">Lütfen bekleyin...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <form id="isletmeForm" method="POST" class="space-y-6">
                     <input type="text" name="_gotcha" style="display:none">
                     
                     <!-- Lojistik Firması Checkbox -->
@@ -135,28 +144,28 @@
                     <!-- İşletme Adı / Lojistik Adı -->
                     <div>
                         <label for="isletmeAdi" id="isletmeAdiLabel" class="block text-sm font-medium text-text mb-2">İşletme Adı *</label>
-                        <input type="text" id="isletmeAdi" name="isletmeAdi" required placeholder="İşletmenizin adını yazın"
+                        <input type="text" id="isletmeAdi" name="isletmeadi" required placeholder="İşletmenizin adını yazın"
                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
                     </div>
                     
                     <!-- Yetkili Kişi -->
                     <div>
                         <label for="yetkiliKisi" class="block text-sm font-medium text-text mb-2">Yetkili Kişi (Ad Soyad) *</label>
-                        <input type="text" id="yetkiliKisi" name="yetkiliKisi" required placeholder="Yetkili kişinin adı soyadı"
+                        <input type="text" id="yetkiliKisi" name="yetkiliadsoyad" required placeholder="Yetkili kişinin adı soyadı"
                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
                     </div>
                     
                     <!-- Telefon -->
                     <div>
                         <label for="telefon" class="block text-sm font-medium text-text mb-2">Telefon *</label>
-                        <input type="tel" id="telefon" name="telefon" required placeholder="5XX XXX XX XX"
+                        <input type="tel" id="telefon" name="tel" required placeholder="5XX XXX XX XX"
                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
                     </div>
                     
                     <!-- E-posta -->
                     <div>
                         <label for="email" class="block text-sm font-medium text-text mb-2">E-posta *</label>
-                        <input type="email" id="email" name="email" required placeholder="ornek@isletme.com"
+                        <input type="email" id="email" name="eposta" required placeholder="ornek@isletme.com"
                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
                     </div>
                     
@@ -178,7 +187,7 @@
                     <!-- İşletme Türü -->
                     <div>
                         <label for="isletmeTuru" class="block text-sm font-medium text-text mb-2">İşletme Türü *</label>
-                        <select id="isletmeTuru" name="isletmeTuru" required
+                        <select id="isletmeTuru" name="tur" required
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed">
                             <option value="">İşletme türü seçin</option>
                             <option value="Restoran">Restoran</option>
@@ -209,7 +218,7 @@
                     <!-- Onay Kutuları -->
                     <div class="space-y-4">
                         <label class="flex items-start">
-                            <input type="checkbox" name="veriPaylasimi" required class="mt-1 mr-3">
+                            <input type="checkbox" name="izin" required class="mt-1 mr-3">
                             <span class="text-sm text-text">Verilerimin yönlendirme amacıyla ilgili platformlarla paylaşılmasını onaylıyorum. *</span>
                         </label>
                         <label class="flex items-start">
@@ -296,6 +305,7 @@
     <script src="js/app.js"></script>
     <script src="js/kuryes-login-modal.js"></script>
     <script src="js/kuryes-preview.js"></script>
+    <script src="js/kuryes-forms.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const mobileMenuBtn = document.getElementById("mobileMenuBtn");
@@ -355,22 +365,100 @@
             const isletmeAdiLabel = document.getElementById("isletmeAdiLabel");
             const isletmeAdiInput = document.getElementById("isletmeAdi");
             const isletmeTuruSelect = document.getElementById("isletmeTuru");
+            const emailInput = document.getElementById("email");
+            const heroImage = document.getElementById("heroImage");
+            const heroSection = document.getElementById("heroSection");
+            const heroTitle = document.getElementById("heroTitle");
+            const heroDescription = document.getElementById("heroDescription");
 
             if (lojistikCheckbox && isletmeAdiLabel && isletmeAdiInput && isletmeTuruSelect) {
-                lojistikCheckbox.addEventListener("change", function() {
-                    if (this.checked) {
-                        // Checkbox işaretlendiğinde
-                        isletmeAdiLabel.textContent = "Lojistik Adı *";
-                        isletmeAdiInput.placeholder = "Lojistik firmanızın adını yazın";
-                        isletmeTuruSelect.value = "Lojistik";
-                        isletmeTuruSelect.disabled = true;
+                // Hero içeriğini güncelle
+                function updateHeroContent() {
+                    if (lojistikCheckbox.checked) {
+                        // Lojistik modu
+                        if (heroImage) {
+                            heroImage.src = 'public/img/lojistik.png';
+                            heroImage.alt = 'Lojistik';
+                        }
+                        if (heroTitle) {
+                            heroTitle.textContent = 'Lojistik Kaydı';
+                        }
+                        if (heroDescription) {
+                            heroDescription.textContent = 'Lojistik ekibiniz için kayıt olun. Kurye bulun, şartlarınızı belirtin, ekibinizi kolayca oluşturun.';
+                        }
                     } else {
-                        // Checkbox işareti kaldırıldığında
-                        isletmeAdiLabel.textContent = "İşletme Adı *";
-                        isletmeAdiInput.placeholder = "İşletmenizin adını yazın";
-                        isletmeTuruSelect.value = "";
-                        isletmeTuruSelect.disabled = false;
+                        // İşletme modu
+                        if (heroImage) {
+                            heroImage.src = 'public/img/isletme.png';
+                            heroImage.alt = 'İşletme';
+                        }
+                        if (heroTitle) {
+                            heroTitle.textContent = 'İşletme Kaydı';
+                        }
+                        if (heroDescription) {
+                            heroDescription.textContent = 'İşletmeniz için kayıt olun. Kurye bulun, işletmenizi tanıtın, teslimatlarınızı kolaylaştırın.';
+                        }
                     }
+                    
+                    // Resmi yeniden göster (animasyon için)
+                    if (heroImage) {
+                        heroImage.classList.remove('animate-kurye-image');
+                        void heroImage.offsetWidth; // Reflow tetikle
+                        heroImage.classList.add('animate-kurye-image');
+                    }
+                }
+                
+                // İlk yüklemede kontrol et
+                updateHeroContent();
+                
+                // İlk yüklemede e-posta placeholder'ını ayarla
+                if (emailInput) {
+                    if (lojistikCheckbox.checked) {
+                        emailInput.placeholder = "ornek@lojistik.com";
+                    } else {
+                        emailInput.placeholder = "ornek@isletme.com";
+                    }
+                }
+                
+                lojistikCheckbox.addEventListener("change", function() {
+                    // Sayfa yenileme efekti
+                    document.body.style.transition = 'opacity 0.3s ease-out';
+                    document.body.style.opacity = '0.7';
+                    
+                    setTimeout(() => {
+                        if (this.checked) {
+                            // Checkbox işaretlendiğinde
+                            isletmeAdiLabel.textContent = "Lojistik Adı *";
+                            isletmeAdiInput.placeholder = "Lojistik firmanızın adını yazın";
+                            isletmeTuruSelect.value = "Lojistik";
+                            isletmeTuruSelect.disabled = true;
+                            if (emailInput) {
+                                emailInput.placeholder = "ornek@lojistik.com";
+                            }
+                        } else {
+                            // Checkbox işareti kaldırıldığında
+                            isletmeAdiLabel.textContent = "İşletme Adı *";
+                            isletmeAdiInput.placeholder = "İşletmenizin adını yazın";
+                            isletmeTuruSelect.value = "";
+                            isletmeTuruSelect.disabled = false;
+                            if (emailInput) {
+                                emailInput.placeholder = "ornek@isletme.com";
+                            }
+                        }
+                        
+                        // Hero içeriğini güncelle (resim, başlık, açıklama)
+                        updateHeroContent();
+                        
+                        // Sayfa başına scroll
+                        if (heroSection) {
+                            heroSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                        
+                        // Sayfa yenileme efekti geri al
+                        setTimeout(() => {
+                            document.body.style.opacity = '1';
+                        }, 100);
+                    }, 150);
                 });
             }
 
@@ -391,30 +479,8 @@
                 passwordInput?.addEventListener("input", validatePasswords);
                 confirmInput?.addEventListener("input", validatePasswords);
                 
-                // Form submit handler - Preview mode için
-                isletmeForm.addEventListener("submit", function(e) {
-                    e.preventDefault(); // Preview mode: Form submit'i engelle
-                    
-                    validatePasswords();
-                    
-                    // Form geçerliyse verileri kaydet
-                    if (isletmeForm.checkValidity()) {
-                        const formData = new FormData(isletmeForm);
-                        
-                        // Preview mode: Verileri localStorage'a kaydet
-                        if (typeof saveRegistrationData === 'function') {
-                            saveRegistrationData('isletme', formData);
-                        }
-                        
-                        // Başarı mesajı göster
-                        alert('Kayıt başarılı! Giriş sayfasına yönlendiriliyorsunuz...');
-                        
-                        // Giriş sayfasına yönlendir
-                        setTimeout(() => {
-                            window.location.href = 'ilanlar.html?showCard=true';
-                        }, 500);
-                    }
-                });
+                // NOT: Form submit handler kuryes-forms.js tarafından handle ediliyor
+                // Eski preview mode handler'ı kaldırıldı - artık kuryes-forms.js kullanılıyor
             }
         });
     </script>

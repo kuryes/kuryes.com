@@ -57,7 +57,6 @@
                 
                 <!-- Navigation -->
                 <nav class="hidden md:flex space-x-8">
-                    <a href="index.html" class="text-text hover:text-primary transition-colors">Ana Sayfa</a>
                     <a href="yakinda.html" class="text-text hover:text-primary transition-colors">Yakında</a>
                     <a href="kurye-rehberi.html" class="text-text hover:text-primary transition-colors">Kurye Rehberi</a>
                     <a href="ilanlar.html" class="text-text hover:text-primary transition-colors">İş İlanları</a>
@@ -84,7 +83,6 @@
             <!-- Mobile Menu -->
             <div id="mobileMenu" class="hidden md:hidden pb-4">
                 <nav class="flex flex-col space-y-2">
-                    <a href="index.html" class="text-text hover:text-primary transition-colors py-2">Ana Sayfa</a>
                     <a href="yakinda.html" class="text-text hover:text-primary transition-colors py-2">Yakında</a>
                     <a href="kurye-rehberi.html" class="text-text hover:text-primary transition-colors py-2">Kurye Rehberi</a>
                     <a href="ilanlar.html" class="text-text hover:text-primary transition-colors py-2">İş İlanları</a>
@@ -821,7 +819,7 @@
     </div>
     
     <!-- Kart Düzenleme Modal -->
-    <div id="kartEditorModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+    <div id="kartEditorModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden flex flex-col animate-fadeInUp">
             <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
                 <h2 class="text-2xl font-bold text-text">İşletme Kartı Ayarları</h2>
@@ -849,26 +847,67 @@
     
     <!-- Scripts -->
     <script src="js/app.js"></script>
+    <script src="js/kuryes-auth.js"></script>
     <script src="js/kuryes-login-modal.js"></script>
+    <script src="js/kuryes-profile.js"></script>
     <script>
-                 document.addEventListener('DOMContentLoaded', function() {
-             // URL'den ID'yi al (?id=1 formatı için)
+                 document.addEventListener('DOMContentLoaded', async function() {
+             // URL'den ID ve type'ı al
              const urlParams = new URLSearchParams(window.location.search);
-             const isletmeId = urlParams.get('id') || '1';
+             const isletmeId = urlParams.get('id');
+             const type = urlParams.get('type') || 'isletme';
              
-             // URL'de sadece id parametresi kalmalı, diğer parametreleri temizle
+             if (!isletmeId) {
+                 console.warn('İşletme ID bulunamadı');
+                 document.getElementById('isletmeId').textContent = '#ID YOK';
+                 return;
+             }
+             
+             // URL'de sadece id ve type parametreleri kalmalı
              const currentUrl = new URL(window.location);
              const idParam = currentUrl.searchParams.get('id');
+             const typeParam = currentUrl.searchParams.get('type') || 'isletme';
              if (idParam) {
-                 // URL'yi sadece id ile güncelle
-                 const cleanUrl = `${currentUrl.pathname}?id=${idParam}`;
-                 if (window.location.search !== `?id=${idParam}`) {
+                 const cleanUrl = `${currentUrl.pathname}?id=${idParam}&type=${typeParam}`;
+                 if (window.location.search !== `?id=${idParam}&type=${typeParam}`) {
                      window.history.replaceState({}, '', cleanUrl);
                  }
              }
              
-             // İşletme ID'yi göster
+             // İşletme ID'yi göster (geçici)
              document.getElementById('isletmeId').textContent = '#' + isletmeId;
+             
+             // Google Sheets'ten veri çek
+             if (typeof getRecordById === 'function') {
+                 try {
+                     const result = await getRecordById(isletmeId, type);
+                     
+                     if (result.success && result.data) {
+                         const isletmeData = result.data;
+                         
+                         // Sayfa elementlerini doldur
+                         if (typeof populatePageFromRecord === 'function') {
+                             populatePageFromRecord(isletmeData, type);
+                         }
+                         
+                         // Form alanlarını doldur (eğer form varsa)
+                         const form = document.querySelector('form');
+                         if (form && typeof populateFormFromRecord === 'function') {
+                             populateFormFromRecord(form, isletmeData);
+                         }
+                         
+                         // LocalStorage'a kaydet
+                         localStorage.setItem('isletme_id', isletmeId);
+                         localStorage.setItem('isletme_data', JSON.stringify(isletmeData));
+                         
+                         console.log('İşletme verileri yüklendi:', isletmeData);
+                     } else {
+                         console.error('İşletme verisi bulunamadı:', result.error);
+                     }
+                 } catch (error) {
+                     console.error('Veri yükleme hatası:', error);
+                 }
+             }
             
             const kartEditorModal = document.getElementById('kartEditorModal');
             const kartEditorModalBody = document.getElementById('kartEditorModalBody');
@@ -879,6 +918,14 @@
             const kartEditorSaveBtn = document.getElementById('kartEditorSaveBtn');
             let kartEditorForm = null;
             let kartAccordionInitialized = false;
+            
+            // Debug: Element kontrolü
+            console.log('Modal elements:', {
+                kartEditorModal: !!kartEditorModal,
+                openKartEditorBtn: !!openKartEditorBtn,
+                kartEditorFormContainer: !!kartEditorFormContainer,
+                kartEditorModalBody: !!kartEditorModalBody
+            });
             
             if (kartEditorFormContainer && kartEditorModalBody) {
                 const formElement = kartEditorFormContainer.querySelector('#isletmeKartForm');
@@ -1136,7 +1183,12 @@
             }
             
             function openKartEditorModal() {
-                if (!kartEditorModal) return;
+                console.log('openKartEditorModal called');
+                if (!kartEditorModal) {
+                    console.error('kartEditorModal not found!');
+                    return;
+                }
+                console.log('Opening modal...');
                 kartEditorModal.classList.remove('hidden');
                 kartEditorModal.classList.add('flex');
                 toggleBodyScroll(true);
@@ -1152,7 +1204,15 @@
             }
             
             if (openKartEditorBtn) {
-                openKartEditorBtn.addEventListener('click', openKartEditorModal);
+                console.log('Adding click listener to openKartEditorBtn');
+                openKartEditorBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('openKartEditorBtn clicked');
+                    openKartEditorModal();
+                });
+            } else {
+                console.error('openKartEditorBtn not found!');
             }
             
             if (kartEditorCloseBtn) {
@@ -1972,19 +2032,94 @@
 
                   console.log('Form Data:', Object.fromEntries(formData));
                   
-                  ilanPreviewModal.classList.add('hidden');
-                      closeKartEditorModal();
-                      toggleBodyScroll(false);
+                  // Google Sheets'e gönder - Tüm form verilerini topla
+                  const formDataObj = {};
+                  for (let [key, value] of formData.entries()) {
+                      // Aynı key için array oluştur
+                      if (formDataObj[key]) {
+                          if (Array.isArray(formDataObj[key])) {
+                              formDataObj[key].push(value);
+                          } else {
+                              formDataObj[key] = [formDataObj[key], value];
+                          }
+                      } else {
+                          formDataObj[key] = value;
+                      }
+                  }
                   
-                  setTimeout(() => {
-                      successMessage.classList.remove('hidden');
-                      updateProfileDisplay();
-                          updateAllIsletmeSectionStatuses();
+                  // JSON payload hazırla
+                  const jsonPayload = JSON.stringify(formDataObj);
+                  
+                  // Form tipini belirle (lojistik mi işletme mi?)
+                  const urlParams = new URLSearchParams(window.location.search);
+                  const type = urlParams.get('type') || 'isletme';
+                  const formType = type === 'lojistik' ? 'lojistik' : 'isletme';
+                  
+                  // Form-urlencoded olarak hazırla
+                  const formDataUrlEncoded = new URLSearchParams();
+                  formDataUrlEncoded.append('action', 'update');
+                  formDataUrlEncoded.append('id', isletmeId);
+                  formDataUrlEncoded.append('formType', formType);
+                  formDataUrlEncoded.append('jsonData', jsonPayload);
+                  
+                  // Tüm form verilerini de ekle
+                  Object.keys(formDataObj).forEach(key => {
+                      const value = Array.isArray(formDataObj[key]) 
+                          ? formDataObj[key].join(',') 
+                          : formDataObj[key];
+                      formDataUrlEncoded.append(key, value);
+                  });
+                  
+                  console.log('Google Sheets\'e gönderiliyor...', {
+                      id: isletmeId,
+                      formType: formType,
+                      dataCount: Object.keys(formDataObj).length
+                  });
+                  
+                  // Google Apps Script'e gönder
+                  const PROFILE_UPDATE_URL = 'https://script.google.com/macros/s/AKfycbyP4rGbVDXG8-xli6QPv4YXaHgiCyCoCr5UvdJtYJyTi2RWfFx-rqUd-ZtTQiMsz6Hdww/exec';
+                  
+                  fetch(PROFILE_UPDATE_URL, {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/x-www-form-urlencoded'
+                      },
+                      body: formDataUrlEncoded.toString()
+                  })
+                  .then(response => response.text())
+                  .then(text => {
+                      console.log('Google Sheets response:', text);
+                      let result;
+                      try {
+                          result = JSON.parse(text);
+                      } catch (e) {
+                          result = { success: true, message: text };
+                      }
+                      
+                      if (result.success) {
+                          ilanPreviewModal.classList.add('hidden');
+                          closeKartEditorModal();
+                          toggleBodyScroll(false);
+                          
+                          setTimeout(() => {
+                              successMessage.classList.remove('hidden');
+                              updateProfileDisplay();
+                              updateAllIsletmeSectionStatuses();
+                              finalize();
+                              setTimeout(() => {
+                                  successMessage.classList.add('hidden');
+                              }, 3000);
+                          }, 200);
+                      } else {
+                          alert('Kayıt sırasında bir hata oluştu: ' + (result.error || 'Bilinmeyen hata'));
                           finalize();
-                      setTimeout(() => {
-                          successMessage.classList.add('hidden');
-                      }, 3000);
-                      }, 200);
+                      }
+                  })
+                  .catch(error => {
+                      console.error('Profil kaydedilirken hata oluştu:', error);
+                      alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+                      finalize();
+                  });
                   } catch (error) {
                       console.error('İşletme kartı kaydedilirken hata oluştu:', error);
                       alert('Bir hata oluştu. Lütfen tekrar deneyin.');

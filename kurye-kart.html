@@ -57,7 +57,6 @@
                 
                 <!-- Navigation -->
                 <nav class="hidden md:flex space-x-8">
-                    <a href="index.html" class="text-text hover:text-primary transition-colors">Ana Sayfa</a>
                     <a href="yakinda.html" class="text-text hover:text-primary transition-colors">Yakında</a>
                     <a href="kurye-rehberi.html" class="text-text hover:text-primary transition-colors">Kurye Rehberi</a>
                     <a href="ilanlar.html" class="text-text hover:text-primary transition-colors">İş İlanları</a>
@@ -85,7 +84,6 @@
         <!-- Mobile Menu -->
         <div id="mobileMenu" class="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 hidden">
             <div class="px-4 py-2 space-y-2">
-                <a href="index.html" class="block py-2 text-text hover:text-primary">Ana Sayfa</a>
                 <a href="yakinda.html" class="block py-2 text-text hover:text-primary">Yakında</a>
                 <a href="kurye-rehberi.html" class="block py-2 text-text hover:text-primary">Kurye Rehberi</a>
                 <a href="ilanlar.html" class="block py-2 text-text hover:text-primary">İş İlanları</a>
@@ -148,12 +146,12 @@
                                 <span id="profileMotor" class="text-sm font-semibold text-text">-</span>
                             </div>
                             <!-- Telefon (görünürlük kontrolü ile) -->
-                            <div id="profileTelefonContainer" class="hidden flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <div id="profileTelefonContainer" class="hidden flex justify-between items-center p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors" data-register-btn>
                                 <span class="text-sm text-muted">Telefon</span>
                                 <span id="profileTelefon" class="text-sm font-semibold text-text">-</span>
                             </div>
                             <!-- WhatsApp (görünürlük kontrolü ile) -->
-                            <div id="profileWhatsAppContainer" class="hidden flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <div id="profileWhatsAppContainer" class="hidden flex justify-between items-center p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors" data-register-btn>
                                 <span class="text-sm text-muted">WhatsApp</span>
                                 <span id="profileWhatsApp" class="text-sm font-semibold text-text">-</span>
                             </div>
@@ -673,7 +671,7 @@
     </section>
     
     <!-- Kurye Kartı Düzenleme Modal -->
-    <div id="kuryeEditorModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+    <div id="kuryeEditorModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden flex flex-col animate-fadeInUp">
             <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
                 <h2 class="text-2xl font-bold text-text">Kurye Kartı Ayarları</h2>
@@ -901,26 +899,68 @@
     
     <!-- Scripts -->
     <script src="js/app.js"></script>
+    <script src="js/kuryes-auth.js"></script>
     <script src="js/kuryes-login-modal.js"></script>
+    <script src="js/kuryes-profile.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // URL'den ID'yi al (?id=1 formatı için)
+        document.addEventListener('DOMContentLoaded', async function() {
+            // URL'den ID ve type'ı al
             const urlParams = new URLSearchParams(window.location.search);
-            const kuryeId = urlParams.get('id') || '1';
+            const kuryeId = urlParams.get('id');
+            const type = urlParams.get('type') || 'kurye';
             
-            // URL'de sadece id parametresi kalmalı, diğer parametreleri temizle
+            if (!kuryeId) {
+                console.warn('Kurye ID bulunamadı');
+                // ID yoksa varsayılan göster
+                document.getElementById('kuryeId').textContent = '#ID YOK';
+                return;
+            }
+            
+            // URL'de sadece id ve type parametreleri kalmalı
             const currentUrl = new URL(window.location);
             const idParam = currentUrl.searchParams.get('id');
+            const typeParam = currentUrl.searchParams.get('type') || 'kurye';
             if (idParam) {
-                // URL'yi sadece id ile güncelle
-                const cleanUrl = `${currentUrl.pathname}?id=${idParam}`;
-                if (window.location.search !== `?id=${idParam}`) {
+                const cleanUrl = `${currentUrl.pathname}?id=${idParam}&type=${typeParam}`;
+                if (window.location.search !== `?id=${idParam}&type=${typeParam}`) {
                     window.history.replaceState({}, '', cleanUrl);
                 }
             }
             
-            // Kurye ID'yi göster
+            // Kurye ID'yi göster (geçici)
             document.getElementById('kuryeId').textContent = '#' + kuryeId;
+            
+            // Google Sheets'ten veri çek
+            if (typeof getRecordById === 'function') {
+                try {
+                    const result = await getRecordById(kuryeId, type);
+                    
+                    if (result.success && result.data) {
+                        const kuryeData = result.data;
+                        
+                        // Sayfa elementlerini doldur
+                        if (typeof populatePageFromRecord === 'function') {
+                            populatePageFromRecord(kuryeData, type);
+                        }
+                        
+                        // Form alanlarını doldur (eğer form varsa)
+                        const form = document.querySelector('form');
+                        if (form && typeof populateFormFromRecord === 'function') {
+                            populateFormFromRecord(form, kuryeData);
+                        }
+                        
+                        // LocalStorage'a kaydet
+                        localStorage.setItem('kurye_id', kuryeId);
+                        localStorage.setItem('kurye_data', JSON.stringify(kuryeData));
+                        
+                        console.log('Kurye verileri yüklendi:', kuryeData);
+                    } else {
+                        console.error('Kurye verisi bulunamadı:', result.error);
+                    }
+                } catch (error) {
+                    console.error('Veri yükleme hatası:', error);
+                }
+            }
             
             const kuryeEditorModal = document.getElementById('kuryeEditorModal');
             const kuryeEditorModalBody = document.getElementById('kuryeEditorModalBody');
@@ -1681,11 +1721,37 @@
 
                 try {
                     const formData = new FormData(form);
-                    formData.append('kuryeId', kuryeId);
+                    
+                    // Kurye ID'yi ekle (URL'den veya localStorage'dan)
+                    const currentKuryeId = kuryeId || localStorage.getItem('kurye_id') || '';
+                    if (!currentKuryeId) {
+                        alert('Kurye ID bulunamadı. Lütfen sayfayı yenileyin.');
+                        finalize();
+                        return;
+                    }
+                    formData.append('kuryeid', currentKuryeId);
 
+                    // Ehliyet checkbox'larını topla (virgülle ayrılmış)
+                    const ehliyetCheckboxes = form.querySelectorAll('input[name="ehliyet"]:checked');
+                    const ehliyetValues = Array.from(ehliyetCheckboxes).map(cb => cb.value);
+                    if (ehliyetValues.length > 0) {
+                        formData.set('ehliyet', ehliyetValues.join(','));
+                    }
+
+                    // Çalışma modeli checkbox'larını topla (virgülle ayrılmış)
+                    const calismaModeliCheckboxes = form.querySelectorAll('input[name="calismaModeli"]:checked');
+                    const calismaModeliValues = Array.from(calismaModeliCheckboxes).map(cb => cb.value);
+                    if (calismaModeliValues.length > 0) {
+                        formData.set('calismaModeli', calismaModeliValues.join(','));
+                    }
+
+                    // Deneyimler JSON formatında
+                    formData.set('deneyimler', JSON.stringify(deneyimler || []));
+
+                    // Acil müsaitlik checkbox
                     const acilMusaitlikCheck = document.getElementById('acilMusaitlikCheck');
                     if (acilMusaitlikCheck) {
-                        formData.append('acilMusaitlik', acilMusaitlikCheck.checked ? '1' : '0');
+                        formData.set('acilMusaitlikCheck', acilMusaitlikCheck.checked ? 'evet' : 'hayır');
 
                         if (acilMusaitlikCheck.checked) {
                             const acilMusaitlikSaatlikCheck = document.getElementById('acilMusaitlikSaatlikCheck');
@@ -1695,84 +1761,169 @@
                             const acilMusaitlikPaketCheck = document.getElementById('acilMusaitlikPaketCheck');
                             const acilMusaitlikPaketInput = document.getElementById('acilMusaitlikPaketUcret');
 
-                            if (acilMusaitlikSaatlikCheck && acilMusaitlikSaatlikCheck.checked && acilMusaitlikSaatlikInput) {
-                                formData.append('acilMusaitlikSaatlikUcret', acilMusaitlikSaatlikInput.value || '');
+                            if (acilMusaitlikSaatlikCheck) {
+                                formData.set('acilMusaitlikSaatlikCheck', acilMusaitlikSaatlikCheck.checked ? 'evet' : 'hayır');
                             }
-                            if (acilMusaitlikKmCheck && acilMusaitlikKmCheck.checked && acilMusaitlikKmInput) {
-                                formData.append('acilMusaitlikKmUcret', acilMusaitlikKmInput.value || '');
+                            if (acilMusaitlikSaatlikInput && acilMusaitlikSaatlikCheck && acilMusaitlikSaatlikCheck.checked) {
+                                formData.set('acilMusaitlikSaatlikUcret', acilMusaitlikSaatlikInput.value || '');
                             }
-                            if (acilMusaitlikPaketCheck && acilMusaitlikPaketCheck.checked && acilMusaitlikPaketInput) {
-                                formData.append('acilMusaitlikPaketUcret', acilMusaitlikPaketInput.value || '');
+                            
+                            if (acilMusaitlikKmCheck) {
+                                formData.set('acilMusaitlikKmCheck', acilMusaitlikKmCheck.checked ? 'evet' : 'hayır');
+                            }
+                            if (acilMusaitlikKmInput && acilMusaitlikKmCheck && acilMusaitlikKmCheck.checked) {
+                                formData.set('acilMusaitlikKmUcret', acilMusaitlikKmInput.value || '');
+                            }
+                            
+                            if (acilMusaitlikPaketCheck) {
+                                formData.set('acilMusaitlikPaketCheck', acilMusaitlikPaketCheck.checked ? 'evet' : 'hayır');
+                            }
+                            if (acilMusaitlikPaketInput && acilMusaitlikPaketCheck && acilMusaitlikPaketCheck.checked) {
+                                formData.set('acilMusaitlikPaketUcret', acilMusaitlikPaketInput.value || '');
                             }
 
                             const acilMusaitlikBaslangicSaati = document.getElementById('acilMusaitlikBaslangicSaati');
                             const acilMusaitlikCikisSaati = document.getElementById('acilMusaitlikCikisSaati');
                             if (acilMusaitlikBaslangicSaati) {
-                                formData.append('acilMusaitlikBaslangicSaati', acilMusaitlikBaslangicSaati.value || '');
+                                formData.set('acilMusaitlikBaslangicSaati', acilMusaitlikBaslangicSaati.value || '');
                             }
                             if (acilMusaitlikCikisSaati) {
-                                formData.append('acilMusaitlikCikisSaati', acilMusaitlikCikisSaati.value || '');
+                                formData.set('acilMusaitlikCikisSaati', acilMusaitlikCikisSaati.value || '');
                             }
 
                             const acilMusaitlikOtomatikMesaj = document.getElementById('acilMusaitlikOtomatikMesaj');
                             if (acilMusaitlikOtomatikMesaj) {
-                                formData.append('acilMusaitlikOtomatikMesaj', acilMusaitlikOtomatikMesaj.value || '');
+                                formData.set('acilMusaitlikOtomatikMesaj', acilMusaitlikOtomatikMesaj.value || '');
                             }
 
                             const acilMusaitlikEkBilgiler = document.getElementById('acilMusaitlikEkBilgiler');
                             if (acilMusaitlikEkBilgiler) {
-                                formData.append('acilMusaitlikEkBilgiler', acilMusaitlikEkBilgiler.value || '');
+                                formData.set('acilMusaitlikEkBilgiler', acilMusaitlikEkBilgiler.value || '');
                             }
                         }
                     }
 
-                    const plakaInput = document.getElementById('plaka') || document.getElementById('motorPlaka');
-                    if (plakaInput) {
-                        formData.append('plaka', plakaInput.value || '');
-                    }
-
+                    // Checkbox'ları düzelt
                     const plakaGorunur = document.getElementById('plakaGorunur');
                     const telefonGorunur = document.getElementById('telefonGorunur');
                     const whatsappGorunur = document.getElementById('whatsappGorunur');
-                    const telegramGorunur = document.getElementById('telegramGorunur');
-                    const instagramGorunur = document.getElementById('instagramGorunur');
+                    const p1Belgesi = form.querySelector('input[name="p1Belgesi"]');
+                    const srcBelgesi = form.querySelector('input[name="srcBelgesi"]');
+                    const psikoteknik = form.querySelector('input[name="psikoteknik"]');
+                    
                     if (plakaGorunur) {
-                        formData.append('plakaGorunur', plakaGorunur.checked ? '1' : '0');
+                        formData.set('plakaGorunur', plakaGorunur.checked ? 'evet' : 'hayır');
                     }
                     if (telefonGorunur) {
-                        formData.append('telefonGorunur', telefonGorunur.checked ? '1' : '0');
+                        formData.set('telefonGorunur', telefonGorunur.checked ? 'evet' : 'hayır');
                     }
                     if (whatsappGorunur) {
-                        formData.append('whatsappGorunur', whatsappGorunur.checked ? '1' : '0');
+                        formData.set('whatsappGorunur', whatsappGorunur.checked ? 'evet' : 'hayır');
                     }
-                    if (telegramGorunur) {
-                        formData.append('telegramGorunur', telegramGorunur.checked ? '1' : '0');
+                    if (p1Belgesi) {
+                        formData.set('p1Belgesi', p1Belgesi.checked ? 'evet' : 'hayır');
                     }
-                    if (instagramGorunur) {
-                        formData.append('instagramGorunur', instagramGorunur.checked ? '1' : '0');
+                    if (srcBelgesi) {
+                        formData.set('srcBelgesi', srcBelgesi.checked ? 'evet' : 'hayır');
                     }
-
-                    formData.append('deneyimler', JSON.stringify(deneyimler));
-                    
-                    // Çalışma Modeli
-                    const calismaModeliCheckboxes = document.querySelectorAll('input[name="calismaModeli"]:checked');
-                    const calismaModeliValues = Array.from(calismaModeliCheckboxes).map(cb => cb.value);
-                    formData.append('calismaModeli', JSON.stringify(calismaModeliValues));
+                    if (psikoteknik) {
+                        formData.set('psikoteknik', psikoteknik.checked ? 'evet' : 'hayır');
+                    }
 
                     console.log('Form Data:', Object.fromEntries(formData));
 
-                    kuryePreviewModal.classList.add('hidden');
-                    closeKuryeEditorModal();
+                    // Google Sheets'e gönder - Tüm form verilerini topla
+                    const formDataObj = {};
+                    for (let [key, value] of formData.entries()) {
+                        // Aynı key için array oluştur
+                        if (formDataObj[key]) {
+                            if (Array.isArray(formDataObj[key])) {
+                                formDataObj[key].push(value);
+                            } else {
+                                formDataObj[key] = [formDataObj[key], value];
+                            }
+                        } else {
+                            formDataObj[key] = value;
+                        }
+                    }
+                    
+                    // JSON payload hazırla
+                    const jsonPayload = JSON.stringify(formDataObj);
+                    
+                    // Form-urlencoded olarak hazırla
+                    const formDataUrlEncoded = new URLSearchParams();
+                    formDataUrlEncoded.append('action', 'update');
+                    formDataUrlEncoded.append('id', currentKuryeId);
+                    formDataUrlEncoded.append('formType', 'kurye');
+                    formDataUrlEncoded.append('jsonData', jsonPayload);
+                    
+                    // Tüm form verilerini de ekle
+                    Object.keys(formDataObj).forEach(key => {
+                        const value = Array.isArray(formDataObj[key]) 
+                            ? formDataObj[key].join(',') 
+                            : formDataObj[key];
+                        formDataUrlEncoded.append(key, value);
+                    });
+                    
+                    console.log('Google Sheets\'e gönderiliyor...', {
+                        id: currentKuryeId,
+                        formType: 'kurye',
+                        dataCount: Object.keys(formDataObj).length
+                    });
+                    
+                    // Google Apps Script'e gönder
+                    const PROFILE_UPDATE_URL = 'https://script.google.com/macros/s/AKfycbyP4rGbVDXG8-xli6QPv4YXaHgiCyCoCr5UvdJtYJyTi2RWfFx-rqUd-ZtTQiMsz6Hdww/exec';
+                    
+                    fetch(PROFILE_UPDATE_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: formDataUrlEncoded.toString()
+                    })
+                    .then(response => response.text())
+                    .then(text => {
+                        console.log('Google Sheets response:', text);
+                        let result;
+                        try {
+                            result = JSON.parse(text);
+                        } catch (e) {
+                            result = { success: true, message: text };
+                        }
+                        
+                        if (result.success) {
+                            if (kuryePreviewModal) {
+                                kuryePreviewModal.classList.add('hidden');
+                            }
+                            closeKuryeEditorModal();
 
-                    setTimeout(() => {
-                        successMessage.classList.remove('hidden');
-                        updateProfileDisplay();
-                        updateAllKuryeSectionStatuses();
+                            setTimeout(() => {
+                                if (successMessage) {
+                                    successMessage.classList.remove('hidden');
+                                }
+                                if (typeof updateProfileDisplay === 'function') {
+                                    updateProfileDisplay();
+                                }
+                                if (typeof updateAllKuryeSectionStatuses === 'function') {
+                                    updateAllKuryeSectionStatuses();
+                                }
+                                finalize();
+                                setTimeout(() => {
+                                    if (successMessage) {
+                                        successMessage.classList.add('hidden');
+                                    }
+                                }, 3000);
+                            }, 200);
+                        } else {
+                            alert('Kayıt sırasında bir hata oluştu: ' + (result.error || 'Bilinmeyen hata'));
+                            finalize();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Profil kaydedilirken hata oluştu:', error);
+                        alert('Bir hata oluştu. Lütfen tekrar deneyin.');
                         finalize();
-                        setTimeout(() => {
-                            successMessage.classList.add('hidden');
-                        }, 3000);
-                    }, 200);
+                    });
                 } catch (error) {
                     console.error('Profil kaydedilirken hata oluştu:', error);
                     alert('Bir hata oluştu. Lütfen tekrar deneyin.');
@@ -2142,6 +2293,8 @@
     </script>
 </body>
 </html>
+
+
 
 
 

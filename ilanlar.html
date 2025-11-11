@@ -49,7 +49,6 @@
                 
                 <!-- Navigation -->
                 <nav class="hidden md:flex space-x-8">
-                    <a href="index.html" class="text-text hover:text-primary transition-colors">Ana Sayfa</a>
                     <a href="yakinda.html" class="text-text hover:text-primary transition-colors">Yakında</a>
                     <a href="kurye-rehberi.html" class="text-text hover:text-primary transition-colors">Kurye Rehberi</a>
                     <a href="ilanlar.html" class="text-primary font-semibold">İş İlanları</a>
@@ -57,13 +56,22 @@
                     <a href="kazanc.html" class="text-text hover:text-primary transition-colors">Kazanç</a>
                 </nav>
                 
-                <!-- Auth Buttons -->
+                <!-- Auth Buttons / User Menu -->
                 <div class="hidden md:flex items-center space-x-4">
-                    <button type="button" data-login-btn
-                            class="inline-flex items-center justify-center px-4 py-2 bg-accent text-white rounded-lg font-semibold shadow-sm hover:bg-blue-600 transition-colors">
-                        Giriş Yap
-                    </button>
+                    <!-- Login Button (shown when not logged in) -->
+                    <button id="loginBtn" data-login-btn class="bg-accent text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors font-medium">Giriş Yap</button>
                     <button data-register-btn class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors">Kayıt Ol</button>
+                    
+                    <!-- User Menu (shown when logged in) -->
+                    <div id="userMenu" class="hidden flex items-center space-x-3">
+                        <a id="profileLink" href="#" class="flex items-center space-x-2 text-text hover:text-primary transition-colors">
+                            <div id="userAvatarDisplay" class="w-8 h-8 rounded-full bg-gray-200 overflow-hidden border-2 border-primary">
+                                <img src="public/img/avatars/1.png" alt="Avatar" class="w-full h-full object-cover">
+                            </div>
+                            <span id="userNameDisplay" class="font-medium">Kullanıcı</span>
+                        </a>
+                        <button id="logoutBtn" class="text-muted hover:text-text transition-colors font-medium">Çıkış Yap</button>
+                    </div>
                 </div>
                 
                 <!-- Mobile Menu Button -->
@@ -80,18 +88,26 @@
         <!-- Mobile Menu -->
         <div id="mobileMenu" class="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 hidden">
             <div class="px-4 py-2 space-y-2">
-                <a href="index.html" class="block py-2 text-text hover:text-primary">Ana Sayfa</a>
                 <a href="yakinda.html" class="block py-2 text-text hover:text-primary">Yakında</a>
                 <a href="kurye-rehberi.html" class="block py-2 text-text hover:text-primary">Kurye Rehberi</a>
                 <a href="ilanlar.html" class="block py-2 text-primary font-semibold">İş İlanları</a>
                 <a href="forum.html" class="block py-2 text-text hover:text-primary">Forum</a>
                 <a href="kazanc.html" class="block py-2 text-text hover:text-primary">Kazanç</a>
                 <div class="pt-2 border-t border-gray-200">
-                    <button type="button" data-login-btn
-                            class="block w-full text-center bg-accent text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-600 transition-colors">
-                        Giriş Yap
-                    </button>
+                    <!-- Login Button (shown when not logged in) -->
+                    <button id="loginBtnMobile" data-login-btn class="block w-full text-center py-2 bg-accent text-white rounded-lg px-4 font-medium hover:bg-blue-600 transition-colors">Giriş Yap</button>
                     <button data-register-btn class="block w-full text-center bg-primary text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors mt-2">Kayıt Ol</button>
+                    
+                    <!-- User Menu Mobile (shown when logged in) -->
+                    <div id="userMenuMobile" class="hidden pt-2 space-y-2">
+                        <a id="profileLinkMobile" href="#" class="flex items-center space-x-2 py-2 text-text hover:text-primary">
+                            <div id="userAvatarDisplayMobile" class="w-8 h-8 rounded-full bg-gray-200 overflow-hidden border-2 border-primary">
+                                <img src="public/img/avatars/1.png" alt="Avatar" class="w-full h-full object-cover">
+                            </div>
+                            <span id="userNameDisplayMobile" class="font-medium">Kullanıcı</span>
+                        </a>
+                        <button id="logoutBtnMobile" class="block w-full text-center py-2 text-muted hover:text-text transition-colors font-medium">Çıkış Yap</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -227,23 +243,23 @@
                             <!-- Details (Orta Kısım) -->
                             <div class="flex-1 space-y-2 sm:space-y-3">
                                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-2 md:gap-3">
-                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Yetkili Kişi</span>
                                         <span class="text-xs sm:text-sm font-semibold text-primary break-words">Ahmet Yılmaz</span>
                                     </div>
-                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Çalışma Modeli</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Esnaf, Sigortalı</span>
                                     </div>
-                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Ücret</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text">80 TL/gün</span>
                                     </div>
-                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Çalışma Süresi</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text">Full Time</span>
                                     </div>
-                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Avantajlar</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Yemek, Sigorta</span>
                                     </div>
@@ -279,11 +295,11 @@
                                         </svg>
                                     </a>
                                 </div>
-                                <div class="flex flex-col sm:flex-row md:flex-col gap-2 w-full md:w-auto">
-                                    <button onclick="openDetailModal('isletme', 1, true)" class="w-full px-4 py-2.5 sm:py-2 bg-primary text-white rounded-lg font-semibold hover:bg-red-600 transition-colors text-sm min-h-[44px]">
+                                <div class="flex flex-col gap-2 w-full md:w-[140px]">
+                                    <button onclick="openDetailModal('isletme', 1, true)" class="w-full px-4 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-red-600 transition-colors text-sm h-[44px] flex items-center justify-center">
                                         Başvur
                                     </button>
-                                    <button onclick="openDetailModal('isletme', 1, false)" class="w-full px-4 py-2.5 sm:py-2 bg-accent text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors text-sm min-h-[44px]">
+                                    <button onclick="openDetailModal('isletme', 1, false)" class="w-full px-4 py-3 bg-accent text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors text-sm h-[44px] flex items-center justify-center">
                                         Detay Gör
                                     </button>
                                 </div>
@@ -309,29 +325,29 @@
                             <!-- Details (Orta Kısım) -->
                             <div class="flex-1 space-y-2 sm:space-y-3">
                                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-2 md:gap-3">
-                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Yetkili Kişi</span>
                                         <span class="text-xs sm:text-sm font-semibold text-primary break-words">Mehmet Demir</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Çalışma Modeli</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Sigortalı</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Ücret</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">120 TL/gün</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Çalışma Süresi</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Part Time</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Avantajlar</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Yemek, İkramiye</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
-                                        <span class="text-xs text-muted block mb-1">Konum</span>
-                                        <a href="#" target="_blank" class="text-sm font-semibold text-accent hover:underline">Harita</a>
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
+                                        <span class="text-xs text-muted block mb-1">Durum</span>
+                                        <span class="text-xs sm:text-sm font-semibold text-text break-words">-</span>
                                     </div>
                                 </div>
                                 
@@ -361,11 +377,11 @@
                                         </svg>
                                     </a>
                                 </div>
-                                <div class="flex flex-col gap-2 w-full md:w-auto">
-                                    <button onclick="openDetailModal('isletme', 2, true)" class="w-full px-4 py-2 bg-primary text-white rounded-lg font-semibold hover:bg-red-600 transition-colors text-sm">
+                                <div class="flex flex-col gap-2 w-full md:w-[140px]">
+                                    <button onclick="openDetailModal('isletme', 2, true)" class="w-full px-4 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-red-600 transition-colors text-sm h-[44px] flex items-center justify-center">
                                         Başvur
                                     </button>
-                                    <button onclick="openDetailModal('isletme', 2, false)" class="w-full px-4 py-2 bg-accent text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors text-sm">
+                                    <button onclick="openDetailModal('isletme', 2, false)" class="w-full px-4 py-3 bg-accent text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors text-sm h-[44px] flex items-center justify-center">
                                         Detay Gör
                                     </button>
                                 </div>
@@ -391,29 +407,29 @@
                             <!-- Details (Orta Kısım) -->
                             <div class="flex-1 space-y-2 sm:space-y-3">
                                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-2 md:gap-3">
-                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Yetkili Kişi</span>
                                         <span class="text-xs sm:text-sm font-semibold text-primary break-words">Ayşe Kaya</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Çalışma Modeli</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Esnaf</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Ücret</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">100 TL/gün</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Çalışma Süresi</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Günlük</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Avantajlar</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Esnek Saatler</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
-                                        <span class="text-xs text-muted block mb-1">Konum</span>
-                                        <a href="#" target="_blank" class="text-sm font-semibold text-accent hover:underline">Harita</a>
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
+                                        <span class="text-xs text-muted block mb-1">Durum</span>
+                                        <span class="text-xs sm:text-sm font-semibold text-text break-words">-</span>
                                     </div>
                                 </div>
                                 
@@ -443,11 +459,11 @@
                                         </svg>
                                     </a>
                                 </div>
-                                <div class="flex flex-col gap-2 w-full md:w-auto">
-                                    <button onclick="openDetailModal('isletme', 3, true)" class="w-full px-4 py-2 bg-primary text-white rounded-lg font-semibold hover:bg-red-600 transition-colors text-sm">
+                                <div class="flex flex-col gap-2 w-full md:w-[140px]">
+                                    <button onclick="openDetailModal('isletme', 3, true)" class="w-full px-4 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-red-600 transition-colors text-sm h-[44px] flex items-center justify-center">
                                         Başvur
                                     </button>
-                                    <button onclick="openDetailModal('isletme', 3, false)" class="w-full px-4 py-2 bg-accent text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors text-sm">
+                                    <button onclick="openDetailModal('isletme', 3, false)" class="w-full px-4 py-3 bg-accent text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors text-sm h-[44px] flex items-center justify-center">
                                         Detay Gör
                                     </button>
                                 </div>
@@ -473,27 +489,27 @@
                             <!-- Details (Orta Kısım) -->
                             <div class="flex-1 space-y-2 sm:space-y-3">
                                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-2 md:gap-3">
-                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Yetkili Kişi</span>
                                         <span class="text-xs sm:text-sm font-semibold text-primary break-words">Can Özkan</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Çalışma Modeli</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Tüm Modellere Uygun</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Ücret</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">90 TL/gün</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Çalışma Süresi</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Part Time, Full Time</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Avantajlar</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Yemek, İkramiye</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Konum</span>
                                         <a href="#" target="_blank" class="text-sm font-semibold text-accent hover:underline">Harita</a>
                                     </div>
@@ -525,11 +541,11 @@
                                         </svg>
                                     </a>
                                 </div>
-                                <div class="flex flex-col gap-2 w-full md:w-auto">
-                                    <button onclick="openDetailModal('isletme', 4, true)" class="w-full px-4 py-2 bg-primary text-white rounded-lg font-semibold hover:bg-red-600 transition-colors text-sm">
+                                <div class="flex flex-col gap-2 w-full md:w-[140px]">
+                                    <button onclick="openDetailModal('isletme', 4, true)" class="w-full px-4 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-red-600 transition-colors text-sm h-[44px] flex items-center justify-center">
                                         Başvur
                                     </button>
-                                    <button onclick="openDetailModal('isletme', 4, false)" class="w-full px-4 py-2 bg-accent text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors text-sm">
+                                    <button onclick="openDetailModal('isletme', 4, false)" class="w-full px-4 py-3 bg-accent text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors text-sm h-[44px] flex items-center justify-center">
                                         Detay Gör
                                     </button>
                                 </div>
@@ -555,27 +571,27 @@
                             <!-- Details (Orta Kısım) -->
                             <div class="flex-1 space-y-2 sm:space-y-3">
                                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-2 md:gap-3">
-                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Yetkili Kişi</span>
                                         <span class="text-xs sm:text-sm font-semibold text-primary break-words">Zeynep Şahin</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Çalışma Modeli</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Sigortalı</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Ücret</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Ücret bilgisi paylaşılmıyor</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Çalışma Süresi</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Full Time</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Avantajlar</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Sigorta, İkramiye</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Konum</span>
                                         <a href="#" target="_blank" class="text-sm font-semibold text-accent hover:underline">Harita</a>
                                     </div>
@@ -597,11 +613,11 @@
                                         </svg>
                                     </a>
                                 </div>
-                                <div class="flex flex-col gap-2 w-full md:w-auto">
-                                    <button onclick="openDetailModal('isletme', 5, true)" class="w-full px-4 py-2 bg-primary text-white rounded-lg font-semibold hover:bg-red-600 transition-colors text-sm">
+                                <div class="flex flex-col gap-2 w-full md:w-[140px]">
+                                    <button onclick="openDetailModal('isletme', 5, true)" class="w-full px-4 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-red-600 transition-colors text-sm h-[44px] flex items-center justify-center">
                                         Başvur
                                     </button>
-                                    <button onclick="openDetailModal('isletme', 5, false)" class="w-full px-4 py-2 bg-accent text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors text-sm">
+                                    <button onclick="openDetailModal('isletme', 5, false)" class="w-full px-4 py-3 bg-accent text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors text-sm h-[44px] flex items-center justify-center">
                                         Detay Gör
                                     </button>
                                 </div>
@@ -627,27 +643,27 @@
                             <!-- Details (Orta Kısım) -->
                             <div class="flex-1 space-y-2 sm:space-y-3">
                                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-2 md:gap-3">
-                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Yetkili Kişi</span>
                                         <span class="text-xs sm:text-sm font-semibold text-primary break-words">Ali Çelik</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Çalışma Modeli</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Esnaf</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Ücret</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">75 TL/gün</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Çalışma Süresi</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Günlük</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Avantajlar</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Yemek, İkramiye</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Konum</span>
                                         <a href="#" target="_blank" class="text-sm font-semibold text-accent hover:underline">Harita</a>
                                     </div>
@@ -679,11 +695,11 @@
                                         </svg>
                                     </a>
                                 </div>
-                                <div class="flex flex-col gap-2 w-full md:w-auto">
-                                    <button onclick="openDetailModal('isletme', 6, true)" class="w-full px-4 py-2 bg-primary text-white rounded-lg font-semibold hover:bg-red-600 transition-colors text-sm">
+                                <div class="flex flex-col gap-2 w-full md:w-[140px]">
+                                    <button onclick="openDetailModal('isletme', 6, true)" class="w-full px-4 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-red-600 transition-colors text-sm h-[44px] flex items-center justify-center">
                                         Başvur
                                     </button>
-                                    <button onclick="openDetailModal('isletme', 6, false)" class="w-full px-4 py-2 bg-accent text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors text-sm">
+                                    <button onclick="openDetailModal('isletme', 6, false)" class="w-full px-4 py-3 bg-accent text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors text-sm h-[44px] flex items-center justify-center">
                                         Detay Gör
                                     </button>
                                 </div>
@@ -709,27 +725,27 @@
                             <!-- Details (Orta Kısım) -->
                             <div class="flex-1 space-y-2 sm:space-y-3">
                                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-2 md:gap-3">
-                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Yetkili Kişi</span>
                                         <span class="text-xs sm:text-sm font-semibold text-primary break-words">Fatih Yıldız</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Çalışma Modeli</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Esnaf, Sigortalı</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Ücret</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Paket: 50 TL, Km: 3 TL/km</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Cep</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">0555 123 45 80</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Avantajlar</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Yol, Sigorta</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Ödeme</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Haftalık</span>
                                     </div>
@@ -761,11 +777,11 @@
                                         </svg>
                                     </a>
                                 </div>
-                                <div class="flex flex-col gap-2 w-full md:w-auto">
-                                    <button onclick="openDetailModal('lojistik', 1, true)" class="w-full px-4 py-2 bg-primary text-white rounded-lg font-semibold hover:bg-red-600 transition-colors text-sm">
+                                <div class="flex flex-col gap-2 w-full md:w-[140px]">
+                                    <button onclick="openDetailModal('lojistik', 1, true)" class="w-full px-4 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-red-600 transition-colors text-sm h-[44px] flex items-center justify-center">
                                         Başvur
                                     </button>
-                                    <button onclick="openDetailModal('lojistik', 1, false)" class="w-full px-4 py-2 bg-accent text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors text-sm">
+                                    <button onclick="openDetailModal('lojistik', 1, false)" class="w-full px-4 py-3 bg-accent text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors text-sm h-[44px] flex items-center justify-center">
                                         Detay Gör
                                     </button>
                                 </div>
@@ -791,27 +807,27 @@
                             <!-- Details (Orta Kısım) -->
                             <div class="flex-1 space-y-2 sm:space-y-3">
                                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-2 md:gap-3">
-                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Yetkili Kişi</span>
                                         <span class="text-xs sm:text-sm font-semibold text-primary break-words">Serkan Özdemir</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Çalışma Modeli</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Sigortalı</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Ücret</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Sabit: 5000 TL/ay, Günlük Bonus: 200 TL</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Cep</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">0555 123 45 81</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Avantajlar</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Yol, Sigorta, İkramiye</span>
                                     </div>
-                                    <div class="p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Ödeme</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">Aylık</span>
                                     </div>
@@ -843,11 +859,11 @@
                                         </svg>
                                     </a>
                                 </div>
-                                <div class="flex flex-col gap-2 w-full md:w-auto">
-                                    <button onclick="openDetailModal('lojistik', 2, true)" class="w-full px-4 py-2 bg-primary text-white rounded-lg font-semibold hover:bg-red-600 transition-colors text-sm">
+                                <div class="flex flex-col gap-2 w-full md:w-[140px]">
+                                    <button onclick="openDetailModal('lojistik', 2, true)" class="w-full px-4 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-red-600 transition-colors text-sm h-[44px] flex items-center justify-center">
                                         Başvur
                                     </button>
-                                    <button onclick="openDetailModal('lojistik', 2, false)" class="w-full px-4 py-2 bg-accent text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors text-sm">
+                                    <button onclick="openDetailModal('lojistik', 2, false)" class="w-full px-4 py-3 bg-accent text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors text-sm h-[44px] flex items-center justify-center">
                                         Detay Gör
                                     </button>
                                 </div>
@@ -897,8 +913,10 @@
     
     <!-- Scripts -->
     <script src="js/app.js"></script>
+    <script src="js/kuryes-auth.js"></script>
     <script src="js/kuryes-login-modal.js"></script>
     <script src="js/kuryes-preview.js"></script>
+    <script src="js/kuryes-access-control.js"></script>
     <script>
         // Mobile menu toggle
         document.getElementById('mobileMenuBtn')?.addEventListener('click', function() {
@@ -961,23 +979,23 @@
                             <!-- Details (Orta Kısım) -->
                             <div class="flex-1 space-y-2 sm:space-y-3">
                                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-2 md:gap-3">
-                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">İşletme ID</span>
                                         <span class="text-xs sm:text-sm font-semibold text-primary break-words">#${business.id.replace('IS', 'IS' + String(Math.floor(cardNum / 6) + 1))}</span>
                                     </div>
-                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Çalışma Modeli</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">${business.model}</span>
                                     </div>
-                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Ücret</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">${business.price}</span>
                                     </div>
-                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Cep</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">${business.phone}</span>
                                     </div>
-                                    <div class="p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
+                                    <div class="p-2 sm:p-2 sm:p-2 md:p-3 bg-gray-50 rounded-lg">
                                         <span class="text-xs text-muted block mb-1">Avantajlar</span>
                                         <span class="text-xs sm:text-sm font-semibold text-text break-words">${business.benefits}</span>
                                     </div>
@@ -1013,11 +1031,11 @@
                                         </svg>
                                     </a>
                                 </div>
-                                <div class="flex flex-col sm:flex-row md:flex-col gap-2 w-full md:w-auto">
-                                    <button onclick="openDetailModal('isletme', 1, true)" class="w-full px-4 py-2.5 sm:py-2 bg-primary text-white rounded-lg font-semibold hover:bg-red-600 transition-colors text-sm min-h-[44px]">
+                                <div class="flex flex-col gap-2 w-full md:w-[140px]">
+                                    <button onclick="openDetailModal('isletme', 1, true)" class="w-full px-4 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-red-600 transition-colors text-sm h-[44px] flex items-center justify-center">
                                         Başvur
                                     </button>
-                                    <button onclick="openDetailModal('isletme', 1, false)" class="w-full px-4 py-2.5 sm:py-2 bg-accent text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors text-sm min-h-[44px]">
+                                    <button onclick="openDetailModal('isletme', 1, false)" class="w-full px-4 py-3 bg-accent text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors text-sm h-[44px] flex items-center justify-center">
                                         Detay Gör
                                     </button>
                                 </div>
