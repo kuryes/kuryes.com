@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="description" content="Jetla Operations - Kurye ve Teslimat Yönetim Uygulaması">
+  <meta name="theme-color" content="#ff2737">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="JetlaOps">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Jetla Operations</title>
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  
+  <!-- Icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon-64x64.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-white min-h-screen pb-20">
+  <!-- Top Header -->
+  <header class="fixed top-0 left-0 right-0 bg-white border-b-2 border-red-600 z-50 shadow-sm">
+    <div class="px-4 py-3">
+      <h1 class="text-xl font-black text-red-600 tracking-wider uppercase text-center">Jetla Operations</h1>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main id="app-content" class="pt-16 px-4 pb-4">
+    <!-- Screens will be loaded here -->
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-200 shadow-lg z-50">
+    <div class="flex justify-around items-center py-2">
+      <button 
+        data-route="dashboard" 
+        class="nav-item flex flex-col items-center justify-center px-4 py-2 rounded-lg transition-all active"
+      >
+        <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+        </svg>
+        <span class="text-xs font-semibold">Dashboard</span>
+      </button>
+      <button 
+        data-route="tasks" 
+        class="nav-item flex flex-col items-center justify-center px-4 py-2 rounded-lg transition-all"
+      >
+        <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+        </svg>
+        <span class="text-xs font-semibold">Görevler</span>
+      </button>
+      <button 
+        data-route="visits" 
+        class="nav-item flex flex-col items-center justify-center px-4 py-2 rounded-lg transition-all"
+      >
+        <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+        </svg>
+        <span class="text-xs font-semibold">Ziyaretler</span>
+      </button>
+      <button 
+        data-route="finance" 
+        class="nav-item flex flex-col items-center justify-center px-4 py-2 rounded-lg transition-all"
+      >
+        <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <span class="text-xs font-semibold">Finans</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Scripts -->
+  <script src="router.js"></script>
+  <script src="app.js"></script>
+  <script src="screens/dashboard.js"></script>
+  <script src="screens/tasks.js"></script>
+  <script src="screens/visits.js"></script>
+  <script src="screens/couriers.js"></script>
+  <script src="screens/finance.js"></script>
+  <script src="screens/settings.js"></script>
+
+  <script>
+    // PWA Install Prompt Banner
+    let deferredPrompt;
+    let installBanner = null;
+    let isInstalled = false;
+
+    // Check if already installed
+    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+      isInstalled = true;
+    }
+
+    // Check localStorage for dismissed banner
+    const bannerDismissed = localStorage.getItem('jetla_install_banner_dismissed');
+    const bannerDismissedDate = bannerDismissed ? new Date(bannerDismissed) : null;
+    const daysSinceDismissed = bannerDismissedDate ? Math.floor((new Date() - bannerDismissedDate) / (1000 * 60 * 60 * 24)) : 999;
+
+    function createInstallBanner() {
+      if (isInstalled || bannerDismissed && daysSinceDismissed < 7) {
+        return; // Don't show if installed or dismissed recently
+      }
+
+      installBanner = document.createElement('div');
+      installBanner.id = 'install-banner';
+      installBanner.className = 'fixed bottom-20 left-0 right-0 bg-gradient-to-r from-red-600 to-red-700 text-white p-4 shadow-2xl z-50 transform transition-transform duration-300';
+      installBanner.style.transform = 'translateY(0)';
+      installBanner.innerHTML = `
+        <div class="flex items-center justify-between gap-3 max-w-md mx-auto">
+          <div class="flex items-center gap-3 flex-1">
+            <div class="text-3xl">📱</div>
+            <div class="flex-1">
+              <div class="font-bold text-sm">Jetla Operations'ı Yükleyin</div>
+              <div class="text-xs opacity-90">Daha hızlı erişim için ana ekrana ekleyin</div>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <button id="install-banner-btn" class="bg-white text-red-600 px-4 py-2 rounded-lg font-bold text-sm whitespace-nowrap hover:bg-gray-100 transition-colors">
+              Yükle
+            </button>
+            <button id="dismiss-banner-btn" class="text-white opacity-75 hover:opacity-100 px-2">
+              ✕
+            </button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(installBanner);
+
+      // Install button click - Direct install
+      document.getElementById('install-banner-btn').addEventListener('click', async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        if (deferredPrompt) {
+          try {
+            // Show the install prompt directly
+            deferredPrompt.prompt();
+            
+            // Wait for user response
+            const { outcome } = await deferredPrompt.userChoice;
+            
+            if (outcome === 'accepted') {
+              console.log('User accepted the install prompt');
+              // Banner will be hidden automatically by appinstalled event
+            } else {
+              console.log('User dismissed the install prompt');
+            }
+            
+            // Clear the deferredPrompt
+            deferredPrompt = null;
+            hideInstallBanner();
+          } catch (error) {
+            console.error('Install prompt error:', error);
+            hideInstallBanner();
+          }
+        } else {
+          // If prompt not available, hide banner silently
+          hideInstallBanner();
+        }
+      });
+
+      // Dismiss button click
+      document.getElementById('dismiss-banner-btn').addEventListener('click', () => {
+        localStorage.setItem('jetla_install_banner_dismissed', new Date().toISOString());
+        hideInstallBanner();
+      });
+    }
+
+    function hideInstallBanner() {
+      if (installBanner) {
+        installBanner.style.transform = 'translateY(100%)';
+        setTimeout(() => {
+          if (installBanner && installBanner.parentNode) {
+            installBanner.remove();
+            installBanner = null;
+          }
+        }, 300);
+      }
+    }
+
+    // Listen for install prompt FIRST (before page load completes)
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      
+      // Show banner immediately when prompt is available
+      if (!installBanner && !isInstalled && (!bannerDismissed || daysSinceDismissed >= 7)) {
+        // Wait for DOM to be ready
+        if (document.body) {
+          createInstallBanner();
+        } else {
+          document.addEventListener('DOMContentLoaded', () => {
+            createInstallBanner();
+          });
+        }
+      }
+    });
+
+    // Show banner after page load (fallback if beforeinstallprompt didn't fire)
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        if (!isInstalled && !bannerDismissed && deferredPrompt && !installBanner) {
+          createInstallBanner();
+        }
+      }, 2000); // Show after 2 seconds
+    });
+
+    // Hide banner when installed
+    window.addEventListener('appinstalled', () => {
+      console.log('PWA was installed');
+      isInstalled = true;
+      hideInstallBanner();
+      deferredPrompt = null;
+      localStorage.removeItem('jetla_install_banner_dismissed');
+    });
+
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js')
+          .then(reg => {
+            console.log('Service Worker registered:', reg);
+            
+            // Check for updates
+            reg.addEventListener('updatefound', () => {
+              const newWorker = reg.installing;
+              newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                  // New service worker available
+                  if (confirm('Yeni sürüm mevcut! Sayfayı yenilemek ister misiniz?')) {
+                    window.location.reload();
+                  }
+                }
+              });
+            });
+          })
+          .catch(err => console.log('Service Worker registration failed:', err));
+      });
+    }
+
+    // Check if app is installed
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      console.log('Running as PWA');
+      document.body.classList.add('pwa-installed');
+    }
+  </script>
+</body>
+</html>

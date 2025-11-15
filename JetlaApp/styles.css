@@ -1,0 +1,224 @@
+/* Custom Styles for Jatla Operations */
+
+:root {
+  --jetla-red: #ff2737;
+  --jetla-red-dark: #cc1e2b;
+  --jetla-red-light: #ff5a6b;
+}
+
+/* Navigation Active State */
+.nav-item.active {
+  color: var(--jetla-red);
+  background-color: rgba(255, 39, 55, 0.1);
+}
+
+.nav-item {
+  color: #666;
+}
+
+.nav-item:active {
+  transform: scale(0.95);
+}
+
+/* Card Styles */
+.card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(255, 39, 55, 0.15);
+}
+
+/* Button Styles */
+.btn-primary {
+  background-color: var(--jetla-red);
+  color: white;
+  border-radius: 12px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--jetla-red-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 39, 55, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-outline {
+  border: 2px solid var(--jetla-red);
+  color: var(--jetla-red);
+  background: white;
+  border-radius: 12px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background-color: var(--jetla-red);
+  color: white;
+}
+
+/* Input Styles */
+.input-field {
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 12px;
+  transition: all 0.3s ease;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--jetla-red);
+  box-shadow: 0 0 0 3px rgba(255, 39, 55, 0.1);
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 20px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Badge Styles */
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.badge-high {
+  background-color: #fee;
+  color: var(--jetla-red);
+}
+
+.badge-medium {
+  background-color: #fff4e6;
+  color: #d97706;
+}
+
+.badge-low {
+  background-color: #e6f7ff;
+  color: #0369a1;
+}
+
+.badge-done {
+  background-color: #e6f7e6;
+  color: #059669;
+}
+
+.badge-open {
+  background-color: #fee;
+  color: var(--jetla-red);
+}
+
+/* Stat Card */
+.stat-card {
+  background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+  border-left: 4px solid var(--jetla-red);
+}
+
+/* Smooth Transitions */
+* {
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--jetla-red);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--jetla-red-dark);
+}
+
+/* PWA Specific Styles */
+.pwa-installed {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Install Banner Animation */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+#install-banner {
+  animation: slideUp 0.3s ease-out;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+}
+
+#install-banner button {
+  transition: all 0.2s ease;
+}
+
+#install-banner button:active {
+  transform: scale(0.95);
+}
+
+/* Standalone mode adjustments */
+@media (display-mode: standalone) {
+  body {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  
+  /* Prevent pull-to-refresh on mobile */
+  body {
+    overscroll-behavior-y: contain;
+  }
+}
