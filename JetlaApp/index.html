@@ -1,256 +1,749 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <meta name="description" content="Jetla Operations - Kurye ve Teslimat Yönetim Uygulaması">
-  <meta name="theme-color" content="#ff2737">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="JetlaOps">
-  <meta name="mobile-web-app-capable" content="yes">
-  <title>Jetla Operations</title>
-  
-  <!-- PWA Manifest -->
-  <link rel="manifest" href="manifest.json">
-  
-  <!-- Icons -->
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="64x64" href="favicon-64x64.png">
-  <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
-  <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JetlaApp</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .app-container {
+            max-width: 430px;
+            margin: 0 auto;
+            background-color: #fff;
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        /* Header */
+        .header {
+            background-color: #fff;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #ff3b30;
+        }
+
+        .header-profile {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #ff3b30;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* Content Area */
+        .content {
+            padding-bottom: 100px;
+            min-height: calc(100vh - 140px);
+        }
+
+        /* Tab Bar */
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 430px;
+            background-color: #fff;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            padding: 12px 16px 20px 16px;
+            height: 80px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .tab-button {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 8px;
+            border-radius: 14px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin: 0 4px;
+            min-height: 56px;
+        }
+
+        .tab-button.active {
+            background-color: #ff3b30;
+        }
+
+        .tab-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .tab-icon svg {
+            width: 100%;
+            height: 100%;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .tab-button.active .tab-icon {
+            color: #fff;
+        }
+
+        .tab-button:not(.active) .tab-icon {
+            color: #777;
+        }
+
+        .tab-label {
+            font-size: 12px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .tab-button.active .tab-label {
+            color: #fff;
+        }
+
+        .tab-button:not(.active) .tab-label {
+            color: #777;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            padding: 20px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Paketler Sekmesi */
+        .switch-container {
+            display: flex;
+            background-color: #f0f0f0;
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 20px;
+        }
+
+        .switch-button {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px;
+            background-color: transparent;
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            color: #777;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .switch-button.active {
+            background-color: #fff;
+            color: #ff3b30;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .package-card {
+            background-color: #fff;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #e0e0e0;
+        }
+
+        .package-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        .package-route {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .package-time {
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 12px;
+        }
+
+        .package-earnings {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .earnings-amount {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ff3b30;
+        }
+
+        .earnings-detail {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .map-button {
+            background-color: #ff3b30;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+
+        .package-date {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 8px;
+        }
+
+        .package-info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .detail-button {
+            background-color: #f0f0f0;
+            color: #333;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 12px;
+            width: 100%;
+        }
+
+        /* Kazanç Sekmesi */
+        .filter-chips {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .filter-chip {
+            padding: 8px 16px;
+            border-radius: 20px;
+            background-color: #f0f0f0;
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-chip.active {
+            background-color: #ff3b30;
+            color: #fff;
+        }
+
+        .summary-card {
+            background: linear-gradient(135deg, #ff3b30 0%, #ff5a50 100%);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .summary-label {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .summary-amount {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .summary-date {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .earnings-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .earnings-card {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            border: 1px solid #e0e0e0;
+        }
+
+        .earnings-card-label {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 8px;
+        }
+
+        .earnings-card-amount {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .chart-container {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            border: 1px solid #e0e0e0;
+        }
+
+        .chart-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+        }
+
+        .chart-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            height: 120px;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background-color: #ff3b30;
+            border-radius: 4px 4px 0 0;
+            min-height: 20px;
+        }
+
+        /* QR Sekmesi */
+        .qr-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .qr-box {
+            width: 240px;
+            height: 240px;
+            background-color: #f0f0f0;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            border: 2px dashed #ccc;
+        }
+
+        .qr-placeholder {
+            font-size: 80px;
+            opacity: 0.3;
+        }
+
+        .qr-input-group {
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 16px;
+        }
+
+        .qr-input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .qr-input:focus {
+            outline: none;
+            border-color: #ff3b30;
+        }
+
+        .qr-button {
+            width: 100%;
+            padding: 14px;
+            background-color: #ff3b30;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 12px;
+        }
+
+        .qr-button-secondary {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .payment-list {
+            width: 100%;
+            max-width: 300px;
+            margin-top: 30px;
+        }
+
+        .payment-list-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+        }
+
+        .payment-item {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            border: 1px solid #e0e0e0;
+        }
+
+        .payment-info {
+            flex: 1;
+        }
+
+        .payment-amount {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ff3b30;
+        }
+
+        .payment-date {
+            font-size: 12px;
+            color: #999;
+        }
+    </style>
 </head>
-<body class="bg-white min-h-screen pb-20">
-  <!-- Top Header -->
-  <header class="fixed top-0 left-0 right-0 bg-white border-b-2 border-red-600 z-50 shadow-sm">
-    <div class="px-4 py-3">
-      <h1 class="text-xl font-black text-red-600 tracking-wider uppercase text-center">Jetla Operations</h1>
-    </div>
-  </header>
-
-  <!-- Main Content Area -->
-  <main id="app-content" class="pt-16 px-4 pb-4">
-    <!-- Screens will be loaded here -->
-  </main>
-
-  <!-- Bottom Navigation -->
-  <nav class="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-200 shadow-lg z-50">
-    <div class="flex justify-around items-center py-2">
-      <button 
-        data-route="dashboard" 
-        class="nav-item flex flex-col items-center justify-center px-4 py-2 rounded-lg transition-all active"
-      >
-        <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-        </svg>
-        <span class="text-xs font-semibold">Dashboard</span>
-      </button>
-      <button 
-        data-route="tasks" 
-        class="nav-item flex flex-col items-center justify-center px-4 py-2 rounded-lg transition-all"
-      >
-        <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
-        </svg>
-        <span class="text-xs font-semibold">Görevler</span>
-      </button>
-      <button 
-        data-route="visits" 
-        class="nav-item flex flex-col items-center justify-center px-4 py-2 rounded-lg transition-all"
-      >
-        <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-        </svg>
-        <span class="text-xs font-semibold">Ziyaretler</span>
-      </button>
-      <button 
-        data-route="finance" 
-        class="nav-item flex flex-col items-center justify-center px-4 py-2 rounded-lg transition-all"
-      >
-        <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
-        <span class="text-xs font-semibold">Finans</span>
-      </button>
-    </div>
-  </nav>
-
-  <!-- Scripts -->
-  <script src="router.js"></script>
-  <script src="app.js"></script>
-  <script src="screens/dashboard.js"></script>
-  <script src="screens/tasks.js"></script>
-  <script src="screens/visits.js"></script>
-  <script src="screens/couriers.js"></script>
-  <script src="screens/finance.js"></script>
-  <script src="screens/settings.js"></script>
-
-  <script>
-    // PWA Install Prompt Banner
-    let deferredPrompt;
-    let installBanner = null;
-    let isInstalled = false;
-
-    // Check if already installed
-    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
-      isInstalled = true;
-    }
-
-    // Check localStorage for dismissed banner
-    const bannerDismissed = localStorage.getItem('jetla_install_banner_dismissed');
-    const bannerDismissedDate = bannerDismissed ? new Date(bannerDismissed) : null;
-    const daysSinceDismissed = bannerDismissedDate ? Math.floor((new Date() - bannerDismissedDate) / (1000 * 60 * 60 * 24)) : 999;
-
-    function createInstallBanner() {
-      if (isInstalled || bannerDismissed && daysSinceDismissed < 7) {
-        return; // Don't show if installed or dismissed recently
-      }
-
-      installBanner = document.createElement('div');
-      installBanner.id = 'install-banner';
-      installBanner.className = 'fixed bottom-20 left-0 right-0 bg-gradient-to-r from-red-600 to-red-700 text-white p-4 shadow-2xl z-50 transform transition-transform duration-300';
-      installBanner.style.transform = 'translateY(0)';
-      installBanner.innerHTML = `
-        <div class="flex items-center justify-between gap-3 max-w-md mx-auto">
-          <div class="flex items-center gap-3 flex-1">
-            <div class="text-3xl">📱</div>
-            <div class="flex-1">
-              <div class="font-bold text-sm">Jetla Operations'ı Yükleyin</div>
-              <div class="text-xs opacity-90">Daha hızlı erişim için ana ekrana ekleyin</div>
-            </div>
-          </div>
-          <div class="flex gap-2">
-            <button id="install-banner-btn" class="bg-white text-red-600 px-4 py-2 rounded-lg font-bold text-sm whitespace-nowrap hover:bg-gray-100 transition-colors">
-              Yükle
-            </button>
-            <button id="dismiss-banner-btn" class="text-white opacity-75 hover:opacity-100 px-2">
-              ✕
-            </button>
-          </div>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-title">JetlaApp</div>
+            <div class="header-profile">👤</div>
         </div>
-      `;
-      document.body.appendChild(installBanner);
 
-      // Install button click - Direct install
-      document.getElementById('install-banner-btn').addEventListener('click', async (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        if (deferredPrompt) {
-          try {
-            // Show the install prompt directly
-            deferredPrompt.prompt();
-            
-            // Wait for user response
-            const { outcome } = await deferredPrompt.userChoice;
-            
-            if (outcome === 'accepted') {
-              console.log('User accepted the install prompt');
-              // Banner will be hidden automatically by appinstalled event
-            } else {
-              console.log('User dismissed the install prompt');
-            }
-            
-            // Clear the deferredPrompt
-            deferredPrompt = null;
-            hideInstallBanner();
-          } catch (error) {
-            console.error('Install prompt error:', error);
-            hideInstallBanner();
-          }
-        } else {
-          // If prompt not available, hide banner silently
-          hideInstallBanner();
-        }
-      });
+        <!-- Content -->
+        <div class="content">
+            <!-- Paketler Sekmesi -->
+            <div class="tab-content active" id="tab-packages">
+                <div class="switch-container">
+                    <button class="switch-button active" onclick="switchPackages('active')">Aktif Paketler</button>
+                    <button class="switch-button" onclick="switchPackages('history')">Geçmiş Paketler</button>
+                </div>
 
-      // Dismiss button click
-      document.getElementById('dismiss-banner-btn').addEventListener('click', () => {
-        localStorage.setItem('jetla_install_banner_dismissed', new Date().toISOString());
-        hideInstallBanner();
-      });
-    }
+                <div id="active-packages">
+                    <div class="package-card">
+                        <h3>McDonald's</h3>
+                        <div class="package-route">📍 Çıkış: Kadıköy</div>
+                        <div class="package-route">📍 Varış: Üsküdar</div>
+                        <div class="package-time">⏰ Tahmini Teslim: 14:30</div>
+                        <div class="package-earnings">
+                            <div>
+                                <div class="earnings-amount">82₺</div>
+                                <div class="earnings-detail">68₺ + 14₺ km</div>
+                            </div>
+                            <button class="map-button">Haritayı Aç</button>
+                        </div>
+                    </div>
 
-    function hideInstallBanner() {
-      if (installBanner) {
-        installBanner.style.transform = 'translateY(100%)';
-        setTimeout(() => {
-          if (installBanner && installBanner.parentNode) {
-            installBanner.remove();
-            installBanner = null;
-          }
-        }, 300);
-      }
-    }
+                    <div class="package-card">
+                        <h3>Burger King</h3>
+                        <div class="package-route">📍 Çıkış: Beşiktaş</div>
+                        <div class="package-route">📍 Varış: Şişli</div>
+                        <div class="package-time">⏰ Tahmini Teslim: 15:15</div>
+                        <div class="package-earnings">
+                            <div>
+                                <div class="earnings-amount">95₺</div>
+                                <div class="earnings-detail">80₺ + 15₺ km</div>
+                            </div>
+                            <button class="map-button">Haritayı Aç</button>
+                        </div>
+                    </div>
+                </div>
 
-    // Listen for install prompt FIRST (before page load completes)
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      
-      // Show banner immediately when prompt is available
-      if (!installBanner && !isInstalled && (!bannerDismissed || daysSinceDismissed >= 7)) {
-        // Wait for DOM to be ready
-        if (document.body) {
-          createInstallBanner();
-        } else {
-          document.addEventListener('DOMContentLoaded', () => {
-            createInstallBanner();
-          });
-        }
-      }
-    });
+                <div id="history-packages" style="display: none;">
+                    <div class="package-card">
+                        <div class="package-date">15 Ocak 2024</div>
+                        <h3>Pizza Hut</h3>
+                        <div class="package-info-row">
+                            <span>KM:</span>
+                            <span>12 km</span>
+                        </div>
+                        <div class="package-info-row">
+                            <span>Toplam Kazanç:</span>
+                            <span class="earnings-amount">110₺</span>
+                        </div>
+                        <button class="detail-button">Detayları Gör</button>
+                    </div>
 
-    // Show banner after page load (fallback if beforeinstallprompt didn't fire)
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        if (!isInstalled && !bannerDismissed && deferredPrompt && !installBanner) {
-          createInstallBanner();
-        }
-      }, 2000); // Show after 2 seconds
-    });
+                    <div class="package-card">
+                        <div class="package-date">14 Ocak 2024</div>
+                        <h3>KFC</h3>
+                        <div class="package-info-row">
+                            <span>KM:</span>
+                            <span>8 km</span>
+                        </div>
+                        <div class="package-info-row">
+                            <span>Toplam Kazanç:</span>
+                            <span class="earnings-amount">88₺</span>
+                        </div>
+                        <button class="detail-button">Detayları Gör</button>
+                    </div>
+                </div>
+            </div>
 
-    // Hide banner when installed
-    window.addEventListener('appinstalled', () => {
-      console.log('PWA was installed');
-      isInstalled = true;
-      hideInstallBanner();
-      deferredPrompt = null;
-      localStorage.removeItem('jetla_install_banner_dismissed');
-    });
+            <!-- Kazanç Sekmesi -->
+            <div class="tab-content" id="tab-earnings">
+                <div class="filter-chips">
+                    <button class="filter-chip active" onclick="filterEarnings('day')">Gün</button>
+                    <button class="filter-chip" onclick="filterEarnings('week')">Hafta</button>
+                    <button class="filter-chip" onclick="filterEarnings('month')">Ay</button>
+                </div>
 
-    // Register Service Worker
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./service-worker.js')
-          .then(reg => {
-            console.log('Service Worker registered:', reg);
-            
-            // Check for updates
-            reg.addEventListener('updatefound', () => {
-              const newWorker = reg.installing;
-              newWorker.addEventListener('statechange', () => {
-                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                  // New service worker available
-                  if (confirm('Yeni sürüm mevcut! Sayfayı yenilemek ister misiniz?')) {
-                    window.location.reload();
-                  }
-                }
-              });
+                <div class="summary-card">
+                    <div class="summary-label">Bugünkü Kazanç</div>
+                    <div class="summary-amount">416₺</div>
+                    <div class="summary-date">15 Ocak 2024</div>
+                </div>
+
+                <div class="earnings-grid">
+                    <div class="earnings-card">
+                        <div class="earnings-card-label">Paket Kazancı</div>
+                        <div class="earnings-card-amount">350₺</div>
+                    </div>
+                    <div class="earnings-card">
+                        <div class="earnings-card-label">KM Bonusu</div>
+                        <div class="earnings-card-amount">66₺</div>
+                    </div>
+                </div>
+
+                <div class="earnings-card" style="margin-bottom: 20px;">
+                    <div class="earnings-card-label">Avans Bilgileri</div>
+                    <div class="earnings-card-amount" style="font-size: 16px; margin-top: 8px;">Çekilebilir: 1,250₺</div>
+                    <div style="font-size: 12px; color: #999; margin-top: 4px;">Son çekim: 10 Ocak 2024</div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-title">Haftalık Kazanç Grafiği</div>
+                    <div class="chart-bars">
+                        <div class="chart-bar" style="height: 40%;"></div>
+                        <div class="chart-bar" style="height: 60%;"></div>
+                        <div class="chart-bar" style="height: 80%;"></div>
+                        <div class="chart-bar" style="height: 100%;"></div>
+                        <div class="chart-bar" style="height: 70%;"></div>
+                        <div class="chart-bar" style="height: 50%;"></div>
+                        <div class="chart-bar" style="height: 90%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QR Sekmesi -->
+            <div class="tab-content" id="tab-qr">
+                <div class="qr-container">
+                    <div class="qr-box">
+                        <div class="qr-placeholder">📱</div>
+                    </div>
+
+                    <div class="qr-input-group">
+                        <input type="number" class="qr-input" placeholder="Tutar Gir" id="qr-amount">
+                        <button class="qr-button" onclick="generateQR()">QR Oluştur</button>
+                        <button class="qr-button qr-button-secondary" onclick="shareLink()">Link Paylaş</button>
+                    </div>
+
+                    <div class="payment-list">
+                        <div class="payment-list-title">Son Ödemeler</div>
+                        <div class="payment-item">
+                            <div class="payment-info">
+                                <div class="payment-amount">150₺</div>
+                                <div class="payment-date">14 Ocak 2024 - 18:30</div>
+                            </div>
+                        </div>
+                        <div class="payment-item">
+                            <div class="payment-info">
+                                <div class="payment-amount">85₺</div>
+                                <div class="payment-date">14 Ocak 2024 - 15:20</div>
+                            </div>
+                        </div>
+                        <div class="payment-item">
+                            <div class="payment-info">
+                                <div class="payment-amount">200₺</div>
+                                <div class="payment-date">13 Ocak 2024 - 20:15</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+            <button class="tab-button active" onclick="switchTab('packages')">
+                <div class="tab-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                    </svg>
+                </div>
+                <div class="tab-label">Paketler</div>
+            </button>
+            <button class="tab-button" onclick="switchTab('earnings')">
+                <div class="tab-icon">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M12 6v12"></path>
+                        <path d="M15 9a3 3 0 1 0-6 0"></path>
+                        <path d="M15 15a3 3 0 1 0-6 0"></path>
+                    </svg>
+                </div>
+                <div class="tab-label">Kazanç</div>
+            </button>
+            <button class="tab-button" onclick="switchTab('qr')">
+                <div class="tab-icon">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="5" height="5"></rect>
+                        <rect x="16" y="3" width="5" height="5"></rect>
+                        <rect x="3" y="16" width="5" height="5"></rect>
+                        <path d="M11 3h2v2h-2z"></path>
+                        <path d="M11 19h2v2h-2z"></path>
+                        <path d="M19 11h2v2h-2z"></path>
+                        <path d="M3 11h2v2H3z"></path>
+                        <path d="M16 8h2v2h-2z"></path>
+                        <path d="M8 16h2v2H8z"></path>
+                        <path d="M8 8h2v2H8z"></path>
+                    </svg>
+                </div>
+                <div class="tab-label">QR</div>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            // Tüm tab içeriklerini gizle
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
             });
-          })
-          .catch(err => console.log('Service Worker registration failed:', err));
-      });
-    }
 
-    // Check if app is installed
-    if (window.matchMedia('(display-mode: standalone)').matches) {
-      console.log('Running as PWA');
-      document.body.classList.add('pwa-installed');
-    }
-  </script>
+            // Tüm tab butonlarını pasif yap
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Seçilen tab'ı aktif yap
+            document.getElementById('tab-' + tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        function switchPackages(type) {
+            const activeBtn = document.querySelectorAll('.switch-button')[0];
+            const historyBtn = document.querySelectorAll('.switch-button')[1];
+            const activePackages = document.getElementById('active-packages');
+            const historyPackages = document.getElementById('history-packages');
+
+            if (type === 'active') {
+                activeBtn.classList.add('active');
+                historyBtn.classList.remove('active');
+                activePackages.style.display = 'block';
+                historyPackages.style.display = 'none';
+            } else {
+                activeBtn.classList.remove('active');
+                historyBtn.classList.add('active');
+                activePackages.style.display = 'none';
+                historyPackages.style.display = 'block';
+            }
+        }
+
+        function filterEarnings(period) {
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                chip.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+            // Burada filtreleme mantığı eklenebilir
+        }
+
+        function generateQR() {
+            const amount = document.getElementById('qr-amount').value;
+            if (amount) {
+                alert('QR kodu oluşturuluyor: ' + amount + '₺');
+                // QR kod oluşturma mantığı buraya eklenebilir
+            } else {
+                alert('Lütfen tutar giriniz');
+            }
+        }
+
+        function shareLink() {
+            alert('Link kopyalandı!');
+            // Link paylaşma mantığı buraya eklenebilir
+        }
+    </script>
 </body>
 </html>
