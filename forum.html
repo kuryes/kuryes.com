@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Forum - Kuryes.com</title>
     <meta name="description" content="Sohbete katıl, ilan ver, kazanç paylaş. Kurye forumu ve şehir odaları.">
     
@@ -13,12 +13,27 @@
     <meta property="og:url" content="https://kuryes.com/forum.html">
     <meta property="og:image" content="/img/og-image.png">
     
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
     <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="public/favicon/kuryesfavicon.png">
-    <link rel="icon" type="image/png" sizes="64x64" href="public/favicon/kuryesfavicon.png">
-    <link rel="icon" type="image/png" sizes="128x128" href="public/favicon/kuryesfavicon.png">
-    <link rel="icon" type="image/png" sizes="256x256" href="public/favicon/kuryesfavicon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="public/favicon/kuryesfavicon.png">
+    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="shortcut icon" href="/logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="/logo.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="/logo.png">
+    <link rel="icon" type="image/png" sizes="256x256" href="/logo.png">
+    
+    <!-- Apple Touch Icon (iOS için masaüstü ikonu) -->
+    <link rel="apple-touch-icon" href="/logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="/logo.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/logo.png">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#FF3131">
+    <meta name="msapplication-TileColor" content="#FF3131">
+    <meta name="msapplication-TileImage" content="/logo.png">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -82,40 +97,10 @@
                     </div>
                 </div>
                 
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden">
-                    <button id="mobileMenuBtn" class="text-text hover:text-primary transition-colors">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Mobile Menu -->
-        <div id="mobileMenu" class="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 hidden">
-            <div class="px-4 py-2 space-y-2">
-                <a href="yakinda.html" class="block py-2 text-text hover:text-primary">Yakında</a>
-                <a href="kurye-rehberi.html" class="block py-2 text-text hover:text-primary">Kurye Rehberi</a>
-                <a href="ilanlar.html" class="block py-2 text-text hover:text-primary">İş İlanları</a>
-                <a href="forum.html" class="block py-2 text-primary font-semibold">Forum</a>
-                <a href="kazanc.html" class="block py-2 text-text hover:text-primary">Kazanç</a>
-                <div class="pt-2 border-t border-gray-200">
-                    <!-- Login Button (shown when not logged in) -->
-                    <button id="loginBtnMobile" data-login-btn class="block w-full text-center py-2 bg-accent text-white rounded-lg px-4 font-medium hover:bg-blue-600 transition-colors">Giriş Yap</button>
-                    <button data-register-btn class="block w-full text-center bg-primary text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors mt-2">Kayıt Ol</button>
-                    
-                    <!-- User Menu Mobile (shown when logged in) -->
-                    <div id="userMenuMobile" class="hidden pt-2 space-y-2">
-                        <a id="profileLinkMobile" href="#" class="flex items-center space-x-2 py-2 text-text hover:text-primary">
-                            <div id="userAvatarDisplayMobile" class="w-8 h-8 rounded-full bg-gray-200 overflow-hidden border-2 border-primary">
-                                <img src="public/img/avatars/1.png" alt="Avatar" class="w-full h-full object-cover">
-                            </div>
-                            <span id="userNameDisplayMobile" class="font-medium">Kullanıcı</span>
-                        </a>
-                        <button id="logoutBtnMobile" class="block w-full text-center py-2 text-muted hover:text-text transition-colors font-medium">Çıkış Yap</button>
-                    </div>
+                <!-- Mobile Auth Buttons -->
+                <div class="md:hidden flex items-center space-x-2">
+                    <button id="loginBtnMobile" data-login-btn class="bg-accent text-white px-3 py-1.5 rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium">Giriş</button>
+                    <button data-register-btn class="bg-primary text-white px-3 py-1.5 rounded-lg hover:bg-red-600 transition-colors text-sm font-medium">Kayıt</button>
                 </div>
             </div>
         </div>
@@ -321,6 +306,50 @@
         </div>
     </section>
     
+    <!-- Bottom Navigation (Mobile Only) -->
+    <nav class="bottom-nav md:hidden">
+        <a href="index.html" class="bottom-nav-item" data-page="index">
+            <svg class="bottom-nav-item-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+            </svg>
+            <div class="bottom-nav-item-text">Ana Sayfa</div>
+        </a>
+        <a href="ilanlar.html" class="bottom-nav-item" data-page="ilanlar">
+            <svg class="bottom-nav-item-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+            <div class="bottom-nav-item-text">İlanlar</div>
+        </a>
+        <a href="forum.html" class="bottom-nav-item active" data-page="forum">
+            <svg class="bottom-nav-item-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+            </svg>
+            <div class="bottom-nav-item-text">Forum</div>
+        </a>
+        <a href="kazanc.html" class="bottom-nav-item" data-page="kazanc">
+            <svg class="bottom-nav-item-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <div class="bottom-nav-item-text">Kazanç</div>
+        </a>
+        <a href="#" id="bottomNavProfile" class="bottom-nav-item" data-page="profil">
+            <svg class="bottom-nav-item-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+            </svg>
+            <div class="bottom-nav-item-text">Profil</div>
+        </a>
+    </nav>
+    
+    <!-- Floating Action Button (Mobile Only) -->
+    <button id="fabButton" class="fab-button md:hidden" style="display: none;">
+        <span id="fabIcon">+</span>
+    </button>
+    
+    <!-- Pull to Refresh Indicator -->
+    <div id="pullToRefreshIndicator" class="pull-to-refresh-indicator">
+        Yenileniyor...
+    </div>
+    
     <!-- Footer -->
     <footer class="bg-text text-white py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -343,6 +372,7 @@
     <script src="js/kuryes-auth.js"></script>
     <script src="js/kuryes-login-modal.js"></script>
     <script src="js/kuryes-preview.js"></script>
+    <script src="js/mobile-enhancements.js"></script>
     
         <!-- Login Modal -->
     <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">

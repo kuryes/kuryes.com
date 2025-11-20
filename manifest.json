@@ -14,16 +14,22 @@
   "categories": ["business", "productivity", "utilities"],
   "icons": [
     {
-      "src": "public/favicon/kuryespwaicons.png",
+      "src": "/logo.png",
       "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "public/favicon/kuryespwaicons.png",
-      "sizes": "512x512",
+      "src": "/logo.png",
+      "sizes": "1024x1024",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ],
   "shortcuts": [
@@ -34,8 +40,8 @@
       "url": "/kurye-tabani.html",
       "icons": [
         {
-          "src": "public/favicon/kuryesfavicon.png",
-          "sizes": "32x32"
+          "src": "/logo.png",
+          "sizes": "96x96"
         }
       ]
     },
@@ -46,8 +52,8 @@
       "url": "/forum.html",
       "icons": [
         {
-          "src": "/favicon/favicon-32x32-orange.png",
-          "sizes": "32x32"
+          "src": "/logo.png",
+          "sizes": "96x96"
         }
       ]
     },
@@ -58,8 +64,8 @@
       "url": "/kazanc.html",
       "icons": [
         {
-          "src": "/favicon/favicon-32x32-yellow.png",
-          "sizes": "32x32"
+          "src": "/logo.png",
+          "sizes": "96x96"
         }
       ]
     }

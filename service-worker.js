@@ -22,6 +22,8 @@ const STATIC_FILES = [
     '/css/styles.css',
     '/js/app.js',
     '/manifest.json',
+    // Add logo file (masaüstü ikonu için)
+    '/logo.png',
     // Add favicon files
     '/public/favicon/kuryesfavicon.png',
     '/public/favicon/kuryespwaicons.png',

@@ -109,12 +109,15 @@
                     <div class="bg-white rounded-xl shadow-lg p-6 sticky top-24">
                         <!-- Business Logo/Name -->
                         <div class="text-center mb-6">
-                            <div class="w-32 h-32 mx-auto bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mb-4 relative">
+                            <div class="w-32 h-32 mx-auto bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mb-4 relative cursor-pointer hover:opacity-80 transition-opacity" id="avatarSelectButton">
                                 <img id="businessAvatar" 
-                                     src="" 
-                                     alt="İşletme Avatar" 
+                                     src="logo.png" 
+                                     alt="İşletme Logo" 
                                      class="w-full h-full rounded-full object-cover hidden">
-                                <span class="text-5xl" id="businessIcon">??</span>
+                                <span class="text-5xl" id="businessIcon">🏪</span>
+                                <div class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 rounded-full flex items-center justify-center transition-all">
+                                    <span class="text-white text-xs font-semibold opacity-0 hover:opacity-100 transition-opacity">Logo Seç</span>
+                                </div>
                             </div>
                             <h2 id="businessName" class="text-2xl font-bold text-text">İşletme Adı</h2>
                             <p id="businessType" class="text-muted">İşletme Türü</p>
@@ -233,6 +236,33 @@
                                         class="inline-flex items-center justify-center px-6 py-3 bg-accent text-white rounded-lg font-semibold shadow-md hover:bg-blue-600 transition-colors">
                                     İlanı Yayınla
                                 </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Başvurular Bölümü -->
+                    <div id="basvurularSection" class="mt-8 hidden">
+                        <div class="border-t border-gray-200 pt-8">
+                            <div class="flex items-center justify-between mb-6">
+                                <div>
+                                    <h2 class="text-2xl font-bold font-poppins text-text">Başvurular</h2>
+                                    <p class="text-sm text-muted mt-1">İlanınıza yapılan başvuruları görüntüleyin ve yönetin</p>
+                                </div>
+                                <button onclick="loadBasvurular()" class="px-4 py-2 bg-accent text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-semibold">
+                                    Yenile
+                                </button>
+                            </div>
+                            
+                            <div id="basvurularLoading" class="text-center py-8 text-muted">
+                                <p>Yükleniyor...</p>
+                            </div>
+                            
+                            <div id="basvurularList" class="space-y-4">
+                                <!-- Başvurular buraya dinamik olarak eklenecek -->
+                            </div>
+                            
+                            <div id="basvurularEmpty" class="text-center py-8 text-muted hidden">
+                                <p>Henüz başvuru bulunmamaktadır.</p>
                             </div>
                         </div>
                     </div>
@@ -850,6 +880,272 @@
     <script src="js/kuryes-auth.js"></script>
     <script src="js/kuryes-login-modal.js"></script>
     <script src="js/kuryes-profile.js"></script>
+    
+    <!-- Kurye Profil Detay Modalı -->
+    <div id="kuryeProfileModal" class="fixed inset-0 bg-black bg-opacity-50 z-[100] hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between z-10">
+                <h2 class="text-2xl font-bold font-poppins text-text">Kurye Profil Detayları</h2>
+                <button id="closeKuryeProfileModal" class="text-gray-500 hover:text-gray-700 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div id="kuryeProfileModalContent" class="p-6">
+                <!-- İçerik buraya dinamik olarak eklenecek -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Başvurular Yönetimi -->
+    <script>
+        // Global scope'a taşı - HTML onclick handler'ları için
+        window.PROFILE_API_URL_BASVURULAR = 'https://script.google.com/macros/s/AKfycbyP4rGbVDXG8-xli6QPv4YXaHgiCyCoCr5UvdJtYJyTi2RWfFx-rqUd-ZtTQiMsz6Hdww/exec';
+        let currentIlanId = null;
+        
+        // Sayfa yüklendiğinde ilan ID'sini al ve başvuruları yükle
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const isletmeId = urlParams.get('id') || localStorage.getItem('isletme_id');
+            
+            if (isletmeId) {
+                currentIlanId = isletmeId;
+                // İlan yayınlanmışsa başvurular bölümünü göster
+                checkIlanYayinlandi(isletmeId);
+            }
+        });
+        
+        async function checkIlanYayinlandi(isletmeId) {
+            try {
+                const url = `${window.PROFILE_API_URL_BASVURULAR}?id=${encodeURIComponent(isletmeId)}&formType=isletme`;
+                const response = await fetch(url);
+                const result = await response.json();
+                
+                if (result.success && result.data) {
+                    const ilanYayinlandi = result.data.ilanYayinlandi;
+                    if (ilanYayinlandi === '1' || ilanYayinlandi === 1 || ilanYayinlandi === true) {
+                        document.getElementById('basvurularSection').classList.remove('hidden');
+                        if (typeof window.loadBasvurular === 'function') {
+                            window.loadBasvurular();
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('İlan kontrolü hatası:', error);
+            }
+        }
+        
+        // Global scope'a taşı - HTML onclick handler'ları için
+        window.loadBasvurular = async function loadBasvurular() {
+            if (!currentIlanId) {
+                console.error('İlan ID bulunamadı');
+                return;
+            }
+            
+            const loadingEl = document.getElementById('basvurularLoading');
+            const listEl = document.getElementById('basvurularList');
+            const emptyEl = document.getElementById('basvurularEmpty');
+            
+            if (!loadingEl || !listEl || !emptyEl) {
+                console.error('Başvurular bölümü elementleri bulunamadı');
+                return;
+            }
+            
+            loadingEl.classList.remove('hidden');
+            listEl.innerHTML = '';
+            emptyEl.classList.add('hidden');
+            
+            try {
+                const url = `${window.PROFILE_API_URL_BASVURULAR}?action=getBasvurular&ilanId=${encodeURIComponent(currentIlanId)}`;
+                const response = await fetch(url);
+                const result = await response.json();
+                
+                loadingEl.classList.add('hidden');
+                
+                if (result.success && result.data && result.data.length > 0) {
+                    displayBasvurular(result.data);
+                } else {
+                    emptyEl.classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error('Başvurular yükleme hatası:', error);
+                loadingEl.classList.add('hidden');
+                listEl.innerHTML = '<div class="text-center py-8 text-red-600"><p>Başvurular yüklenirken bir hata oluştu.</p></div>';
+            }
+        };
+        
+        function displayBasvurular(basvurular) {
+            const listEl = document.getElementById('basvurularList');
+            listEl.innerHTML = '';
+            
+            // Basvuru verilerini global olarak sakla (butonlar için)
+            if (!window.basvuruDataMap) {
+                window.basvuruDataMap = {};
+            }
+            
+            basvurular.forEach(basvuru => {
+                // Basvuru verisini map'e kaydet
+                window.basvuruDataMap[basvuru.id] = basvuru;
+                // Basvuru verisini map'e kaydet
+                window.basvuruDataMap[basvuru.id] = basvuru;
+                const kuryeData = basvuru.kuryeData || {};
+                const kartData = kuryeData.raw_kart_json || {};
+                
+                // Avatar belirleme
+                const avatar = kuryeData.avatar || 1;
+                const avatarSrc = `public/img/avatars/${avatar}.png`;
+                
+                // Durum renkleri
+                let durumClass = 'bg-yellow-100 text-yellow-800';
+                let durumText = 'Beklemede';
+                if (basvuru.durum === 'kabul') {
+                    durumClass = 'bg-green-100 text-green-800';
+                    durumText = 'Kabul Edildi';
+                } else if (basvuru.durum === 'red') {
+                    durumClass = 'bg-red-100 text-red-800';
+                    durumText = 'Reddedildi';
+                }
+                
+                // Tarih formatla
+                const basvuruTarihi = new Date(basvuru.basvuruTarihi);
+                const tarihStr = basvuruTarihi.toLocaleDateString('tr-TR', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                const basvuruCard = document.createElement('div');
+                basvuruCard.className = 'bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow';
+                basvuruCard.innerHTML = `
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <!-- Kurye Bilgileri (Sol) -->
+                        <div class="flex-1">
+                            <div class="flex items-start gap-4 mb-4">
+                                <div class="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center flex-shrink-0">
+                                    <img src="${avatarSrc}" alt="Avatar" class="w-full h-full rounded-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                    <span class="text-3xl hidden">🏍️</span>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="text-xl font-bold text-text mb-1">${kuryeData.adSoyad || kuryeData.ad_soyad || 'İsimsiz'}</h3>
+                                    <p class="text-sm text-muted mb-2">${kuryeData.id ? `#${kuryeData.id}` : ''}</p>
+                                    <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold ${durumClass}">${durumText}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <p class="text-xs text-muted mb-1">Telefon</p>
+                                    <p class="text-sm font-medium text-text">${kuryeData.telefon || kuryeData.tel || '-'}</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-muted mb-1">E-posta</p>
+                                    <p class="text-sm font-medium text-text">${kuryeData.email || '-'}</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-muted mb-1">Şehir</p>
+                                    <p class="text-sm font-medium text-text">${kuryeData.sehir || '-'}</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-muted mb-1">Başvuru Tarihi</p>
+                                    <p class="text-sm font-medium text-text">${tarihStr}</p>
+                                </div>
+                            </div>
+                            
+                            ${kartData.hakkinda || kartData.hakkında || kartData.aciklama || kartData.açıklama ? `
+                            <div class="mt-4 pt-4 border-t border-gray-200">
+                                <p class="text-xs text-muted mb-2">Hakkında</p>
+                                <p class="text-sm text-text">${kartData.hakkinda || kartData.hakkında || kartData.aciklama || kartData.açıklama}</p>
+                            </div>
+                            ` : ''}
+                            
+                            ${basvuru.notlar ? `
+                            <div class="mt-4 pt-4 border-t border-gray-200">
+                                <p class="text-xs text-muted mb-2">Notlar</p>
+                                <p class="text-sm text-text">${basvuru.notlar}</p>
+                            </div>
+                            ` : ''}
+                        </div>
+                        
+                        <!-- Aksiyonlar (Sağ) -->
+                        <div class="flex flex-col gap-2 md:w-48">
+                            ${basvuru.durum === 'beklemede' ? `
+                            <button onclick="updateBasvuruDurum('${basvuru.id}', 'kabul')" class="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-semibold">
+                                Kabul Et
+                            </button>
+                            <button onclick="updateBasvuruDurum('${basvuru.id}', 'red')" class="w-full px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-semibold">
+                                Reddet
+                            </button>
+                            ` : ''}
+                            <button data-basvuru-id="${basvuru.id}" class="viewKuryeProfileBtn w-full px-4 py-2 bg-accent text-white rounded-lg hover:bg-blue-600 transition-colors font-semibold">
+                                Profili Gör
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                listEl.appendChild(basvuruCard);
+            });
+            
+            // Profili Gör butonları için event listener ekle
+            const viewProfileBtns = listEl.querySelectorAll('.viewKuryeProfileBtn');
+            viewProfileBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const basvuruId = this.getAttribute('data-basvuru-id');
+                    const basvuruData = window.basvuruDataMap && window.basvuruDataMap[basvuruId];
+                    if (basvuruData && typeof window.viewKuryeProfile === 'function') {
+                        window.viewKuryeProfile(basvuruData.kuryeData?.id || '', basvuruData);
+                    } else {
+                        alert('Kurye profili yükleniyor, lütfen bekleyin...');
+                    }
+                });
+            });
+        }
+        
+        // Global scope'a taşı - HTML onclick handler'ları için
+        window.updateBasvuruDurum = async function updateBasvuruDurum(basvuruId, durum) {
+            if (!confirm(`Bu başvuruyu ${durum === 'kabul' ? 'kabul' : 'reddetmek'} istediğinize emin misiniz?`)) {
+                return;
+            }
+            
+            try {
+                const formData = new URLSearchParams();
+                formData.append('action', 'updateBasvuruDurum');
+                formData.append('basvuruId', basvuruId);
+                formData.append('durum', durum);
+                
+                const response = await fetch(window.PROFILE_API_URL_BASVURULAR, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: formData.toString()
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert(`Başvuru ${durum === 'kabul' ? 'kabul' : 'reddedildi'}.`);
+                    if (typeof window.loadBasvurular === 'function') {
+                        window.loadBasvurular();
+                    }
+                } else {
+                    alert(result.error || 'Başvuru durumu güncellenirken bir hata oluştu.');
+                }
+            } catch (error) {
+                console.error('Başvuru durumu güncelleme hatası:', error);
+                alert('Başvuru durumu güncellenirken bir hata oluştu.');
+            }
+        };
+        
+        // Global scope'a taşı - HTML onclick handler'ları için
+        window.viewKuryeProfile = function viewKuryeProfile(kuryeId) {
+            window.open(`kurye-kart.html?id=${kuryeId}`, '_blank');
+        };
+    </script>
     <script>
                  document.addEventListener('DOMContentLoaded', async function() {
              // URL'den ID ve type'ı al
@@ -877,35 +1173,113 @@
              // İşletme ID'yi göster (geçici)
              document.getElementById('isletmeId').textContent = '#' + isletmeId;
              
-             // Google Sheets'ten veri çek
+             // Önce localStorage'dan yükle (hızlı yükleme için)
+             const savedDataStr = localStorage.getItem('isletme_data');
+             if (savedDataStr && savedDataStr !== 'null') {
+                 try {
+                     const savedData = JSON.parse(savedDataStr);
+                     if (savedData && savedData.id === isletmeId) {
+                         console.log('LocalStorage\'dan veri yüklendi:', savedData);
+                         // Form alanlarını doldur
+                         if (typeof fillIsletmeProfileForm === 'function') {
+                             fillIsletmeProfileForm(savedData);
+                         }
+                         // Sayfa elementlerini doldur
+                         if (typeof populatePageFromRecord === 'function') {
+                             populatePageFromRecord(savedData, type);
+                         }
+                         // Form alanlarını güncelle
+                         setTimeout(() => {
+                             if (typeof updateProfileDisplay === 'function') {
+                                 updateProfileDisplay();
+                             }
+                             if (typeof updatePreview === 'function') {
+                                 updatePreview();
+                             }
+                             if (typeof updateAllIsletmeSectionStatuses === 'function') {
+                                 updateAllIsletmeSectionStatuses();
+                             }
+                         }, 50);
+                     }
+                 } catch (e) {
+                     console.error('LocalStorage parse hatası:', e);
+                 }
+             }
+             
+             // Google Sheets'ten veri çek (güncel veri için)
              if (typeof getRecordById === 'function') {
                  try {
                      const result = await getRecordById(isletmeId, type);
                      
-                     if (result.success && result.data) {
-                         const isletmeData = result.data;
-                         
-                         // Sayfa elementlerini doldur
-                         if (typeof populatePageFromRecord === 'function') {
-                             populatePageFromRecord(isletmeData, type);
-                         }
-                         
-                         // Form alanlarını doldur (eğer form varsa)
-                         const form = document.querySelector('form');
-                         if (form && typeof populateFormFromRecord === 'function') {
-                             populateFormFromRecord(form, isletmeData);
-                         }
-                         
-                         // LocalStorage'a kaydet
-                         localStorage.setItem('isletme_id', isletmeId);
-                         localStorage.setItem('isletme_data', JSON.stringify(isletmeData));
-                         
-                         console.log('İşletme verileri yüklendi:', isletmeData);
-                     } else {
-                         console.error('İşletme verisi bulunamadı:', result.error);
-                     }
+                    if (result.success && result.data) {
+                        const isletmeData = result.data;
+                        
+                        // Sayfa elementlerini doldur
+                        if (typeof populatePageFromRecord === 'function') {
+                            populatePageFromRecord(isletmeData, type);
+                        }
+                        
+                        // Form alanlarını doldur - fillIsletmeProfileForm fonksiyonunu kullan
+                        if (typeof fillIsletmeProfileForm === 'function') {
+                            fillIsletmeProfileForm(isletmeData);
+                        } else if (typeof populateFormFromRecord === 'function') {
+                            const form = document.querySelector('form');
+                            if (form) {
+                                populateFormFromRecord(form, isletmeData);
+                            }
+                        }
+                        
+                        // LocalStorage'a kaydet
+                        localStorage.setItem('isletme_id', isletmeId);
+                        localStorage.setItem('isletme_data', JSON.stringify(isletmeData));
+                        
+                        console.log('İşletme verileri Google Sheets\'ten yüklendi:', isletmeData);
+                        
+                        // Form alanlarını güncelle (preview ve display için)
+                        setTimeout(() => {
+                            if (typeof updateProfileDisplay === 'function') {
+                                updateProfileDisplay();
+                            }
+                            if (typeof updatePreview === 'function') {
+                                updatePreview();
+                            }
+                            if (typeof updateAllIsletmeSectionStatuses === 'function') {
+                                updateAllIsletmeSectionStatuses();
+                            }
+                        }, 100);
+                    } else {
+                        console.error('İşletme verisi bulunamadı:', result.error);
+                        // LocalStorage'dan yükle (fallback) - eğer daha önce yüklenmediyse
+                        if (!savedDataStr || savedDataStr === 'null') {
+                            const savedData = localStorage.getItem('isletme_data');
+                            if (savedData) {
+                                try {
+                                    const isletmeData = JSON.parse(savedData);
+                                    if (typeof fillIsletmeProfileForm === 'function') {
+                                        fillIsletmeProfileForm(isletmeData);
+                                    }
+                                } catch (e) {
+                                    console.error('LocalStorage parse hatası:', e);
+                                }
+                            }
+                        }
+                    }
                  } catch (error) {
                      console.error('Veri yükleme hatası:', error);
+                     // Hata durumunda localStorage'dan yükle (eğer daha önce yüklenmediyse)
+                     if (!savedDataStr || savedDataStr === 'null') {
+                         const savedData = localStorage.getItem('isletme_data');
+                         if (savedData) {
+                             try {
+                                 const isletmeData = JSON.parse(savedData);
+                                 if (typeof fillIsletmeProfileForm === 'function') {
+                                     fillIsletmeProfileForm(isletmeData);
+                                 }
+                             } catch (e) {
+                                 console.error('LocalStorage parse hatası:', e);
+                             }
+                         }
+                     }
                  }
              }
             
@@ -1271,16 +1645,36 @@
                 const isletmeTuru = document.getElementById('isletmeTuru').value || 'Diğer';
                 const businessIcon = document.getElementById('businessIcon');
                 const businessAvatar = document.getElementById('businessAvatar');
-                const avatarContainer = businessIcon.parentElement;
+                const avatarContainer = businessIcon ? businessIcon.parentElement : (businessAvatar ? businessAvatar.parentElement : null);
                 
-                // Icon'u güncelle
-                businessIcon.textContent = businessTypeIcons[isletmeTuru] || businessTypeIcons['Diğer'];
+                // Logo yoksa kategoriye göre emoji göster
+                // Logo varsa avatar göster, yoksa emoji göster
+                const hasLogo = false; // Logo onayı için kontrol edilecek (şimdilik false)
+                
+                if (hasLogo && businessAvatar) {
+                    // Logo varsa avatar göster
+                    businessAvatar.src = 'logo.png';
+                    businessAvatar.classList.remove('hidden');
+                    businessAvatar.classList.add('block');
+                    if (businessIcon) {
+                        businessIcon.classList.add('hidden');
+                    }
+                } else {
+                    // Logo yoksa kategoriye göre emoji göster
+                    if (businessAvatar) {
+                        businessAvatar.classList.add('hidden');
+                        businessAvatar.classList.remove('block');
+                    }
+                    if (businessIcon) {
+                        businessIcon.textContent = businessTypeIcons[isletmeTuru] || businessTypeIcons['Diğer'];
+                        businessIcon.classList.remove('hidden');
+                    }
+                }
                 
                 // Renkleri güncelle
-                avatarContainer.className = `w-32 h-32 mx-auto bg-gradient-to-br ${businessTypeColors[isletmeTuru] || businessTypeColors['Diğer']} rounded-full flex items-center justify-center mb-4 relative`;
-                
-                // Eğer avatar görseli varsa göster (şimdilik icon kullanıyoruz)
-                // Gelecekte: if (businessAvatar.src) { businessAvatar.classList.remove('hidden'); businessIcon.classList.add('hidden'); }
+                if (avatarContainer) {
+                    avatarContainer.className = `w-32 h-32 mx-auto bg-gradient-to-br ${businessTypeColors[isletmeTuru] || businessTypeColors['Diğer']} rounded-full flex items-center justify-center mb-4 relative cursor-pointer hover:opacity-80 transition-opacity`;
+                }
             }
             
             // İşletme türü değiştiğinde avatar güncelle
@@ -1945,7 +2339,7 @@
                   });
               }
 
-              function submitIsletmeProfile(triggerBtn) {
+              function submitIsletmeProfile(triggerBtn, callback) {
                   if (isProcessing) return;
 
                   if (!form.checkValidity()) {
@@ -2097,6 +2491,56 @@
                       }
                       
                       if (result.success) {
+                          // Form verilerini localStorage'a kaydet
+                          try {
+                              const formDataObj = {};
+                              formData.forEach((value, key) => {
+                                  formDataObj[key] = value;
+                              });
+                              
+                              // Mevcut veriyi al ve güncelle
+                              const existingDataStr = localStorage.getItem('isletme_data');
+                              let existingData = {};
+                              if (existingDataStr) {
+                                  try {
+                                      existingData = JSON.parse(existingDataStr);
+                                  } catch (e) {
+                                      console.error('LocalStorage parse hatası:', e);
+                                  }
+                              }
+                              
+                              // raw_kart_json'ı güncelle
+                              if (!existingData.raw_kart_json) {
+                                  existingData.raw_kart_json = {};
+                              } else if (typeof existingData.raw_kart_json === 'string') {
+                                  try {
+                                      existingData.raw_kart_json = JSON.parse(existingData.raw_kart_json);
+                                  } catch (e) {
+                                      existingData.raw_kart_json = {};
+                                  }
+                              }
+                              
+                              // Form verilerini raw_kart_json'a ekle
+                              Object.keys(formDataObj).forEach(key => {
+                                  if (key !== 'action' && key !== 'id' && key !== 'formType' && key !== 'jsonData' && key !== 'isletmeId') {
+                                      existingData.raw_kart_json[key] = formDataObj[key];
+                                  }
+                              });
+                              
+                              // Güncellenmiş veriyi localStorage'a kaydet
+                              localStorage.setItem('isletme_data', JSON.stringify(existingData));
+                              console.log('Form verileri localStorage\'a kaydedildi');
+                          } catch (e) {
+                              console.error('LocalStorage kaydetme hatası:', e);
+                          }
+                          
+                          // Eğer callback varsa çağır (ilan yayınlama için)
+                          if (callback && typeof callback === 'function') {
+                              callback();
+                              return;
+                          }
+                          
+                          // Normal kaydetme işlemi
                           ilanPreviewModal.classList.add('hidden');
                           closeKartEditorModal();
                           toggleBodyScroll(false);
@@ -2147,7 +2591,107 @@
               if (confirmSaveBtn) {
                   confirmSaveBtn.addEventListener('click', function(e) {
                       e.preventDefault();
-                      submitIsletmeProfile(confirmSaveBtn);
+                      // Önce kaydet, sonra ilan yayınla
+                      submitIsletmeProfileAndPublish(confirmSaveBtn);
+                  });
+              }
+              
+              // İlan yayınlama fonksiyonu (kaydet + yayınla)
+              function submitIsletmeProfileAndPublish(triggerBtn) {
+                  if (isProcessing) return;
+                  
+                  // Önce kaydet
+                  submitIsletmeProfile(triggerBtn, function() {
+                      // Kaydetme başarılı, şimdi ilan yayınla
+                      publishIlan(triggerBtn);
+                  });
+              }
+              
+              // İlan yayınlama fonksiyonu
+              function publishIlan(triggerBtn) {
+                  const urlParams = new URLSearchParams(window.location.search);
+                  const isletmeId = urlParams.get('id') || localStorage.getItem('isletme_id');
+                  const type = urlParams.get('type') || 'isletme';
+                  const formType = type === 'lojistik' ? 'lojistik' : 'isletme';
+                  
+                  if (!isletmeId) {
+                      alert('İşletme ID bulunamadı. Lütfen sayfayı yenileyin.');
+                      return;
+                  }
+                  
+                  const disabledButtons = [];
+                  if (triggerBtn) {
+                      disabledButtons.push([triggerBtn, triggerBtn.textContent]);
+                      triggerBtn.disabled = true;
+                      triggerBtn.textContent = 'Yayınlanıyor...';
+                  }
+                  
+                  function finalize() {
+                      disabledButtons.forEach(([btn, text]) => {
+                          btn.disabled = false;
+                          btn.textContent = text;
+                      });
+                  }
+                  
+                  const formDataUrlEncoded = new URLSearchParams();
+                  formDataUrlEncoded.append('action', 'publishIlan');
+                  formDataUrlEncoded.append('id', isletmeId);
+                  formDataUrlEncoded.append('formType', formType);
+                  
+                  const PROFILE_UPDATE_URL = 'https://script.google.com/macros/s/AKfycbyP4rGbVDXG8-xli6QPv4YXaHgiCyCoCr5UvdJtYJyTi2RWfFx-rqUd-ZtTQiMsz6Hdww/exec';
+                  
+                  fetch(PROFILE_UPDATE_URL, {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/x-www-form-urlencoded'
+                      },
+                      body: formDataUrlEncoded.toString()
+                  })
+                  .then(response => response.text())
+                  .then(text => {
+                      console.log('İlan yayınlama response:', text);
+                      let result;
+                      try {
+                          result = JSON.parse(text);
+                      } catch (e) {
+                          result = { success: true, message: text };
+                      }
+                      
+                      if (result.success) {
+                          ilanPreviewModal.classList.add('hidden');
+                          closeKartEditorModal();
+                          toggleBodyScroll(false);
+                          
+                          setTimeout(() => {
+                              successMessage.classList.remove('hidden');
+                              successMessage.textContent = 'İlan başarıyla yayınlandı! İlanlar sayfasında görüntülenebilir.';
+                              updateProfileDisplay();
+                              updateAllIsletmeSectionStatuses();
+                              
+                              // Başvurular bölümünü göster ve yükle
+                              const basvurularSection = document.getElementById('basvurularSection');
+                              if (basvurularSection) {
+                                  basvurularSection.classList.remove('hidden');
+                                  // loadBasvurular fonksiyonunu çağır (eğer tanımlıysa)
+                                  if (typeof window.loadBasvurular === 'function') {
+                                      window.loadBasvurular();
+                                  }
+                              }
+                              
+                              finalize();
+                              setTimeout(() => {
+                                  successMessage.classList.add('hidden');
+                              }, 5000);
+                          }, 200);
+                      } else {
+                          alert('İlan yayınlama sırasında bir hata oluştu: ' + (result.error || 'Bilinmeyen hata'));
+                          finalize();
+                      }
+                  })
+                  .catch(error => {
+                      console.error('İlan yayınlanırken hata oluştu:', error);
+                      alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+                      finalize();
                   });
               }
 
@@ -2238,8 +2782,99 @@
             
             updatePreview();
             updateAllIsletmeSectionStatuses();
+            
+            // Avatar seçim modal'ı
+            const avatarSelectButton = document.getElementById('avatarSelectButton');
+            const logoModal = document.getElementById('logoModal');
+            const closeLogoModal = document.getElementById('closeLogoModal');
+            
+            if (avatarSelectButton) {
+                avatarSelectButton.addEventListener('click', function() {
+                    if (logoModal) {
+                        logoModal.classList.remove('hidden');
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            }
+            
+            const closeLogoModalBtn = document.getElementById('closeLogoModalBtn');
+            
+            function closeLogoModalFunc() {
+                if (logoModal) {
+                    logoModal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            }
+            
+            if (closeLogoModal) {
+                closeLogoModal.addEventListener('click', closeLogoModalFunc);
+            }
+            
+            if (closeLogoModalBtn) {
+                closeLogoModalBtn.addEventListener('click', closeLogoModalFunc);
+            }
+            
+            // Modal dışına tıklanınca kapat
+            if (logoModal) {
+                logoModal.addEventListener('click', function(e) {
+                    if (e.target === logoModal) {
+                        closeLogoModalFunc();
+                    }
+                });
+            }
+            
+            // ESC tuşu ile kapat
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && logoModal && !logoModal.classList.contains('hidden')) {
+                    closeLogoModalFunc();
+                }
+            });
         });
     </script>
+    
+    <!-- Logo Seçim Modal -->
+    <div id="logoModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 sm:p-8 animate-fadeInUp">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl sm:text-2xl font-bold text-text">Logo Yükleme</h2>
+                <button id="closeLogoModal" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mb-6">
+                <div class="bg-accent/10 border border-accent rounded-lg p-4 mb-4">
+                    <div class="flex items-start gap-3">
+                        <svg class="w-6 h-6 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <div>
+                            <h3 class="text-sm font-semibold text-text mb-2">Logo Yükleme Bilgisi</h3>
+                            <p class="text-sm text-muted leading-relaxed">
+                                Logonuzu <a href="mailto:kuryes.up@gmail.com" class="text-accent hover:text-blue-600 font-semibold">kuryes.up@gmail.com</a> adresine mail olarak atabilirsiniz. Bu sizin hem güvenilir rozetini almanızı sağlar hem de logonuz ile ilan verebilirsiniz.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <a href="mailto:kuryes.up@gmail.com?subject=Logo Yükleme&body=Merhaba,%0D%0A%0D%0Aİşletmemin logosunu ekliyorum.%0D%0A%0D%0ATeşekkürler." 
+                       class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-600 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                        Mail Gönder
+                    </a>
+                </div>
+            </div>
+            
+            <button id="closeLogoModalBtn" class="w-full bg-gray-200 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
+                Kapat
+            </button>
+        </div>
+    </div>
 </body>
 </html>
 

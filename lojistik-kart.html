@@ -109,12 +109,15 @@
                     <div class="bg-white rounded-xl shadow-lg p-6 sticky top-24">
                         <!-- Business Logo/Name -->
                         <div class="text-center mb-6">
-                            <div class="w-32 h-32 mx-auto bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mb-4 relative">
+                            <div class="w-32 h-32 mx-auto bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mb-4 relative cursor-pointer hover:opacity-80 transition-opacity" id="avatarSelectButton">
                                 <img id="businessAvatar" 
-                                     src="" 
-                                     alt="İşletme Avatar" 
-                                     class="w-full h-full rounded-full object-cover hidden">
-                                <span class="text-5xl" id="businessIcon">??</span>
+                                     src="logo.png" 
+                                     alt="Lojistik Logo" 
+                                     class="w-full h-full rounded-full object-cover">
+                                <span class="text-5xl hidden" id="businessIcon">🚚</span>
+                                <div class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 rounded-full flex items-center justify-center transition-all">
+                                    <span class="text-white text-xs font-semibold opacity-0 hover:opacity-100 transition-opacity">Logo Seç</span>
+                                </div>
                             </div>
                             <h2 id="businessName" class="text-2xl font-bold text-text">Lojistik Adı</h2>
                             <p id="businessType" class="text-muted">Lojistik</p>
@@ -233,6 +236,33 @@
                                         class="inline-flex items-center justify-center px-6 py-3 bg-accent text-white rounded-lg font-semibold shadow-md hover:bg-blue-600 transition-colors">
                                     İlanı Yayınla
                                 </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Başvurular Bölümü -->
+                    <div id="basvurularSection" class="mt-8 hidden">
+                        <div class="border-t border-gray-200 pt-8">
+                            <div class="flex items-center justify-between mb-6">
+                                <div>
+                                    <h2 class="text-2xl font-bold font-poppins text-text">Başvurular</h2>
+                                    <p class="text-sm text-muted mt-1">İlanınıza yapılan başvuruları görüntüleyin ve yönetin</p>
+                                </div>
+                                <button id="yenileBasvurularBtn" class="px-4 py-2 bg-accent text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-semibold">
+                                    Yenile
+                                </button>
+                            </div>
+                            
+                            <div id="basvurularLoading" class="text-center py-8 text-muted">
+                                <p>Yükleniyor...</p>
+                            </div>
+                            
+                            <div id="basvurularList" class="space-y-4">
+                                <!-- Başvurular buraya dinamik olarak eklenecek -->
+                            </div>
+                            
+                            <div id="basvurularEmpty" class="text-center py-8 text-muted hidden">
+                                <p>Henüz başvuru bulunmamaktadır.</p>
                             </div>
                         </div>
                     </div>
@@ -397,7 +427,7 @@
                                         
                                         <!-- Paket 1 -->
                                         <div class="flex items-start space-x-3 mb-4">
-                                            <input type="checkbox" id="paket1Check" class="mt-1 w-4 h-4">
+                                            <input type="checkbox" id="paket1Check" name="paket1Check" class="mt-1 w-4 h-4">
                                             <div class="flex-1">
                                                 <label for="paket1Check" class="block text-sm font-medium text-text mb-2">
                                                     Paket
@@ -411,7 +441,7 @@
                                         
                                         <!-- Paket 2 -->
                                         <div class="flex items-start space-x-3 mb-4">
-                                            <input type="checkbox" id="paket2Check" class="mt-1 w-4 h-4">
+                                            <input type="checkbox" id="paket2Check" name="paket2Check" class="mt-1 w-4 h-4">
                                             <div class="flex-1">
                                                 <label for="paket2Check" class="block text-sm font-medium text-text mb-2">
                                                     Paket
@@ -425,7 +455,7 @@
                                         
                                         <!-- Km -->
                                         <div class="flex items-start space-x-3 mb-4">
-                                            <input type="checkbox" id="kmCheck" class="mt-1 w-4 h-4">
+                                            <input type="checkbox" id="kmCheck" name="kmCheck" class="mt-1 w-4 h-4">
                                             <div class="flex-1">
                                                 <label for="kmCheck" class="block text-sm font-medium text-text mb-2">
                                                     Km
@@ -443,7 +473,7 @@
                                         
                                         <!-- Günlük Bonus -->
                                         <div class="flex items-start space-x-3 mb-4">
-                                            <input type="checkbox" id="gunlukBonusCheck" class="mt-1 w-4 h-4">
+                                            <input type="checkbox" id="gunlukBonusCheck" name="gunlukBonusCheck" class="mt-1 w-4 h-4">
                                             <div class="flex-1">
                                                 <label for="gunlukBonusCheck" class="block text-sm font-medium text-text mb-2">
                                                     Günlük Bonus var
@@ -457,7 +487,7 @@
                                         
                                         <!-- Haftalık Bonus -->
                                         <div class="flex items-start space-x-3 mb-4">
-                                            <input type="checkbox" id="haftalikBonusCheck" class="mt-1 w-4 h-4">
+                                            <input type="checkbox" id="haftalikBonusCheck" name="haftalikBonusCheck" class="mt-1 w-4 h-4">
                                             <div class="flex-1">
                                                 <label for="haftalikBonusCheck" class="block text-sm font-medium text-text mb-2">
                                                     Haftalık Bonus var
@@ -471,7 +501,7 @@
                                         
                                         <!-- Ödeme Şekli -->
                                         <div class="flex items-start space-x-3 mb-4">
-                                            <input type="checkbox" id="odemeSekliCheck" class="mt-1 w-4 h-4">
+                                            <input type="checkbox" id="odemeSekliCheck" name="odemeSekliCheck" class="mt-1 w-4 h-4">
                                             <div class="flex-1">
                                                 <label for="odemeSekliCheck" class="block text-sm font-medium text-text mb-2">
                                                     Ödeme Şekli
@@ -485,7 +515,7 @@
                                         
                                         <!-- Aylık Ortalama Kazanç -->
                                         <div class="flex items-start space-x-3 mb-4">
-                                            <input type="checkbox" id="aylikOrtalamaKazançCheck" class="mt-1 w-4 h-4">
+                                            <input type="checkbox" id="aylikOrtalamaKazançCheck" name="aylikOrtalamaKazançCheck" class="mt-1 w-4 h-4">
                                             <div class="flex-1">
                                                 <label for="aylikOrtalamaKazançCheck" class="block text-sm font-medium text-text mb-2">
                                                     Aylık Ortalama Kazanç
@@ -588,7 +618,7 @@
                                 <h3 class="text-xl font-semibold text-text mb-4">Not</h3>
                                 
                                 <div class="flex items-start space-x-3">
-                                    <input type="checkbox" id="detaylarCheck" class="mt-1 w-4 h-4">
+                                    <input type="checkbox" id="detaylarCheck" name="detaylarCheck" value="1" class="mt-1 w-4 h-4">
                                     <div class="flex-1">
                                         <label for="detaylarCheck" class="block text-sm font-medium text-text mb-2">
                                             Detaylar
@@ -861,7 +891,7 @@
      </div>
      
      <!-- Adres Modal -->
-    <div id="adresModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+    <div id="adresModal" class="fixed inset-0 bg-black bg-opacity-50 z-[100] hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full p-8 animate-fadeInUp">
             <div class="flex items-center justify-between mb-6">
                 <h2 class="text-2xl font-bold text-text">Adres Bilgileri</h2>
@@ -974,35 +1004,113 @@
              // Lojistik ID'yi göster (geçici)
              document.getElementById('isletmeId').textContent = '#' + lojistikId;
              
-             // Google Sheets'ten veri çek
+             // Önce localStorage'dan yükle (hızlı yükleme için)
+             const savedDataStr = localStorage.getItem('lojistik_data');
+             if (savedDataStr && savedDataStr !== 'null') {
+                 try {
+                     const savedData = JSON.parse(savedDataStr);
+                     if (savedData && savedData.id === lojistikId) {
+                         console.log('LocalStorage\'dan veri yüklendi:', savedData);
+                         // Form alanlarını doldur
+                         if (typeof fillIsletmeProfileForm === 'function') {
+                             fillIsletmeProfileForm(savedData);
+                         }
+                         // Sayfa elementlerini doldur
+                         if (typeof populatePageFromRecord === 'function') {
+                             populatePageFromRecord(savedData, type);
+                         }
+                         // Form alanlarını güncelle
+                         setTimeout(() => {
+                             if (typeof updateProfileDisplay === 'function') {
+                                 updateProfileDisplay();
+                             }
+                             if (typeof updatePreview === 'function') {
+                                 updatePreview();
+                             }
+                             if (typeof updateAllIsletmeSectionStatuses === 'function') {
+                                 updateAllIsletmeSectionStatuses();
+                             }
+                         }, 50);
+                     }
+                 } catch (e) {
+                     console.error('LocalStorage parse hatası:', e);
+                 }
+             }
+             
+             // Google Sheets'ten veri çek (güncel veri için)
              if (typeof getRecordById === 'function') {
                  try {
                      const result = await getRecordById(lojistikId, type);
                      
-                     if (result.success && result.data) {
-                         const lojistikData = result.data;
-                         
-                         // Sayfa elementlerini doldur
-                         if (typeof populatePageFromRecord === 'function') {
-                             populatePageFromRecord(lojistikData, type);
-                         }
-                         
-                         // Form alanlarını doldur (eğer form varsa)
-                         const form = document.querySelector('form');
-                         if (form && typeof populateFormFromRecord === 'function') {
-                             populateFormFromRecord(form, lojistikData);
-                         }
-                         
-                         // LocalStorage'a kaydet
-                         localStorage.setItem('lojistik_id', lojistikId);
-                         localStorage.setItem('lojistik_data', JSON.stringify(lojistikData));
-                         
-                         console.log('Lojistik verileri yüklendi:', lojistikData);
-                     } else {
-                         console.error('Lojistik verisi bulunamadı:', result.error);
-                     }
+                    if (result.success && result.data) {
+                        const lojistikData = result.data;
+                        
+                        // Sayfa elementlerini doldur
+                        if (typeof populatePageFromRecord === 'function') {
+                            populatePageFromRecord(lojistikData, type);
+                        }
+                        
+                        // Form alanlarını doldur - fillIsletmeProfileForm fonksiyonunu kullan (lojistik için de aynı)
+                        if (typeof fillIsletmeProfileForm === 'function') {
+                            fillIsletmeProfileForm(lojistikData);
+                        } else if (typeof populateFormFromRecord === 'function') {
+                            const form = document.querySelector('form');
+                            if (form) {
+                                populateFormFromRecord(form, lojistikData);
+                            }
+                        }
+                        
+                        // LocalStorage'a kaydet
+                        localStorage.setItem('lojistik_id', lojistikId);
+                        localStorage.setItem('lojistik_data', JSON.stringify(lojistikData));
+                        
+                        console.log('Lojistik verileri Google Sheets\'ten yüklendi:', lojistikData);
+                        
+                        // Form alanlarını güncelle (preview ve display için)
+                        setTimeout(() => {
+                            if (typeof updateProfileDisplay === 'function') {
+                                updateProfileDisplay();
+                            }
+                            if (typeof updatePreview === 'function') {
+                                updatePreview();
+                            }
+                            if (typeof updateAllIsletmeSectionStatuses === 'function') {
+                                updateAllIsletmeSectionStatuses();
+                            }
+                        }, 100);
+                    } else {
+                        console.error('Lojistik verisi bulunamadı:', result.error);
+                        // LocalStorage'dan yükle (fallback) - eğer daha önce yüklenmediyse
+                        if (!savedDataStr || savedDataStr === 'null') {
+                            const savedData = localStorage.getItem('lojistik_data');
+                            if (savedData) {
+                                try {
+                                    const lojistikData = JSON.parse(savedData);
+                                    if (typeof fillIsletmeProfileForm === 'function') {
+                                        fillIsletmeProfileForm(lojistikData);
+                                    }
+                                } catch (e) {
+                                    console.error('LocalStorage parse hatası:', e);
+                                }
+                            }
+                        }
+                    }
                  } catch (error) {
                      console.error('Veri yükleme hatası:', error);
+                     // Hata durumunda localStorage'dan yükle (eğer daha önce yüklenmediyse)
+                     if (!savedDataStr || savedDataStr === 'null') {
+                         const savedData = localStorage.getItem('lojistik_data');
+                         if (savedData) {
+                             try {
+                                 const lojistikData = JSON.parse(savedData);
+                                 if (typeof fillIsletmeProfileForm === 'function') {
+                                     fillIsletmeProfileForm(lojistikData);
+                                 }
+                             } catch (e) {
+                                 console.error('LocalStorage parse hatası:', e);
+                             }
+                         }
+                     }
                  }
              }
             
@@ -1349,16 +1457,23 @@
                 const isletmeTuru = document.getElementById('isletmeTuru').value || 'Lojistik';
                 const businessIcon = document.getElementById('businessIcon');
                 const businessAvatar = document.getElementById('businessAvatar');
-                const avatarContainer = businessIcon.parentElement;
+                const avatarContainer = businessIcon ? businessIcon.parentElement : (businessAvatar ? businessAvatar.parentElement : null);
                 
-                // Icon'u güncelle
-                businessIcon.textContent = businessTypeIcons[isletmeTuru] || businessTypeIcons['Lojistik'];
+                // Avatar'ı her zaman göster (logo.png)
+                if (businessAvatar) {
+                    businessAvatar.src = 'logo.png';
+                    businessAvatar.classList.remove('hidden');
+                    businessAvatar.classList.add('block');
+                }
+                
+                if (businessIcon) {
+                    businessIcon.classList.add('hidden');
+                }
                 
                 // Renkleri güncelle
-                avatarContainer.className = `w-32 h-32 mx-auto bg-gradient-to-br ${businessTypeColors[isletmeTuru] || businessTypeColors['Lojistik']} rounded-full flex items-center justify-center mb-4 relative`;
-                
-                // Eğer avatar görseli varsa göster (şimdilik icon kullanıyoruz)
-                // Gelecekte: if (businessAvatar.src) { businessAvatar.classList.remove('hidden'); businessIcon.classList.add('hidden'); }
+                if (avatarContainer) {
+                    avatarContainer.className = `w-32 h-32 mx-auto bg-gradient-to-br ${businessTypeColors[isletmeTuru] || businessTypeColors['Lojistik']} rounded-full flex items-center justify-center mb-4 relative cursor-pointer hover:opacity-80 transition-opacity`;
+                }
             }
             
             // Şehir değiştiğinde otomatik güncelleme
@@ -1579,9 +1694,25 @@
             
             // Detaylar checkbox
             if (detaylarCheck && detaylarInput) {
+                // Sayfa yüklendiğinde checkbox durumunu kontrol et
+                if (detaylarCheck.checked) {
+                    detaylarInput.disabled = false;
+                    detaylarInput.classList.remove('text-gray-400');
+                } else {
+                    detaylarInput.disabled = true;
+                    detaylarInput.classList.add('text-gray-400');
+                }
+                
                 detaylarCheck.addEventListener('change', function() {
                     detaylarInput.disabled = !this.checked;
-                    if (!this.checked) detaylarInput.value = '';
+                    if (!this.checked) {
+                        // Checkbox kapatıldığında değeri temizleme - kullanıcı isterse manuel temizlesin
+                        // Sadece görsel olarak disable et
+                        detaylarInput.classList.add('text-gray-400');
+                    } else {
+                        detaylarInput.classList.remove('text-gray-400');
+                    }
+                    updateIsletmeSectionStatus('not');
                 });
             }
             
@@ -2008,34 +2139,65 @@
             
             // Adres kaydetme
             window.saveAddress = function() {
-                const adresText = document.getElementById('adresInput').value;
-                const lat = document.getElementById('latitude').value;
-                const lng = document.getElementById('longitude').value;
+                const adresText = document.getElementById('adresInput').value.trim();
+                const latInput = document.getElementById('latitude');
+                const lngInput = document.getElementById('longitude');
+                const lat = latInput ? latInput.value : '';
+                const lng = lngInput ? lngInput.value : '';
+                
+                console.log('Adres kaydediliyor:', { adresText, lat, lng });
                 
                 if (adresText || (lat && lng)) {
                     // Adres bilgisini kaydet
-                    document.getElementById('adres').value = adresText || '';
+                    const adresInput = document.getElementById('adres');
+                    if (adresInput) {
+                        adresInput.value = adresText || '';
+                    }
+                    
+                    // Koordinatları kaydet
+                    if (latInput && lat) {
+                        latInput.value = lat;
+                    }
+                    if (lngInput && lng) {
+                        lngInput.value = lng;
+                    }
                     
                     // Eğer koordinatlar varsa, kısa adres göster (mahalle, ilçe, şehir formatında)
-                    if (lat && lng && adresText) {
-                        // Adres text'inden kısa format çıkar (virgülle ayrılmış son kısımlar)
-                        const adresParts = adresText.split(',');
-                        // Son 2-3 parçayı al (mahalle, ilçe, şehir)
-                        const shortParts = adresParts.slice(-3).join(', ').replace(/\s*\(PK:.*?\)\s*/g, '').trim();
-                        document.getElementById('adresGoster').textContent = shortParts || adresText;
-                    } else if (adresText) {
-                        document.getElementById('adresGoster').textContent = adresText;
-                    } else if (lat && lng) {
-                        document.getElementById('adresGoster').textContent = 'Konum: Harita';
+                    const adresGoster = document.getElementById('adresGoster');
+                    if (adresGoster) {
+                        if (lat && lng && adresText) {
+                            // Adres text'inden kısa format çıkar (virgülle ayrılmış son kısımlar)
+                            const adresParts = adresText.split(',');
+                            // Son 2-3 parçayı al (mahalle, ilçe, şehir)
+                            const shortParts = adresParts.slice(-3).join(', ').replace(/\s*\(PK:.*?\)\s*/g, '').trim();
+                            adresGoster.textContent = shortParts || adresText;
+                        } else if (adresText) {
+                            adresGoster.textContent = adresText;
+                        } else if (lat && lng) {
+                            adresGoster.textContent = 'Konum: Harita';
+                        } else {
+                            adresGoster.textContent = 'Henüz adres eklenmedi';
+                        }
                     }
                     
                     // Modal'ı kapat
-                    document.getElementById('adresModal').classList.add('hidden');
+                    const adresModal = document.getElementById('adresModal');
+                    if (adresModal) {
+                        adresModal.classList.add('hidden');
+                    }
                     
                     // Önizlemeyi güncelle
-                    updatePreview();
+                    if (typeof updatePreview === 'function') {
+                        updatePreview();
+                    }
+                    if (typeof updateAcilMesaj === 'function') {
                         updateAcilMesaj();
-                    updateIsletmeSectionStatus('adres-bilgileri');
+                    }
+                    if (typeof updateIsletmeSectionStatus === 'function') {
+                        updateIsletmeSectionStatus('adres-bilgileri');
+                    }
+                    
+                    console.log('Adres başarıyla kaydedildi');
                 } else {
                     alert('Lütfen bir adres seçin veya konum almayı deneyin.');
                 }
@@ -2234,12 +2396,70 @@
                   });
               }
 
-              function submitIsletmeProfile(triggerBtn) {
+              function submitIsletmeProfile(triggerBtn, callback) {
                   if (isProcessing) return;
 
-                  if (!form.checkValidity()) {
-                      form.reportValidity();
-                      return;
+                  // Form validation - gizli alanları kontrol etme
+                  // Required alanların görünür olup olmadığını kontrol et
+                  const requiredFields = form.querySelectorAll('[required]');
+                  let hasInvalidHiddenField = false;
+                  let firstInvalidField = null;
+                  
+                  requiredFields.forEach(field => {
+                      // Alanın görünür olup olmadığını kontrol et
+                      const isVisible = field.offsetParent !== null && 
+                                       !field.closest('.hidden') && 
+                                       !field.hasAttribute('disabled');
+                      
+                      if (!isVisible && field.value === '') {
+                          hasInvalidHiddenField = true;
+                          if (!firstInvalidField) {
+                              firstInvalidField = field;
+                          }
+                      }
+                  });
+                  
+                  // Sadece görünür alanları kontrol et
+                  if (!hasInvalidHiddenField) {
+                      // Görünür alanlar için validation
+                      let isValid = true;
+                      requiredFields.forEach(field => {
+                          const isVisible = field.offsetParent !== null && 
+                                           !field.closest('.hidden') && 
+                                           !field.hasAttribute('disabled');
+                          if (isVisible && !field.value.trim()) {
+                              isValid = false;
+                              if (!firstInvalidField) {
+                                  firstInvalidField = field;
+                              }
+                          }
+                      });
+                      
+                      if (!isValid && firstInvalidField) {
+                          firstInvalidField.focus();
+                          firstInvalidField.reportValidity();
+                          return;
+                      }
+                  } else {
+                      // Gizli alanlar varsa, sadece görünür alanları kontrol et
+                      let isValid = true;
+                      requiredFields.forEach(field => {
+                          const isVisible = field.offsetParent !== null && 
+                                           !field.closest('.hidden') && 
+                                           !field.hasAttribute('disabled');
+                          if (isVisible && !field.value.trim()) {
+                              isValid = false;
+                              if (!firstInvalidField) {
+                                  firstInvalidField = field;
+                              }
+                          }
+                      });
+                      
+                      if (!isValid && firstInvalidField) {
+                          firstInvalidField.focus();
+                          firstInvalidField.reportValidity();
+                          return;
+                      }
                   }
                   
                   isProcessing = true;
@@ -2261,16 +2481,23 @@
                   confirmSaveBtn.textContent = 'Kaydediliyor...';
                   }
 
+                  // temporarilyEnabled değişkenini fonksiyon scope'unda tanımla
+                  const temporarilyEnabled = [];
+                  
                   function finalize() {
                       disabledButtons.forEach(([btn, text]) => {
                           btn.disabled = false;
                           btn.textContent = text;
                       });
+                      // Geçici olarak enable edilen elementleri tekrar disable et
+                      temporarilyEnabled.forEach(el => {
+                          el.disabled = true;
+                      });
                       isProcessing = false;
                   }
 
                   try {
-                      const temporarilyEnabled = [];
+                      // Geçici olarak disabled elementleri enable et
                       ['cep', 'sabitUcret'].forEach(id => {
                           const el = document.getElementById(id);
                           if (el && el.disabled) {
@@ -2279,16 +2506,39 @@
                           }
                       });
                   
-                  const formData = new FormData(form);
-                  formData.append('isletmeId', isletmeId);
+                  // Lojistik ID'yi al (URL'den veya localStorage'dan)
+                  const urlParams = new URLSearchParams(window.location.search);
+                  const lojistikId = urlParams.get('id') || localStorage.getItem('lojistik_id');
                   
-                      const checkboxIds = ['esnaf', 'sigortali', 'sabitUcretCheck', 'partTime', 'fullTime', 'gunluk', 'yemek', 'yol', 'sigorta', 'ucretBilgisiPaylas', 'kuryeArayabilir', 'iletisimYetkiliTelefon', 'acilSaatlikCheck', 'acilKmCheck', 'acilPaketCheck', 'acilYemek', 'acilYol', 'acilSigorta'];
+                  if (!lojistikId) {
+                      alert('Lojistik ID bulunamadı. Lütfen sayfayı yenileyin.');
+                      finalize();
+                      return;
+                  }
+                  
+                  const formData = new FormData(form);
+                  formData.append('isletmeId', lojistikId);
+                  
+                      const checkboxIds = ['esnaf', 'sigortali', 'sabitUcretCheck', 'paket1Check', 'paket2Check', 'kmCheck', 'gunlukBonusCheck', 'haftalikBonusCheck', 'odemeSekliCheck', 'aylikOrtalamaKazançCheck', 'partTime', 'fullTime', 'gunluk', 'yemek', 'yol', 'sigorta', 'ucretBilgisiPaylas', 'kuryeArayabilir', 'iletisimYetkiliTelefon', 'acilSaatlikCheck', 'acilKmCheck', 'acilPaketCheck', 'acilYemek', 'acilYol', 'acilSigorta', 'detaylarCheck'];
                       checkboxIds.forEach(id => {
                           const el = document.getElementById(id);
                           if (el) {
                               formData.set(id, el.checked ? '1' : '0');
                           }
                       });
+                      
+                      // Detaylar - checkbox işaretliyse değeri gönder, değilse boş gönder
+                      const detaylarCheckEl = document.getElementById('detaylarCheck');
+                      const detaylarInputEl = document.getElementById('detaylar');
+                      if (detaylarCheckEl && detaylarInputEl) {
+                          // Checkbox durumunu her zaman kaydet (zaten checkboxIds listesinde var)
+                          // Detaylar değerini gönder - checkbox işaretliyse değeri, değilse boş string
+                          if (detaylarCheckEl.checked) {
+                              formData.set('detaylar', detaylarInputEl.value || '');
+                          } else {
+                              formData.set('detaylar', '');
+                          }
+                      }
 
                       const acilKuryeCheckEl = document.getElementById('acilKuryeCheck');
                       const acilKuryeAktif = acilKuryeCheckEl && acilKuryeCheckEl.checked;
@@ -2310,14 +2560,84 @@
                           const sabitCheck = document.getElementById('sabitUcretCheck');
                           formData.set('sabitUcret', sabitCheck && sabitCheck.checked ? (sabitInput.value || '') : '');
                       }
+                      
+                      // Paket1 - sadece checkbox işaretliyse gönder
+                      const paket1Input = document.getElementById('paket1');
+                      if (paket1Input) {
+                          const paket1Check = document.getElementById('paket1Check');
+                          formData.set('paket1', paket1Check && paket1Check.checked ? (paket1Input.value || '') : '');
+                      }
+                      
+                      // Paket2 - sadece checkbox işaretliyse gönder
+                      const paket2Input = document.getElementById('paket2');
+                      if (paket2Input) {
+                          const paket2Check = document.getElementById('paket2Check');
+                          formData.set('paket2', paket2Check && paket2Check.checked ? (paket2Input.value || '') : '');
+                      }
+                      
+                      // Km - sadece checkbox işaretliyse gönder
+                      const kmInput = document.getElementById('km');
+                      if (kmInput) {
+                          const kmCheck = document.getElementById('kmCheck');
+                          formData.set('km', kmCheck && kmCheck.checked ? (kmInput.value || '') : '');
+                      }
+                      
+                      // Km Şartları - sadece checkbox işaretliyse gönder
+                      const kmSartlariInput = document.getElementById('kmSartlari');
+                      if (kmSartlariInput) {
+                          const kmCheck = document.getElementById('kmCheck');
+                          formData.set('kmSartlari', kmCheck && kmCheck.checked ? (kmSartlariInput.value || '') : '');
+                      }
+                      
+                      // Günlük Bonus - sadece checkbox işaretliyse gönder
+                      const gunlukBonusInput = document.getElementById('gunlukBonus');
+                      if (gunlukBonusInput) {
+                          const gunlukBonusCheck = document.getElementById('gunlukBonusCheck');
+                          formData.set('gunlukBonus', gunlukBonusCheck && gunlukBonusCheck.checked ? (gunlukBonusInput.value || '') : '');
+                      }
+                      
+                      // Haftalık Bonus - sadece checkbox işaretliyse gönder
+                      const haftalikBonusInput = document.getElementById('haftalikBonus');
+                      if (haftalikBonusInput) {
+                          const haftalikBonusCheck = document.getElementById('haftalikBonusCheck');
+                          formData.set('haftalikBonus', haftalikBonusCheck && haftalikBonusCheck.checked ? (haftalikBonusInput.value || '') : '');
+                      }
+                      
+                      // Ödeme Şekli - sadece checkbox işaretliyse gönder
+                      const odemeSekliInput = document.getElementById('odemeSekli');
+                      if (odemeSekliInput) {
+                          const odemeSekliCheck = document.getElementById('odemeSekliCheck');
+                          formData.set('odemeSekli', odemeSekliCheck && odemeSekliCheck.checked ? (odemeSekliInput.value || '') : '');
+                      }
+                      
+                      // Aylık Ortalama Kazanç - sadece checkbox işaretliyse gönder
+                      const aylikOrtalamaKazançInput = document.getElementById('aylikOrtalamaKazanç');
+                      if (aylikOrtalamaKazançInput) {
+                          const aylikOrtalamaKazançCheck = document.getElementById('aylikOrtalamaKazançCheck');
+                          formData.set('aylikOrtalamaKazanç', aylikOrtalamaKazançCheck && aylikOrtalamaKazançCheck.checked ? (aylikOrtalamaKazançInput.value || '') : '');
+                      }
+                      
                       const cepInput = document.getElementById('cep');
                       if (cepInput) {
                           formData.set('cep', cepInput.value || '');
                       }
+                      
+                      // Adres bilgilerini kontrol et ve ekle
+                      const adresInput = document.getElementById('adres');
+                      const latitudeInput = document.getElementById('latitude');
+                      const longitudeInput = document.getElementById('longitude');
+                      
+                      if (adresInput && adresInput.value) {
+                          formData.set('adres', adresInput.value);
+                      }
+                      if (latitudeInput && latitudeInput.value) {
+                          formData.set('latitude', latitudeInput.value);
+                      }
+                      if (longitudeInput && longitudeInput.value) {
+                          formData.set('longitude', longitudeInput.value);
+                      }
 
-                      temporarilyEnabled.forEach(el => {
-                          el.disabled = true;
-                      });
+                      // temporarilyEnabled artık finalize() içinde yönetiliyor
 
                   console.log('Form Data:', Object.fromEntries(formData));
                   
@@ -2345,7 +2665,7 @@
                   // Form-urlencoded olarak hazırla
                   const formDataUrlEncoded = new URLSearchParams();
                   formDataUrlEncoded.append('action', 'update');
-                  formDataUrlEncoded.append('id', isletmeId);
+                  formDataUrlEncoded.append('id', lojistikId);
                   formDataUrlEncoded.append('formType', formType);
                   formDataUrlEncoded.append('jsonData', jsonPayload);
                   
@@ -2358,7 +2678,7 @@
                   });
                   
                   console.log('Google Sheets\'e gönderiliyor...', {
-                      id: isletmeId,
+                      id: lojistikId,
                       formType: formType,
                       dataCount: Object.keys(formDataObj).length
                   });
@@ -2384,6 +2704,56 @@
                       }
                       
                       if (result.success) {
+                          // Form verilerini localStorage'a kaydet
+                          try {
+                              const formDataObj = {};
+                              formData.forEach((value, key) => {
+                                  formDataObj[key] = value;
+                              });
+                              
+                              // Mevcut veriyi al ve güncelle
+                              const existingDataStr = localStorage.getItem('lojistik_data');
+                              let existingData = {};
+                              if (existingDataStr) {
+                                  try {
+                                      existingData = JSON.parse(existingDataStr);
+                                  } catch (e) {
+                                      console.error('LocalStorage parse hatası:', e);
+                                  }
+                              }
+                              
+                              // raw_kart_json'ı güncelle
+                              if (!existingData.raw_kart_json) {
+                                  existingData.raw_kart_json = {};
+                              } else if (typeof existingData.raw_kart_json === 'string') {
+                                  try {
+                                      existingData.raw_kart_json = JSON.parse(existingData.raw_kart_json);
+                                  } catch (e) {
+                                      existingData.raw_kart_json = {};
+                                  }
+                              }
+                              
+                              // Form verilerini raw_kart_json'a ekle
+                              Object.keys(formDataObj).forEach(key => {
+                                  if (key !== 'action' && key !== 'id' && key !== 'formType' && key !== 'jsonData' && key !== 'lojistikId') {
+                                      existingData.raw_kart_json[key] = formDataObj[key];
+                                  }
+                              });
+                              
+                              // Güncellenmiş veriyi localStorage'a kaydet
+                              localStorage.setItem('lojistik_data', JSON.stringify(existingData));
+                              console.log('Form verileri localStorage\'a kaydedildi');
+                          } catch (e) {
+                              console.error('LocalStorage kaydetme hatası:', e);
+                          }
+                          
+                          // Eğer callback varsa çağır (ilan yayınlama için)
+                          if (callback && typeof callback === 'function') {
+                              callback();
+                              return;
+                          }
+                          
+                          // Normal kaydetme işlemi
                           ilanPreviewModal.classList.add('hidden');
                           closeKartEditorModal();
                           toggleBodyScroll(false);
@@ -2411,10 +2781,6 @@
                       console.error('İşletme kartı kaydedilirken hata oluştu:', error);
                       alert('Bir hata oluştu. Lütfen tekrar deneyin.');
                       finalize();
-                  } finally {
-                      temporarilyEnabled.forEach(el => {
-                          el.disabled = true;
-                      });
                   }
               }
 
@@ -2434,7 +2800,105 @@
               if (confirmSaveBtn) {
                   confirmSaveBtn.addEventListener('click', function(e) {
                       e.preventDefault();
-                      submitIsletmeProfile(confirmSaveBtn);
+                      // Önce kaydet, sonra ilan yayınla
+                      submitIsletmeProfileAndPublish(confirmSaveBtn);
+                  });
+              }
+              
+              // İlan yayınlama fonksiyonu (kaydet + yayınla)
+              function submitIsletmeProfileAndPublish(triggerBtn) {
+                  if (isProcessing) return;
+                  
+                  // Önce kaydet
+                  submitIsletmeProfile(triggerBtn, function() {
+                      // Kaydetme başarılı, şimdi ilan yayınla
+                      publishIlan(triggerBtn);
+                  });
+              }
+              
+              // İlan yayınlama fonksiyonu
+              function publishIlan(triggerBtn) {
+                  // Lojistik ID'yi al (URL'den veya localStorage'dan)
+                  const urlParams = new URLSearchParams(window.location.search);
+                  const lojistikId = urlParams.get('id') || localStorage.getItem('lojistik_id');
+                  
+                  if (!lojistikId) {
+                      alert('Lojistik ID bulunamadı. Lütfen sayfayı yenileyin.');
+                      return;
+                  }
+                  
+                  const disabledButtons = [];
+                  if (triggerBtn) {
+                      disabledButtons.push([triggerBtn, triggerBtn.textContent]);
+                      triggerBtn.disabled = true;
+                      triggerBtn.textContent = 'Yayınlanıyor...';
+                  }
+                  
+                  function finalize() {
+                      disabledButtons.forEach(([btn, text]) => {
+                          btn.disabled = false;
+                          btn.textContent = text;
+                      });
+                  }
+                  
+                  const formDataUrlEncoded = new URLSearchParams();
+                  formDataUrlEncoded.append('action', 'publishIlan');
+                  formDataUrlEncoded.append('id', lojistikId);
+                  formDataUrlEncoded.append('formType', 'lojistik');
+                  
+                  const PROFILE_UPDATE_URL = 'https://script.google.com/macros/s/AKfycbyP4rGbVDXG8-xli6QPv4YXaHgiCyCoCr5UvdJtYJyTi2RWfFx-rqUd-ZtTQiMsz6Hdww/exec';
+                  
+                  fetch(PROFILE_UPDATE_URL, {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/x-www-form-urlencoded'
+                      },
+                      body: formDataUrlEncoded.toString()
+                  })
+                  .then(response => response.text())
+                  .then(text => {
+                      console.log('İlan yayınlama response:', text);
+                      let result;
+                      try {
+                          result = JSON.parse(text);
+                      } catch (e) {
+                          result = { success: true, message: text };
+                      }
+                      
+                      if (result.success) {
+                          ilanPreviewModal.classList.add('hidden');
+                          closeKartEditorModal();
+                          toggleBodyScroll(false);
+                          
+                          setTimeout(() => {
+                              successMessage.classList.remove('hidden');
+                              successMessage.textContent = 'İlan başarıyla yayınlandı! İlanlar sayfasında görüntülenebilir.';
+                              updateProfileDisplay();
+                              
+                              // Başvurular bölümünü göster ve yükle
+                              const basvurularSection = document.getElementById('basvurularSection');
+                              if (basvurularSection) {
+                                  basvurularSection.classList.remove('hidden');
+                                  // loadBasvurular fonksiyonunu çağır (eğer tanımlıysa)
+                                  if (typeof window.loadBasvurular === 'function') {
+                                      window.loadBasvurular();
+                                  }
+                              }
+                              updateAllIsletmeSectionStatuses();
+                              finalize();
+                              setTimeout(() => {
+                                  successMessage.classList.add('hidden');
+                              }, 5000);
+                          }, 200);
+                      } else {
+                          alert('İlan yayınlama sırasında bir hata oluştu: ' + (result.error || 'Bilinmeyen hata'));
+                          finalize();
+                      }
+                  })
+                  .catch(error => {
+                      console.error('İlan yayınlanırken hata oluştu:', error);
+                      alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+                      finalize();
                   });
               }
 
@@ -2525,6 +2989,666 @@
             
             updatePreview();
             updateAllIsletmeSectionStatuses();
+            
+            // Avatar'ı başlangıçta logo.png olarak ayarla
+            updateBusinessAvatar();
+            
+            // Avatar seçim modal'ı
+            const avatarSelectButton = document.getElementById('avatarSelectButton');
+            const logoModal = document.getElementById('logoModal');
+            const closeLogoModal = document.getElementById('closeLogoModal');
+            
+            if (avatarSelectButton) {
+                avatarSelectButton.addEventListener('click', function() {
+                    if (logoModal) {
+                        logoModal.classList.remove('hidden');
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            }
+            
+            const closeLogoModalBtn = document.getElementById('closeLogoModalBtn');
+            
+            function closeLogoModalFunc() {
+                if (logoModal) {
+                    logoModal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            }
+            
+            if (closeLogoModal) {
+                closeLogoModal.addEventListener('click', closeLogoModalFunc);
+            }
+            
+            if (closeLogoModalBtn) {
+                closeLogoModalBtn.addEventListener('click', closeLogoModalFunc);
+            }
+            
+            // Modal dışına tıklanınca kapat
+            if (logoModal) {
+                logoModal.addEventListener('click', function(e) {
+                    if (e.target === logoModal) {
+                        closeLogoModalFunc();
+                    }
+                });
+            }
+            
+            // ESC tuşu ile kapat
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && logoModal && !logoModal.classList.contains('hidden')) {
+                    closeLogoModalFunc();
+                }
+            });
+        });
+    </script>
+    
+    <!-- Logo Seçim Modal -->
+    <div id="logoModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 sm:p-8 animate-fadeInUp">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl sm:text-2xl font-bold text-text">Logo Yükleme</h2>
+                <button id="closeLogoModal" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mb-6">
+                <div class="bg-accent/10 border border-accent rounded-lg p-4 mb-4">
+                    <div class="flex items-start gap-3">
+                        <svg class="w-6 h-6 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <div>
+                            <h3 class="text-sm font-semibold text-text mb-2">Logo Yükleme Bilgisi</h3>
+                            <p class="text-sm text-muted leading-relaxed">
+                                Logonuzu <a href="mailto:kuryes.up@gmail.com" class="text-accent hover:text-blue-600 font-semibold">kuryes.up@gmail.com</a> adresine mail olarak atabilirsiniz. Bu sizin hem güvenilir rozetini almanızı sağlar hem de logonuz ile ilan verebilirsiniz.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <a href="mailto:kuryes.up@gmail.com?subject=Logo Yükleme&body=Merhaba,%0D%0A%0D%0ALojistik firmamın logosunu ekliyorum.%0D%0A%0D%0ATeşekkürler." 
+                       class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-600 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                        Mail Gönder
+                    </a>
+                </div>
+            </div>
+            
+            <button id="closeLogoModalBtn" class="w-full bg-gray-200 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
+                Kapat
+            </button>
+        </div>
+    </div>
+    
+    <!-- Kurye Profil Detay Modalı -->
+    <div id="kuryeProfileModal" class="fixed inset-0 bg-black bg-opacity-50 z-[100] hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between z-10">
+                <h2 class="text-2xl font-bold font-poppins text-text">Kurye Profil Detayları</h2>
+                <button id="closeKuryeProfileModal" class="text-gray-500 hover:text-gray-700 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div id="kuryeProfileModalContent" class="p-6">
+                <!-- İçerik buraya dinamik olarak eklenecek -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Başvurular Yönetimi -->
+    <script>
+        // Global scope'a taşı - HTML onclick handler'ları için
+        window.PROFILE_API_URL_BASVURULAR = 'https://script.google.com/macros/s/AKfycbyP4rGbVDXG8-xli6QPv4YXaHgiCyCoCr5UvdJtYJyTi2RWfFx-rqUd-ZtTQiMsz6Hdww/exec';
+        let currentIlanId = null;
+        
+        // Sayfa yüklendiğinde ilan ID'sini al ve başvuruları yükle
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const lojistikId = urlParams.get('id') || localStorage.getItem('lojistik_id');
+            
+            if (lojistikId) {
+                currentIlanId = lojistikId;
+                // İlan yayınlanmışsa başvurular bölümünü göster
+                checkIlanYayinlandi(lojistikId);
+            }
+        });
+        
+        async function checkIlanYayinlandi(lojistikId) {
+            try {
+                const url = `${window.PROFILE_API_URL_BASVURULAR}?id=${encodeURIComponent(lojistikId)}&formType=lojistik`;
+                const response = await fetch(url);
+                const result = await response.json();
+                
+                if (result.success && result.data) {
+                    const ilanYayinlandi = result.data.ilanYayinlandi;
+                    if (ilanYayinlandi === '1' || ilanYayinlandi === 1 || ilanYayinlandi === true) {
+                        document.getElementById('basvurularSection').classList.remove('hidden');
+                        if (typeof window.loadBasvurular === 'function') {
+                            window.loadBasvurular();
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('İlan kontrolü hatası:', error);
+            }
+        }
+        
+        // Global scope'a taşı - HTML onclick handler'ları için
+        window.loadBasvurular = async function loadBasvurular() {
+            if (!currentIlanId) {
+                console.error('İlan ID bulunamadı');
+                return;
+            }
+            
+            const loadingEl = document.getElementById('basvurularLoading');
+            const listEl = document.getElementById('basvurularList');
+            const emptyEl = document.getElementById('basvurularEmpty');
+            
+            if (!loadingEl || !listEl || !emptyEl) {
+                console.error('Başvurular bölümü elementleri bulunamadı');
+                return;
+            }
+            
+            loadingEl.classList.remove('hidden');
+            listEl.innerHTML = '';
+            emptyEl.classList.add('hidden');
+            
+            try {
+                const url = `${window.PROFILE_API_URL_BASVURULAR}?action=getBasvurular&ilanId=${encodeURIComponent(currentIlanId)}`;
+                const response = await fetch(url);
+                const result = await response.json();
+                
+                loadingEl.classList.add('hidden');
+                
+                if (result.success && result.data && result.data.length > 0) {
+                    displayBasvurular(result.data);
+                } else {
+                    emptyEl.classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error('Başvurular yükleme hatası:', error);
+                loadingEl.classList.add('hidden');
+                listEl.innerHTML = '<div class="text-center py-8 text-red-600"><p>Başvurular yüklenirken bir hata oluştu.</p></div>';
+            }
+        };
+        
+        // Yenile butonu için event listener ekle
+        document.addEventListener('DOMContentLoaded', function() {
+            const yenileBtn = document.getElementById('yenileBasvurularBtn');
+            if (yenileBtn) {
+                yenileBtn.addEventListener('click', function() {
+                    if (typeof window.loadBasvurular === 'function') {
+                        window.loadBasvurular();
+                    } else {
+                        console.error('loadBasvurular fonksiyonu bulunamadı');
+                        alert('Başvurular yükleniyor, lütfen bekleyin...');
+                    }
+                });
+            }
+        });
+        
+        function displayBasvurular(basvurular) {
+            const listEl = document.getElementById('basvurularList');
+            if (!listEl) {
+                console.error('basvurularList elementi bulunamadı');
+                return;
+            }
+            
+            listEl.innerHTML = '';
+            
+            // Basvuru verilerini global olarak sakla (butonlar için)
+            if (!window.basvuruDataMap) {
+                window.basvuruDataMap = {};
+            }
+            
+            // Basvurular listesini de sakla (fallback için)
+            window.currentBasvurular = basvurular || [];
+            
+            if (!basvurular || basvurular.length === 0) {
+                console.log('Gösterilecek başvuru yok');
+                return;
+            }
+            
+            basvurular.forEach(basvuru => {
+                // Basvuru verisini map'e kaydet
+                if (basvuru && basvuru.id) {
+                    window.basvuruDataMap[basvuru.id] = basvuru;
+                }
+                const kuryeData = basvuru.kuryeData || {};
+                const kartData = kuryeData.raw_kart_json || {};
+                
+                // Avatar belirleme
+                const avatar = kuryeData.avatar || 1;
+                const avatarSrc = `public/img/avatars/${avatar}.png`;
+                
+                // Durum renkleri
+                let durumClass = 'bg-yellow-100 text-yellow-800';
+                let durumText = 'Beklemede';
+                if (basvuru.durum === 'kabul') {
+                    durumClass = 'bg-green-100 text-green-800';
+                    durumText = 'Kabul Edildi';
+                } else if (basvuru.durum === 'red') {
+                    durumClass = 'bg-red-100 text-red-800';
+                    durumText = 'Reddedildi';
+                }
+                
+                // Tarih formatla
+                const basvuruTarihi = new Date(basvuru.basvuruTarihi);
+                const tarihStr = basvuruTarihi.toLocaleDateString('tr-TR', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                const basvuruCard = document.createElement('div');
+                basvuruCard.className = 'bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow';
+                basvuruCard.innerHTML = `
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <!-- Kurye Bilgileri (Sol) -->
+                        <div class="flex-1">
+                            <div class="flex items-start gap-4 mb-4">
+                                <div class="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center flex-shrink-0">
+                                    <img src="${avatarSrc}" alt="Avatar" class="w-full h-full rounded-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                    <span class="text-3xl hidden">🏍️</span>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="text-xl font-bold text-text mb-1">${kuryeData.adSoyad || kuryeData.ad_soyad || 'İsimsiz'}</h3>
+                                    <p class="text-sm text-muted mb-2">${kuryeData.id ? `#${kuryeData.id}` : ''}</p>
+                                    <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold ${durumClass}">${durumText}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <p class="text-xs text-muted mb-1">Telefon</p>
+                                    <p class="text-sm font-medium text-text">${kuryeData.telefon || kuryeData.tel || '-'}</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-muted mb-1">E-posta</p>
+                                    <p class="text-sm font-medium text-text">${kuryeData.email || '-'}</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-muted mb-1">Şehir</p>
+                                    <p class="text-sm font-medium text-text">${kuryeData.sehir || '-'}</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-muted mb-1">Başvuru Tarihi</p>
+                                    <p class="text-sm font-medium text-text">${tarihStr}</p>
+                                </div>
+                            </div>
+                            
+                            ${kartData.hakkinda || kartData.hakkında || kartData.aciklama || kartData.açıklama ? `
+                            <div class="mt-4 pt-4 border-t border-gray-200">
+                                <p class="text-xs text-muted mb-2">Hakkında</p>
+                                <p class="text-sm text-text">${kartData.hakkinda || kartData.hakkında || kartData.aciklama || kartData.açıklama}</p>
+                            </div>
+                            ` : ''}
+                            
+                            ${basvuru.notlar ? `
+                            <div class="mt-4 pt-4 border-t border-gray-200">
+                                <p class="text-xs text-muted mb-2">Notlar</p>
+                                <p class="text-sm text-text">${basvuru.notlar}</p>
+                            </div>
+                            ` : ''}
+                        </div>
+                        
+                        <!-- Aksiyonlar (Sağ) -->
+                        <div class="flex flex-col gap-2 md:w-48">
+                            ${basvuru.durum === 'beklemede' ? `
+                            <button onclick="if(typeof window.updateBasvuruDurum === 'function') window.updateBasvuruDurum('${basvuru.id}', 'kabul'); else alert('Fonksiyon yükleniyor...');" class="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-semibold">
+                                Kabul Et
+                            </button>
+                            <button onclick="if(typeof window.updateBasvuruDurum === 'function') window.updateBasvuruDurum('${basvuru.id}', 'red'); else alert('Fonksiyon yükleniyor...');" class="w-full px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-semibold">
+                                Reddet
+                            </button>
+                            ` : ''}
+                            <button data-basvuru-id="${basvuru.id}" class="viewKuryeProfileBtn w-full px-4 py-2 bg-accent text-white rounded-lg hover:bg-blue-600 transition-colors font-semibold">
+                                Profili Gör
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                listEl.appendChild(basvuruCard);
+            });
+            
+            // Profili Gör butonları için event listener ekle
+            const viewProfileBtns = listEl.querySelectorAll('.viewKuryeProfileBtn');
+            viewProfileBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const basvuruId = this.getAttribute('data-basvuru-id');
+                    
+                    // BasvuruDataMap kontrolü ve oluşturma
+                    if (!window.basvuruDataMap) {
+                        window.basvuruDataMap = {};
+                    }
+                    
+                    // Eğer basvuruDataMap'te yoksa, currentBasvurular listesinden bul
+                    let basvuruData = window.basvuruDataMap[basvuruId];
+                    if (!basvuruData && window.currentBasvurular && window.currentBasvurular.length > 0) {
+                        basvuruData = window.currentBasvurular.find(b => b && b.id === basvuruId);
+                        if (basvuruData) {
+                            window.basvuruDataMap[basvuruId] = basvuruData;
+                        }
+                    }
+                    
+                    if (basvuruData && typeof window.viewKuryeProfile === 'function') {
+                        window.viewKuryeProfile(basvuruData.kuryeData?.id || '', basvuruData);
+                    } else {
+                        console.error('Basvuru verisi bulunamadı:', {
+                            basvuruId: basvuruId,
+                            basvuruData: basvuruData,
+                            hasViewKuryeProfile: typeof window.viewKuryeProfile === 'function',
+                            basvuruDataMap: window.basvuruDataMap,
+                            currentBasvurular: window.currentBasvurular
+                        });
+                        alert('Kurye profili yükleniyor, lütfen bekleyin...');
+                    }
+                });
+            });
+        }
+        
+        // Global scope'a taşı - HTML onclick handler'ları için
+        window.updateBasvuruDurum = async function updateBasvuruDurum(basvuruId, durum) {
+            if (!confirm(`Bu başvuruyu ${durum === 'kabul' ? 'kabul' : 'reddetmek'} istediğinize emin misiniz?`)) {
+                return;
+            }
+            
+            try {
+                const formData = new URLSearchParams();
+                formData.append('action', 'updateBasvuruDurum');
+                formData.append('basvuruId', basvuruId);
+                formData.append('durum', durum);
+                
+                const response = await fetch(window.PROFILE_API_URL_BASVURULAR, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: formData.toString()
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert(`Başvuru ${durum === 'kabul' ? 'kabul' : 'reddedildi'}.`);
+                    if (typeof window.loadBasvurular === 'function') {
+                        window.loadBasvurular();
+                    }
+                } else {
+                    alert(result.error || 'Başvuru durumu güncellenirken bir hata oluştu.');
+                }
+            } catch (error) {
+                console.error('Başvuru durumu güncelleme hatası:', error);
+                alert('Başvuru durumu güncellenirken bir hata oluştu.');
+            }
+        };
+        
+        // Global scope'a taşı - HTML onclick handler'ları için
+        // Kurye profil modalını aç ve bilgileri göster
+        window.viewKuryeProfile = function viewKuryeProfile(kuryeId, basvuruData) {
+            // Basvuru verilerinden kurye bilgilerini al
+            const kuryeData = basvuruData?.kuryeData || {};
+            const kartData = kuryeData?.raw_kart_json || {};
+            
+            // Avatar belirleme
+            const avatar = kuryeData.avatar || 1;
+            const avatarSrc = `public/img/avatars/${avatar}.png`;
+            
+            // Ad Soyad
+            const adSoyad = kuryeData.adSoyad || kuryeData.ad_soyad || 'İsimsiz';
+            
+            // Telefon (eğer paylaşıldıysa)
+            const telefon = kuryeData.telefon || kuryeData.tel || '-';
+            const telefonGorunur = kartData.telefonGorunur === '1' || kartData.telefonGorunur === 1 || kartData.telefonGorunur === true;
+            
+            // Email
+            const email = kuryeData.email || '-';
+            
+            // Şehir
+            const sehir = kuryeData.sehir || '-';
+            
+            // Ehliyet
+            const ehliyet = kartData.ehliyet || kartData.ehliyetTipi || '-';
+            
+            // Motor bilgisi
+            const motorVarmi = kartData.motorVarmi === '1' || kartData.motorVarmi === 1 || kartData.motorVarmi === true || kartData.motorVarmi === 'evet';
+            const motorMarka = kartData.motorMarka || '';
+            const motorModel = kartData.motorModel || '';
+            const motorYil = kartData.motorYil || '';
+            const motorPlaka = kartData.motorPlaka || '';
+            const plakaGorunur = kartData.plakaGorunur === '1' || kartData.plakaGorunur === 1 || kartData.plakaGorunur === true;
+            
+            // Belge bilgileri
+            const p1Belgesi = kartData.p1Belgesi === '1' || kartData.p1Belgesi === 1 || kartData.p1Belgesi === true || kartData.p1Belgesi === 'evet';
+            const srcBelgesi = kartData.srcBelgesi === '1' || kartData.srcBelgesi === 1 || kartData.srcBelgesi === true || kartData.srcBelgesi === 'evet';
+            const psikoteknik = kartData.psikoteknik === '1' || kartData.psikoteknik === 1 || kartData.psikoteknik === true || kartData.psikoteknik === 'evet';
+            
+            // Deneyimler
+            let deneyimler = '-';
+            if (kartData.deneyimler) {
+                if (typeof kartData.deneyimler === 'string') {
+                    try {
+                        const deneyimlerParsed = JSON.parse(kartData.deneyimler);
+                        if (Array.isArray(deneyimlerParsed)) {
+                            deneyimler = deneyimlerParsed.join(', ');
+                        } else {
+                            deneyimler = kartData.deneyimler;
+                        }
+                    } catch (e) {
+                        deneyimler = kartData.deneyimler;
+                    }
+                } else if (Array.isArray(kartData.deneyimler)) {
+                    deneyimler = kartData.deneyimler.join(', ');
+                }
+            }
+            
+            // Çalışma Modeli
+            const calismaModeliParts = [];
+            if (kartData.esnaf === '1' || kartData.esnaf === 1 || kartData.esnaf === true) {
+                calismaModeliParts.push('Esnaf');
+            }
+            if (kartData.sigortali === '1' || kartData.sigortali === 1 || kartData.sigortali === true) {
+                calismaModeliParts.push('Sigortalı');
+            }
+            const calismaModeli = calismaModeliParts.length > 0 ? calismaModeliParts.join(', ') : '-';
+            
+            // Ücret bilgileri (eğer paylaşıldıysa)
+            const ucretBilgisiPaylas = kartData.ucretBilgisiPaylas === '1' || kartData.ucretBilgisiPaylas === 1 || kartData.ucretBilgisiPaylas === true;
+            let ucretBilgileri = '-';
+            if (!ucretBilgisiPaylas) {
+                const ucretParts = [];
+                if (kartData.sabitUcret) {
+                    ucretParts.push(`Sabit: ${kartData.sabitUcret} TL`);
+                }
+                if (kartData.paket1) {
+                    ucretParts.push(`Paket: ${kartData.paket1} TL`);
+                }
+                if (kartData.km) {
+                    ucretParts.push(`Km: ${kartData.km} TL`);
+                }
+                if (ucretParts.length > 0) {
+                    ucretBilgileri = ucretParts.join(', ');
+                }
+            }
+            
+            // Hakkında
+            const hakkinda = kartData.hakkinda || kartData.hakkında || kartData.aciklama || kartData.açıklama || '-';
+            
+            // Acil Müsaitlik bilgileri
+            const acilMusaitlikCheck = kartData.acilMusaitlikCheck === '1' || kartData.acilMusaitlikCheck === 1 || kartData.acilMusaitlikCheck === true;
+            let acilMusaitlikBilgileri = '';
+            if (acilMusaitlikCheck) {
+                const acilParts = [];
+                if (kartData.acilMusaitlikBaslangicSaati && kartData.acilMusaitlikCikisSaati) {
+                    acilParts.push(`Saatler: ${kartData.acilMusaitlikBaslangicSaati} - ${kartData.acilMusaitlikCikisSaati}`);
+                }
+                if (kartData.acilMusaitlikSaatlikUcret) {
+                    acilParts.push(`Saatlik: ${kartData.acilMusaitlikSaatlikUcret} TL`);
+                }
+                if (kartData.acilMusaitlikKmUcret) {
+                    acilParts.push(`Km: ${kartData.acilMusaitlikKmUcret} TL`);
+                }
+                if (kartData.acilMusaitlikPaketUcret) {
+                    acilParts.push(`Paket: ${kartData.acilMusaitlikPaketUcret} TL`);
+                }
+                if (kartData.acilMusaitlikEkBilgiler) {
+                    acilParts.push(kartData.acilMusaitlikEkBilgiler);
+                }
+                if (acilParts.length > 0) {
+                    acilMusaitlikBilgileri = acilParts.join(' | ');
+                }
+            }
+            
+            // WhatsApp
+            const whatsapp = kartData.whatsapp || '';
+            const whatsappGorunur = kartData.whatsappGorunur === '1' || kartData.whatsappGorunur === 1 || kartData.whatsappGorunur === true;
+            
+            // Modal içeriğini oluştur
+            const modalContent = document.getElementById('kuryeProfileModalContent');
+            modalContent.innerHTML = `
+                <div class="space-y-6">
+                    <!-- Üst Bilgiler -->
+                    <div class="flex flex-col md:flex-row items-start gap-6 pb-6 border-b border-gray-200">
+                        <div class="w-32 h-32 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center flex-shrink-0 mx-auto md:mx-0">
+                            <img src="${avatarSrc}" alt="Avatar" class="w-full h-full rounded-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <span class="text-5xl hidden">🏍️</span>
+                        </div>
+                        <div class="flex-1 text-center md:text-left">
+                            <h3 class="text-3xl font-bold text-text mb-2">${adSoyad}</h3>
+                            <p class="text-lg text-muted mb-4">${kuryeData.id ? `#${kuryeData.id}` : ''}</p>
+                            <div class="flex flex-wrap gap-2 justify-center md:justify-start">
+                                <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-semibold">${sehir}</span>
+                                ${ehliyet !== '-' ? `<span class="px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-semibold">Ehliyet: ${ehliyet}</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Kişisel Bilgiler -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <p class="text-xs text-muted mb-1">Telefon</p>
+                            <p class="text-sm font-medium text-text">${telefonGorunur ? telefon : 'Gizli'}</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <p class="text-xs text-muted mb-1">E-posta</p>
+                            <p class="text-sm font-medium text-text">${email}</p>
+                        </div>
+                        ${whatsapp && whatsappGorunur ? `
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <p class="text-xs text-muted mb-1">WhatsApp</p>
+                            <p class="text-sm font-medium text-text">${whatsapp}</p>
+                        </div>
+                        ` : ''}
+                        ${deneyimler !== '-' ? `
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <p class="text-xs text-muted mb-1">Deneyimler</p>
+                            <p class="text-sm font-medium text-text">${deneyimler}</p>
+                        </div>
+                        ` : ''}
+                    </div>
+                    
+                    <!-- Motor Bilgileri -->
+                    ${motorVarmi ? `
+                    <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
+                        <h4 class="text-lg font-semibold text-text mb-3">Motor Bilgileri</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            ${motorMarka ? `<div><p class="text-xs text-muted mb-1">Marka</p><p class="text-sm font-medium text-text">${motorMarka}</p></div>` : ''}
+                            ${motorModel ? `<div><p class="text-xs text-muted mb-1">Model</p><p class="text-sm font-medium text-text">${motorModel}</p></div>` : ''}
+                            ${motorYil ? `<div><p class="text-xs text-muted mb-1">Yıl</p><p class="text-sm font-medium text-text">${motorYil}</p></div>` : ''}
+                            ${motorPlaka && plakaGorunur ? `<div><p class="text-xs text-muted mb-1">Plaka</p><p class="text-sm font-medium text-text">${motorPlaka}</p></div>` : ''}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    <!-- Belge Bilgileri -->
+                    ${(p1Belgesi || srcBelgesi || psikoteknik) ? `
+                    <div class="bg-green-50 rounded-lg p-4 border border-green-200">
+                        <h4 class="text-lg font-semibold text-text mb-3">Belgeler</h4>
+                        <div class="flex flex-wrap gap-2">
+                            ${p1Belgesi ? '<span class="px-3 py-1 bg-green-600 text-white rounded-full text-sm font-semibold">P1 Belgesi</span>' : ''}
+                            ${srcBelgesi ? '<span class="px-3 py-1 bg-green-600 text-white rounded-full text-sm font-semibold">SRC Belgesi</span>' : ''}
+                            ${psikoteknik ? '<span class="px-3 py-1 bg-green-600 text-white rounded-full text-sm font-semibold">Psikoteknik</span>' : ''}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    <!-- Çalışma Modeli ve Ücret -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <p class="text-xs text-muted mb-1">Çalışma Modeli</p>
+                            <p class="text-sm font-medium text-text">${calismaModeli}</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <p class="text-xs text-muted mb-1">Ücret Bilgileri</p>
+                            <p class="text-sm font-medium text-text">${ucretBilgileri}</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Acil Müsaitlik -->
+                    ${acilMusaitlikBilgileri ? `
+                    <div class="bg-red-50 rounded-lg p-4 border border-red-200">
+                        <h4 class="text-lg font-semibold text-text mb-2">🚨 Acil Müsaitlik</h4>
+                        <p class="text-sm text-text">${acilMusaitlikBilgileri}</p>
+                    </div>
+                    ` : ''}
+                    
+                    <!-- Hakkında -->
+                    ${hakkinda !== '-' ? `
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <h4 class="text-lg font-semibold text-text mb-2">Hakkında</h4>
+                        <p class="text-sm text-text whitespace-pre-wrap">${hakkinda}</p>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+            
+            // Modal'ı aç
+            const modal = document.getElementById('kuryeProfileModal');
+            modal.classList.remove('hidden');
+            
+            // Body scroll'u engelle
+            document.body.style.overflow = 'hidden';
+        };
+        
+        // Modal kapatma
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('kuryeProfileModal');
+            const closeBtn = document.getElementById('closeKuryeProfileModal');
+            
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                });
+            }
+            
+            // Modal dışına tıklayınca kapat
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            // ESC tuşu ile kapat
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            });
         });
     </script>
 </body>

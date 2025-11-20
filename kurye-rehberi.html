@@ -83,41 +83,10 @@
                     </div>
                 </div>
                 
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden">
-                    <button id="mobileMenuBtn" class="text-text hover:text-primary transition-colors">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
-                
-            </div>
-        </div>
-        
-        <!-- Mobile Menu -->
-        <div id="mobileMenu" class="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 hidden">
-            <div class="px-4 py-2 space-y-2">
-                <a href="yakinda.html" class="block py-2 text-text hover:text-primary">Yakında</a>
-                <a href="kurye-rehberi.html" class="block py-2 text-primary font-semibold">Kurye Rehberi</a>
-                <a href="ilanlar.html" class="block py-2 text-text hover:text-primary">İş İlanları</a>
-                <a href="forum.html" class="block py-2 text-text hover:text-primary">Forum</a>
-                <a href="kazanc.html" class="block py-2 text-text hover:text-primary">Kazanç</a>
-                <div class="pt-2 border-t border-gray-200">
-                    <!-- Login Button (shown when not logged in) -->
-                    <button id="loginBtnMobile" data-login-btn class="block w-full text-center py-2 bg-accent text-white rounded-lg px-4 font-medium hover:bg-blue-600 transition-colors">Giriş Yap</button>
-                    <button data-register-btn class="block w-full text-center bg-primary text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors mt-2">Kayıt Ol</button>
-                    
-                    <!-- User Menu Mobile (shown when logged in) -->
-                    <div id="userMenuMobile" class="hidden pt-2 space-y-2">
-                        <a id="profileLinkMobile" href="#" class="flex items-center space-x-2 py-2 text-text hover:text-primary">
-                            <div id="userAvatarDisplayMobile" class="w-8 h-8 rounded-full bg-gray-200 overflow-hidden border-2 border-primary">
-                                <img src="public/img/avatars/1.png" alt="Avatar" class="w-full h-full object-cover">
-                            </div>
-                            <span id="userNameDisplayMobile" class="font-medium">Kullanıcı</span>
-                        </a>
-                        <button id="logoutBtnMobile" class="block w-full text-center py-2 text-muted hover:text-text transition-colors font-medium">Çıkış Yap</button>
-                    </div>
+                <!-- Mobile Auth Buttons -->
+                <div class="md:hidden flex items-center space-x-2">
+                    <button id="loginBtnMobile" data-login-btn class="bg-accent text-white px-3 py-1.5 rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium">Giriş</button>
+                    <button data-register-btn class="bg-primary text-white px-3 py-1.5 rounded-lg hover:bg-red-600 transition-colors text-sm font-medium">Kayıt</button>
                 </div>
             </div>
         </div>

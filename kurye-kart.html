@@ -13,16 +13,27 @@
     <meta property="og:url" content="https://kuryes.com/kurye-kart.html">
     <meta property="og:image" content="/img/og-image.png">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="public/favicon/kuryesfavicon.png">
-    <link rel="icon" type="image/png" sizes="64x64" href="public/favicon/kuryesfavicon.png">
-    <link rel="icon" type="image/png" sizes="128x128" href="public/favicon/kuryesfavicon.png">
-    <link rel="icon" type="image/png" sizes="256x256" href="public/favicon/kuryesfavicon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="public/favicon/kuryesfavicon.png">
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
     
-    <!-- PWA -->
-    <link rel="manifest" href="manifest.json">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="shortcut icon" href="/logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="/logo.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="/logo.png">
+    <link rel="icon" type="image/png" sizes="256x256" href="/logo.png">
+    
+    <!-- Apple Touch Icon (iOS için masaüstü ikonu) -->
+    <link rel="apple-touch-icon" href="/logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="/logo.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/logo.png">
+    
+    <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#FF3131">
+    <meta name="msapplication-TileColor" content="#FF3131">
+    <meta name="msapplication-TileImage" content="/logo.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Kuryes">
@@ -1302,6 +1313,16 @@
                     selectedAvatar.value = avatarNumber;
                     profileAvatar.src = `public/img/avatars/${avatarNumber}.png`;
                     updateAvatarSelection(avatarNumber);
+                    
+                    // Avatar'ı localStorage'a kaydet (tüm sayfalarda görünsün)
+                    if (typeof localStorage !== 'undefined') {
+                        localStorage.setItem('kuryes_user_avatar', avatarNumber);
+                        
+                        // Header'daki avatar'ı güncelle (eğer sayfa yüklüyse)
+                        if (typeof window.KuryesAuth !== 'undefined' && window.KuryesAuth.updateHeaderForAuth) {
+                            window.KuryesAuth.updateHeaderForAuth();
+                        }
+                    }
                     
                     // Modal'ı kapat
                     document.getElementById('avatarModal').classList.add('hidden');
