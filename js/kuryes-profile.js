@@ -424,6 +424,11 @@ function fillKuryeProfileForm(profileData) {
         const selectedAvatar = document.getElementById('selectedAvatar');
         if (selectedAvatar) selectedAvatar.value = avatarValue;
         
+        // Avatar'ı localStorage'a kaydet (tüm sayfalarda görünsün)
+        if (typeof localStorage !== 'undefined') {
+            localStorage.setItem('kuryes_user_avatar', avatarValue);
+        }
+        
         // Avatar görselini güncelle
         const avatarButtons = document.querySelectorAll('[data-avatar]');
         avatarButtons.forEach(btn => {
@@ -432,6 +437,17 @@ function fillKuryeProfileForm(profileData) {
                 btn.classList.add('border-primary', 'border-2');
             }
         });
+        
+        // Profil avatar görselini güncelle
+        const profileAvatar = document.getElementById('profileAvatar');
+        if (profileAvatar) {
+            profileAvatar.src = `public/img/avatars/${avatarValue}.png`;
+        }
+        
+        // Header'daki avatar'ı güncelle
+        if (typeof window.KuryesAuth !== 'undefined' && window.KuryesAuth.updateHeaderForAuth) {
+            window.KuryesAuth.updateHeaderForAuth();
+        }
     }
     
     console.log('Kurye profil formu doldurma tamamlandı');
@@ -566,17 +582,119 @@ function fillIsletmeProfileForm(profileData) {
         }
         
         const value = kartData[key];
-        if (value === null || value === undefined || value === '') {
+        // Boş değer kontrolü - checkbox'lar için '0' de geçerli, diğerleri için null/undefined/boş string kontrolü
+        if (value === null || value === undefined) {
             return;
         }
         
-        // Checkbox'lar için özel işlem
-        if (key.toLowerCase().includes('check') || key.toLowerCase().includes('gorunur') || key.toLowerCase().includes('evet') || key.toLowerCase().includes('hayir')) {
-            const checkbox = document.getElementById(key) || document.querySelector(`input[name="${key}"]`);
-            if (checkbox && checkbox.type === 'checkbox') {
-                checkbox.checked = value === 'evet' || value === '1' || value === 1 || value === true || value === 'true';
-                console.log(`Checkbox dolduruldu: ${key} = ${checkbox.checked}`);
+        // Checkbox'lar için '0' değeri de geçerli, diğerleri için boş string kontrolü
+        const isCheckboxField = key.toLowerCase().includes('check') || 
+                                ['yemek', 'yol', 'sigorta', 'esnaf', 'sigortali', 'partTime', 'fullTime', 'gunluk', 
+                                 'ucretBilgisiPaylas', 'kuryeArayabilir', 'iletisimYetkiliTelefon', 'acilKuryeCheck',
+                                 'acilYemek', 'acilYol', 'acilSigorta', 'detaylarCheck', 'paket1Check', 'paket2Check',
+                                 'kmCheck', 'gunlukBonusCheck', 'haftalikBonusCheck', 'odemeSekliCheck', 'aylikOrtalamaKazançCheck'].includes(key);
+        
+        if (!isCheckboxField && value === '') {
+            return;
+        }
+        
+        // Önce checkbox olarak kontrol et (tüm checkbox'lar için)
+        const checkbox = document.getElementById(key) || document.querySelector(`input[name="${key}"]`);
+        if (checkbox && checkbox.type === 'checkbox') {
+            // Checkbox değerini kontrol et
+            let checked = value === 'evet' || value === '1' || value === 1 || value === true || value === 'true' || value === 'on';
+            
+            // Detaylar checkbox'ı için özel işlem - eğer detaylar değeri varsa checkbox'ı true yap
+            if (key === 'detaylarCheck') {
+                const detaylarValue = kartData.detaylar || '';
+                if (detaylarValue && detaylarValue.trim() !== '') {
+                    checked = true; // Değer varsa checkbox'ı true yap
+                }
             }
+            
+            checkbox.checked = checked;
+            console.log(`Checkbox dolduruldu: ${key} = ${checked}`);
+            
+            // Ücret tipi checkbox'ları için ilgili input'ları enable/disable et
+            const checkboxInputMap = {
+                'sabitUcretCheck': 'sabitUcret',
+                'paket1Check': 'paket1',
+                'paket2Check': 'paket2',
+                'kmCheck': 'km',
+                'gunlukBonusCheck': 'gunlukBonus',
+                'haftalikBonusCheck': 'haftalikBonus',
+                'odemeSekliCheck': 'odemeSekli',
+                'aylikOrtalamaKazançCheck': 'aylikOrtalamaKazanç',
+                'detaylarCheck': 'detaylar',
+                'acilSaatlikCheck': 'acilSaatlikUcret',
+                'acilKmCheck': 'acilKmUcret',
+                'acilPaketCheck': 'acilPaketUcret'
+            };
+            
+            if (checkboxInputMap[key]) {
+                const relatedInput = document.getElementById(checkboxInputMap[key]);
+                if (relatedInput) {
+                    if (checked) {
+                        relatedInput.disabled = false;
+                        relatedInput.classList.remove('text-gray-400');
+                        // Detaylar için özel: eğer değer varsa input'a yaz
+                        if (key === 'detaylarCheck') {
+                            const detaylarValue = kartData.detaylar || '';
+                            if (detaylarValue && detaylarValue.trim() !== '') {
+                                relatedInput.value = detaylarValue;
+                            }
+                        }
+                    } else {
+                        relatedInput.disabled = true;
+                        relatedInput.classList.add('text-gray-400');
+                        // Detaylar için özel: checkbox kapatıldığında değeri temizleme
+                        if (key !== 'detaylarCheck' && !relatedInput.value) {
+                            relatedInput.value = '';
+                        }
+                    }
+                }
+                
+                // kmCheck için kmSartlari input'unu da kontrol et
+                if (key === 'kmCheck') {
+                    const kmSartlariInput = document.getElementById('kmSartlari');
+                    if (kmSartlariInput) {
+                        if (checked) {
+                            kmSartlariInput.disabled = false;
+                            kmSartlariInput.classList.remove('text-gray-400');
+                        } else {
+                            kmSartlariInput.disabled = true;
+                            kmSartlariInput.classList.add('text-gray-400');
+                            if (!kmSartlariInput.value) {
+                                kmSartlariInput.value = '';
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // Acil kurye checkbox'ı için özel işlem
+            if (key === 'acilKuryeCheck' && checked) {
+                const acilKuryeInlineContent = document.getElementById('acilKuryeInlineContent');
+                if (acilKuryeInlineContent) {
+                    acilKuryeInlineContent.classList.remove('hidden');
+                    const acilAccordionSection = acilKuryeInlineContent.closest('[data-accordion-item]');
+                    if (acilAccordionSection) {
+                        acilAccordionSection.classList.add('active');
+                    }
+                }
+            }
+            
+            // İletişim yetkili telefon checkbox'ı için özel işlem
+            if (key === 'iletisimYetkiliTelefon' && checked) {
+                const cepInput = document.getElementById('cep');
+                if (cepInput) {
+                    cepInput.disabled = true;
+                }
+            }
+            
+            // Checkbox değişikliğini tetikle (event listener'ların çalışması için)
+            checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+            
             return;
         }
         
@@ -599,7 +717,7 @@ function fillIsletmeProfileForm(profileData) {
         // Textarea için
         const textarea = document.getElementById(key) || document.querySelector(`textarea[name="${key}"]`);
         if (textarea && textarea.tagName === 'TEXTAREA') {
-            textarea.value = value;
+            textarea.value = value || '';
             console.log(`Textarea dolduruldu: ${key} = ${value}`);
             return;
         }
@@ -611,7 +729,19 @@ function fillIsletmeProfileForm(profileData) {
             if (input.type === 'checkbox' || input.type === 'radio') {
                 return;
             }
-            input.value = value;
+            
+            // Input disabled ise ve ilgili checkbox işaretliyse enable et
+            if (input.disabled) {
+                const relatedCheckboxId = key + 'Check';
+                const relatedCheckbox = document.getElementById(relatedCheckboxId);
+                if (relatedCheckbox && relatedCheckbox.checked) {
+                    input.disabled = false;
+                    input.classList.remove('text-gray-400');
+                }
+            }
+            
+            // Değeri doldur (boş string de olsa)
+            input.value = value || '';
             console.log(`Input dolduruldu: ${key} = ${value}`);
         }
     });
@@ -654,14 +784,15 @@ function fillIsletmeProfileForm(profileData) {
         }
     }
     
-    // Acil kurye checkbox
-    if (kartData.acilKuryeCheck !== undefined || profileData.acil_kurye !== undefined) {
-        const acilKuryeCheck = document.getElementById('acilKuryeCheck');
-        if (acilKuryeCheck) {
-            const checked = kartData.acilKuryeCheck === 'evet' || kartData.acilKuryeCheck === '1' || profileData.acil_kurye === '1' || profileData.acil_kurye === 1;
-            acilKuryeCheck.checked = checked;
-            if (checked) {
-                acilKuryeCheck.dispatchEvent(new Event('change'));
+    // Acil kurye checkbox - özel işlem (zaten yukarıda dolduruldu ama UI'ı güncelle)
+    const acilKuryeCheck = document.getElementById('acilKuryeCheck');
+    if (acilKuryeCheck && acilKuryeCheck.checked) {
+        const acilKuryeInlineContent = document.getElementById('acilKuryeInlineContent');
+        if (acilKuryeInlineContent) {
+            acilKuryeInlineContent.classList.remove('hidden');
+            const acilAccordionSection = acilKuryeInlineContent.closest('[data-accordion-item]');
+            if (acilAccordionSection) {
+                acilAccordionSection.classList.add('active');
             }
         }
     }

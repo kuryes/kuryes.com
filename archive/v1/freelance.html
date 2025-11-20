@@ -1,0 +1,1418 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurye Bul - Kuryes.com</title>
+    <meta name="description" content="Başlangıç ve teslim adresini gir, ürün fotoğrafını yükle—şeffaf fiyatı gör. Demo kurye bulma arayüzü.">
+    
+    <!-- OpenGraph -->
+    <meta property="og:title" content="Kurye Bul - Kuryes.com">
+    <meta property="og:description" content="Başlangıç ve teslim adresini gir, ürün fotoğrafını yükle—şeffaf fiyatı gör.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kuryes.com/freelance.html">
+    <meta property="og:image" content="/img/og-image.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="public/favicon/kuryesfavicon.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="public/favicon/kuryesfavicon.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="public/favicon/kuryesfavicon.png">
+    <link rel="icon" type="image/png" sizes="256x256" href="public/favicon/kuryesfavicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="public/favicon/kuryesfavicon.png">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#FF3131">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Kuryes">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Leaflet CSS & JS (OpenStreetMap - Ücretsiz!) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF3131',
+                        accent: '#00C8FF',
+                        support: {
+                            yellow: '#FFD60A',
+                            orange: '#FF7A00'
+                        },
+                        bg: '#F8FBFD',
+                        text: '#1C1C1C',
+                        muted: '#6F6F6F'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-bg text-text font-inter">
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <img src="public/img/kuryes.svg" 
+                             srcset="public/img/kuryes.svg, public/img/kuryes.png" 
+                             alt="KURYΕS.com" 
+                             class="h-12 md:h-14 w-auto"
+                             onerror="this.onerror=null; this.src='public/img/kuryes.png';">
+                    </a>
+                </div>
+                
+                <!-- Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-text hover:text-primary transition-colors">Ana Sayfa</a>
+                    <a href="kurye-tabani.html" class="text-text hover:text-primary transition-colors">KuryeTabanı</a>
+                    <a href="freelance.html" class="text-primary font-semibold">Kurye Bul</a>
+                    <a href="kurye-rehberi.html" class="text-text hover:text-primary transition-colors">Kurye Rehberi</a>
+                    <a href="ilanlar.html" class="text-text hover:text-primary transition-colors">İş İlanları</a>
+                    <a href="forum.html" class="text-text hover:text-primary transition-colors">Forum</a>
+                    <a href="kazanc.html" class="text-text hover:text-primary transition-colors">Kazanç</a>
+                </nav>
+                
+                <!-- Auth Buttons -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <button class="text-muted hover:text-text transition-colors" disabled>Giriş Yap</button>
+                    <button data-register-btn class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors">Kayıt Ol</button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobileMenuBtn" class="text-text hover:text-primary transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 hidden">
+            <div class="px-4 py-2 space-y-2">
+                <a href="index.html" class="block py-2 text-text hover:text-primary">Ana Sayfa</a>
+                <a href="kurye-tabani.html" class="block py-2 text-text hover:text-primary">KuryeTabanı</a>
+                <a href="freelance.html" class="block py-2 text-primary font-semibold">Kurye Bul</a>
+                <a href="kurye-rehberi.html" class="block py-2 text-text hover:text-primary">Kurye Rehberi</a>
+                <a href="ilanlar.html" class="block py-2 text-text hover:text-primary">İş İlanları</a>
+                <a href="forum.html" class="block py-2 text-text hover:text-primary">Forum</a>
+                <a href="kazanc.html" class="block py-2 text-text hover:text-primary">Kazanç</a>
+                <div class="pt-2 border-t border-gray-200">
+                    <button class="block w-full text-left py-2 text-muted" disabled>Giriş Yap</button>
+                    <button data-register-btn class="block w-full text-center bg-primary text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors mt-2">Kayıt Ol</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Launch Banner -->
+    <div class="bg-gradient-to-r from-primary to-accent text-white text-center py-2">
+        <p class="text-sm font-medium">🚀 Lansman: Aralık 2025 Antalya — 2026 Tüm Türkiye</p>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="py-16 bg-gradient-to-br from-bg to-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold font-poppins text-text mb-6">
+                Kurye Bul
+            </h1>
+            <p class="text-xl text-muted mb-8">
+                Başlangıç ve teslim adresini gir, ürün fotoğrafını yükle—şeffaf fiyatı gör.
+            </p>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Left Panel - Address Inputs -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-6">Gönderi Bilgileri</h3>
+                    
+                    <!-- Başlangıç Adresi -->
+                    <div class="mb-6">
+                        <label for="baslangic" class="block text-sm font-medium text-text mb-2">
+                            Başlangıç Adresi *
+                        </label>
+                        <input type="text" id="baslangic" name="baslangic" required
+                               placeholder="Başlangıç adresini girin veya tıklayarak haritada seçin"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent cursor-pointer"
+                               readonly>
+                    </div>
+                    
+                    <!-- Teslim Adresi -->
+                    <div class="mb-6">
+                        <label for="teslim" class="block text-sm font-medium text-text mb-2">
+                            Teslim Adresi *
+                        </label>
+                        <input type="text" id="teslim" name="teslim" required
+                               placeholder="Teslim adresini girin veya tıklayarak haritada seçin"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent cursor-pointer"
+                               readonly>
+                    </div>
+                    
+                    <!-- Haritada Seç Button -->
+                    <button type="button" id="openMapModal" class="w-full bg-accent text-white py-3 rounded-lg font-semibold hover:bg-accent/90 transition-colors mb-6">
+                        🗺️ Haritada Seç
+                    </button>
+                    
+                    <!-- Fotoğraf Yükleme -->
+                    <div class="mb-6">
+                        <label for="fotograf" class="block text-sm font-medium text-text mb-2">
+                            Ürün Fotoğrafları (1-3 adet)
+                        </label>
+                        <input type="file" id="fotograf" name="fotograf" multiple
+                               accept="image/*"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <p class="text-xs text-muted mt-1">
+                            Fotoğraflar teslimden sonra 1 ay saklanır, sonra silinir.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Middle Panel - Map & Calculations -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-6">Rota & Hesaplama</h3>
+                    
+                    <!-- Mini Map - Rota Gösterimi -->
+                    <div id="routeMapContainer" class="bg-gray-100 rounded-lg h-48 mb-6 relative overflow-hidden border border-gray-300" style="z-index: 1;">
+                        <div id="routeMapPlaceholder" class="absolute inset-0 flex items-center justify-center">
+                            <div class="text-center">
+                                <svg class="w-12 h-12 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                                <p class="text-sm text-muted">Rota bilgilerini görmek için adres girin</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Distance & Time -->
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <span class="text-sm font-medium">Mesafe:</span>
+                            <span id="mesafe" class="text-sm font-semibold text-primary">- km</span>
+                        </div>
+                        
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <span class="text-sm font-medium">Tahmini Süre:</span>
+                            <span id="sure" class="text-sm font-semibold text-accent">- dk</span>
+                        </div>
+                        
+                        <div class="flex justify-between items-center p-3 bg-primary/10 rounded-lg">
+                            <span class="text-sm font-medium">Ücret:</span>
+                            <span id="ucret" class="text-lg font-bold text-primary">- TL</span>
+                        </div>
+                    </div>
+                    
+                    <p class="text-xs text-muted mt-4 text-center">
+                        Süre; trafik verilerine, hava koşullarına göre değişkenlik gösterebilir.
+                    </p>
+                </div>
+                
+                <!-- Right Panel - Confirmations & CTA -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-6">Onay & Gönderim</h3>
+                    
+                    <!-- Onay Kutuları -->
+                    <div class="space-y-4 mb-6">
+                        <label class="flex items-start">
+                            <input type="checkbox" id="gondericiOnay" class="mt-1 mr-3">
+                            <span class="text-sm text-text">
+                                <strong>Gönderici:</strong> Yasaklı, tehlikeli, kaçak ürün içermediğini onaylıyorum.
+                            </span>
+                        </label>
+                        
+                        <label class="flex items-start">
+                            <input type="checkbox" id="kuryeOnay" class="mt-1 mr-3">
+                            <span class="text-sm text-text">
+                                <strong>Kurye:</strong> Gönderi içeriğinden sorumlu tutulmadığımı kabul ederim.
+                            </span>
+                        </label>
+                    </div>
+                    
+                    <!-- CTA Buttons -->
+                    <div class="space-y-3">
+                        <button id="onUyelikBtn" class="w-full bg-primary text-white py-4 rounded-lg font-semibold hover:bg-red-600 transition-colors">
+                            Ön Üyelik Oluştur
+                        </button>
+                        
+                        <a href="https://wa.me/905551234567?text=Kurye%20talebi%20oluşturmak%20istiyorum" 
+                           target="_blank"
+                           class="w-full bg-green-500 text-white py-4 rounded-lg font-semibold hover:bg-green-600 transition-colors flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                            </svg>
+                            WhatsApp ile Gönder
+                        </a>
+                    </div>
+                    
+                    <!-- Success Message (Hidden by default) -->
+                    <div id="successMessage" class="hidden mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <p class="text-green-700 font-medium">Talebin alındı — Aralık 2025 Antalya lansmanında erişim verilecek.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-text text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm">© 2025 Kuryes — Altyapı: <a href="https://kaysia.co" class="text-accent hover:text-white">Kaysia.co</a></p>
+                </div>
+                <div class="flex flex-wrap gap-4 text-sm">
+                    <a href="#" class="hover:text-accent transition-colors">KVKK</a>
+                    <a href="#" class="hover:text-accent transition-colors">Gizlilik</a>
+                    <a href="#" class="hover:text-accent transition-colors">Kullanım Şartları</a>
+                    <a href="#" class="hover:text-accent transition-colors">İletişim</a>
+                </div>
+            </div>
+        </div>
+        <!-- powered by Kaysia -->
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script>
+        // Koordinatları saklamak için global değişkenler
+        let baslangicCoordinates = null;
+        let teslimCoordinates = null;
+        let currentRouteGeometry = null; // Rota çizgisi için
+        let routeMap = null; // Mini harita instance
+        let routePolyline = null; // Rota çizgisi
+        let startMarker = null; // Başlangıç marker
+        let endMarker = null; // Bitiş marker
+        
+        // OpenRouteService API key
+        const ORS_API_KEY = 'eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImZiZTQzY2Y0MGNlZjQ1ODFhODZlNzZlNGYwMTk2Nzg0IiwiaCI6Im11cm11cjY0In0=';
+        
+        // LocalStorage helper functions
+        function saveLocationToStorage(type, location, coordinates) {
+            try {
+                const data = {
+                    location: location,
+                    coordinates: coordinates,
+                    timestamp: Date.now()
+                };
+                localStorage.setItem(`kuryes_${type}`, JSON.stringify(data));
+                console.log(`Location saved to storage (${type}):`, data);
+            } catch (error) {
+                console.error('Error saving to localStorage:', error);
+            }
+        }
+        
+        function getLocationFromStorage(type) {
+            try {
+                const stored = localStorage.getItem(`kuryes_${type}`);
+                if (stored) {
+                    return JSON.parse(stored);
+                }
+            } catch (error) {
+                console.error('Error reading from localStorage:', error);
+            }
+            return null;
+        }
+        
+        function clearLocationFromStorage(type) {
+            try {
+                localStorage.removeItem(`kuryes_${type}`);
+                console.log(`Location cleared from storage (${type})`);
+            } catch (error) {
+                console.error('Error clearing localStorage:', error);
+            }
+        }
+        
+        // Önceki konumları haritada göster
+        function restorePreviousLocations() {
+            if (!map) return;
+            
+            // Önceki marker'ları temizle
+            if (window.previousMarkers) {
+                window.previousMarkers.forEach(marker => {
+                    if (map.hasLayer(marker)) {
+                        map.removeLayer(marker);
+                    }
+                });
+            }
+            window.previousMarkers = [];
+            
+            // Başlangıç konumunu göster
+            const savedBaslangic = getLocationFromStorage('baslangic');
+            if (savedBaslangic && savedBaslangic.coordinates) {
+                const marker = L.marker([savedBaslangic.coordinates.lat, savedBaslangic.coordinates.lng], {
+                    icon: L.divIcon({
+                        className: 'custom-marker-start-stored',
+                        html: '<div style="background-color: #22c55e; width: 28px; height: 28px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px;">B</div><div style="position: absolute; top: 35px; left: 50%; transform: translateX(-50%); background: white; padding: 3px 8px; border-radius: 4px; font-size: 11px; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.3); font-weight: 600;">Başlangıç</div>',
+                        iconSize: [28, 50],
+                        iconAnchor: [14, 14]
+                    })
+                }).addTo(map);
+                window.previousMarkers.push(marker);
+            }
+            
+            // Teslim konumunu göster
+            const savedTeslim = getLocationFromStorage('teslim');
+            if (savedTeslim && savedTeslim.coordinates) {
+                const marker = L.marker([savedTeslim.coordinates.lat, savedTeslim.coordinates.lng], {
+                    icon: L.divIcon({
+                        className: 'custom-marker-end-stored',
+                        html: '<div style="background-color: #FF3131; width: 28px; height: 28px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px;">T</div><div style="position: absolute; top: 35px; left: 50%; transform: translateX(-50%); background: white; padding: 3px 8px; border-radius: 4px; font-size: 11px; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.3); font-weight: 600;">Teslim</div>',
+                        iconSize: [28, 50],
+                        iconAnchor: [14, 14]
+                    })
+                }).addTo(map);
+                window.previousMarkers.push(marker);
+            }
+        }
+        
+        // Label'dan harita modalını aç
+        function openMapModalFromLabel(type) {
+            if (typeof initMapModal === 'function') {
+                currentInputType = type;
+                const mapModal = document.getElementById('mapModal');
+                if (mapModal) {
+                    mapModal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                    // Harita başlatma initMapModal içinde handle edilecek
+                    setTimeout(() => {
+                        if (map) {
+                            restorePreviousLocations();
+                        }
+                    }, 200);
+                }
+            }
+        }
+        
+        // Haversine formülü ile kuş uçuşu mesafe hesaplama (km) - Fallback için
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Dünya yarıçapı (km)
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = 
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+        
+        // OpenRouteService geometry formatını parse et (GeoJSON veya Encoded Polyline)
+        function parseRouteGeometry(geometry) {
+            // Eğer string ise encoded polyline, array ise GeoJSON coordinates
+            if (typeof geometry === 'string') {
+                // Encoded polyline decode
+                return decodePolyline(geometry);
+            } else if (Array.isArray(geometry)) {
+                // GeoJSON coordinates format: [[lng, lat], [lng, lat], ...]
+                // Leaflet için [lat, lng] formatına çevir
+                return geometry.map(coord => [coord[1], coord[0]]);
+            } else if (geometry && geometry.coordinates) {
+                // GeoJSON object: { coordinates: [[lng, lat], ...] }
+                return geometry.coordinates.map(coord => [coord[1], coord[0]]);
+            }
+            return null;
+        }
+        
+        // Encoded polyline decode fonksiyonu
+        function decodePolyline(encoded) {
+            const poly = [];
+            let index = 0;
+            const len = encoded.length;
+            let lat = 0;
+            let lng = 0;
+            
+            while (index < len) {
+                let b;
+                let shift = 0;
+                let result = 0;
+                do {
+                    b = encoded.charCodeAt(index++) - 63;
+                    result |= (b & 0x1f) << shift;
+                    shift += 5;
+                } while (b >= 0x20);
+                const dlat = ((result & 1) !== 0 ? ~(result >> 1) : (result >> 1));
+                lat += dlat;
+                
+                shift = 0;
+                result = 0;
+                do {
+                    b = encoded.charCodeAt(index++) - 63;
+                    result |= (b & 0x1f) << shift;
+                    shift += 5;
+                } while (b >= 0x20);
+                const dlng = ((result & 1) !== 0 ? ~(result >> 1) : (result >> 1));
+                lng += dlng;
+                
+                poly.push([lat / 1e5, lng / 1e5]);
+            }
+            return poly;
+        }
+        
+        // Rota haritasını güncelle
+        function updateRouteMap(startLat, startLng, endLat, endLng, geometry) {
+            const routeMapContainer = document.getElementById('routeMapContainer');
+            const routeMapPlaceholder = document.getElementById('routeMapPlaceholder');
+            
+            if (!routeMapContainer) return;
+            
+            // Placeholder'ı gizle
+            if (routeMapPlaceholder) routeMapPlaceholder.style.display = 'none';
+            
+            // Harita yoksa oluştur
+            if (!routeMap) {
+                try {
+                    routeMap = L.map('routeMapContainer').setView([(startLat + endLat) / 2, (startLng + endLng) / 2], 12);
+                    
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                        maxZoom: 19
+                    }).addTo(routeMap);
+                } catch (error) {
+                    console.error('Route map initialization error:', error);
+                    return;
+                }
+            }
+            
+            // Önceki çizgileri ve marker'ları temizle
+            if (routePolyline) {
+                routeMap.removeLayer(routePolyline);
+            }
+            if (startMarker) {
+                routeMap.removeLayer(startMarker);
+            }
+            if (endMarker) {
+                routeMap.removeLayer(endMarker);
+            }
+            
+            // Geometry varsa parse et ve gerçek yolları çiz
+            if (geometry) {
+                try {
+                    const latlngs = parseRouteGeometry(geometry);
+                    
+                    if (latlngs && latlngs.length > 0) {
+                        // Rota çizgisini çiz (gerçek yollar boyunca)
+                        routePolyline = L.polyline(latlngs, {
+                            color: '#00C8FF',
+                            weight: 5,
+                            opacity: 0.9,
+                            smoothFactor: 1
+                        }).addTo(routeMap);
+                        
+                        // Harita bounds'ı rota çizgisine göre ayarla
+                        routeMap.fitBounds(routePolyline.getBounds(), { padding: [20, 20] });
+                        
+                        console.log('Rota çizgisi çizildi:', latlngs.length, 'nokta');
+                    } else {
+                        throw new Error('Geometry parse edilemedi');
+                    }
+                } catch (error) {
+                    console.error('Rota çizimi hatası:', error);
+                    console.error('Geometry:', geometry);
+                    
+                    // Fallback: Sadece başlangıç ve bitiş arası düz çizgi (kesikli)
+                    routePolyline = L.polyline([[startLat, startLng], [endLat, endLng]], {
+                        color: '#FF3131',
+                        weight: 4,
+                        opacity: 0.6,
+                        dashArray: '10, 10'
+                    }).addTo(routeMap);
+                    routeMap.fitBounds([[startLat, startLng], [endLat, endLng]], { padding: [20, 20] });
+                }
+            } else {
+                // Geometry yoksa sadece başlangıç ve bitiş arası düz çizgi (kesikli - uyarı)
+                routePolyline = L.polyline([[startLat, startLng], [endLat, endLng]], {
+                    color: '#FF3131',
+                    weight: 4,
+                    opacity: 0.6,
+                    dashArray: '10, 10'
+                }).addTo(routeMap);
+                routeMap.fitBounds([[startLat, startLng], [endLat, endLng]], { padding: [20, 20] });
+            }
+            
+            // Başlangıç marker'ı
+            startMarker = L.marker([startLat, startLng], {
+                icon: L.divIcon({
+                    className: 'custom-marker-start',
+                    html: '<div style="background-color: #22c55e; width: 24px; height: 24px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>',
+                    iconSize: [24, 24],
+                    iconAnchor: [12, 12]
+                })
+            }).addTo(routeMap);
+            
+            // Bitiş marker'ı
+            endMarker = L.marker([endLat, endLng], {
+                icon: L.divIcon({
+                    className: 'custom-marker-end',
+                    html: '<div style="background-color: #FF3131; width: 24px; height: 24px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>',
+                    iconSize: [24, 24],
+                    iconAnchor: [12, 12]
+                })
+            }).addTo(routeMap);
+        }
+        
+        // Trafik verisi ile gerçek rota hesaplama (OpenRouteService)
+        async function calculateRouteWithTraffic(startLat, startLng, endLat, endLng) {
+            try {
+                // OpenRouteService Directions API - driving-car profil (gerçek yolları kullanır)
+                // format=geojson parametresi ile GeoJSON formatında alıyoruz
+                const response = await fetch(
+                    `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${ORS_API_KEY}&start=${startLng},${startLat}&end=${endLng},${endLat}&format=geojson&geometry=true`,
+                    {
+                        headers: {
+                            'Accept': 'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8'
+                        }
+                    }
+                );
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('OpenRouteService API error:', response.status, errorText);
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // GeoJSON format kontrolü
+                if (data.features && data.features.length > 0) {
+                    const feature = data.features[0];
+                    const geometry = feature.geometry;
+                    const properties = feature.properties;
+                    
+                    // Distance ve duration hesaplama
+                    let distance = 0;
+                    let duration = 0;
+                    
+                    if (properties.summary) {
+                        distance = properties.summary.distance / 1000; // Metre -> km
+                        duration = properties.summary.duration / 60; // Saniye -> dakika
+                    } else if (properties.segments) {
+                        distance = properties.segments.reduce((sum, seg) => sum + (seg.distance || 0), 0) / 1000;
+                        duration = properties.segments.reduce((sum, seg) => sum + (seg.duration || 0), 0) / 60;
+                    }
+                    
+                    console.log('OpenRouteService response:', {
+                        geometryType: geometry.type,
+                        coordinatesLength: geometry.coordinates ? geometry.coordinates.length : 0,
+                        distance: distance,
+                        duration: duration
+                    });
+                    
+                    return {
+                        distance: distance,
+                        duration: duration,
+                        geometry: geometry // GeoJSON geometry: { type: "LineString", coordinates: [[lng, lat], ...] }
+                    };
+                }
+                
+                // Standart JSON formatı fallback (eğer GeoJSON dönmediyse)
+                if (data.routes && data.routes.length > 0) {
+                    const route = data.routes[0];
+                    const distance = route.summary.distance / 1000;
+                    const duration = route.summary.duration / 60;
+                    
+                    console.log('Using standard JSON format');
+                    
+                    return {
+                        distance: distance,
+                        duration: duration,
+                        geometry: route.geometry // Encoded polyline string veya coordinates array
+                    };
+                }
+                
+                return null;
+            } catch (error) {
+                console.error('OpenRouteService routing error:', error);
+                return null;
+            }
+        }
+        
+        // Adresten koordinat bulma (geocoding)
+        async function geocodeAddress(address) {
+            try {
+                const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&limit=1&countrycodes=tr`);
+                const data = await response.json();
+                if (data.length > 0) {
+                    return {
+                        lat: parseFloat(data[0].lat),
+                        lng: parseFloat(data[0].lon)
+                    };
+                }
+                return null;
+            } catch (error) {
+                console.error('Geocoding error:', error);
+                return null;
+            }
+        }
+        
+        // Fiyat hesaplama fonksiyonu (Trafik verisi ile)
+        async function calculatePrice() {
+            const baslangic = document.getElementById('baslangic').value;
+            const teslim = document.getElementById('teslim').value;
+            
+            if (baslangic && teslim) {
+                let distance = 0;
+                let time = 0;
+                
+                // Loading state göster
+                const mesafeElement = document.getElementById('mesafe');
+                const sureElement = document.getElementById('sure');
+                const ucretElement = document.getElementById('ucret');
+                
+                if (mesafeElement) mesafeElement.textContent = 'Hesaplanıyor...';
+                if (sureElement) sureElement.textContent = 'Hesaplanıyor...';
+                if (ucretElement) ucretElement.textContent = 'Hesaplanıyor...';
+                
+                // Eğer koordinatlar varsa trafik verisi ile hesapla
+                if (baslangicCoordinates && teslimCoordinates) {
+                    const route = await calculateRouteWithTraffic(
+                        baslangicCoordinates.lat,
+                        baslangicCoordinates.lng,
+                        teslimCoordinates.lat,
+                        teslimCoordinates.lng
+                    );
+                    
+                        if (route) {
+                            distance = route.distance;
+                            // Her 1 km için süreye +1 dk ekle
+                            time = route.duration + Math.round(distance);
+                            currentRouteGeometry = route.geometry;
+                            
+                            // Rota haritasını güncelle
+                            updateRouteMap(
+                                baslangicCoordinates.lat,
+                                baslangicCoordinates.lng,
+                                teslimCoordinates.lat,
+                                teslimCoordinates.lng,
+                                route.geometry
+                            );
+                        } else {
+                            // Fallback: Kuş uçuşu mesafe (API başarısız olursa)
+                            distance = calculateDistance(
+                                baslangicCoordinates.lat,
+                                baslangicCoordinates.lng,
+                                teslimCoordinates.lat,
+                                teslimCoordinates.lng
+                            );
+                            // Her 1 km için süreye +1 dk ekle
+                            time = Math.max(10, distance * 2) + Math.round(distance);
+                            currentRouteGeometry = null;
+                            
+                            // Fallback için de haritada göster
+                            updateRouteMap(
+                                baslangicCoordinates.lat,
+                                baslangicCoordinates.lng,
+                                teslimCoordinates.lat,
+                                teslimCoordinates.lng,
+                                null
+                            );
+                        }
+                } else {
+                    // Adreslerden koordinat bul ve rota hesapla
+                    const baslangicCoord = await geocodeAddress(baslangic);
+                    const teslimCoord = await geocodeAddress(teslim);
+                    
+                    if (baslangicCoord && teslimCoord) {
+                        baslangicCoordinates = baslangicCoord;
+                        teslimCoordinates = teslimCoord;
+                        
+                        // Trafik verisi ile rota hesapla
+                        const route = await calculateRouteWithTraffic(
+                            baslangicCoord.lat,
+                            baslangicCoord.lng,
+                            teslimCoord.lat,
+                            teslimCoord.lng
+                        );
+                        
+                        if (route) {
+                            distance = route.distance;
+                            // Her 1 km için süreye +1 dk ekle
+                            time = route.duration + Math.round(distance);
+                            currentRouteGeometry = route.geometry;
+                            
+                            // Rota haritasını güncelle
+                            updateRouteMap(
+                                baslangicCoord.lat,
+                                baslangicCoord.lng,
+                                teslimCoord.lat,
+                                teslimCoord.lng,
+                                route.geometry
+                            );
+                        } else {
+                            // Fallback: Kuş uçuşu
+                            distance = calculateDistance(
+                                baslangicCoord.lat,
+                                baslangicCoord.lng,
+                                teslimCoord.lat,
+                                teslimCoord.lng
+                            );
+                            // Her 1 km için süreye +1 dk ekle
+                            time = Math.max(10, distance * 2) + Math.round(distance);
+                            currentRouteGeometry = null;
+                            
+                            // Fallback için de haritada göster
+                            updateRouteMap(
+                                baslangicCoord.lat,
+                                baslangicCoord.lng,
+                                teslimCoord.lat,
+                                teslimCoord.lng,
+                                null
+                            );
+                        }
+                    } else {
+                        // Son fallback: Rastgele değer
+                        distance = Math.random() * 13 + 2;
+                        // Her 1 km için süreye +1 dk ekle
+                        time = Math.max(10, distance * 2) + Math.round(distance);
+                    }
+                }
+                
+                // Fiyat hesaplama: 60 TL sabit + km başına 12 TL
+                const price = 60 + (12 * distance);
+                
+                // Sonuçları göster
+                if (mesafeElement) mesafeElement.textContent = distance.toFixed(1) + ' km';
+                if (sureElement) sureElement.textContent = Math.round(time) + ' dk';
+                if (ucretElement) ucretElement.textContent = Math.round(price) + ' TL';
+            }
+        }
+        
+        // Event listeners
+        document.getElementById('baslangic').addEventListener('input', calculatePrice);
+        document.getElementById('teslim').addEventListener('input', calculatePrice);
+        
+        // Form submission
+        document.getElementById('onUyelikBtn').addEventListener('click', function() {
+            if (document.getElementById('gondericiOnay').checked && document.getElementById('kuryeOnay').checked) {
+                document.getElementById('successMessage').classList.remove('hidden');
+                this.textContent = 'Gönderildi!';
+                this.disabled = true;
+            } else {
+                alert('Lütfen onay kutularını işaretleyin.');
+            }
+        });
+        
+        // Map Modal functionality with Leaflet
+        let map = null;
+        let marker = null;
+        let selectedLocation = null;
+        let selectedCoordinates = null;
+        let currentInputType = null; // 'baslangic' veya 'teslim'
+        
+        // Leaflet yüklendiğinden emin ol ve modal'ı başlat
+        function initMapModal() {
+            // Leaflet kontrolü
+            if (typeof L === 'undefined') {
+                console.error('Leaflet library not loaded!');
+                return;
+            }
+            
+            const mapModal = document.getElementById('mapModal');
+            const openMapModal = document.getElementById('openMapModal');
+            const closeMapModal = document.getElementById('closeMapModal');
+            const cancelMapModal = document.getElementById('cancelMapModal');
+            const confirmLocation = document.getElementById('confirmLocation');
+            const selectedLocationDiv = document.getElementById('selectedLocation');
+            const locationText = document.getElementById('locationText');
+            const addressSearch = document.getElementById('addressSearch');
+            const searchAddress = document.getElementById('searchAddress');
+            const baslangicInput = document.getElementById('baslangic');
+            const teslimInput = document.getElementById('teslim');
+            
+            if (!openMapModal || !mapModal) {
+                console.error('Map modal elements not found!');
+                return;
+            }
+            
+            // Harita başlatma fonksiyonu
+            function initializeMap() {
+                if (map) {
+                    // Harita zaten var, sadece yeniden boyutlandır ve önceki konumları göster
+                    setTimeout(() => {
+                        map.invalidateSize();
+                        restorePreviousLocations();
+                    }, 100);
+                    return;
+                }
+                
+                // Map container'ın görünür olduğundan emin ol
+                setTimeout(() => {
+                    try {
+                        // Önceki konumları kontrol et ve haritayı ona göre konumlandır
+                        const savedBaslangic = getLocationFromStorage('baslangic');
+                        const savedTeslim = getLocationFromStorage('teslim');
+                        
+                        let centerLat = 36.8841; // Antalya default
+                        let centerLng = 30.7056;
+                        let zoom = 13;
+                        
+                        // Eğer seçili bir konum varsa oraya odaklan
+                        if (currentInputType === 'baslangic' && savedBaslangic) {
+                            centerLat = savedBaslangic.coordinates.lat;
+                            centerLng = savedBaslangic.coordinates.lng;
+                            zoom = 15;
+                        } else if (currentInputType === 'teslim' && savedTeslim) {
+                            centerLat = savedTeslim.coordinates.lat;
+                            centerLng = savedTeslim.coordinates.lng;
+                            zoom = 15;
+                        } else if (savedBaslangic) {
+                            centerLat = savedBaslangic.coordinates.lat;
+                            centerLng = savedBaslangic.coordinates.lng;
+                            zoom = 13;
+                        } else if (savedTeslim) {
+                            centerLat = savedTeslim.coordinates.lat;
+                            centerLng = savedTeslim.coordinates.lng;
+                            zoom = 13;
+                        }
+                        
+                        map = L.map('mapContainer').setView([centerLat, centerLng], zoom);
+                        
+                        // Add OpenStreetMap tiles
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                            maxZoom: 19
+                        }).addTo(map);
+                        
+                        // Önceki konumları göster
+                        restorePreviousLocations();
+                        
+                        // Add click event to map
+                        map.on('click', function(e) {
+                            const lat = e.latlng.lat.toFixed(6);
+                            const lng = e.latlng.lng.toFixed(6);
+                            selectedCoordinates = { lat: parseFloat(lat), lng: parseFloat(lng) };
+                            
+                            // Reverse geocoding - get address from coordinates
+                            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.address) {
+                                        const addressParts = [];
+                                        if (data.address.road) addressParts.push(data.address.road);
+                                        if (data.address.neighbourhood) addressParts.push(data.address.neighbourhood);
+                                        if (data.address.suburb) addressParts.push(data.address.suburb);
+                                        if (data.address.city || data.address.town || data.address.municipality) {
+                                            addressParts.push(data.address.city || data.address.town || data.address.municipality);
+                                        }
+                                        selectedLocation = addressParts.join(', ') || `${lat}, ${lng}`;
+                                    } else {
+                                        selectedLocation = `${lat}, ${lng}`;
+                                    }
+                                    
+                                    // Update marker
+                                    if (marker) {
+                                        map.removeLayer(marker);
+                                    }
+                                    marker = L.marker([lat, lng]).addTo(map);
+                                    
+                                    // Show selected location
+                                    if (selectedLocationDiv) selectedLocationDiv.classList.remove('hidden');
+                                    if (locationText) locationText.textContent = selectedLocation;
+                                    if (confirmLocation) confirmLocation.disabled = false;
+                                })
+                                .catch(error => {
+                                    console.error('Geocoding error:', error);
+                                    selectedLocation = `${lat}, ${lng}`;
+                                    if (marker) {
+                                        map.removeLayer(marker);
+                                    }
+                                    marker = L.marker([lat, lng]).addTo(map);
+                                    if (selectedLocationDiv) selectedLocationDiv.classList.remove('hidden');
+                                    if (locationText) locationText.textContent = selectedLocation;
+                                    if (confirmLocation) confirmLocation.disabled = false;
+                                });
+                        });
+                        
+                        // Invalidate size after map is created
+                        setTimeout(() => {
+                            map.invalidateSize();
+                        }, 200);
+                    } catch (error) {
+                        console.error('Map initialization error:', error);
+                    }
+                }, 150);
+            }
+            
+            // Open map modal and initialize Leaflet map
+            openMapModal.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Hangi input için modal açılıyor? (Boş olan)
+                if (!baslangicInput.value) {
+                    currentInputType = 'baslangic';
+                } else if (!teslimInput.value) {
+                    currentInputType = 'teslim';
+                } else {
+                    currentInputType = 'baslangic'; // Varsayılan
+                }
+                
+                // Modal'ı göster
+                mapModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                
+                // Modal gösterildikten sonra haritayı başlat
+                initializeMap();
+            });
+            
+            // Global olarak erişilebilir hale getir (label click için)
+            window.initializeMap = initializeMap;
+            window.restorePreviousLocations = restorePreviousLocations;
+            
+            
+            // Close map modal
+            if (closeMapModal) {
+                closeMapModal.addEventListener('click', function() {
+                    mapModal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                    selectedLocation = null;
+                    selectedCoordinates = null;
+                    // Reset modal state
+                    if (selectedLocationDiv) selectedLocationDiv.classList.add('hidden');
+                    if (confirmLocation) confirmLocation.disabled = true;
+                    if (addressSearch) addressSearch.value = '';
+                });
+            }
+            
+            if (cancelMapModal) {
+                cancelMapModal.addEventListener('click', function() {
+                    mapModal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                    selectedLocation = null;
+                    selectedCoordinates = null;
+                    // Reset modal state
+                    if (selectedLocationDiv) selectedLocationDiv.classList.add('hidden');
+                    if (confirmLocation) confirmLocation.disabled = true;
+                    if (addressSearch) addressSearch.value = '';
+                });
+            }
+            
+            // Close on outside click
+            mapModal.addEventListener('click', function(e) {
+                if (e.target === mapModal) {
+                    mapModal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                    selectedLocation = null;
+                    selectedCoordinates = null;
+                    // Reset modal state
+                    if (selectedLocationDiv) selectedLocationDiv.classList.add('hidden');
+                    if (confirmLocation) confirmLocation.disabled = true;
+                    if (addressSearch) addressSearch.value = '';
+                }
+            });
+            
+            // Address search using Nominatim
+            if (searchAddress) {
+                searchAddress.addEventListener('click', function() {
+                    if (!map) {
+                        alert('Harita yükleniyor, lütfen bekleyin...');
+                        return;
+                    }
+                    
+                    const query = addressSearch.value.trim();
+                    if (query) {
+                        // Use Nominatim for geocoding
+                        fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=1&countrycodes=tr`)
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.length > 0) {
+                                    const result = data[0];
+                                    const lat = parseFloat(result.lat);
+                                    const lng = parseFloat(result.lon);
+                                    selectedCoordinates = { lat, lng };
+                                    selectedLocation = result.display_name;
+                                    
+                                    // Update marker
+                                    if (marker) {
+                                        map.removeLayer(marker);
+                                    }
+                                    marker = L.marker([lat, lng]).addTo(map);
+                                    map.setView([lat, lng], 15);
+                                    
+                                    // Show selected location
+                                    if (selectedLocationDiv) selectedLocationDiv.classList.remove('hidden');
+                                    if (locationText) locationText.textContent = selectedLocation;
+                                    if (confirmLocation) confirmLocation.disabled = false;
+                                } else {
+                                    alert('Adres bulunamadı. Lütfen farklı bir arama yapın.');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Search error:', error);
+                                alert('Arama sırasında hata oluştu. Lütfen tekrar deneyin.');
+                            });
+                    } else {
+                        alert('Lütfen bir adres girin');
+                    }
+                });
+            }
+            
+            // Enter key to search
+            if (addressSearch) {
+                addressSearch.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (searchAddress) searchAddress.click();
+                    }
+                });
+            }
+            
+            // Confirm location
+            if (confirmLocation) {
+                confirmLocation.addEventListener('click', function() {
+                    if (selectedLocation && selectedCoordinates) {
+                        // İlgili input'a yaz
+                        if (currentInputType === 'baslangic') {
+                            baslangicInput.value = selectedLocation;
+                            baslangicCoordinates = selectedCoordinates;
+                            // LocalStorage'a kaydet
+                            saveLocationToStorage('baslangic', selectedLocation, selectedCoordinates);
+                        } else if (currentInputType === 'teslim') {
+                            teslimInput.value = selectedLocation;
+                            teslimCoordinates = selectedCoordinates;
+                            // LocalStorage'a kaydet
+                            saveLocationToStorage('teslim', selectedLocation, selectedCoordinates);
+                        }
+                        
+                        // Fiyat hesapla (trafik verisi ile gerçek mesafe hesaplanacak)
+                        calculatePrice();
+                        
+                        // Önceki konumları güncelle (marker'ları yeniden çiz)
+                        restorePreviousLocations();
+                        
+                        // Close modal
+                        mapModal.classList.add('hidden');
+                        document.body.style.overflow = '';
+                        selectedLocation = null;
+                        selectedCoordinates = null;
+                        // currentInputType'ı sıfırlama (kullanıcı tekrar açabilir)
+                        
+                        // Reset modal state
+                        if (selectedLocationDiv) selectedLocationDiv.classList.add('hidden');
+                        confirmLocation.disabled = true;
+                        if (addressSearch) addressSearch.value = '';
+                        
+                        // Seçili marker'ı kaldır (önceki konumlar zaten gösteriliyor)
+                        if (marker) {
+                            map.removeLayer(marker);
+                            marker = null;
+                        }
+                    }
+                });
+            }
+        }
+        
+        // DOMContentLoaded ile başlat
+        document.addEventListener('DOMContentLoaded', function() {
+            const baslangicInput = document.getElementById('baslangic');
+            const teslimInput = document.getElementById('teslim');
+            const baslangicLabel = document.querySelector('label[for="baslangic"]');
+            const teslimLabel = document.querySelector('label[for="teslim"]');
+            
+            // LocalStorage'dan adresleri yükle
+            const savedBaslangic = getLocationFromStorage('baslangic');
+            if (savedBaslangic && baslangicInput) {
+                baslangicInput.value = savedBaslangic.location;
+                baslangicCoordinates = savedBaslangic.coordinates;
+            }
+            
+            const savedTeslim = getLocationFromStorage('teslim');
+            if (savedTeslim && teslimInput) {
+                teslimInput.value = savedTeslim.location;
+                teslimCoordinates = savedTeslim.coordinates;
+            }
+            
+            // Eğer her iki konum da varsa, fiyat hesapla
+            if (baslangicCoordinates && teslimCoordinates) {
+                setTimeout(() => {
+                    calculatePrice();
+                }, 500);
+            }
+            
+            // Input'lara tıklama event'i ekle (harita modalı açmak için)
+            if (baslangicInput) {
+                baslangicInput.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    currentInputType = 'baslangic';
+                    const mapModal = document.getElementById('mapModal');
+                    if (mapModal) {
+                        mapModal.classList.remove('hidden');
+                        document.body.style.overflow = 'hidden';
+                        setTimeout(() => {
+                            if (window.initializeMap) {
+                                window.initializeMap();
+                            } else {
+                                // initMapModal henüz çalışmamışsa bekle
+                                setTimeout(() => {
+                                    if (window.initializeMap) {
+                                        window.initializeMap();
+                                    }
+                                }, 200);
+                            }
+                        }, 150);
+                    }
+                });
+                
+                // Input'a odaklanınca da harita açılsın
+                baslangicInput.addEventListener('focus', function(e) {
+                    e.preventDefault();
+                    currentInputType = 'baslangic';
+                    const mapModal = document.getElementById('mapModal');
+                    if (mapModal) {
+                        mapModal.classList.remove('hidden');
+                        document.body.style.overflow = 'hidden';
+                        setTimeout(() => {
+                            if (window.initializeMap) {
+                                window.initializeMap();
+                            } else {
+                                setTimeout(() => {
+                                    if (window.initializeMap) {
+                                        window.initializeMap();
+                                    }
+                                }, 200);
+                            }
+                        }, 150);
+                    }
+                });
+            }
+            
+            if (teslimInput) {
+                teslimInput.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    currentInputType = 'teslim';
+                    const mapModal = document.getElementById('mapModal');
+                    if (mapModal) {
+                        mapModal.classList.remove('hidden');
+                        document.body.style.overflow = 'hidden';
+                        setTimeout(() => {
+                            if (window.initializeMap) {
+                                window.initializeMap();
+                            } else {
+                                // initMapModal henüz çalışmamışsa bekle
+                                setTimeout(() => {
+                                    if (window.initializeMap) {
+                                        window.initializeMap();
+                                    }
+                                }, 200);
+                            }
+                        }, 150);
+                    }
+                });
+                
+                // Input'a odaklanınca da harita açılsın
+                teslimInput.addEventListener('focus', function(e) {
+                    e.preventDefault();
+                    currentInputType = 'teslim';
+                    const mapModal = document.getElementById('mapModal');
+                    if (mapModal) {
+                        mapModal.classList.remove('hidden');
+                        document.body.style.overflow = 'hidden';
+                        setTimeout(() => {
+                            if (window.initializeMap) {
+                                window.initializeMap();
+                            } else {
+                                setTimeout(() => {
+                                    if (window.initializeMap) {
+                                        window.initializeMap();
+                                    }
+                                }, 200);
+                            }
+                        }, 150);
+                    }
+                });
+            }
+            
+            // Leaflet yüklendiğinden emin ol
+            if (typeof L !== 'undefined') {
+                initMapModal();
+            } else {
+                // Leaflet henüz yüklenmemişse bekle
+                window.addEventListener('load', function() {
+                    if (typeof L !== 'undefined') {
+                        initMapModal();
+                    } else {
+                        console.error('Leaflet library failed to load!');
+                    }
+                });
+            }
+        });
+        
+    </script>
+    
+    <!-- Map Selection Modal -->
+    <div id="mapModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full p-6 animate-fadeInUp" style="max-height: 90vh;">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-text">Konum Seç</h2>
+                <button id="closeMapModal" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Map Container -->
+            <div id="mapContainer" class="w-full h-96 bg-gray-100 rounded-lg mb-4 relative overflow-hidden border border-gray-300"></div>
+            
+            <!-- Selected Location Display -->
+            <div id="selectedLocation" class="hidden mb-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+                <div class="flex items-start">
+                    <svg class="w-5 h-5 text-green-600 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium text-green-800">Seçilen konum:</p>
+                        <p class="text-sm text-green-700 mt-1" id="locationText">—</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Address Search -->
+            <div class="mb-4">
+                <label for="addressSearch" class="block text-sm font-medium text-text mb-2">
+                    Adres Ara
+                </label>
+                <div class="flex gap-2">
+                    <input type="text" id="addressSearch" 
+                           placeholder="Adres, mahalle veya ilçe yazın..."
+                           class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent">
+                    <button type="button" id="searchAddress" class="bg-accent text-white px-6 py-2 rounded-lg hover:bg-accent/90 transition-colors font-medium">
+                        Ara
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Modal Buttons -->
+            <div class="flex gap-3">
+                <button id="confirmLocation" disabled class="flex-1 bg-accent text-white py-3 rounded-lg font-semibold hover:bg-accent/90 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed">
+                    Konumu Seç
+                </button>
+                <button id="cancelMapModal" class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium">
+                    İptal
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Profile Selection Modal -->
+    <div id="profileModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full p-8 animate-fadeInUp">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-text mb-2">Kayıt Ol</h2>
+                <p class="text-muted">Size en uygun profili seçin</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Kurye Option -->
+                <button id="selectKurye" class="profile-option bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-primary hover:shadow-xl transition-all transform hover:scale-105 group">
+                    <div class="text-6xl mb-4">🏍️</div>
+                    <h3 class="text-xl font-bold text-text mb-2 group-hover:text-primary">Kurye</h3>
+                    <p class="text-sm text-muted">Kurye olmak için kayıt ol</p>
+                </button>
+                
+                <!-- İşletme Option -->
+                <button id="selectIsletme" class="profile-option bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-accent hover:shadow-xl transition-all transform hover:scale-105 group">
+                    <div class="text-6xl mb-4">🏪</div>
+                    <h3 class="text-xl font-bold text-text mb-2 group-hover:text-accent">İşletme</h3>
+                    <p class="text-sm text-muted">İşletmeniz için kayıt olun</p>
+                </button>
+                
+                <!-- Kullanıcı Option -->
+                <button id="selectKullanici" class="profile-option bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-support-orange hover:shadow-xl transition-all transform hover:scale-105 group">
+                    <div class="text-6xl mb-4">📦</div>
+                    <h3 class="text-xl font-bold text-text mb-2 group-hover:text-support-orange">Kullanıcı</h3>
+                    <p class="text-sm text-muted">Gönderi yapmak için kayıt ol</p>
+                </button>
+            </div>
+            
+            <button id="closeModal" class="mt-8 w-full text-muted hover:text-text transition-colors">
+                İptal
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        // Profile selection modal
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileModal = document.getElementById('profileModal');
+            const selectKurye = document.getElementById('selectKurye');
+            const selectIsletme = document.getElementById('selectIsletme');
+            const selectKullanici = document.getElementById('selectKullanici');
+            const closeModal = document.getElementById('closeModal');
+            const registerButtons = document.querySelectorAll('[data-register-btn]');
+            
+            // Open modal
+            registerButtons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    profileModal.classList.remove('hidden');
+                });
+            });
+            
+            // Close modal
+            closeModal.addEventListener('click', function() {
+                profileModal.classList.add('hidden');
+            });
+            
+            // Close on outside click
+            profileModal.addEventListener('click', function(e) {
+                if (e.target === profileModal) {
+                    profileModal.classList.add('hidden');
+                }
+            });
+            
+            // Profile selection
+            selectKurye.addEventListener('click', function() {
+                window.location.href = 'kurye-tabani.html';
+            });
+            
+            selectIsletme.addEventListener('click', function() {
+                window.location.href = 'isletme-kayit.html';
+            });
+            
+            selectKullanici.addEventListener('click', function() {
+                window.location.href = 'kullanici-kayit.html';
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+

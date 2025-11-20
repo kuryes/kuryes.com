@@ -225,6 +225,18 @@ function setupKuryeProfileSave() {
             const result = await saveProfileToSheet(profileId, formData, 'kurye');
             
             if (result.success) {
+                // Avatar'ı localStorage'a kaydet (tüm sayfalarda görünsün)
+                const selectedAvatar = document.getElementById('selectedAvatar');
+                if (selectedAvatar && typeof localStorage !== 'undefined') {
+                    const avatarValue = selectedAvatar.value || '1';
+                    localStorage.setItem('kuryes_user_avatar', avatarValue);
+                    
+                    // Header'daki avatar'ı güncelle
+                    if (typeof window.KuryesAuth !== 'undefined' && window.KuryesAuth.updateHeaderForAuth) {
+                        window.KuryesAuth.updateHeaderForAuth();
+                    }
+                }
+                
                 // Başarı mesajı göster
                 const successMessage = document.getElementById('successMessage');
                 if (successMessage) {

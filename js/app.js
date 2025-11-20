@@ -167,56 +167,7 @@ class MobileMenuHandler {
     }
     
     bindEvents() {
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        
-        if (mobileMenuBtn && mobileMenu) {
-            mobileMenuBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                mobileMenu.classList.toggle('hidden');
-                
-                // Animate hamburger icon
-                const iconSvg = mobileMenuBtn.querySelector('svg');
-                if (iconSvg) {
-                    const path = iconSvg.querySelector('path');
-                    if (mobileMenu.classList.contains('hidden')) {
-                        // Show hamburger (3 lines)
-                        path.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
-                    } else {
-                        // Show X (close)
-                        path.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-                    }
-                }
-            });
-            
-            // Close menu when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-                    mobileMenu.classList.add('hidden');
-                    // Reset hamburger icon
-                    const iconSvg = mobileMenuBtn.querySelector('svg');
-                    if (iconSvg) {
-                        const path = iconSvg.querySelector('path');
-                        path.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
-                    }
-                }
-            });
-            
-            // Close menu when clicking on menu links
-            const menuLinks = mobileMenu.querySelectorAll('a');
-            menuLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    // Reset hamburger icon
-                    const iconSvg = mobileMenuBtn.querySelector('svg');
-                    if (iconSvg) {
-                        const path = iconSvg.querySelector('path');
-                        path.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
-                    }
-                });
-            });
-        }
+        // Mobile menu functionality removed - using bottom navigation instead
     }
 }
 

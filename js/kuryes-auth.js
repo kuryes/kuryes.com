@@ -61,6 +61,75 @@ function clearAuthState() {
 }
 
 /**
+ * Mobil profil modalını güncelle
+ */
+function updateMobileProfileModal(authState) {
+    const mobileProfileAvatar = document.getElementById('mobileProfileAvatar');
+    const mobileProfileName = document.getElementById('mobileProfileName');
+    const mobileProfileType = document.getElementById('mobileProfileType');
+    const mobileProfileLink = document.getElementById('mobileProfileLink');
+    const mobileProfileLinkText = document.getElementById('mobileProfileLinkText');
+    
+    if (!mobileProfileAvatar || !mobileProfileName) {
+        return; // Mobil profil modalı bu sayfada yok
+    }
+    
+    // Avatar
+    const avatarImg = mobileProfileAvatar.querySelector('img');
+    if (avatarImg) {
+        const avatarPath = `public/img/avatars/${authState.userAvatar || '1'}.png`;
+        avatarImg.src = avatarPath;
+        avatarImg.alt = authState.userName || 'Avatar';
+        avatarImg.onerror = function() {
+            this.src = 'public/img/avatars/1.png';
+            this.onerror = null;
+        };
+    }
+    
+    // Kullanıcı adı
+    let displayName = authState.userName || 'Kullanıcı';
+    if ((authState.userType === 'isletme' || authState.userType === 'lojistik') && authState.yetkiliAdi) {
+        displayName = `${authState.userName} - ${authState.yetkiliAdi}`;
+    }
+    mobileProfileName.textContent = displayName;
+    
+    // Kullanıcı tipi
+    if (mobileProfileType) {
+        let typeText = '';
+        if (authState.userType === 'kurye') {
+            typeText = 'Kurye';
+        } else if (authState.userType === 'lojistik') {
+            typeText = 'Lojistik';
+        } else if (authState.userType === 'isletme') {
+            typeText = 'İşletme';
+        }
+        mobileProfileType.textContent = typeText;
+    }
+    
+    // Profil linki
+    if (mobileProfileLink) {
+        if (authState.userType === 'kurye') {
+            mobileProfileLink.href = `kurye-kart.html?id=${authState.userId}`;
+        } else if (authState.userType === 'lojistik') {
+            mobileProfileLink.href = `lojistik-kart.html?id=${authState.userId}`;
+        } else {
+            mobileProfileLink.href = `isletme-kart.html?id=${authState.userId}`;
+        }
+    }
+    
+    // Profil link metni
+    if (mobileProfileLinkText) {
+        if (authState.userType === 'kurye') {
+            mobileProfileLinkText.textContent = 'Kuryes Profil Kartı';
+        } else if (authState.userType === 'lojistik') {
+            mobileProfileLinkText.textContent = 'Kuryes Lojistik Kartı';
+        } else {
+            mobileProfileLinkText.textContent = 'Kuryes İşletme Kartı';
+        }
+    }
+}
+
+/**
  * Update header based on authentication state
  */
 function updateHeaderForAuth() {
@@ -174,6 +243,7 @@ function updateHeaderForAuth() {
         if (userMenu) {
             userMenu.style.display = 'flex';
         }
+        // Mobile menu removed - user menu now in bottom navigation
         if (userMenuMobile) {
             userMenuMobile.style.display = 'block';
         }
@@ -237,6 +307,9 @@ function updateHeaderForAuth() {
                 };
             }
         }
+        
+        // Mobil profil modalını güncelle
+        updateMobileProfileModal(authState);
         
         // Update profile links
         const profileLinkDropdown = document.getElementById('profileLinkDropdown');

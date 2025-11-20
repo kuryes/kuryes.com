@@ -287,31 +287,6 @@ input[type="range"]::-moz-range-thumb {
         grid-template-columns: 1fr;
     }
     
-    /* Mobile menu animations */
-    #mobileMenu {
-        transition: all 0.3s ease-in-out;
-        max-height: calc(100vh - 64px);
-        overflow-y: auto;
-    }
-    
-    #mobileMenuBtn svg path {
-        transition: all 0.3s ease-in-out;
-    }
-    
-    #mobileMenuBtn:hover {
-        transform: scale(1.1);
-    }
-    
-    /* Smooth menu transition */
-    #mobileMenu.hidden {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    
-    #mobileMenu:not(.hidden) {
-        opacity: 1;
-        transform: translateY(0);
-    }
     
     /* Mobile form optimizations */
     .input-primary {
@@ -458,6 +433,241 @@ input[type="range"]::-moz-range-thumb {
     /* Mobile stats counter optimizations */
     .stat-number {
         @apply text-2xl; /* Smaller stats on mobile */
+    }
+    
+    /* Safe Area Support for iOS notch and Android navigation bar */
+    body {
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: calc(60px + env(safe-area-inset-bottom));
+    }
+    
+    /* Desktop: Remove padding-bottom for web view and ensure footer sticks to bottom */
+    @media (min-width: 768px) {
+        body {
+            padding-bottom: 0;
+        }
+        
+        /* Ensure footer is at the bottom on desktop */
+        body.flex.flex-col.min-h-screen {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        body.flex.flex-col.min-h-screen > main {
+            flex: 1;
+        }
+        
+        body.flex.flex-col.min-h-screen > footer {
+            margin-top: auto;
+        }
+    }
+    
+    /* Bottom Navigation Bar */
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 64px;
+        background: white;
+        border-top: 2px solid #FF3131;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 100;
+        padding-bottom: env(safe-area-inset-bottom);
+        box-shadow: 0 -4px 20px rgba(255, 49, 49, 0.15);
+    }
+    
+    .bottom-nav-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 4px;
+        text-decoration: none;
+        color: #6F6F6F;
+        transition: all 0.3s ease;
+        min-height: 64px;
+        position: relative;
+    }
+    
+    .bottom-nav-item:hover {
+        color: #FF3131;
+        background-color: rgba(255, 49, 49, 0.05);
+    }
+    
+    .bottom-nav-item.active {
+        color: #FF3131;
+        background-color: rgba(255, 49, 49, 0.08);
+    }
+    
+    .bottom-nav-item.active::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 3px;
+        background: #FF3131;
+        border-radius: 0 0 3px 3px;
+    }
+    
+    .bottom-nav-item-icon {
+        width: 22px;
+        height: 22px;
+        margin-bottom: 4px;
+        stroke-width: 2;
+        transition: transform 0.2s ease;
+    }
+    
+    .bottom-nav-item.active .bottom-nav-item-icon {
+        transform: scale(1.1);
+    }
+    
+    .bottom-nav-item-text {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+    }
+    
+    .bottom-nav-item-badge {
+        position: absolute;
+        top: 6px;
+        right: calc(50% - 12px);
+        background: #FF3131;
+        color: white;
+        border-radius: 10px;
+        padding: 2px 6px;
+        font-size: 10px;
+        font-weight: bold;
+        min-width: 18px;
+        text-align: center;
+    }
+    
+    /* Compact Header for Mobile */
+    header {
+        height: 56px;
+        padding-top: env(safe-area-inset-top);
+    }
+    
+    header .max-w-7xl {
+        height: 56px;
+    }
+    
+    /* Header navigation styling */
+    nav a {
+        position: relative;
+    }
+    
+    nav a span {
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #FF3131;
+        transition: width 0.3s ease;
+    }
+    
+    nav a:hover span {
+        width: 100%;
+    }
+    
+    /* Floating Action Button */
+    .fab-button {
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: #FF3131;
+        color: white;
+        border: none;
+        box-shadow: 0 4px 12px rgba(255, 49, 49, 0.4);
+        cursor: pointer;
+        z-index: 90;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        transition: transform 0.2s;
+        min-width: 56px;
+        min-height: 56px;
+    }
+    
+    .fab-button:active {
+        transform: scale(0.95);
+    }
+    
+    /* Prevent Zoom on Input Focus (iOS) */
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="password"],
+    select,
+    textarea {
+        font-size: 16px !important;
+    }
+    
+    /* Touch Targets - Minimum 44x44px */
+    button,
+    a.btn-primary,
+    a.btn-secondary,
+    a.btn-ghost,
+    .bottom-nav-item {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Pull to Refresh Indicator */
+    .pull-to-refresh-indicator {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #FF3131;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 0 0 12px 12px;
+        font-size: 14px;
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity 0.3s;
+        pointer-events: none;
+        display: none; /* Varsayılan olarak gizli */
+    }
+    
+    /* Sadece mobilde göster */
+    @media (max-width: 768px) {
+        .pull-to-refresh-indicator {
+            display: block;
+        }
+    }
+    
+    .pull-to-refresh-indicator.show {
+        opacity: 1;
+    }
+    
+    /* Swipeable Cards */
+    .swipeable-card {
+        touch-action: pan-y;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Mobile Content Padding */
+    .mobile-content {
+        padding-bottom: 80px; /* Space for bottom nav */
+    }
+    
+    /* Hide hamburger menu on mobile when bottom nav is active */
+    .mobile-menu-hidden {
+        display: none !important;
     }
 }
 
