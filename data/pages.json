@@ -1,0 +1,35 @@
+[
+  {
+    "slug": "getir-kurye-kazanci",
+    "title": "Getir Kurye Kazancı - 2026",
+    "intro": "Getir kuryeleri ortalama ne kadar kazanır? Güncel paket başı ücretleri ve aylık gelir hesaplaması.",
+    "platform": "Getir",
+    "package_fee": 85,
+    "packages_per_day": 40,
+    "work_days_per_month": 26,
+    "fuel_cost_per_day": 300,
+    "content": "Getir kurye kazançları çalışılan saate ve atılan pakete göre değişiklik göstermektedir. Özel hesaplayıcımız üzerinden kendi çalışma rutininize göre tahmini Getir aylık gelirinizi ve net kazancınızı hesaplayabilirsiniz."
+  },
+  {
+    "slug": "trendyol-kurye-kazanci",
+    "title": "Trendyol Go Kurye Kazancı - 2026",
+    "intro": "Trendyol Go kuryeleri ortalama ne kadar kazanır? Trendyol Go motosikletli kurye aylık kazanç simülatörü.",
+    "platform": "Trendyol",
+    "package_fee": 90,
+    "packages_per_day": 35,
+    "work_days_per_month": 26,
+    "fuel_cost_per_day": 250,
+    "content": "Trendyol kuryelerinin kazançları, günlük tamamlanan paket sayısına, saatlik bonuslara ve kilometreye göre ciddi oranda değişiklik gösterebilir. Aşağıdaki aracı kullanarak Trendyol kurye maaşını detaylıca görebilirsiniz."
+  },
+  {
+    "slug": "yemeksepeti-kurye-kazanci",
+    "title": "Yemeksepeti Kurye Kazancı - 2026",
+    "intro": "Yemeksepeti kuryeleri ortalama ne kadar kazanır? Saatlik garanti ücret ve paket başı Yemeksepeti kurye maaşları.",
+    "platform": "Yemeksepeti",
+    "package_fee": 70,
+    "packages_per_day": 45,
+    "work_days_per_month": 26,
+    "fuel_cost_per_day": 200,
+    "content": "Yemeksepeti Express kurye kazanç ortalamaları ve kendi potansiyel gelirinizi tespit edebileceğiniz hesaplama aracı ile ne kadar kazanacağınızı öğrenin."
+  }
+]
