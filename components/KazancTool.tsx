@@ -1,6 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
+
+const SHARE_BASE_PATH = '/kurye-kazanc-hesaplama';
 
 interface KazancToolProps {
     initialPackageFee?: number;
@@ -15,11 +18,15 @@ export function KazancTool({
     initialWorkDaysPerMonth = 26,
     initialFuelCostPerDay = 0,
 }: KazancToolProps) {
+    const searchParams = useSearchParams();
+    const urlParamsApplied = useRef(false);
+
     // Sol taraf: Kazanç Inputları
     const [workHours, setWorkHours] = useState(10);
     const [ordersPerHour, setOrdersPerHour] = useState(initialPackagesPerDay > 0 ? initialPackagesPerDay / 10 : 4);
     const [pkgFeeInput, setPkgFeeInput] = useState(initialPackageFee);
     const [kdvDahil, setKdvDahil] = useState(false);
+    const [fuelCostPerDay, setFuelCostPerDay] = useState(initialFuelCostPerDay);
 
     const [useKm, setUseKm] = useState(false);
     const [kmFee, setKmFee] = useState(5);
@@ -47,6 +54,7 @@ export function KazancTool({
     const [isKmModalOpen, setIsKmModalOpen] = useState(false);
     const [isSecondPackageModalOpen, setIsSecondPackageModalOpen] = useState(false);
     const [isManuelModalOpen, setIsManuelModalOpen] = useState(false);
+    const [shareCopied, setShareCopied] = useState(false);
 
     // Modal içindeki Manuel Hesaplama için state
     const [manuelTotalKazanc, setManuelTotalKazanc] = useState<number>(0);
@@ -73,6 +81,56 @@ export function KazancTool({
         weeklyNet: 0,
         monthlyNet: 0,
     });
+
+    // URL parametrelerinden başlangıç değerlerini uygula (sadece ilk yüklemede)
+    useEffect(() => {
+        if (urlParamsApplied.current) return;
+        const paket = searchParams.get('paket');
+        const gunluk = searchParams.get('gunluk');
+        const gun = searchParams.get('gun');
+        const yakit = searchParams.get('yakit');
+        if (paket != null) {
+            const n = Number(paket);
+            if (!Number.isNaN(n)) setPkgFeeInput(n);
+        }
+        if (gunluk != null) {
+            const n = Number(gunluk);
+            if (!Number.isNaN(n) && n > 0) setOrdersPerHour(Math.max(0.1, n / workHours));
+        }
+        if (gun != null) {
+            const n = Number(gun);
+            if (n === 26) setIzinVar(true);
+            if (n === 30) setIzinVar(false);
+        }
+        if (yakit != null) {
+            const n = Number(yakit);
+            if (!Number.isNaN(n)) setFuelCostPerDay(n);
+        }
+        urlParamsApplied.current = true;
+    }, [searchParams, workHours]);
+
+    const workDaysPerMonth = izinVar ? 26 : 30;
+    const dailyPackagesForShare = Math.round(ordersPerHour * workHours);
+
+    const buildShareUrl = () => {
+        const params = new URLSearchParams();
+        params.set('paket', String(Math.round(pkgFeeInput)));
+        params.set('gunluk', String(dailyPackagesForShare));
+        params.set('gun', String(workDaysPerMonth));
+        if (fuelCostPerDay > 0) params.set('yakit', String(Math.round(fuelCostPerDay)));
+        return `${SHARE_BASE_PATH}?${params.toString()}`;
+    };
+
+    const handleShare = async () => {
+        const url = typeof window !== 'undefined' ? `${window.location.origin}${buildShareUrl()}` : buildShareUrl();
+        try {
+            await navigator.clipboard.writeText(url);
+            setShareCopied(true);
+            setTimeout(() => setShareCopied(false), 2500);
+        } catch {
+            setShareCopied(false);
+        }
+    };
 
     const monteCarloSimulation = (iterations = 1000) => {
         const pkgFee = kdvDahil ? (pkgFeeInput / 1.20) : pkgFeeInput;
@@ -208,9 +266,9 @@ export function KazancTool({
         // Ancak PSEO için initialFuelCostPerDay'i harici düşmek istersen burada dailyNet'ten düşebiliriz.
         // Şimdilik kazanc.html orijinal koduna tam sadık kalıyoruz.
 
-        const dailyNetVal = dailyBrutVal - dailyKDVVal - dailyTevfikatVal - initialFuelCostPerDay;
-        const weeklyNetVal = weeklyBrutVal - weeklyKDVVal - weeklyTevfikatVal - (initialFuelCostPerDay * (izinVar ? 6 : 7));
-        const monthlyNetVal = monthlyBrutVal - monthlyKDVVal - monthlyTevfikatVal - (initialFuelCostPerDay * (izinVar ? 26 : 30));
+        const dailyNetVal = dailyBrutVal - dailyKDVVal - dailyTevfikatVal - fuelCostPerDay;
+        const weeklyNetVal = weeklyBrutVal - weeklyKDVVal - weeklyTevfikatVal - (fuelCostPerDay * (izinVar ? 6 : 7));
+        const monthlyNetVal = monthlyBrutVal - monthlyKDVVal - monthlyTevfikatVal - (fuelCostPerDay * (izinVar ? 26 : 30));
 
         setResults({
             dailyBrut: dailyBrutVal,
@@ -237,7 +295,7 @@ export function KazancTool({
     }, [
         workHours, ordersPerHour, pkgFeeInput, kdvDahil,
         useKm, kmFee, avgKm, mode, hourlyFee, saatlikHesapTipi, aylikToplamUcret, useSecondPackage,
-        secondPackageFeeInput, dailyBonuses, weeklyBonuses, izinVar, vergiKesinti, tevfikat, initialFuelCostPerDay
+        secondPackageFeeInput, dailyBonuses, weeklyBonuses, izinVar, vergiKesinti, tevfikat, fuelCostPerDay
     ]);
 
     const formatter = new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY', maximumFractionDigits: 0 });
@@ -258,9 +316,18 @@ export function KazancTool({
                                 </div>
                                 <h2 className="text-2xl font-bold text-gray-800">Ne kadar kazanırım?</h2>
                             </div>
-                            <div className="flex items-center bg-gray-100 p-1 rounded-lg shrink-0">
-                                <button onClick={() => setMode('paket')} className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all ${mode === 'paket' ? 'bg-white shadow text-red-600' : 'text-gray-500 hover:text-gray-700'}`}>Paket</button>
-                                <button onClick={() => setMode('saat')} className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all ${mode === 'saat' ? 'bg-white shadow text-red-600' : 'text-gray-500 hover:text-gray-700'}`}>Saat</button>
+                            <div className="flex items-center gap-2 flex-wrap">
+                                <div className="flex items-center bg-gray-100 p-1 rounded-lg shrink-0">
+                                    <button type="button" onClick={() => setMode('paket')} className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all ${mode === 'paket' ? 'bg-white shadow text-red-600' : 'text-gray-500 hover:text-gray-700'}`}>Paket</button>
+                                    <button type="button" onClick={() => setMode('saat')} className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all ${mode === 'saat' ? 'bg-white shadow text-red-600' : 'text-gray-500 hover:text-gray-700'}`}>Saat</button>
+                                </div>
+                                <button type="button" onClick={handleShare} className="px-4 py-2 text-sm font-medium rounded-lg border border-red-200 text-red-600 hover:bg-red-50 transition-colors flex items-center gap-2">
+                                    {shareCopied ? (
+                                        <>Kopyalandı</>
+                                    ) : (
+                                        <>Hesaplamayı Paylaş</>
+                                    )}
+                                </button>
                             </div>
                         </div>
 

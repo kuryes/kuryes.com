@@ -14,16 +14,15 @@ export default function PageForm({ initialData }: { initialData?: PageData }) {
         packages_per_day: 0,
         work_days_per_month: 26,
         fuel_cost_per_day: 0,
-        content: ''
+        content: '',
+        city: undefined,
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value, type } = e.target;
-        // @ts-ignore
-        const checked = type === 'checkbox' ? e.target.checked : undefined;
         setData(prev => ({
             ...prev,
-            [name]: type === 'number' ? Number(value) : value
+            [name]: type === 'number' ? Number(value) : value || undefined
         }));
     };
 
@@ -45,6 +44,10 @@ export default function PageForm({ initialData }: { initialData?: PageData }) {
             <div>
                 <label className="block text-sm font-medium">Platform Adı</label>
                 <input name="platform" value={data.platform} onChange={handleChange} className="w-full border p-2 rounded" />
+            </div>
+            <div>
+                <label className="block text-sm font-medium">Şehir (opsiyonel, slug: city-platform-kurye-kazanci)</label>
+                <input name="city" value={data.city ?? ''} onChange={handleChange} placeholder="örn: istanbul" className="w-full border p-2 rounded" />
             </div>
             <div>
                 <label className="block text-sm font-medium">Kısa Açıklama (Intro)</label>
@@ -73,7 +76,7 @@ export default function PageForm({ initialData }: { initialData?: PageData }) {
 
             <div>
                 <label className="block text-sm font-medium">İçerik (Makale/Açıklama)</label>
-                <textarea name="content" value={data.content} onChange={handleChange} className="w-full border p-2 rounded h-32" />
+                <textarea name="content" value={data.content ?? ''} onChange={handleChange} className="w-full border p-2 rounded h-32" />
             </div>
 
             <button type="submit" className="bg-red-600 text-white px-6 py-2 rounded font-bold hover:bg-red-700">

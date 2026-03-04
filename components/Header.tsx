@@ -13,7 +13,7 @@ export function Header() {
                         </div>
                         <nav className="hidden md:flex space-x-8">
                             <Link href="/" className="text-gray-800 hover:text-red-500 transition-colors">Ana Sayfa</Link>
-                            <Link href="/kazanc" className="text-gray-800 hover:text-red-500 transition-colors">Kazanç Hesapla</Link>
+                            <Link href="/kurye-kazanc-hesaplama" className="text-gray-800 hover:text-red-500 transition-colors">Kazanç Hesapla</Link>
                         </nav>
                     </div>
                 </div>

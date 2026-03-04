@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { KazancTool } from '@/components/KazancTool';
 import type { Metadata } from 'next';
 
@@ -23,7 +24,9 @@ export default function Home() {
 
                 {/* Ana Kazanç Aracı */}
                 <div id="hesapla">
-                    <KazancTool />
+                    <Suspense fallback={<div className="bg-white rounded-xl shadow-lg p-6 md:p-8 max-w-7xl mx-auto my-8 h-96 animate-pulse rounded-xl" />}>
+                        <KazancTool />
+                    </Suspense>
                 </div>
 
                 {/* PSEO Platform Linkleri */}
@@ -89,6 +92,50 @@ export default function Home() {
                     </div>
                 </div>
             </div>
+
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        '@context': 'https://schema.org',
+                        '@type': 'FAQPage',
+                        mainEntity: [
+                            {
+                                '@type': 'Question',
+                                name: 'Motor kurye ne kadar kazanır?',
+                                acceptedAnswer: {
+                                    '@type': 'Answer',
+                                    text: '2026 yılı itibariyle motokurye kazançları çalışılan platform, günlük atılan paket sayısı ve vergi kesintilerine göre değişir. Günde 10 saat çalışan bir esnaf kurye aylık ortalama 40.000₺ ile 90.000₺ arasında brüt ciro yapabilmektedir.',
+                                },
+                            },
+                            {
+                                '@type': 'Question',
+                                name: 'Trendyol kurye kazancı ne kadar?',
+                                acceptedAnswer: {
+                                    '@type': 'Answer',
+                                    text: 'Trendyol Go kurye kazançları günlük paket sayısına, saatlik bonuslara ve kilometreye göre değişir. Aylık kazanç ortalama 35-40 paket/gün ile 70.000₺-90.000₺ brüt bandında olabilir. Hesaplama aracımızdan detaylı simülasyon yapabilirsiniz.',
+                                },
+                            },
+                            {
+                                '@type': 'Question',
+                                name: 'Getir kurye maaşı ne kadar?',
+                                acceptedAnswer: {
+                                    '@type': 'Answer',
+                                    text: 'Getir kurye maaşları paket başı ücret ve saatlik garanti ücret modellerine göre değişir. Günlük 40 paket civarı atan bir kurye aylık brüt 80.000₺-100.000₺ bandında kazanç elde edebilir. Kesintiler sonrası net için aracımızı kullanın.',
+                                },
+                            },
+                            {
+                                '@type': 'Question',
+                                name: 'Kurye aylık ne kadar kazanır?',
+                                acceptedAnswer: {
+                                    '@type': 'Answer',
+                                    text: 'Kurye aylık kazancı platforma, günlük paket sayısına ve çalışma gününe göre değişir. Ortalama 26 gün çalışan, günde 35-45 paket atan bir kurye aylık 60.000₺-95.000₺ brüt kazanabilir. Net kazanç KDV ve tevfikat kesintileri sonrası hesaplanır.',
+                                },
+                            },
+                        ],
+                    }),
+                }}
+            />
         </div>
     );
 }
